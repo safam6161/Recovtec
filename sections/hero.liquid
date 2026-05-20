@@ -1,0 +1,87 @@
+<section class="hero">
+  <div class="container" style="display:contents">
+    <div class="hero-content container">
+
+      <div class="hero-tag">Professionelle Regeneration</div>
+
+      <h1 class="hero-title">
+        <span class="line-outline">RECOVER</span><br>
+        FASTER.<br>
+        <span class="accent">PERFORM</span><br>
+        BETTER.
+      </h1>
+
+      <p class="hero-desc">
+        {{ section.settings.hero_desc }}
+      </p>
+
+      <div class="hero-actions">
+        <a href="{{ section.settings.cta_url | default: routes.collections_url }}" class="btn btn-primary">
+          Jetzt kaufen
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="{{ section.settings.secondary_url | default: '/pages/technologie' }}" class="btn btn-secondary">
+          Mehr erfahren
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-number">6</div>
+          <div class="hero-stat-label">Druckkammern</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">240<small style="font-size:18px">mmHg</small></div>
+          <div class="hero-stat-label">Max. Druck</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">3+</div>
+          <div class="hero-stat-label">Programme</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hero-visual" style="padding: 0 32px">
+      <div class="hero-img-wrap">
+        {% if section.settings.hero_image != blank %}
+          {{ section.settings.hero_image | image_url: width: 1000 | image_tag: alt: 'Recovtec Recovery Boots', loading: 'eager', fetchpriority: 'high' }}
+        {% else %}
+          <div style="background: var(--dark-2); border-radius: 16px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center;">
+            <div style="text-align: center; color: var(--gray);">
+              <div style="font-size: 80px; margin-bottom: 16px;">🥾</div>
+              <div style="font-family: var(--font-head); font-size: 20px; text-transform: uppercase; letter-spacing: 0.1em;">Recovery Boots</div>
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="hero-badge badge-1">
+          <div class="hero-badge-icon">⚡</div>
+          <div class="hero-badge-text">Schnelle Regeneration</div>
+          <div class="hero-badge-sub">Klinisch getestet</div>
+        </div>
+
+        <div class="hero-badge badge-2">
+          <div class="hero-badge-icon">🏆</div>
+          <div class="hero-badge-text">Pro-Athlet Standard</div>
+          <div class="hero-badge-sub">Von Profis genutzt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "image_picker", "id": "hero_image", "label": "Hero Bild" },
+    { "type": "textarea", "id": "hero_desc", "label": "Beschreibung", "default": "Pneumatische Kompressionsstiefeln für professionelle Regeneration. Reduziere Muskelkater, verbessere die Durchblutung und sei schneller wieder einsatzbereit." },
+    { "type": "url", "id": "cta_url", "label": "Hauptbutton Link" },
+    { "type": "url", "id": "secondary_url", "label": "Zweiter Button Link" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

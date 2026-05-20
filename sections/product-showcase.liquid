@@ -1,0 +1,90 @@
+<section class="showcase" id="produkt">
+  <div class="container">
+    <div class="showcase-inner">
+
+      <div class="showcase-img-wrap">
+        {% if section.settings.showcase_image != blank %}
+          {{ section.settings.showcase_image | image_url: width: 900 | image_tag: alt: 'Recovtec Recovery Boots Detail', loading: 'lazy' }}
+        {% else %}
+          <div style="background: var(--dark-3); border-radius: 16px; aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border);">
+            <div style="text-align: center; color: var(--gray);">
+              <div style="font-size: 64px;">🥾</div>
+            </div>
+          </div>
+        {% endif %}
+        <div class="showcase-img-overlay"></div>
+      </div>
+
+      <div class="showcase-content">
+        <div>
+          <p class="section-tag">Produktdetails</p>
+          <h2 class="section-title">
+            RECOVTEC<br>
+            <span class="accent">BOOTS PRO</span>
+          </h2>
+        </div>
+
+        <p class="section-desc">
+          Entwickelt für Athleten, die das Maximum aus ihrer Regeneration herausholen wollen. Präzisionstechnik trifft auf Komfort.
+        </p>
+
+        <div class="showcase-features">
+
+          <div class="showcase-feature">
+            <div class="showcase-feature-num">01</div>
+            <div class="showcase-feature-text">
+              <h4>6-Kammer-Kompressionssystem</h4>
+              <p>Von Fuß bis Hüfte — sequenzielle Befüllung der Kammern für optimalen Lymphfluss und maximale Wirkung.</p>
+            </div>
+          </div>
+
+          <div class="showcase-feature">
+            <div class="showcase-feature-num">02</div>
+            <div class="showcase-feature-text">
+              <h4>Digitale Drucksteuerung</h4>
+              <p>LCD-Display mit präziser Einstellung von 40 bis 240 mmHg — für jeden Athleten und jede Trainingsphase.</p>
+            </div>
+          </div>
+
+          <div class="showcase-feature">
+            <div class="showcase-feature-num">03</div>
+            <div class="showcase-feature-text">
+              <h4>Ergonomisches Design</h4>
+              <p>Passform für alle Beingrößen mit robusten Klettverschlüssen. Einfach anlegen, starten, erholen.</p>
+            </div>
+          </div>
+
+          <div class="showcase-feature">
+            <div class="showcase-feature-num">04</div>
+            <div class="showcase-feature-text">
+              <h4>Leise & effizient</h4>
+              <p>Flüsterleiser Kompressor — ideal zum Entspannen, Lesen oder Fernsehen während der Anwendung.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div>
+          <a href="{{ section.settings.product_url | default: routes.collections_url }}" class="btn btn-primary">
+            Jetzt bestellen
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Showcase",
+  "settings": [
+    { "type": "image_picker", "id": "showcase_image", "label": "Showcase Bild" },
+    { "type": "url", "id": "product_url", "label": "Produkt Link" }
+  ],
+  "presets": [{ "name": "Product Showcase" }]
+}
+{% endschema %}

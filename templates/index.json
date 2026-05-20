@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "hero_desc": "Pneumatische Kompressionsstiefel für professionelle Regeneration. Reduziere Muskelkater, verbessere die Durchblutung und sei schneller wieder einsatzbereit."
+      }
+    },
+    "features-strip": {
+      "type": "features-strip",
+      "settings": {}
+    },
+    "benefits": {
+      "type": "benefits",
+      "settings": {}
+    },
+    "product-showcase": {
+      "type": "product-showcase",
+      "settings": {}
+    },
+    "how-it-works": {
+      "type": "how-it-works",
+      "settings": {}
+    },
+    "specs": {
+      "type": "specs",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {}
+    },
+    "cta": {
+      "type": "cta",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "features-strip",
+    "benefits",
+    "product-showcase",
+    "how-it-works",
+    "specs",
+    "testimonials",
+    "cta"
+  ]
+}

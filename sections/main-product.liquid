@@ -1,0 +1,128 @@
+<section class="product-page">
+  <div class="container">
+
+    <div class="product-layout">
+
+      <!-- Gallery -->
+      <div class="product-gallery">
+        <div class="product-main-img">
+          {%- if product.featured_media -%}
+            {{ product.featured_media | image_url: width: 900 | image_tag:
+              id: 'MainProductImage',
+              alt: product.featured_media.alt | escape,
+              loading: 'eager',
+              fetchpriority: 'high'
+            }}
+          {%- else -%}
+            <div style="aspect-ratio:1; display:flex; align-items:center; justify-content:center; background:var(--dark-3);">
+              <span style="font-size:80px">🥾</span>
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if product.media.size > 1 -%}
+          <div class="product-thumbs">
+            {%- for media in product.media limit: 4 -%}
+              <div class="product-thumb {% if forloop.first %}active{% endif %}">
+                {{ media | image_url: width: 200 | image_tag: alt: media.alt | escape, loading: 'lazy' }}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Info -->
+      <div class="product-info">
+
+        <nav class="product-breadcrumb" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span>/</span>
+          <a href="{{ routes.collections_url }}">Produkte</a>
+          <span>/</span>
+          <span aria-current="page">{{ product.title }}</span>
+        </nav>
+
+        <div class="product-badge-row">
+          <span class="badge badge-new">Neu</span>
+          {%- if product.available -%}
+            <span class="badge badge-stock">✓ Auf Lager</span>
+          {%- endif -%}
+        </div>
+
+        <h1 class="product-title-main">{{ product.title }}</h1>
+
+        <div class="product-rating" aria-label="4.9 von 5 Sternen">
+          <div class="rating-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <span class="rating-count">4.9/5 (127 Bewertungen)</span>
+        </div>
+
+        <div class="product-price-block">
+          <span class="product-price">{{ product.price | money }}</span>
+          {%- if product.compare_at_price > product.price -%}
+            <span class="product-price-old">{{ product.compare_at_price | money }}</span>
+            <span class="product-price-save">
+              {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}% gespart
+            </span>
+          {%- endif -%}
+        </div>
+
+        <p class="product-desc">{{ product.description }}</p>
+
+        {%- assign size_option = product.options_with_values | where: 'name', 'Größe' | first -%}
+        {%- unless size_option == nil -%}
+          <p class="product-option-label">Größe wählen</p>
+          <div class="product-sizes" role="group" aria-label="Größenauswahl">
+            {%- for value in size_option.values -%}
+              <button class="size-btn {% if forloop.first %}active{% endif %}" type="button">
+                {{ value }}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endunless -%}
+
+        {%- form 'product', product, id: 'product-form', novalidate: 'novalidate' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+          <div class="product-add-row">
+            <div class="qty-control" aria-label="Menge">
+              <button class="qty-btn" type="button" data-qty="minus" aria-label="Weniger">−</button>
+              <span class="qty-num" aria-live="polite">1</span>
+              <button class="qty-btn" type="button" data-qty="plus" aria-label="Mehr">+</button>
+            </div>
+            <button type="submit" name="add" class="add-to-cart-btn"
+              {%- unless product.available %} disabled{%- endunless -%}>
+              {%- if product.available -%}In den Warenkorb{%- else -%}Nicht verfügbar{%- endif -%}
+            </button>
+          </div>
+
+          <button type="button" class="buy-now-btn">Sofort kaufen</button>
+        {%- endform -%}
+
+        <div class="product-guarantees">
+          <div class="guarantee-item">
+            <div class="guarantee-icon">🚚</div>
+            <div class="guarantee-label">Kostenloser Versand</div>
+          </div>
+          <div class="guarantee-item">
+            <div class="guarantee-icon">🔄</div>
+            <div class="guarantee-label">30 Tage Rückgabe</div>
+          </div>
+          <div class="guarantee-item">
+            <div class="guarantee-icon">🎖</div>
+            <div class="guarantee-label">2 Jahre Garantie</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Main",
+  "settings": []
+}
+{% endschema %}

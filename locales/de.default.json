@@ -1,0 +1,31 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Zum Inhalt springen",
+      "close": "Schließen"
+    },
+    "currency": {
+      "estimated_total": "Geschätzter Gesamtbetrag"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "In den Warenkorb",
+      "sold_out": "Ausverkauft",
+      "unavailable": "Nicht verfügbar",
+      "quantity": {
+        "label": "Menge",
+        "increase": "Menge erhöhen",
+        "decrease": "Menge verringern"
+      },
+      "variant_sold_out_or_unavailable": "Ausverkauft"
+    }
+  },
+  "sections": {
+    "cart": {
+      "title": "Warenkorb",
+      "empty": "Dein Warenkorb ist leer.",
+      "subtotal": "Zwischensumme"
+    }
+  }
+}

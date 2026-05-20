@@ -1,0 +1,35 @@
+<header class="site-header" role="banner">
+  <div class="container">
+    <div class="header-inner">
+
+      <a href="{{ routes.root_url }}" class="header-logo">
+        RECOV<span>TEC</span>
+      </a>
+
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="{{ routes.collections_url }}">Produkte</a>
+        <a href="/pages/technologie">Technologie</a>
+        <a href="/pages/ueber-uns">Über uns</a>
+        <a href="/pages/faq">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="{{ routes.cart_url }}" class="btn btn-nav" aria-label="Warenkorb">
+          Warenkorb
+          {%- if cart.item_count > 0 -%}
+            ({{ cart.item_count }})
+          {%- endif -%}
+        </a>
+        <button class="hamburger" aria-label="Menu öffnen" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{ "name": "Header" }
+{% endschema %}

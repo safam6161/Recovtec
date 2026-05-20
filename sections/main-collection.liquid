@@ -1,0 +1,40 @@
+<div style="padding: 80px 0 120px; min-height: 60vh;">
+  <div class="container">
+    <div style="margin-bottom: 64px; text-align: center;">
+      <p class="section-tag">{{ collection.title }}</p>
+      <h1 class="section-title">{{ collection.title | upcase }}</h1>
+      {%- if collection.description != blank -%}
+        <p class="section-desc" style="margin: 16px auto 0;">{{ collection.description }}</p>
+      {%- endif -%}
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
+      {%- for product in collection.products -%}
+        <article style="background: var(--dark-2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: border-color .3s, transform .3s;" onmouseover="this.style.borderColor='rgba(0,212,255,0.3)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
+          <a href="{{ product.url }}">
+            <div style="aspect-ratio: 1; overflow: hidden; background: var(--dark-3);">
+              {%- if product.featured_image -%}
+                {{ product.featured_image | image_url: width: 500 | image_tag: alt: product.featured_image.alt | escape, loading: 'lazy', style: 'width:100%;height:100%;object-fit:cover;' }}
+              {%- else -%}
+                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;">🥾</div>
+              {%- endif -%}
+            </div>
+            <div style="padding: 24px;">
+              <h2 style="font-family:var(--font-head);font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;">{{ product.title }}</h2>
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-family:var(--font-head);font-size:24px;font-weight:800;color:var(--white);">{{ product.price | money }}</span>
+                <span class="btn btn-primary" style="padding:10px 20px;font-size:12px;">Ansehen</span>
+              </div>
+            </div>
+          </a>
+        </article>
+      {%- else -%}
+        <p style="color:var(--gray);grid-column:1/-1;text-align:center;padding:64px 0;">Keine Produkte gefunden.</p>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Collection Main" }
+{% endschema %}

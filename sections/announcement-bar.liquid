@@ -1,0 +1,15 @@
+{% if section.settings.show_bar %}
+<div class="announcement-bar">
+  {{ section.settings.text }}
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    { "type": "checkbox", "id": "show_bar", "label": "Show bar", "default": true },
+    { "type": "text", "id": "text", "label": "Text", "default": "🚚 Kostenloser Versand ab 99 € · 30 Tage Rückgabe · Made for Champions" }
+  ]
+}
+{% endschema %}

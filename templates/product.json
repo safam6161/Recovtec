@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "features-strip": {
+      "type": "features-strip",
+      "settings": {}
+    },
+    "benefits": {
+      "type": "benefits",
+      "settings": {}
+    },
+    "how-it-works": {
+      "type": "how-it-works",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {}
+    },
+    "cta": {
+      "type": "cta",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main-product",
+    "features-strip",
+    "benefits",
+    "how-it-works",
+    "testimonials",
+    "cta"
+  ]
+}

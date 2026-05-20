@@ -1,0 +1,94 @@
+<section class="specs" id="specs">
+  <div class="container">
+    <div class="specs-inner">
+
+      <div>
+        <p class="section-tag">Technische Daten</p>
+        <h2 class="section-title" style="margin-bottom: 48px;">
+          VOLLE<br><span class="accent">KONTROLLE.</span>
+        </h2>
+
+        <div class="specs-table">
+          <div class="specs-row">
+            <div class="specs-key">Druckbereich</div>
+            <div class="specs-val">40 – 240 mmHg</div>
+          </div>
+          <div class="specs-row">
+            <div class="specs-key">Kammern</div>
+            <div class="specs-val">6 (Fuß bis Hüfte)</div>
+          </div>
+          <div class="specs-row">
+            <div class="specs-key">Programme</div>
+            <div class="specs-val">Lymph · Sport · Erholung</div>
+          </div>
+          <div class="specs-row">
+            <div class="specs-key">Steuerung</div>
+            <div class="specs-val">LCD-Display, digital</div>
+          </div>
+          <div class="specs-row">
+            <div class="specs-key">Anwendungsdauer</div>
+            <div class="specs-val">Einstellbar 5–60 Min.</div>
+          </div>
+          <div class="specs-row">
+            <div class="specs-key">Größen</div>
+            <div class="specs-val">S / M / L / XL</div>
+          </div>
+          <div class="specs-row">
+            <div class="specs-key">Material</div>
+            <div class="specs-val">Premium-Nylon, PVC-frei</div>
+          </div>
+          <div class="specs-row">
+            <div class="specs-key">Gewicht (Kompressor)</div>
+            <div class="specs-val">ca. 1,2 kg</div>
+          </div>
+          <div class="specs-row">
+            <div class="specs-key">Stromversorgung</div>
+            <div class="specs-val">100–240V, 50/60Hz</div>
+          </div>
+          <div class="specs-row">
+            <div class="specs-key">Garantie</div>
+            <div class="specs-val">2 Jahre</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="specs-content">
+        <div>
+          <p class="section-desc" style="margin-bottom: 40px;">
+            Höchste Verarbeitungsqualität trifft auf medizinisch geprüfte Drucktechnologie. Recovtec Boots wurden entwickelt, um professionelle Leistung in deinen Alltag zu bringen.
+          </p>
+        </div>
+
+        <div class="specs-highlight">
+          <div class="specs-highlight-num">240</div>
+          <div class="specs-highlight-label">mmHg maximaler Druck — klinischer Standard</div>
+        </div>
+
+        <div class="specs-highlight">
+          <div class="specs-highlight-num">6</div>
+          <div class="specs-highlight-label">Unabhängige Druckkammern für gezielte Kompression</div>
+        </div>
+
+        <div class="specs-highlight">
+          <div class="specs-highlight-num">3</div>
+          <div class="specs-highlight-label">Spezialisierte Programme für jeden Anwendungsfall</div>
+        </div>
+
+        <a href="{{ section.settings.buy_url | default: routes.collections_url }}" class="btn btn-primary" style="align-self: flex-start;">
+          Recovtec Boots kaufen
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Specs",
+  "settings": [
+    { "type": "url", "id": "buy_url", "label": "Kaufen Link" }
+  ],
+  "presets": [{ "name": "Specs" }]
+}
+{% endschema %}

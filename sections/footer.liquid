@@ -1,0 +1,66 @@
+<footer class="site-footer">
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <div class="footer-logo">RECOV<span>TEC</span></div>
+        <p class="footer-desc">
+          Professionelle Regenerationstechnologie für Athleten, die das Maximum aus sich herausholen wollen. Made for Champions.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Instagram">📷</a>
+          <a href="#" class="social-link" aria-label="TikTok">🎵</a>
+          <a href="#" class="social-link" aria-label="YouTube">▶️</a>
+          <a href="#" class="social-link" aria-label="Facebook">📘</a>
+        </div>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Produkte</p>
+        <ul class="footer-links">
+          <li><a href="{{ routes.collections_url }}">Recovery Boots</a></li>
+          <li><a href="{{ routes.collections_url }}">Kompressionsmanschetten</a></li>
+          <li><a href="{{ routes.collections_url }}">Zubehör</a></li>
+          <li><a href="{{ routes.collections_url }}">Bundles</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Unternehmen</p>
+        <ul class="footer-links">
+          <li><a href="/pages/ueber-uns">Über uns</a></li>
+          <li><a href="/pages/technologie">Technologie</a></li>
+          <li><a href="/blogs/news">Blog</a></li>
+          <li><a href="/pages/kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Support</p>
+        <ul class="footer-links">
+          <li><a href="/pages/faq">FAQ</a></li>
+          <li><a href="/pages/versand">Versand & Rücksendung</a></li>
+          <li><a href="/pages/garantie">Garantie</a></li>
+          <li><a href="mailto:{{ shop.email }}">{{ shop.email }}</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Alle Rechte vorbehalten.</p>
+      <nav class="footer-legal" aria-label="Legal navigation">
+        <a href="/policies/privacy-policy">Datenschutz</a>
+        <a href="/policies/terms-of-service">AGB</a>
+        <a href="/policies/refund-policy">Widerruf</a>
+        <a href="/policies/shipping-policy">Versand</a>
+      </nav>
+    </div>
+
+  </div>
+</footer>
+
+{% schema %}
+{ "name": "Footer" }
+{% endschema %}
