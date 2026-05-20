@@ -1,0 +1,60 @@
+<section class="howto section-pad" id="howto">
+  <div class="container">
+
+    <div class="howto-head">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.headline }}</h2>
+    </div>
+
+    <div class="howto-steps">
+      {%- for block in section.blocks -%}
+        <div class="howto-step" {{ block.shopify_attributes }}>
+          <div class="step-num">{{ forloop.index }}</div>
+          <div class="step-media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 600 | image_tag: alt: block.settings.title }}
+            {%- else -%}
+              <div class="placeholder">
+                <div class="placeholder-label">Schritt {{ forloop.index }} Bild</div>
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="step-body">
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How To",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "03 — Anwendung" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "In 3 Schritten zur perfekten Recovery." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Schritt",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "text", "id": "title", "label": "Titel", "default": "Boots anlegen" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Schiebe die Recovery Boots über deine Beine und schließe den Reißverschluss." }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "How To",
+    "blocks": [
+      { "type": "step", "settings": { "title": "Boots anlegen", "text": "Schiebe die Recovery Boots über deine Beine und schließe den Reißverschluss." } },
+      { "type": "step", "settings": { "title": "Programm wählen", "text": "Wähle eines der 5 Massageprogramme und stelle den Druck nach deinem Komfort ein." } },
+      { "type": "step", "settings": { "title": "Entspannen & erholen", "text": "20–30 Minuten reichen aus. Lehn dich zurück und lass die Technologie arbeiten." } }
+    ]
+  }]
+}
+{% endschema %}

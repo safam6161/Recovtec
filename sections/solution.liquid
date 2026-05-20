@@ -1,0 +1,60 @@
+<section class="solution section-pad dark" id="solution">
+  <div class="container">
+
+    <div class="solution-head">
+      <p class="eyebrow light">{{ section.settings.eyebrow }}</p>
+      <h2 class="solution-headline">{{ section.settings.headline }}</h2>
+      <p class="solution-sub">{{ section.settings.subtext }}</p>
+    </div>
+
+    <div class="solution-cards">
+      {%- for block in section.blocks -%}
+        <div class="solution-card" {{ block.shopify_attributes }}>
+          <div class="solution-card-icon">
+            {% render 'icon', icon: block.settings.icon %}
+          </div>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Solution",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "02 — Die Lösung" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Pneumatische Kompression. Professionelle Recovery. Für zuhause." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "RECOVTEC nutzt die gleiche Technologie wie Profi-Athleten – jetzt für dein Training." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Karte",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+          { "value": "bolt", "label": "Blitz" },
+          { "value": "shield", "label": "Schild" },
+          { "value": "refresh", "label": "Pfeil Rückkehr" },
+          { "value": "truck", "label": "LKW" },
+          { "value": "warranty", "label": "Garantie" }
+        ], "default": "bolt" },
+        { "type": "text", "id": "title", "label": "Titel", "default": "Aktive Kompression" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Pulsierender Luftdruck massiert deine Beine systematisch von unten nach oben." }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Solution",
+    "blocks": [
+      { "type": "card", "settings": { "icon": "bolt", "title": "Aktive Kompression", "text": "Pulsierender Luftdruck massiert deine Beine systematisch von unten nach oben." } },
+      { "type": "card", "settings": { "icon": "refresh", "title": "Bessere Durchblutung", "text": "Laktat und Entzündungen werden schneller abtransportiert – du erholst dich spürbar schneller." } },
+      { "type": "card", "settings": { "icon": "shield", "title": "5 Massageprogramme", "text": "Von sanfter Lymphdrainage bis intensiver Tiefenmassage – alles per Knopfdruck einstellbar." } },
+      { "type": "card", "settings": { "icon": "warranty", "title": "Klinisch getestet", "text": "Basiert auf der gleichen Technologie, die Physiotherapeuten und Sportmediziner einsetzen." } }
+    ]
+  }]
+}
+{% endschema %}

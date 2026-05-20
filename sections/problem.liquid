@@ -1,0 +1,53 @@
+<section class="problem section-pad" id="problem">
+  <div class="container">
+    <div class="problem-grid">
+
+      <div class="problem-left">
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2 class="problem-headline">{{ section.settings.headline }}</h2>
+      </div>
+
+      <div class="problem-right">
+        {%- for block in section.blocks -%}
+          <div class="problem-item" {{ block.shopify_attributes }}>
+            <span class="num">{{ forloop.index | prepend: '0' }}</span>
+            <div class="problem-item-body">
+              <h4>{{ block.settings.title }}</h4>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Problem",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "01 — Warum Recovery" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Du trainierst. Aber deine Beine bleiben schwer." }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Schmerzpunkt",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel", "default": "Muskelkater blockiert dich" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Nach intensivem Training brauchst du Tage, bis du wieder Vollgas geben kannst." }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Problem",
+    "blocks": [
+      { "type": "item", "settings": { "title": "Muskelkater blockiert dich", "text": "Nach intensivem Training brauchst du Tage, bis du wieder Vollgas geben kannst." } },
+      { "type": "item", "settings": { "title": "Schwere Beine bremsen dich aus", "text": "Laktat und Entzündungen sammeln sich an – dein Körper kommt nicht hinterher." } },
+      { "type": "item", "settings": { "title": "Zu wenig Zeit für echte Erholung", "text": "Massagen und Physiotherapie kosten Zeit und Geld, die du nicht immer hast." } },
+      { "type": "item", "settings": { "title": "Schlechte Schlafqualität", "text": "Ohne gute Recovery leidet der Schlaf – der wichtigste Regenerationsfaktor überhaupt." } }
+    ]
+  }]
+}
+{% endschema %}

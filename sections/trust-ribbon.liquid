@@ -1,0 +1,42 @@
+<div class="ribbon">
+  <div class="container">
+    <div class="ribbon-inner">
+      {%- for block in section.blocks -%}
+        <div class="ribbon-item" {{ block.shopify_attributes }}>
+          {% render 'icon', icon: block.settings.icon %}
+          {{ block.settings.label }}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trust Ribbon",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Punkt",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+          { "value": "truck",   "label": "LKW" },
+          { "value": "refresh", "label": "Pfeil Rückkehr" },
+          { "value": "shield",  "label": "Schild" },
+          { "value": "warranty","label": "Garantie" }
+        ], "default": "truck" },
+        { "type": "text", "id": "label", "label": "Text", "default": "1–3 Tage Lieferung" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Trust Ribbon",
+    "blocks": [
+      { "type": "item", "settings": { "icon": "truck",    "label": "1–3 Tage Lieferung" } },
+      { "type": "item", "settings": { "icon": "refresh",  "label": "30 Tage Geld zurück" } },
+      { "type": "item", "settings": { "icon": "truck",    "label": "Kostenloser Versand" } },
+      { "type": "item", "settings": { "icon": "warranty", "label": "1 Jahr Garantie" } }
+    ]
+  }]
+}
+{% endschema %}

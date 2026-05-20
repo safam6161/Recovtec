@@ -1,15 +1,20 @@
-{% if section.settings.show_bar %}
-<div class="announcement-bar">
-  {{ section.settings.text }}
+<div class="announce">
+  <div class="announce-track">
+    <span>{{ section.settings.item_1 }}</span>
+    <span class="dot"></span>
+    <span>{{ section.settings.item_2 }}</span>
+    <span class="dot"></span>
+    <span>{{ section.settings.item_3 }}</span>
+  </div>
 </div>
-{% endif %}
 
 {% schema %}
 {
   "name": "Announcement Bar",
   "settings": [
-    { "type": "checkbox", "id": "show_bar", "label": "Show bar", "default": true },
-    { "type": "text", "id": "text", "label": "Text", "default": "🚚 Kostenloser Versand ab 99 € · 30 Tage Rückgabe · Made for Champions" }
+    { "type": "text", "id": "item_1", "label": "Punkt 1", "default": "Kostenloser Versand" },
+    { "type": "text", "id": "item_2", "label": "Punkt 2", "default": "30 Tage Geld zurück" },
+    { "type": "text", "id": "item_3", "label": "Punkt 3", "default": "1 Jahr Garantie" }
   ]
 }
 {% endschema %}

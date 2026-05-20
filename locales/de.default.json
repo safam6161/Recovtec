@@ -1,11 +1,18 @@
 {
   "general": {
-    "accessibility": {
-      "skip_to_content": "Zum Inhalt springen",
-      "close": "Schließen"
+    "cart": {
+      "title": "Warenkorb",
+      "empty": "Dein Warenkorb ist leer.",
+      "checkout": "Zur Kasse",
+      "subtotal": "Zwischensumme"
     },
-    "currency": {
-      "estimated_total": "Geschätzter Gesamtbetrag"
+    "search": {
+      "placeholder": "Suchen…",
+      "submit": "Suchen"
+    },
+    "pagination": {
+      "previous": "Zurück",
+      "next": "Weiter"
     }
   },
   "products": {
@@ -13,19 +20,15 @@
       "add_to_cart": "In den Warenkorb",
       "sold_out": "Ausverkauft",
       "unavailable": "Nicht verfügbar",
-      "quantity": {
-        "label": "Menge",
-        "increase": "Menge erhöhen",
-        "decrease": "Menge verringern"
-      },
-      "variant_sold_out_or_unavailable": "Ausverkauft"
+      "quantity": "Menge",
+      "size_guide": "Größentabelle"
     }
   },
-  "sections": {
-    "cart": {
-      "title": "Warenkorb",
-      "empty": "Dein Warenkorb ist leer.",
-      "subtotal": "Zwischensumme"
-    }
+  "accessibility": {
+    "skip_to_content": "Zum Inhalt springen",
+    "close": "Schließen",
+    "open_cart": "Warenkorb öffnen",
+    "open_search": "Suche öffnen",
+    "open_account": "Konto öffnen"
   }
 }

@@ -1,128 +1,181 @@
-<section class="product-page">
-  <div class="container">
+<div class="pdp-wrap" data-product-id="{{ product.id }}">
 
-    <div class="product-layout">
-
-      <!-- Gallery -->
-      <div class="product-gallery">
-        <div class="product-main-img">
-          {%- if product.featured_media -%}
-            {{ product.featured_media | image_url: width: 900 | image_tag:
-              id: 'MainProductImage',
-              alt: product.featured_media.alt | escape,
-              loading: 'eager',
-              fetchpriority: 'high'
-            }}
-          {%- else -%}
-            <div style="aspect-ratio:1; display:flex; align-items:center; justify-content:center; background:var(--dark-3);">
-              <span style="font-size:80px">🥾</span>
-            </div>
-          {%- endif -%}
+  <!-- Gallery -->
+  <div class="pdp-gallery">
+    <div class="gallery-main">
+      {%- assign featured = product.featured_image -%}
+      {%- if featured -%}
+        <img
+          id="gallery-main-img"
+          src="{{ featured | image_url: width: 1200 }}"
+          alt="{{ featured.alt | escape }}"
+          loading="eager"
+          fetchpriority="high"
+        >
+      {%- else -%}
+        <div class="placeholder" style="aspect-ratio:1">
+          <div class="placeholder-label">Produktfoto</div>
         </div>
-
-        {%- if product.media.size > 1 -%}
-          <div class="product-thumbs">
-            {%- for media in product.media limit: 4 -%}
-              <div class="product-thumb {% if forloop.first %}active{% endif %}">
-                {{ media | image_url: width: 200 | image_tag: alt: media.alt | escape, loading: 'lazy' }}
-              </div>
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
+      {%- endif -%}
+    </div>
+    {%- if product.images.size > 1 -%}
+      <div class="gallery-thumbs">
+        {%- for img in product.images -%}
+          <button
+            class="thumb {% if forloop.first %}active{% endif %}"
+            data-src="{{ img | image_url: width: 1200 }}"
+            data-alt="{{ img.alt | escape }}"
+            aria-label="Bild {{ forloop.index }}"
+          >
+            <img src="{{ img | image_url: width: 160 }}" alt="{{ img.alt | escape }}" loading="lazy">
+          </button>
+        {%- endfor -%}
       </div>
+    {%- endif -%}
+  </div>
 
-      <!-- Info -->
-      <div class="product-info">
+  <!-- Buy Box -->
+  <div class="pdp-buybox">
 
-        <nav class="product-breadcrumb" aria-label="Breadcrumb">
-          <a href="{{ routes.root_url }}">Home</a>
-          <span>/</span>
-          <a href="{{ routes.collections_url }}">Produkte</a>
-          <span>/</span>
-          <span aria-current="page">{{ product.title }}</span>
-        </nav>
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
 
-        <div class="product-badge-row">
-          <span class="badge badge-new">Neu</span>
-          {%- if product.available -%}
-            <span class="badge badge-stock">✓ Auf Lager</span>
-          {%- endif -%}
-        </div>
+    <h1 class="pdp-title">{{ product.title }}</h1>
 
-        <h1 class="product-title-main">{{ product.title }}</h1>
+    <!-- Stars -->
+    <div class="pdp-rating">
+      <div class="star-row">
+        {%- for i in (1..5) -%}{% render 'icon', icon: 'star' %}{%- endfor -%}
+      </div>
+      <span class="pdp-rating-score">{{ section.settings.rating_score }}</span>
+      <a href="#reviews" class="pdp-rating-count">{{ section.settings.rating_count }}</a>
+    </div>
 
-        <div class="product-rating" aria-label="4.9 von 5 Sternen">
-          <div class="rating-stars">
-            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-          </div>
-          <span class="rating-count">4.9/5 (127 Bewertungen)</span>
-        </div>
+    <!-- Price -->
+    <div class="pdp-price-row">
+      <span class="pdp-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+      {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+        <span class="pdp-price-compare">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+        <span class="pdp-badge">{{ section.settings.badge_label }}</span>
+      {%- endif -%}
+    </div>
 
-        <div class="product-price-block">
-          <span class="product-price">{{ product.price | money }}</span>
-          {%- if product.compare_at_price > product.price -%}
-            <span class="product-price-old">{{ product.compare_at_price | money }}</span>
-            <span class="product-price-save">
-              {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}% gespart
-            </span>
-          {%- endif -%}
-        </div>
+    <!-- Short Description -->
+    {%- if section.settings.short_desc != blank -%}
+      <p class="pdp-short-desc">{{ section.settings.short_desc }}</p>
+    {%- endif -%}
 
-        <p class="product-desc">{{ product.description }}</p>
-
-        {%- assign size_option = product.options_with_values | where: 'name', 'Größe' | first -%}
-        {%- unless size_option == nil -%}
-          <p class="product-option-label">Größe wählen</p>
-          <div class="product-sizes" role="group" aria-label="Größenauswahl">
-            {%- for value in size_option.values -%}
-              <button class="size-btn {% if forloop.first %}active{% endif %}" type="button">
-                {{ value }}
-              </button>
-            {%- endfor -%}
-          </div>
-        {%- endunless -%}
-
-        {%- form 'product', product, id: 'product-form', novalidate: 'novalidate' -%}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-
-          <div class="product-add-row">
-            <div class="qty-control" aria-label="Menge">
-              <button class="qty-btn" type="button" data-qty="minus" aria-label="Weniger">−</button>
-              <span class="qty-num" aria-live="polite">1</span>
-              <button class="qty-btn" type="button" data-qty="plus" aria-label="Mehr">+</button>
-            </div>
-            <button type="submit" name="add" class="add-to-cart-btn"
-              {%- unless product.available %} disabled{%- endunless -%}>
-              {%- if product.available -%}In den Warenkorb{%- else -%}Nicht verfügbar{%- endif -%}
+    <!-- Variant / Size Selector -->
+    {%- unless product.has_only_default_variant -%}
+      {%- for option in product.options_with_values -%}
+        <div class="pdp-option">
+          <div class="pdp-option-label">
+            <span>{{ option.name }}</span>
+            <button class="size-guide-trigger link-btn" type="button" aria-controls="size-guide-modal">
+              {% render 'icon', icon: 'backpack' %} Größentabelle
             </button>
           </div>
-
-          <button type="button" class="buy-now-btn">Sofort kaufen</button>
-        {%- endform -%}
-
-        <div class="product-guarantees">
-          <div class="guarantee-item">
-            <div class="guarantee-icon">🚚</div>
-            <div class="guarantee-label">Kostenloser Versand</div>
-          </div>
-          <div class="guarantee-item">
-            <div class="guarantee-icon">🔄</div>
-            <div class="guarantee-label">30 Tage Rückgabe</div>
-          </div>
-          <div class="guarantee-item">
-            <div class="guarantee-icon">🎖</div>
-            <div class="guarantee-label">2 Jahre Garantie</div>
+          <div class="pdp-size-grid">
+            {%- for value in option.values -%}
+              <button
+                class="size-btn {% if option.selected_value == value %}active{% endif %}"
+                data-option="{{ option.position }}"
+                data-value="{{ value }}"
+                type="button"
+              >{{ value }}</button>
+            {%- endfor -%}
           </div>
         </div>
+      {%- endfor -%}
+    {%- endunless -%}
 
-      </div>
+    <!-- Stock Status -->
+    <div class="pdp-stock">
+      {%- if product.selected_or_first_available_variant.available -%}
+        <span class="stock-dot in"></span>
+        <span>{{ section.settings.in_stock_label }}</span>
+      {%- else -%}
+        <span class="stock-dot out"></span>
+        <span>{{ section.settings.out_stock_label }}</span>
+      {%- endif -%}
+    </div>
+
+    <!-- ATC -->
+    <form id="pdp-atc-form" class="pdp-atc-form">
+      <input type="hidden" name="id" id="pdp-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button
+        type="submit"
+        class="btn btn-primary btn-lg pdp-atc-btn"
+        {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+      >
+        {{ section.settings.atc_label }}
+        <span class="btn-icon">{% render 'icon', icon: 'cart' %}</span>
+      </button>
+    </form>
+
+    <!-- Trust Pills -->
+    <div class="trust-pills">
+      <div class="trust-pill">{% render 'icon', icon: 'truck' %} <span>{{ section.settings.pill_shipping }}</span></div>
+      <div class="trust-pill">{% render 'icon', icon: 'refresh' %} <span>{{ section.settings.pill_return }}</span></div>
+      <div class="trust-pill">{% render 'icon', icon: 'warranty' %} <span>{{ section.settings.pill_warranty }}</span></div>
+    </div>
+
+    <!-- Full Description -->
+    {%- if product.description != blank -%}
+      <div class="pdp-desc rte">{{ product.description }}</div>
+    {%- endif -%}
+
+  </div><!-- /buybox -->
+
+</div><!-- /pdp-wrap -->
+
+<!-- Sticky ATC (hidden by default, shown when buybox scrolls out of view) -->
+<div class="sticky-atc" id="sticky-atc" aria-hidden="true">
+  <div class="container sticky-atc-inner">
+    <span class="sticky-atc-title">{{ product.title }}</span>
+    <span class="sticky-atc-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+    <button class="btn btn-primary sticky-atc-btn" data-sticky-atc>
+      {{ section.settings.atc_label }}
+    </button>
+  </div>
+</div>
+
+<!-- Size Guide Modal -->
+<div class="modal-overlay" id="size-guide-modal" role="dialog" aria-modal="true" aria-label="Größentabelle" hidden>
+  <div class="modal-box">
+    <header class="modal-head">
+      <h3>Größentabelle</h3>
+      <button class="modal-close" aria-label="Schließen">{% render 'icon', icon: 'close' %}</button>
+    </header>
+    <div class="modal-body">
+      {{ section.settings.size_guide_content }}
     </div>
   </div>
-</section>
+</div>
 
 {% schema %}
 {
-  "name": "Product Main",
-  "settings": []
+  "name": "Produkt",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Recovery Boots" },
+    { "type": "text", "id": "badge_label", "label": "Sale Badge", "default": "SALE" },
+    { "type": "text", "id": "rating_score", "label": "Bewertung", "default": "4.9" },
+    { "type": "text", "id": "rating_count", "label": "Anzahl Bewertungen", "default": "142 Bewertungen" },
+    { "type": "text", "id": "short_desc", "label": "Kurzbeschreibung", "default": "Pneumatische Kompression für schnellere Regeneration nach dem Sport." },
+    { "type": "text", "id": "in_stock_label", "label": "Auf Lager Text", "default": "Auf Lager – Versand in 1–3 Tagen" },
+    { "type": "text", "id": "out_stock_label", "label": "Ausverkauft Text", "default": "Derzeit nicht verfügbar" },
+    { "type": "text", "id": "atc_label", "label": "In den Warenkorb Text", "default": "In den Warenkorb" },
+    { "type": "text", "id": "pill_shipping", "label": "Versand Pill", "default": "Kostenloser Versand" },
+    { "type": "text", "id": "pill_return", "label": "Rückgabe Pill", "default": "30 Tage Rückgabe" },
+    { "type": "text", "id": "pill_warranty", "label": "Garantie Pill", "default": "1 Jahr Garantie" },
+    {
+      "type": "richtext",
+      "id": "size_guide_content",
+      "label": "Größentabellen-Inhalt",
+      "default": "<table><thead><tr><th>Größe</th><th>Schuhgröße</th><th>Beingröße</th></tr></thead><tbody><tr><td>S/M</td><td>36–42</td><td>bis 90 cm</td></tr><tr><td>L/XL</td><td>42–48</td><td>ab 90 cm</td></tr></tbody></table>"
+    }
+  ],
+  "presets": [{ "name": "Produkt" }]
 }
 {% endschema %}

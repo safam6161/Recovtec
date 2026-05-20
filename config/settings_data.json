@@ -1,7 +1,7 @@
 {
   "current": {
-    "color_accent": "#00d4ff",
-    "color_bg": "#0a0a0a",
-    "color_text": "#ffffff"
+    "color_ink": "#0a0a0a",
+    "color_paper": "#fafafa",
+    "color_accent": "#0a0a0a"
   }
 }

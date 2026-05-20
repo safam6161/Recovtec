@@ -1,36 +1,102 @@
 {
   "sections": {
-    "main-product": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "item_1": "Kostenloser Versand",
+        "item_2": "30 Tage Geld zurück",
+        "item_3": "1 Jahr Garantie"
+      }
+    },
+    "main_product": {
       "type": "main-product",
-      "settings": {}
+      "settings": {
+        "eyebrow": "Recovery Boots",
+        "rating_score": "4.9",
+        "rating_count": "142 Bewertungen",
+        "short_desc": "Pneumatische Kompression für schnellere Regeneration nach dem Sport.",
+        "in_stock_label": "Auf Lager – Versand in 1–3 Tagen",
+        "out_stock_label": "Derzeit nicht verfügbar",
+        "atc_label": "In den Warenkorb",
+        "pill_shipping": "Kostenloser Versand",
+        "pill_return": "30 Tage Rückgabe",
+        "pill_warranty": "1 Jahr Garantie"
+      }
     },
-    "features-strip": {
-      "type": "features-strip",
-      "settings": {}
+    "modes": {
+      "type": "product-modes",
+      "settings": {
+        "eyebrow": "Programme",
+        "headline": "5 Massageprogramme für jeden Bedarf.",
+        "subtext": "Von sanfter Erholung bis intensiver Tiefenmassage – du bestimmst die Intensität."
+      },
+      "block_order": ["mode_1", "mode_2", "mode_3", "mode_4", "mode_5"],
+      "blocks": {
+        "mode_1": { "type": "mode", "settings": { "title": "Lymphdrainage", "description": "Sanfte, langsame Kompression für maximale Entspannung und Lymphfluss-Aktivierung.", "pressure_pct": 30, "pressure_val": "20–40 mmHg" } },
+        "mode_2": { "type": "mode", "settings": { "title": "Active Recovery", "description": "Mittlerer Druck, sequenziell – ideal nach intensivem Training zur Laktatentleerung.", "pressure_pct": 55, "pressure_val": "40–60 mmHg", "featured": true } },
+        "mode_3": { "type": "mode", "settings": { "title": "Pulsierend", "description": "Rhythmische Druckwellen für Muskeln, die besonders intensiv belastet wurden.", "pressure_pct": 70, "pressure_val": "60–80 mmHg" } },
+        "mode_4": { "type": "mode", "settings": { "title": "Tiefenmassage", "description": "Hoher Druck für tiefe Muskelfaszien – nur für erfahrene Nutzer.", "pressure_pct": 90, "pressure_val": "80–100 mmHg" } },
+        "mode_5": { "type": "mode", "settings": { "title": "Schlaf-Recovery", "description": "Sehr sanft, Intervall-gesteuert – lässt dich beim Einschlafen entspannen.", "pressure_pct": 20, "pressure_val": "15–30 mmHg" } }
+      }
     },
-    "benefits": {
-      "type": "benefits",
-      "settings": {}
+    "story": {
+      "type": "product-story",
+      "settings": { "dark": false },
+      "block_order": ["story_1", "story_2"],
+      "blocks": {
+        "story_1": { "type": "row", "settings": { "eyebrow": "Technologie", "heading": "Pneumatische Kompression", "text": "Sequenzielle Luftkammern massieren deine Beine von den Füßen aufwärts – genau wie eine professionelle manuelle Lymphdrainage." } },
+        "story_2": { "type": "row", "settings": { "eyebrow": "Design", "heading": "Ergonomisch & komfortabel", "text": "Das anatomische Design passt sich deinen Beinen an. Leichte Materialien, einfacher Verschluss – in Sekunden bereit." } }
+      }
     },
-    "how-it-works": {
-      "type": "how-it-works",
-      "settings": {}
+    "guarantee": {
+      "type": "product-guarantee",
+      "settings": {
+        "days": "30",
+        "headline": "Tage Geld-zurück-Garantie",
+        "text": "Wir sind überzeugt von unserem Produkt. Wenn du nicht 100 % zufrieden bist, erstatten wir dir den vollen Kaufpreis – kein Kleingedrucktes, keine Fragen."
+      }
     },
-    "testimonials": {
-      "type": "testimonials",
-      "settings": {}
+    "social_proof": {
+      "type": "social-proof",
+      "settings": {
+        "eyebrow": "Bewertungen",
+        "headline": "Was unsere Kunden sagen.",
+        "rating": "4.9 / 5",
+        "review_count": "aus 142 Bewertungen"
+      },
+      "block_order": ["rev_1", "rev_2", "rev_3"],
+      "blocks": {
+        "rev_1": { "type": "review", "settings": { "text": "Nach jedem Lauf ziehe ich die Boots an. Meine Erholung hat sich massiv verbessert.", "name": "Markus T.", "subtitle": "Marathonläufer" } },
+        "rev_2": { "type": "review", "settings": { "text": "Ich war skeptisch, aber nach einer Woche war ich überzeugt. Die schweren Beine nach dem Krafttraining sind weg.", "name": "Laura K.", "subtitle": "CrossFit Athletin" } },
+        "rev_3": { "type": "review", "settings": { "text": "Endlich eine bezahlbare Alternative zur Physiotherapie. Ich nutze die Boots jeden Abend und schlafe viel besser.", "name": "Stefan M.", "subtitle": "Triathlet" } }
+      }
     },
-    "cta": {
-      "type": "cta",
-      "settings": {}
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "eyebrow": "FAQ",
+        "headline": "Häufige Fragen."
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3"],
+      "blocks": {
+        "faq_1": { "type": "item", "settings": { "question": "Für wen sind die Recovery Boots geeignet?", "answer": "Für alle, die regelmäßig Sport treiben – egal ob Läufer, Radfahrer, Kraftsportler oder Teamsportler." } },
+        "faq_2": { "type": "item", "settings": { "question": "Wie oft und wie lange sollte ich die Boots nutzen?", "answer": "20–30 Minuten nach dem Training reichen für eine optimale Wirkung. Täglich nutzbar." } },
+        "faq_3": { "type": "item", "settings": { "question": "Gilt die 30-Tage-Geld-zurück-Garantie?", "answer": "Absolut. Wenn du nicht 100 % zufrieden bist, erstatten wir den vollen Kaufpreis." } }
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "tagline": "Professionelle Recovery für jeden Athleten.",
+        "legal": "© 2025 RECOVTEC. Alle Rechte vorbehalten."
+      },
+      "block_order": ["fcol_1", "fcol_2", "fcol_3"],
+      "blocks": {
+        "fcol_1": { "type": "column", "settings": { "heading": "Shop", "labels": "Recovery Boots|Zubehör|Bundles", "links": "/collections/all|/collections/zubehoer|/collections/bundles" } },
+        "fcol_2": { "type": "column", "settings": { "heading": "Hilfe", "labels": "FAQ|Versand & Rückgabe|Kontakt", "links": "/#faq|/pages/versand|/pages/kontakt" } },
+        "fcol_3": { "type": "column", "settings": { "heading": "Unternehmen", "labels": "Über uns|Presse|Partner", "links": "/pages/ueber-uns|/pages/presse|/pages/partner" } }
+      }
     }
   },
-  "order": [
-    "main-product",
-    "features-strip",
-    "benefits",
-    "how-it-works",
-    "testimonials",
-    "cta"
-  ]
+  "order": ["announcement", "main_product", "modes", "story", "guarantee", "social_proof", "faq", "footer"]
 }

@@ -1,0 +1,79 @@
+<section class="compare section-pad dark" id="compare">
+  <div class="container">
+
+    <div class="compare-head">
+      <p class="eyebrow light">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.headline }}</h2>
+    </div>
+
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            {%- for block in section.blocks -%}
+              <th class="{% if block.settings.highlight %}col-highlight{% endif %}" {{ block.shopify_attributes }}>
+                {{ block.settings.col_label }}
+              </th>
+            {%- endfor -%}
+          </tr>
+        </thead>
+        <tbody>
+          {%- assign rows = section.settings.rows | split: '|' -%}
+          {%- for row in rows -%}
+            {%- assign cells = row | split: ',' -%}
+            <tr>
+              {%- for cell in cells -%}
+                {%- assign val = cell | strip -%}
+                {%- if forloop.first -%}
+                  <td class="row-label">{{ val }}</td>
+                {%- elsif val == 'yes' -%}
+                  <td class="cell-yes">{% render 'icon', icon: 'check' %}</td>
+                {%- elsif val == 'no' -%}
+                  <td class="cell-no">—</td>
+                {%- else -%}
+                  <td>{{ val }}</td>
+                {%- endif -%}
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Compare",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "04 — Vergleich" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "RECOVTEC vs. die Alternativen." },
+    {
+      "type": "textarea",
+      "id": "rows",
+      "label": "Zeilen (Label, col1, col2, col3 — mit | getrennt, Werte: yes / no / Text)",
+      "default": "Preis,yes,no,no|Zuhause nutzbar,yes,no,yes|Effektivität,yes,yes,no|Sofort verfügbar,yes,no,yes|Einmalige Investition,yes,no,no"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "col",
+      "name": "Spalte",
+      "settings": [
+        { "type": "text", "id": "col_label", "label": "Spalten-Label", "default": "RECOVTEC" },
+        { "type": "checkbox", "id": "highlight", "label": "Hervorheben", "default": true }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Compare",
+    "blocks": [
+      { "type": "col", "settings": { "col_label": "RECOVTEC", "highlight": true } },
+      { "type": "col", "settings": { "col_label": "Physiotherapeut", "highlight": false } },
+      { "type": "col", "settings": { "col_label": "Foam Roller", "highlight": false } }
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,62 @@
+<section class="modes section-pad">
+  <div class="container">
+
+    <div class="modes-head">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.headline }}</h2>
+      <p class="modes-sub">{{ section.settings.subtext }}</p>
+    </div>
+
+    <div class="modes-grid">
+      {%- for block in section.blocks -%}
+        <div class="mode-card {% if block.settings.featured %}mode-featured{% endif %}" {{ block.shopify_attributes }}>
+          <div class="mode-num">{{ forloop.index | prepend: '0' }}</div>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.description }}</p>
+          <div class="mode-pressure">
+            <span class="mode-pressure-label">Druck</span>
+            <div class="mode-pressure-bar">
+              <div class="mode-pressure-fill" style="width:{{ block.settings.pressure_pct }}%"></div>
+            </div>
+            <span class="mode-pressure-val">{{ block.settings.pressure_val }}</span>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Modes",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Programme" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "5 Massageprogramme für jeden Bedarf." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Von sanfter Erholung bis intensiver Tiefenmassage – du bestimmst die Intensität." }
+  ],
+  "blocks": [
+    {
+      "type": "mode",
+      "name": "Programm",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Name", "default": "Lymphdrainage" },
+        { "type": "textarea", "id": "description", "label": "Beschreibung", "default": "Sanfte, langsame Kompression für maximale Entspannung und Lymphfluss-Aktivierung." },
+        { "type": "range", "id": "pressure_pct", "label": "Druck %", "min": 10, "max": 100, "step": 5, "default": 30 },
+        { "type": "text", "id": "pressure_val", "label": "Druck Anzeigewert", "default": "20–40 mmHg" },
+        { "type": "checkbox", "id": "featured", "label": "Hervorheben", "default": false }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Product Modes",
+    "blocks": [
+      { "type": "mode", "settings": { "title": "Lymphdrainage", "description": "Sanfte, langsame Kompression für maximale Entspannung und Lymphfluss-Aktivierung.", "pressure_pct": 30, "pressure_val": "20–40 mmHg" } },
+      { "type": "mode", "settings": { "title": "Active Recovery", "description": "Mittlerer Druck, sequenziell – ideal nach intensivem Training zur Laktatentleerung.", "pressure_pct": 55, "pressure_val": "40–60 mmHg", "featured": true } },
+      { "type": "mode", "settings": { "title": "Pulsierend", "description": "Rhythmische Druckwellen für Muskeln, die besonders intensiv belastet wurden.", "pressure_pct": 70, "pressure_val": "60–80 mmHg" } },
+      { "type": "mode", "settings": { "title": "Tiefenmassage", "description": "Hoher Druck für tiefe Muskelfaszien – nur für erfahrene Nutzer.", "pressure_pct": 90, "pressure_val": "80–100 mmHg" } },
+      { "type": "mode", "settings": { "title": "Schlaf-Recovery", "description": "Sehr sanft, Intervall-gesteuert – lässt dich beim Einschlafen entspannen.", "pressure_pct": 20, "pressure_val": "15–30 mmHg" } }
+    ]
+  }]
+}
+{% endschema %}

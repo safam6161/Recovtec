@@ -1,42 +1,25 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Recovtec",
+    "theme_name": "RECOVTEC",
     "theme_version": "1.0.0",
-    "theme_author": "Recovtec",
-    "theme_documentation_url": "https://recovtec.de",
-    "theme_support_url": "mailto:sm@recovtec.de"
+    "theme_author": "RECOVTEC",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
   },
   {
-    "name": "Colors",
+    "name": "Farben",
     "settings": [
-      {
-        "type": "color",
-        "id": "color_accent",
-        "label": "Akzentfarbe",
-        "default": "#00d4ff"
-      },
-      {
-        "type": "color",
-        "id": "color_bg",
-        "label": "Hintergrundfarbe",
-        "default": "#0a0a0a"
-      },
-      {
-        "type": "color",
-        "id": "color_text",
-        "label": "Textfarbe",
-        "default": "#ffffff"
-      }
+      { "type": "color", "id": "color_ink", "label": "Primäre Textfarbe", "default": "#0a0a0a" },
+      { "type": "color", "id": "color_paper", "label": "Primärer Hintergrund", "default": "#fafafa" },
+      { "type": "color", "id": "color_accent", "label": "Akzentfarbe", "default": "#0a0a0a" }
     ]
   },
   {
-    "name": "Social Media",
+    "name": "Typografie",
     "settings": [
-      { "type": "url", "id": "social_instagram", "label": "Instagram URL" },
-      { "type": "url", "id": "social_tiktok",    "label": "TikTok URL"    },
-      { "type": "url", "id": "social_youtube",   "label": "YouTube URL"   },
-      { "type": "url", "id": "social_facebook",  "label": "Facebook URL"  }
+      { "type": "font_picker", "id": "font_display", "label": "Display-Schrift (Überschriften)", "default": "inter_tight_n4" },
+      { "type": "font_picker", "id": "font_body", "label": "Fließtext-Schrift", "default": "space_grotesk_n4" }
     ]
   },
   {

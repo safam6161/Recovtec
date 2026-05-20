@@ -1,0 +1,63 @@
+<section class="product-story section-pad {% if section.settings.dark %}dark{% endif %}">
+  <div class="container">
+    {%- for block in section.blocks -%}
+      <div class="story-row {% cycle 'odd', 'even' %}" {{ block.shopify_attributes }}>
+
+        <div class="story-media">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 900 | image_tag: alt: block.settings.heading }}
+          {%- else -%}
+            <div class="placeholder">
+              <div class="placeholder-label">Story Bild {{ forloop.index }}</div>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="story-body">
+          {%- if block.settings.eyebrow != blank -%}
+            <p class="eyebrow {% if section.settings.dark %}light{% endif %}">{{ block.settings.eyebrow }}</p>
+          {%- endif -%}
+          <h2>{{ block.settings.heading }}</h2>
+          <p>{{ block.settings.text }}</p>
+          {%- if block.settings.cta_label != blank -%}
+            <a href="{{ block.settings.cta_url | default: '#' }}" class="btn btn-primary">
+              {{ block.settings.cta_label }}
+              <span class="btn-icon">{% render 'icon', icon: 'arrow' %}</span>
+            </a>
+          {%- endif -%}
+        </div>
+
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Story",
+  "settings": [
+    { "type": "checkbox", "id": "dark", "label": "Dunkler Hintergrund", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Story Row",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+        { "type": "text", "id": "heading", "label": "Überschrift", "default": "Technologie, die einen Unterschied macht" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Unsere Recovery Boots nutzen pneumatische Kompressionstechnologie, die ursprünglich in der Sportwissenschaft und Rehabilitation entwickelt wurde." },
+        { "type": "text", "id": "cta_label", "label": "Button Text" },
+        { "type": "url", "id": "cta_url", "label": "Button Link" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Product Story",
+    "blocks": [
+      { "type": "row", "settings": { "eyebrow": "Technologie", "heading": "Pneumatische Kompression", "text": "Sequenzielle Luftkammern massieren deine Beine von den Füßen aufwärts – genau wie eine professionelle manuelle Lymphdrainage." } },
+      { "type": "row", "settings": { "eyebrow": "Design", "heading": "Ergonomisch & komfortabel", "text": "Das anatomische Design passt sich deinen Beinen an. Leichte Materialien, einfacher Verschluss – in Sekunden bereit." } }
+    ]
+  }]
+}
+{% endschema %}

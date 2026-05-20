@@ -1,0 +1,32 @@
+<section class="final-cta dark">
+  <div class="container">
+    <p class="eyebrow light">{{ section.settings.eyebrow }}</p>
+    <h2 class="final-cta-headline">{{ section.settings.headline }}</h2>
+    <p class="final-cta-sub">{{ section.settings.subtext }}</p>
+    <div class="final-cta-actions">
+      <a href="{{ section.settings.cta_url | default: routes.collections_url }}" class="btn btn-primary btn-lg">
+        {{ section.settings.cta_label }}
+        <span class="btn-icon">{% render 'icon', icon: 'arrow' %}</span>
+      </a>
+      <div class="final-cta-pills">
+        <span>{% render 'icon', icon: 'truck' %} Kostenloser Versand</span>
+        <span>{% render 'icon', icon: 'refresh' %} 30 Tage Rückgabe</span>
+        <span>{% render 'icon', icon: 'shield' %} 1 Jahr Garantie</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Final CTA",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Bereit?" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Trainiere hart. Erhol dich härter." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Starte noch heute mit professioneller Recovery – für zuhause, für jeden Athleten." },
+    { "type": "text", "id": "cta_label", "label": "Button Text", "default": "Jetzt kaufen" },
+    { "type": "url", "id": "cta_url", "label": "Button Link" }
+  ],
+  "presets": [{ "name": "Final CTA" }]
+}
+{% endschema %}
