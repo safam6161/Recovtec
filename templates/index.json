@@ -17,122 +17,130 @@
     },
     "trust": {
       "type": "trust-ribbon",
-      "block_order": ["trust_1", "trust_2", "trust_3", "trust_4"],
+      "block_order": ["t1","t2","t3","t4"],
       "blocks": {
-        "trust_1": { "type": "item", "settings": { "icon": "truck",    "label": "1–3 Tage Lieferung" } },
-        "trust_2": { "type": "item", "settings": { "icon": "refresh",  "label": "30 Tage Geld zurück" } },
-        "trust_3": { "type": "item", "settings": { "icon": "truck",    "label": "Kostenloser Versand" } },
-        "trust_4": { "type": "item", "settings": { "icon": "warranty", "label": "1 Jahr Garantie" } }
+        "t1": { "type": "item", "settings": { "icon": "truck", "label": "1–3 Tage Lieferung" } },
+        "t2": { "type": "item", "settings": { "icon": "refresh", "label": "30 Tage Geld zurück" } },
+        "t3": { "type": "item", "settings": { "icon": "truck", "label": "Kostenloser Versand" } },
+        "t4": { "type": "item", "settings": { "icon": "ce", "label": "1 Jahr Garantie" } }
       }
     },
     "problem": {
       "type": "problem",
       "settings": {
         "eyebrow": "01 — Warum Recovery",
-        "headline": "Du trainierst. Aber deine Beine bleiben schwer."
+        "headline": "Du trainierst.\nAber deine Beine bleiben schwer.",
+        "intro": "Jeder, der ernsthaft trainiert, kennt das Problem: harter Tag im Gym, langer Lauf, Ligaspiel — und am nächsten Tag fühlen sich die Beine an wie Beton. Stretchen reicht oft nicht. Foam Roller ist Arbeit. Pause ist keine Option."
       },
-      "block_order": ["prob_1", "prob_2", "prob_3", "prob_4"],
+      "block_order": ["p1","p2","p3","p4"],
       "blocks": {
-        "prob_1": { "type": "item", "settings": { "title": "Muskelkater blockiert dich", "text": "Nach intensivem Training brauchst du Tage, bis du wieder Vollgas geben kannst." } },
-        "prob_2": { "type": "item", "settings": { "title": "Schwere Beine bremsen dich aus", "text": "Laktat und Entzündungen sammeln sich an – dein Körper kommt nicht hinterher." } },
-        "prob_3": { "type": "item", "settings": { "title": "Zu wenig Zeit für echte Erholung", "text": "Massagen und Physiotherapie kosten Zeit und Geld, die du nicht immer hast." } },
-        "prob_4": { "type": "item", "settings": { "title": "Schlechte Schlafqualität", "text": "Ohne gute Recovery leidet der Schlaf – der wichtigste Regenerationsfaktor überhaupt." } }
+        "p1": { "type": "item", "settings": { "title": "Müde Beine am nächsten Tag", "text": "Schwere, steife Muskulatur bremst dich beim nächsten Workout aus — und du kommst gar nicht zur eigentlichen Leistung." } },
+        "p2": { "type": "item", "settings": { "title": "Stretchen und Roller reichen nicht", "text": "Die Standard-Tools helfen — aber nur oberflächlich. Tiefe Muskulatur kommt damit selten in Bewegung." } },
+        "p3": { "type": "item", "settings": { "title": "Mehr Volumen, weniger Fortschritt", "text": "Wer häufig trainiert, ohne richtig zu erholen, sammelt Müdigkeit an — Leistung stagniert, Verletzungsrisiko steigt." } },
+        "p4": { "type": "item", "settings": { "title": "Keine Zeit fürs Studio", "text": "Recovery-Lounges kosten Mitgliedschaft plus Anfahrt. An Trainingstagen ist das ein Termin zu viel." } }
       }
     },
     "solution": {
       "type": "solution",
       "settings": {
         "eyebrow": "02 — Die Lösung",
-        "headline": "Pneumatische Kompression. Professionelle Recovery. Für zuhause.",
-        "subtext": "RECOVTEC nutzt die gleiche Technologie wie Profi-Athleten – jetzt für dein Training."
+        "headline": "Recovery Boots.\nIm Wohnzimmer. Sofort.",
+        "subtext": "Pneumatische Kompression in 5 Modi und 7 fein abgestuften Druckstufen — komplett kabellos, flüsterleise, ohne App-Quatsch. Anziehen, einschalten, erholen.",
+        "footnote": "1 Jahr Garantie · 30 Tage Geld-zurück-Garantie · Kostenloser Versand in 1–3 Werktagen.",
+        "cta_label": "Zum Produkt"
       },
-      "block_order": ["sol_1", "sol_2", "sol_3", "sol_4"],
+      "block_order": ["s1","s2","s3"],
       "blocks": {
-        "sol_1": { "type": "card", "settings": { "icon": "bolt", "title": "Aktive Kompression", "text": "Pulsierender Luftdruck massiert deine Beine systematisch von unten nach oben." } },
-        "sol_2": { "type": "card", "settings": { "icon": "refresh", "title": "Bessere Durchblutung", "text": "Laktat und Entzündungen werden schneller abtransportiert – du erholst dich spürbar schneller." } },
-        "sol_3": { "type": "card", "settings": { "icon": "shield", "title": "5 Massageprogramme", "text": "Von sanfter Lymphdrainage bis intensiver Tiefenmassage – alles per Knopfdruck einstellbar." } },
-        "sol_4": { "type": "card", "settings": { "icon": "warranty", "title": "Klinisch getestet", "text": "Basiert auf der gleichen Technologie, die Physiotherapeuten und Sportmediziner einsetzen." } }
+        "s1": { "type": "usp", "settings": { "big_num": "7", "big_unit": "Stufen", "title": "Volle Kontrolle über deine Recovery", "text": "5 Massagemodi und 7 Druckstufen von 30 bis 240 mmHg. Sanftes Cool-Down oder Tiefen-Regeneration — alles in einem Gerät." } },
+        "s2": { "type": "usp", "settings": { "big_num": "3", "big_unit": "Stunden Akku", "title": "Kabellos. Keine App.", "text": "Komplett akkubetrieben, leiser als 45 dB, mit LED-Controller direkt am Bein. Anziehen, drücken, fertig. Auch unterwegs." } },
+        "s3": { "type": "usp", "settings": { "big_num": "3", "big_unit": "Teile im Paket", "title": "Alles dabei. Sofort startklar.", "text": "Recovery Boots, ein hochwertiger Transport-Rucksack und Erweiterungslaschen für unterschiedliche Beingrößen. Im Paket enthalten — ohne Aufpreis, ohne Zusatzbestellung.", "cta_label": "So funktioniert's", "cta_url": "#howto" } }
       }
     },
     "howto": {
       "type": "howto",
       "settings": {
         "eyebrow": "03 — Anwendung",
-        "headline": "In 3 Schritten zur perfekten Recovery."
+        "headline": "In 4 Schritten zur\nbesseren Recovery.",
+        "subtext": "Keine App, kein Pairing, keine Anleitung mit 30 Seiten. Anziehen, einschalten, fertig."
       },
-      "block_order": ["step_1", "step_2", "step_3"],
+      "block_order": ["h1","h2","h3","h4","hfoot"],
       "blocks": {
-        "step_1": { "type": "step", "settings": { "title": "Boots anlegen", "text": "Schiebe die Recovery Boots über deine Beine und schließe den Reißverschluss." } },
-        "step_2": { "type": "step", "settings": { "title": "Programm wählen", "text": "Wähle eines der 5 Massageprogramme und stelle den Druck nach deinem Komfort ein." } },
-        "step_3": { "type": "step", "settings": { "title": "Entspannen & erholen", "text": "20–30 Minuten reichen aus. Lehn dich zurück und lass die Technologie arbeiten." } }
+        "h1": { "type": "step", "settings": { "title": "Anziehen", "text": "Beine in die Boots, Reißverschluss zu." } },
+        "h2": { "type": "step", "settings": { "title": "Modus wählen", "text": "Einer der 5 Modi am LED-Controller wählen." } },
+        "h3": { "type": "step", "settings": { "title": "Druck einstellen", "text": "Start mit Stufe 80 mmHg. Steigere dich nach Bedarf — bis 240 mmHg möglich." } },
+        "h4": { "type": "step", "settings": { "title": "15–45 Minuten erholen", "text": "Hinlegen, Augen zu, Serie schauen. Nach der Session fühlst du den Unterschied." } },
+        "hfoot": { "type": "foot", "settings": { "title": "Direkt einsatzbereit aus der Box", "text": "Akku vorgeladen. Keine Software, kein Pairing, kein Konto. In unter 60 Sekunden startklar." } }
       }
     },
     "compare": {
       "type": "compare",
       "settings": {
         "eyebrow": "04 — Vergleich",
-        "headline": "RECOVTEC vs. die Alternativen.",
-        "rows": "Preis,yes,no,no|Zuhause nutzbar,yes,no,yes|Effektivität,yes,yes,no|Sofort verfügbar,yes,no,yes|Einmalige Investition,yes,no,no"
+        "headline": "Recovtec Pro vs. der Rest.\nVolle Ausstattung, kein Hokuspokus.",
+        "rows": "Druckstufen,bis 240 mmHg,bis 180 mmHg|Massage-Modi,5,3|Akkubetrieb,Ja · 3 Std,Teils|Lautstärke,< 45 dB,> 60 dB|App / Pairing nötig,Nein,Oft ja|Rucksack inklusive,check,x|Erweiterungslaschen,check,x"
       },
-      "block_order": ["col_1", "col_2", "col_3"],
+      "block_order": ["c1","c2"],
       "blocks": {
-        "col_1": { "type": "col", "settings": { "col_label": "RECOVTEC", "highlight": true } },
-        "col_2": { "type": "col", "settings": { "col_label": "Physiotherapeut", "highlight": false } },
-        "col_3": { "type": "col", "settings": { "col_label": "Foam Roller", "highlight": false } }
+        "c1": { "type": "col", "settings": { "col_label": "Recovtec Pro", "badge": "DAS PAKET", "highlight": true } },
+        "c2": { "type": "col", "settings": { "col_label": "Andere Brands", "badge": "", "highlight": false } }
       }
     },
-    "social_proof": {
+    "social": {
       "type": "social-proof",
       "settings": {
-        "eyebrow": "05 — Bewertungen",
-        "headline": "Was unsere Kunden sagen.",
-        "rating": "4.9 / 5",
-        "review_count": "aus 142 Bewertungen"
+        "eyebrow": "04 — Stimmen",
+        "headline": "Frühe Tester sind überzeugt.",
+        "subtext": "Wir bauen unsere Community gerade auf. Werde Teil davon — und gib uns dein Feedback.",
+        "rating": "4,9 / 5",
+        "review_count": "aus 27 frühen Bewertungen",
+        "rating_note": "Wir sammeln Bewertungen erst seit kurzem. Jede Rückmeldung hilft — und wird gelesen."
       },
-      "block_order": ["rev_1", "rev_2", "rev_3"],
+      "block_order": ["r1","r2","r3"],
       "blocks": {
-        "rev_1": { "type": "review", "settings": { "text": "Nach jedem Lauf ziehe ich die Boots an. Meine Erholung hat sich massiv verbessert – ich bin deutlich schneller wieder trainingsbereit.", "name": "Markus T.", "subtitle": "Marathonläufer" } },
-        "rev_2": { "type": "review", "settings": { "text": "Ich war skeptisch, aber nach einer Woche war ich überzeugt. Die schweren Beine nach dem Krafttraining sind weg.", "name": "Laura K.", "subtitle": "CrossFit Athletin" } },
-        "rev_3": { "type": "review", "settings": { "text": "Endlich eine bezahlbare Alternative zur Physiotherapie. Ich nutze die Boots jeden Abend und schlafe viel besser.", "name": "Stefan M.", "subtitle": "Triathlet" } }
+        "r1": { "type": "review", "settings": { "text": "Bei mir nach jeder langen Einheit Pflicht. Beine fühlen sich am nächsten Tag deutlich frischer an.", "name": "Jonas K.", "subtitle": "Triathlon · Hamburg" } },
+        "r2": { "type": "review", "settings": { "text": "Endlich Recovery zuhause, ohne Studio. Leise genug, dass meine Freundin sie kaum hört.", "name": "Lukas M.", "subtitle": "CrossFit · München" } },
+        "r3": { "type": "review", "settings": { "text": "Bedienung in 30 Sekunden verstanden. Kein App-Quatsch, einfach an und gut.", "name": "Sarah F.", "subtitle": "Marathon · Köln" } }
       }
     },
     "faq": {
       "type": "faq",
       "settings": {
-        "eyebrow": "06 — FAQ",
-        "headline": "Häufige Fragen."
+        "eyebrow": "05 — FAQ",
+        "headline": "Häufige Fragen.\nKlare Antworten.",
+        "subtext": "Du hast eine andere Frage? Schreib uns direkt — meistens antworten wir innerhalb eines Werktages.",
+        "email": "support@recovtec.de"
       },
-      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+      "block_order": ["faq1","faq2","faq3","faq4","faq5","faq6"],
       "blocks": {
-        "faq_1": { "type": "item", "settings": { "question": "Für wen sind die Recovery Boots geeignet?", "answer": "Für alle, die regelmäßig Sport treiben – egal ob Läufer, Radfahrer, Kraftsportler oder Teamsportler. Auch bei berufsbedingtem langen Stehen oder Sitzen sind die Boots eine hervorragende Entlastung." } },
-        "faq_2": { "type": "item", "settings": { "question": "Wie oft und wie lange sollte ich die Boots nutzen?", "answer": "20–30 Minuten nach dem Training reichen für eine optimale Wirkung. Du kannst sie täglich nutzen – viele Athleten schwören auf die abendliche Routine direkt nach dem Sport oder vor dem Schlafen." } },
-        "faq_3": { "type": "item", "settings": { "question": "Gibt es eine Größe, die für alle passt?", "answer": "Ja, die RECOVTEC Boots sind in zwei Größen erhältlich: S/M (Schuhgröße 36–42) und L/XL (Schuhgröße 42–48). Das Bein-Design passt für nahezu alle Beinlängen." } },
-        "faq_4": { "type": "item", "settings": { "question": "Wie lange dauert die Lieferung?", "answer": "Wir liefern innerhalb von 1–3 Werktagen innerhalb Deutschlands, Österreichs und der Schweiz. Der Versand ist ab einem Bestellwert von 50 € kostenlos." } },
-        "faq_5": { "type": "item", "settings": { "question": "Gilt die 30-Tage-Geld-zurück-Garantie?", "answer": "Absolut. Wenn du nicht 100 % zufrieden bist, schickst du die Boots einfach zurück und wir erstatten den vollen Kaufpreis – ohne Wenn und Aber." } }
+        "faq1": { "type": "item", "settings": { "question": "Für wen sind die Recovery Boots gedacht?", "answer": "Für alle, die ihre Beine regelmäßig belasten — Läufer, Kraftsportler, Mannschaftssportler, CrossFit-Athleten, Triathleten. Aber auch für lange Bürotage und schwere Beine nach einem stressigen Tag." } },
+        "faq2": { "type": "item", "settings": { "question": "Wie oft und wie lange soll ich sie nutzen?", "answer": "Eine Session dauert 20–30 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel, solange du dich wohl fühlst." } },
+        "faq3": { "type": "item", "settings": { "question": "Welche Druckstufe sollte ich am Anfang wählen?", "answer": "Starte mit Stufe 80 mmHg. Das ist angenehm und effektiv. Steigere dich nach Bedarf — höhere Stufen für tiefere Regeneration, niedrigere für sanftes Cool-Down." } },
+        "faq4": { "type": "item", "settings": { "question": "Brauche ich eine App oder WLAN?", "answer": "Nein. Anschalten, Modus und Druckstufe am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto. Bewusst so designt." } },
+        "faq5": { "type": "item", "settings": { "question": "Welche Größe passt mir?", "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die mitgelieferten Erweiterungslaschen geben dir zusätzlichen Spielraum von +10 cm." } },
+        "faq6": { "type": "item", "settings": { "question": "Was, wenn sie mir nicht gefallen?", "answer": "30 Tage Geld-zurück-Garantie. Du testest sie zuhause — gefallen sie dir nicht, schickst du sie kostenfrei zurück und bekommst dein Geld zurück. Ohne Diskussion." } }
       }
     },
     "final_cta": {
       "type": "final-cta",
       "settings": {
-        "eyebrow": "Bereit?",
-        "headline": "Trainiere hart. Erhol dich härter.",
-        "subtext": "Starte noch heute mit professioneller Recovery – für zuhause, für jeden Athleten.",
-        "cta_label": "Jetzt kaufen"
+        "headline": "Bereit für die\nbessere Recovery?",
+        "subtext": "Ein Produkt. Alles dabei. Direkt vom Hersteller verschickt. Wenn's nicht passt, schickst du es zurück — kostenlos, ohne Diskussion.",
+        "cta_label": "Jetzt zur Produktseite"
       }
     },
     "footer": {
       "type": "footer",
       "settings": {
-        "tagline": "Professionelle Recovery für jeden Athleten.",
-        "legal": "© 2025 RECOVTEC. Alle Rechte vorbehalten."
+        "tagline": "Eigenmarke für professionelle Recovery. Faire Preise, volle Ausstattung, ehrlich kalkuliert.",
+        "legal": "© 2026 Recovtec · Deutschland"
       },
-      "block_order": ["fcol_1", "fcol_2", "fcol_3"],
+      "block_order": ["fcol1","fcol2","fcol3"],
       "blocks": {
-        "fcol_1": { "type": "column", "settings": { "heading": "Shop", "labels": "Recovery Boots|Zubehör|Bundles", "links": "/collections/all|/collections/zubehoer|/collections/bundles" } },
-        "fcol_2": { "type": "column", "settings": { "heading": "Hilfe", "labels": "FAQ|Versand & Rückgabe|Kontakt", "links": "/#faq|/pages/versand|/pages/kontakt" } },
-        "fcol_3": { "type": "column", "settings": { "heading": "Unternehmen", "labels": "Über uns|Presse|Partner", "links": "/pages/ueber-uns|/pages/presse|/pages/partner" } }
+        "fcol1": { "type": "column", "settings": { "heading": "Shop", "labels": "Recovery Boots|Bald: Massagepistole|Zubehör", "links": "/collections/all|#|#" } },
+        "fcol2": { "type": "column", "settings": { "heading": "Service", "labels": "Versand & Lieferung|Rückgabe|Garantie|Größenberater", "links": "/pages/versand|/pages/rueckgabe|/pages/garantie|#" } },
+        "fcol3": { "type": "column", "settings": { "heading": "Unternehmen", "labels": "Über Recovtec|Kontakt|Impressum|Datenschutz|AGB", "links": "/pages/ueber-uns|/pages/kontakt|/pages/impressum|/pages/datenschutz|/pages/agb" } }
       }
     }
   },
-  "order": ["announcement", "hero", "trust", "problem", "solution", "howto", "compare", "social_proof", "faq", "final_cta", "footer"]
+  "order": ["announcement","hero","trust","problem","solution","howto","compare","social","faq","final_cta","footer"]
 }
