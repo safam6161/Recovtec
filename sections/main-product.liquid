@@ -2,10 +2,10 @@
   <div class="container">
     <a href="{{ routes.root_url }}">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 7H2M6 3L2 7l4 4"/></svg>
-      Zurück
+      {{ section.settings.breadcrumb_back | default: 'Zurück' }}
     </a>
     <span class="sep">/</span>
-    <a href="{{ routes.root_url }}">Startseite</a>
+    <a href="{{ routes.root_url }}">{{ section.settings.breadcrumb_home | default: 'Startseite' }}</a>
     <span class="sep">/</span>
     <span>{{ product.title }}</span>
   </div>
@@ -25,7 +25,7 @@
               loading="eager" fetchpriority="high">
           {%- else -%}
             <div class="placeholder" style="height:100%;min-height:500px">
-              <div class="placeholder-label">RECOVTEC PRO · Frontansicht · auf Modell</div>
+              <div class="placeholder-label">{{ section.settings.img_placeholder | default: 'RECOVTEC PRO · Frontansicht · auf Modell' }}</div>
             </div>
           {%- endif -%}
         </div>
@@ -52,7 +52,7 @@
 
           <div class="pdp-price-row">
             <div class="pdp-price">{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</div>
-            <div class="pdp-price-meta">Inkl. MwSt.</div>
+            <div class="pdp-price-meta">{{ section.settings.price_note | default: 'Inkl. MwSt.' }}</div>
           </div>
 
           {%- unless product.has_only_default_variant -%}
@@ -60,13 +60,9 @@
               <div class="size-block">
                 <div class="size-head">
                   <span class="label">{{ option.name }} wählen</span>
-                  <button type="button" class="size-guide-link size-guide-trigger">Größentabelle <span aria-hidden="true">↗</span></button>
+                  <button type="button" class="size-guide-link size-guide-trigger">{{ section.settings.sg_link_label | default: 'Größentabelle' }} <span aria-hidden="true">↗</span></button>
                 </div>
                 <div class="size-options">
-                  {%- for variant in product.variants -%}
-                    {%- if variant.option1 == option.values[forloop.index0] or option.values.size == 1 -%}
-                    {%- endif -%}
-                  {%- endfor -%}
                   {%- for value in option.values -%}
                     {%- assign variant_for_value = product.variants | where: "option1", value | first -%}
                     <button type="button"
@@ -85,9 +81,9 @@
           <div class="stock-status">
             {%- if product.selected_or_first_available_variant.available -%}
               <span class="stock-dot" aria-hidden="true"></span>
-              <span><strong>Auf Lager</strong> · in 1–3 Werktagen bei dir.</span>
+              <span>{{ section.settings.in_stock_text | default: 'Auf Lager · in 1–3 Werktagen bei dir.' }}</span>
             {%- else -%}
-              <span style="color:var(--mute)">Derzeit nicht verfügbar</span>
+              <span style="color:var(--mute)">{{ section.settings.out_of_stock_text | default: 'Derzeit nicht verfügbar' }}</span>
             {%- endif -%}
           </div>
 
@@ -96,17 +92,25 @@
               <input type="hidden" name="id" id="pdp-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
               <button type="submit" class="btn btn-primary btn-lg btn-add"
                 {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
-                In den Warenkorb
+                {{ section.settings.atc_label | default: 'In den Warenkorb' }}
                 <span class="btn-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span>
               </button>
             </form>
           </div>
 
           <div class="pdp-trust-pills">
-            <div class="trust-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12a8 8 0 0 1 14-5l2-2v6h-6l2.5-2.5"/><path d="M20 12a8 8 0 0 1-14 5l-2 2v-6h6l-2.5 2.5"/></svg><span>30 Tage Geld zurück</span></div>
-            <div class="trust-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg><span>1 Jahr Garantie</span></div>
-            <div class="trust-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 7h11v9H2zM13 10h5l3 3v3h-8z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><span>Kostenloser Versand</span></div>
-            <div class="trust-pill"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg><span>Rucksack &amp; Laschen inklusive</span></div>
+            {%- if section.settings.trust_1 != blank -%}
+              <div class="trust-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12a8 8 0 0 1 14-5l2-2v6h-6l2.5-2.5"/><path d="M20 12a8 8 0 0 1-14 5l-2 2v-6h6l-2.5 2.5"/></svg><span>{{ section.settings.trust_1 }}</span></div>
+            {%- endif -%}
+            {%- if section.settings.trust_2 != blank -%}
+              <div class="trust-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg><span>{{ section.settings.trust_2 }}</span></div>
+            {%- endif -%}
+            {%- if section.settings.trust_3 != blank -%}
+              <div class="trust-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 7h11v9H2zM13 10h5l3 3v3h-8z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><span>{{ section.settings.trust_3 }}</span></div>
+            {%- endif -%}
+            {%- if section.settings.trust_4 != blank -%}
+              <div class="trust-pill"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg><span>{{ section.settings.trust_4 }}</span></div>
+            {%- endif -%}
           </div>
         </div>
       </div>
@@ -126,7 +130,7 @@
       </div>
       <div class="sticky-meta">
         <div class="sticky-name">{{ product.title }}</div>
-        <div class="sticky-price">{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }} · Größe M</div>
+        <div class="sticky-price">{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</div>
       </div>
     </div>
     <div class="sticky-actions">
@@ -138,7 +142,7 @@
         {%- endunless -%}
       </div>
       <button class="btn btn-primary" data-sticky-atc>
-        In den Warenkorb <span class="btn-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span>
+        {{ section.settings.atc_label | default: 'In den Warenkorb' }} <span class="btn-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span>
       </button>
     </div>
   </div>
@@ -146,44 +150,44 @@
 
 <!-- Size Guide Modal -->
 <div class="sg-overlay" id="sg-overlay"></div>
-<aside class="sg-modal" id="size-guide-modal" role="dialog" aria-label="Größentabelle">
+<aside class="sg-modal" id="size-guide-modal" role="dialog" aria-label="{{ section.settings.sg_title | default: 'Größentabelle' }}">
   <header class="sg-head">
-    <span class="sg-eyebrow">Größentabelle</span>
+    <span class="sg-eyebrow">{{ section.settings.sg_title | default: 'Größentabelle' }}</span>
     <button class="sg-close" aria-label="Schließen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
   </header>
   <div class="sg-body">
-    <div class="sg-brand">RECOVTEC</div>
-    <p class="sg-intro">Die richtige Größe ist entscheidend für die beste Wirkung deiner Recovtec Recovery Boots. Wir machen es dir einfach — keine komplizierten Messungen, nur deine Körpergröße entscheidet.</p>
-    <h3 class="sg-title">Welche Größe<br><strong>passt mir?</strong></h3>
+    <div class="sg-brand">{{ section.settings.logo_text | default: 'RECOVTEC' }}</div>
+    <p class="sg-intro">{{ section.settings.sg_intro }}</p>
+    <h3 class="sg-title">{{ section.settings.sg_heading }}</h3>
     <div class="sg-reco">
       <div class="sg-reco-card">
-        <div class="sg-reco-size">M</div>
+        <div class="sg-reco-size">{{ section.settings.sg_size1_name | default: 'M' }}</div>
         <div class="sg-reco-meta">
-          <span class="sg-reco-label">Empfohlen für</span>
-          <div class="sg-reco-value">unter 1,80 m</div>
+          <span class="sg-reco-label">{{ section.settings.sg_size_label | default: 'Empfohlen für' }}</span>
+          <div class="sg-reco-value">{{ section.settings.sg_size1_value | default: 'unter 1,80 m' }}</div>
         </div>
       </div>
       <div class="sg-reco-card">
-        <div class="sg-reco-size">L</div>
+        <div class="sg-reco-size">{{ section.settings.sg_size2_name | default: 'L' }}</div>
         <div class="sg-reco-meta">
-          <span class="sg-reco-label">Empfohlen für</span>
-          <div class="sg-reco-value">über 1,80 m</div>
+          <span class="sg-reco-label">{{ section.settings.sg_size_label | default: 'Empfohlen für' }}</span>
+          <div class="sg-reco-value">{{ section.settings.sg_size2_value | default: 'über 1,80 m' }}</div>
         </div>
       </div>
     </div>
     <div class="sg-facts">
       <div class="sg-fact">
-        <span class="sg-fact-num">+10<small>cm</small></span>
+        <span class="sg-fact-num">{{ section.settings.sg_fact1_num | default: '+10' }}<small>{{ section.settings.sg_fact1_unit | default: 'cm' }}</small></span>
         <div class="sg-fact-text">
-          <h4>+10 cm Bein-Erweiterung inklusive</h4>
-          <p>Mit den beigelieferten Erweiterungslaschen ist bei <strong>beiden Größen</strong> ein zusätzlicher Spielraum von 10 cm am <strong>ganzen Bein</strong> möglich.</p>
+          <h4>{{ section.settings.sg_fact1_title }}</h4>
+          <p>{{ section.settings.sg_fact1_text }}</p>
         </div>
       </div>
       <div class="sg-fact">
-        <span class="sg-fact-num">↑</span>
+        <span class="sg-fact-num">{{ section.settings.sg_fact2_icon | default: '↑' }}</span>
         <div class="sg-fact-text">
-          <h4>Zwischen zwei Größen?</h4>
-          <p>Wer sich nicht ganz entscheiden kann, dem empfehlen wir die <strong>größere Variante</strong>.</p>
+          <h4>{{ section.settings.sg_fact2_title }}</h4>
+          <p>{{ section.settings.sg_fact2_text }}</p>
         </div>
       </div>
     </div>
@@ -194,8 +198,41 @@
 {
   "name": "Produkt",
   "settings": [
+    { "type": "header", "content": "Produktinfo" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Recovtec — Recovery" },
-    { "type": "textarea", "id": "lede", "label": "Kurzbeschreibung", "default": "Pneumatische Recovery Boots für aktive Muskelregeneration. Kabellos, leise, mit 5 Modi und 7 fein abgestuften Druckstufen bis 240 mmHg." }
+    { "type": "textarea", "id": "lede", "label": "Kurzbeschreibung", "default": "Pneumatische Recovery Boots für aktive Muskelregeneration. Kabellos, leise, mit 5 Modi und 7 fein abgestuften Druckstufen bis 240 mmHg." },
+    { "type": "text", "id": "price_note", "label": "Preishinweis", "default": "Inkl. MwSt." },
+    { "type": "text", "id": "atc_label", "label": "Warenkorb-Button Text", "default": "In den Warenkorb" },
+    { "type": "header", "content": "Lager-Status" },
+    { "type": "text", "id": "in_stock_text", "label": "Auf Lager Text", "default": "Auf Lager · in 1–3 Werktagen bei dir." },
+    { "type": "text", "id": "out_of_stock_text", "label": "Ausverkauft Text", "default": "Derzeit nicht verfügbar" },
+    { "type": "header", "content": "Vertrauens-Pills" },
+    { "type": "text", "id": "trust_1", "label": "Vertrauen 1", "default": "30 Tage Geld zurück" },
+    { "type": "text", "id": "trust_2", "label": "Vertrauen 2", "default": "1 Jahr Garantie" },
+    { "type": "text", "id": "trust_3", "label": "Vertrauen 3", "default": "Kostenloser Versand" },
+    { "type": "text", "id": "trust_4", "label": "Vertrauen 4", "default": "Rucksack & Laschen inklusive" },
+    { "type": "header", "content": "Breadcrumb" },
+    { "type": "text", "id": "breadcrumb_back", "label": "Zurück Text", "default": "Zurück" },
+    { "type": "text", "id": "breadcrumb_home", "label": "Startseite Text", "default": "Startseite" },
+    { "type": "header", "content": "Größentabelle (Modal)" },
+    { "type": "text", "id": "sg_link_label", "label": "Link zur Größentabelle", "default": "Größentabelle" },
+    { "type": "text", "id": "sg_title", "label": "Modal Titel", "default": "Größentabelle" },
+    { "type": "text", "id": "logo_text", "label": "Brand Name im Modal", "default": "RECOVTEC" },
+    { "type": "textarea", "id": "sg_intro", "label": "Einleitungstext", "default": "Die richtige Größe ist entscheidend für die beste Wirkung deiner Recovtec Recovery Boots. Wir machen es dir einfach — keine komplizierten Messungen, nur deine Körpergröße entscheidet." },
+    { "type": "text", "id": "sg_heading", "label": "Größen-Überschrift", "default": "Welche Größe passt mir?" },
+    { "type": "text", "id": "sg_size_label", "label": "Empfehlung Label", "default": "Empfohlen für" },
+    { "type": "text", "id": "sg_size1_name", "label": "Größe 1 Name", "default": "M" },
+    { "type": "text", "id": "sg_size1_value", "label": "Größe 1 Empfehlung", "default": "unter 1,80 m" },
+    { "type": "text", "id": "sg_size2_name", "label": "Größe 2 Name", "default": "L" },
+    { "type": "text", "id": "sg_size2_value", "label": "Größe 2 Empfehlung", "default": "über 1,80 m" },
+    { "type": "text", "id": "sg_fact1_num", "label": "Fakt 1 Zahl", "default": "+10" },
+    { "type": "text", "id": "sg_fact1_unit", "label": "Fakt 1 Einheit", "default": "cm" },
+    { "type": "text", "id": "sg_fact1_title", "label": "Fakt 1 Titel", "default": "+10 cm Bein-Erweiterung inklusive" },
+    { "type": "textarea", "id": "sg_fact1_text", "label": "Fakt 1 Text", "default": "Mit den beigelieferten Erweiterungslaschen ist bei beiden Größen ein zusätzlicher Spielraum von 10 cm am ganzen Bein möglich." },
+    { "type": "text", "id": "sg_fact2_icon", "label": "Fakt 2 Symbol", "default": "↑" },
+    { "type": "text", "id": "sg_fact2_title", "label": "Fakt 2 Titel", "default": "Zwischen zwei Größen?" },
+    { "type": "textarea", "id": "sg_fact2_text", "label": "Fakt 2 Text", "default": "Wer sich nicht ganz entscheiden kann, dem empfehlen wir die größere Variante." },
+    { "type": "text", "id": "img_placeholder", "label": "Bild-Platzhalter Text", "default": "RECOVTEC PRO · Frontansicht · auf Modell" }
   ],
   "presets": [{ "name": "Produkt" }]
 }

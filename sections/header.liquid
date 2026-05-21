@@ -3,20 +3,21 @@
 
     <a href="{{ routes.root_url }}" class="nav-logo">
       <span class="mark" aria-hidden="true"></span>
-      RECOVTEC
+      {{ section.settings.logo_text | default: 'RECOVTEC' }}
     </a>
 
     <div class="nav-links">
-      <a href="{{ routes.root_url }}#problem">Warum Recovery</a>
-      <a href="{{ routes.collections_url }}">Boots</a>
-      <a href="{{ routes.root_url }}#howto">Anwendung</a>
-      <a href="{{ routes.root_url }}#faq">FAQ</a>
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'link' -%}
+          <a href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
 
     <div class="nav-actions">
-      <button class="icon-btn" aria-label="Suche">{% render 'icon', icon: 'search' %}</button>
-      <button class="icon-btn" aria-label="Konto">{% render 'icon', icon: 'user' %}</button>
-      <button class="icon-btn cart-btn" aria-label="Warenkorb öffnen" data-cart-open>
+      <button class="icon-btn" aria-label="{{ section.settings.aria_search | default: 'Suche' }}">{% render 'icon', icon: 'search' %}</button>
+      <button class="icon-btn" aria-label="{{ section.settings.aria_account | default: 'Konto' }}">{% render 'icon', icon: 'user' %}</button>
+      <button class="icon-btn cart-btn" aria-label="{{ section.settings.aria_cart | default: 'Warenkorb öffnen' }}" data-cart-open>
         {% render 'icon', icon: 'cart' %}
         <span class="cart-count" aria-live="polite" style="display:none">0</span>
       </button>
@@ -26,5 +27,33 @@
 </nav>
 
 {% schema %}
-{ "name": "Header" }
+{
+  "name": "Header",
+  "settings": [
+    { "type": "text", "id": "logo_text", "label": "Logo Text", "default": "RECOVTEC" },
+    { "type": "header", "content": "Barrierefreiheit" },
+    { "type": "text", "id": "aria_search", "label": "Suche Label", "default": "Suche" },
+    { "type": "text", "id": "aria_account", "label": "Konto Label", "default": "Konto" },
+    { "type": "text", "id": "aria_cart", "label": "Warenkorb Label", "default": "Warenkorb öffnen" }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Nav Link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Link Text", "default": "Warum Recovery" },
+        { "type": "url", "id": "url", "label": "Link URL" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Header",
+    "blocks": [
+      { "type": "link", "settings": { "label": "Warum Recovery", "url": "/#problem" } },
+      { "type": "link", "settings": { "label": "Boots", "url": "/collections/all" } },
+      { "type": "link", "settings": { "label": "Anwendung", "url": "/#howto" } },
+      { "type": "link", "settings": { "label": "FAQ", "url": "/#faq" } }
+    ]
+  }]
+}
 {% endschema %}

@@ -21,7 +21,7 @@
 
       {%- for block in section.blocks -%}
         <div class="usp {% if forloop.last and section.blocks.size == 3 %}usp-wide{% endif %}" {{ block.shopify_attributes }}>
-          <span class="num">USP / {{ forloop.index | prepend: '0' }}</span>
+          {%- if section.settings.show_usp_num -%}<span class="num">{{ section.settings.usp_num_prefix | default: 'USP' }} / {{ forloop.index | prepend: '0' }}</span>{%- endif -%}
           <div class="big">{{ block.settings.big_num }}<span class="u">{{ block.settings.big_unit }}</span></div>
           <h3>{{ block.settings.title }}</h3>
           <p>{{ block.settings.text }}</p>
@@ -52,7 +52,10 @@
     { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Pneumatische Kompression in 5 Modi und 7 fein abgestuften Druckstufen — komplett kabellos, flüsterleise, ohne App-Quatsch. Anziehen, einschalten, erholen." },
     { "type": "text", "id": "footnote", "label": "Fußnote", "default": "1 Jahr Garantie · 30 Tage Geld-zurück-Garantie · Kostenloser Versand in 1–3 Werktagen." },
     { "type": "text", "id": "cta_label", "label": "Button Text", "default": "Zum Produkt" },
-    { "type": "url", "id": "cta_url", "label": "Button Link" }
+    { "type": "url", "id": "cta_url", "label": "Button Link" },
+    { "type": "header", "content": "USP Nummern" },
+    { "type": "checkbox", "id": "show_usp_num", "label": "USP Nummer anzeigen", "default": true },
+    { "type": "text", "id": "usp_num_prefix", "label": "Nummern Prefix", "default": "USP" }
   ],
   "blocks": [
     {

@@ -46,11 +46,13 @@
             </div>
           {%- endif -%}
         {%- endfor -%}
+        {%- if section.settings.show_empty_card -%}
         <div class="testimonial-soon">
-          <span class="label">Bald hier</span>
-          <h4>Dein Erfahrungsbericht</h4>
-          <p>Wir freuen uns auf deine Bewertung — direkt nach den ersten 2 Wochen. Foto vom Setup gern dabei.</p>
+          <span class="label">{{ section.settings.empty_label | default: 'Bald hier' }}</span>
+          <h4>{{ section.settings.empty_heading | default: 'Dein Erfahrungsbericht' }}</h4>
+          <p>{{ section.settings.empty_text | default: 'Wir freuen uns auf deine Bewertung — direkt nach den ersten 2 Wochen. Foto vom Setup gern dabei.' }}</p>
         </div>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -65,7 +67,12 @@
     { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Wir bauen unsere Community gerade auf. Werde Teil davon — und gib uns dein Feedback." },
     { "type": "text", "id": "rating", "label": "Bewertung", "default": "4,9 / 5" },
     { "type": "text", "id": "review_count", "label": "Anzahl", "default": "aus 27 frühen Bewertungen" },
-    { "type": "textarea", "id": "rating_note", "label": "Rating-Hinweis", "default": "Wir sammeln Bewertungen erst seit kurzem. Jede Rückmeldung hilft — und wird gelesen." }
+    { "type": "textarea", "id": "rating_note", "label": "Rating-Hinweis", "default": "Wir sammeln Bewertungen erst seit kurzem. Jede Rückmeldung hilft — und wird gelesen." },
+    { "type": "header", "content": "Leere Karte" },
+    { "type": "checkbox", "id": "show_empty_card", "label": "Leere Karte anzeigen", "default": true },
+    { "type": "text", "id": "empty_label", "label": "Karte Label", "default": "Bald hier" },
+    { "type": "text", "id": "empty_heading", "label": "Karte Überschrift", "default": "Dein Erfahrungsbericht" },
+    { "type": "textarea", "id": "empty_text", "label": "Karte Text", "default": "Wir freuen uns auf deine Bewertung — direkt nach den ersten 2 Wochen. Foto vom Setup gern dabei." }
   ],
   "blocks": [
     {

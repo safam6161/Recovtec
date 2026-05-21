@@ -23,7 +23,7 @@
     {%- for block in section.blocks -%}
       {%- if block.type == 'foot' -%}
         <div class="howto-foot" {{ block.shopify_attributes }}>
-          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+          <div class="ico">{% render 'icon', icon: block.settings.icon | default: 'bolt' %}</div>
           <div class="txt">
             <h5>{{ block.settings.title }}</h5>
             <p>{{ block.settings.text }}</p>
@@ -56,6 +56,13 @@
       "name": "Fußzeile",
       "limit": 1,
       "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "bolt", "options": [
+          { "value": "bolt", "label": "Blitz" },
+          { "value": "check", "label": "Haken" },
+          { "value": "shield", "label": "Schild" },
+          { "value": "truck", "label": "LKW" },
+          { "value": "warranty", "label": "Garantie" }
+        ]},
         { "type": "text", "id": "title", "label": "Titel", "default": "Direkt einsatzbereit aus der Box" },
         { "type": "textarea", "id": "text", "label": "Text", "default": "Akku vorgeladen. Keine Software, kein Pairing, kein Konto. In unter 60 Sekunden startklar." }
       ]
