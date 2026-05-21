@@ -1,10 +1,12 @@
-<section class="guarantee dark">
-  <div class="container guarantee-inner">
-    <div class="guarantee-badge">
-      {% render 'icon', icon: 'shield' %}
-      <span class="guarantee-days">{{ section.settings.days }}</span>
-    </div>
-    <div class="guarantee-body">
+{% comment %}
+  Guarantee banner is embedded in product-story.liquid as a block type "guarantee".
+  This section exists for standalone use if needed.
+{% endcomment %}
+<section class="guarantee-banner">
+  <div class="container guarantee-content">
+    <div class="guarantee-num">{{ section.settings.days }}</div>
+    <div class="guarantee-text">
+      <span class="guarantee-eyebrow">{{ section.settings.eyebrow }}</span>
       <h2>{{ section.settings.headline }}</h2>
       <p>{{ section.settings.text }}</p>
     </div>
@@ -16,8 +18,9 @@
   "name": "Guarantee Banner",
   "settings": [
     { "type": "text", "id": "days", "label": "Tage", "default": "30" },
-    { "type": "text", "id": "headline", "label": "Headline", "default": "Tage Geld-zurück-Garantie" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Wir sind überzeugt von unserem Produkt. Wenn du nicht 100 % zufrieden bist, erstatten wir dir den vollen Kaufpreis – kein Kleingedrucktes, keine Fragen." }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Risikofrei testen" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Tage Geld zurück." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Probier die Boots in Ruhe zuhause. Wenn sie dich nicht überzeugen, schickst du sie kostenfrei zurück — ohne Diskussion, ohne Begründung." }
   ],
   "presets": [{ "name": "Guarantee Banner" }]
 }

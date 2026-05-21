@@ -3,8 +3,8 @@
     {%- if section.settings.hero_image != blank -%}
       {{ section.settings.hero_image | image_url: width: 1800 | image_tag: alt: section.settings.hero_image.alt, loading: 'eager', fetchpriority: 'high' }}
     {%- else -%}
-      <div class="placeholder dark" style="height:100%;position:absolute;inset:0">
-        <div class="placeholder-label">HERO · Sportler nach hartem Training mit Recovery Boots · Bild oder Video, full-bleed</div>
+      <div class="hero-placeholder">
+        <div class="placeholder-label" style="background:rgba(0,0,0,0.55);color:rgba(255,255,255,0.7)">HERO · Sportler nach hartem Training mit Recovery Boots · Bild oder Video, full-bleed</div>
       </div>
     {%- endif -%}
   </div>
@@ -12,14 +12,12 @@
   <div class="container hero-content">
     <h1 class="hero-headline">
       {%- assign lines = section.settings.headline | newline_to_br | split: '<br />' -%}
-      {%- for line in lines -%}
-        <span style="display:block">{{ line }}</span>
-      {%- endfor -%}
+      {%- for line in lines -%}<span style="display:block">{{ line }}</span>{%- endfor -%}
     </h1>
     <div class="hero-cta-row">
-      <a href="{{ section.settings.cta_url | default: routes.collections_url }}" class="btn btn-primary btn-lg">
+      <a href="{{ section.settings.cta_url | default: '#solution' }}" class="btn btn-primary btn-lg">
         {{ section.settings.cta_label }}
-        <span class="btn-icon">{% render 'icon', icon: 'arrow' %}</span>
+        <span class="btn-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span>
       </a>
     </div>
   </div>
@@ -30,7 +28,7 @@
   "name": "Hero",
   "settings": [
     { "type": "image_picker", "id": "hero_image", "label": "Hero Bild" },
-    { "type": "textarea", "id": "headline", "label": "Headline (Zeilenumbruch mit Enter)", "default": "HART TRAINIERT.\nSCHNELL ERHOLT.\nRECOVTEC." },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "HART TRAINIERT.\nSCHNELL ERHOLT.\nRECOVTEC." },
     { "type": "text", "id": "cta_label", "label": "Button Text", "default": "Jetzt kaufen" },
     { "type": "url", "id": "cta_url", "label": "Button Link" }
   ],

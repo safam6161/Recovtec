@@ -1,32 +1,36 @@
-<section class="howto section-pad" id="howto">
+<section class="howto" id="howto">
   <div class="container">
-
-    <div class="howto-head">
-      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
-      <h2>{{ section.settings.headline }}</h2>
+    <div class="section-head">
+      <div class="left">
+        <span class="eyebrow" style="display:block;margin-bottom:16px">{{ section.settings.eyebrow }}</span>
+        <h2 class="h-2">{{ section.settings.headline }}</h2>
+      </div>
+      <p style="max-width:36ch;color:var(--mute)">{{ section.settings.subtext }}</p>
     </div>
 
     <div class="howto-steps">
       {%- for block in section.blocks -%}
-        <div class="howto-step" {{ block.shopify_attributes }}>
-          <div class="step-num">{{ forloop.index }}</div>
-          <div class="step-media">
-            {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 600 | image_tag: alt: block.settings.title }}
-            {%- else -%}
-              <div class="placeholder">
-                <div class="placeholder-label">Schritt {{ forloop.index }} Bild</div>
-              </div>
-            {%- endif -%}
-          </div>
-          <div class="step-body">
-            <h3>{{ block.settings.title }}</h3>
+        {%- if block.type == 'step' -%}
+          <div class="howto-step" {{ block.shopify_attributes }}>
+            <div class="step-big">{{ forloop.index | prepend: '0' }}</div>
+            <h4>{{ block.settings.title }}</h4>
             <p>{{ block.settings.text }}</p>
           </div>
-        </div>
+        {%- endif -%}
       {%- endfor -%}
     </div>
 
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'foot' -%}
+        <div class="howto-foot" {{ block.shopify_attributes }}>
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+          <div class="txt">
+            <h5>{{ block.settings.title }}</h5>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
   </div>
 </section>
 
@@ -35,25 +39,36 @@
   "name": "How To",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "03 — Anwendung" },
-    { "type": "text", "id": "headline", "label": "Headline", "default": "In 3 Schritten zur perfekten Recovery." }
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "In 4 Schritten zur\nbesseren Recovery." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Keine App, kein Pairing, keine Anleitung mit 30 Seiten. Anziehen, einschalten, fertig." }
   ],
   "blocks": [
     {
       "type": "step",
       "name": "Schritt",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Bild" },
-        { "type": "text", "id": "title", "label": "Titel", "default": "Boots anlegen" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "Schiebe die Recovery Boots über deine Beine und schließe den Reißverschluss." }
+        { "type": "text", "id": "title", "label": "Titel", "default": "Anziehen" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Beine in die Boots, Reißverschluss zu." }
+      ]
+    },
+    {
+      "type": "foot",
+      "name": "Fußzeile",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel", "default": "Direkt einsatzbereit aus der Box" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Akku vorgeladen. Keine Software, kein Pairing, kein Konto. In unter 60 Sekunden startklar." }
       ]
     }
   ],
   "presets": [{
     "name": "How To",
     "blocks": [
-      { "type": "step", "settings": { "title": "Boots anlegen", "text": "Schiebe die Recovery Boots über deine Beine und schließe den Reißverschluss." } },
-      { "type": "step", "settings": { "title": "Programm wählen", "text": "Wähle eines der 5 Massageprogramme und stelle den Druck nach deinem Komfort ein." } },
-      { "type": "step", "settings": { "title": "Entspannen & erholen", "text": "20–30 Minuten reichen aus. Lehn dich zurück und lass die Technologie arbeiten." } }
+      { "type": "step", "settings": { "title": "Anziehen", "text": "Beine in die Boots, Reißverschluss zu." } },
+      { "type": "step", "settings": { "title": "Modus wählen", "text": "Einer der 5 Modi am LED-Controller wählen." } },
+      { "type": "step", "settings": { "title": "Druck einstellen", "text": "Start mit Stufe 80 mmHg. Steigere dich nach Bedarf — bis 240 mmHg möglich." } },
+      { "type": "step", "settings": { "title": "15–45 Minuten erholen", "text": "Hinlegen, Augen zu, Serie schauen. Nach der Session fühlst du den Unterschied." } },
+      { "type": "foot", "settings": { "title": "Direkt einsatzbereit aus der Box", "text": "Akku vorgeladen. Keine Software, kein Pairing, kein Konto. In unter 60 Sekunden startklar." } }
     ]
   }]
 }

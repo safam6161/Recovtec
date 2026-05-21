@@ -1,48 +1,33 @@
-<footer class="site-footer dark">
+<footer class="footer">
   <div class="container">
-
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="{{ routes.root_url }}" class="nav-logo">
-          <span class="mark" aria-hidden="true"></span>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="{{ routes.root_url }}" class="nav-logo" style="color:var(--paper)">
+          <span class="mark"></span>
           RECOVTEC
         </a>
-        <p class="footer-tagline">{{ section.settings.tagline }}</p>
+        <p>{{ section.settings.tagline }}</p>
       </div>
-
-      <div class="footer-cols">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'column' -%}
-            <div class="footer-col" {{ block.shopify_attributes }}>
-              <h5>{{ block.settings.heading }}</h5>
-              <ul>
-                {%- assign links = block.settings.links | split: '|' -%}
-                {%- assign labels = block.settings.labels | split: '|' -%}
-                {%- for label in labels -%}
-                  <li><a href="{{ links[forloop.index0] | default: '#' }}">{{ label }}</a></li>
-                {%- endfor -%}
-              </ul>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
+      {%- for block in section.blocks -%}
+        <div class="foot-col" {{ block.shopify_attributes }}>
+          <h5>{{ block.settings.heading }}</h5>
+          <ul>
+            {%- assign labels = block.settings.labels | split: '|' -%}
+            {%- assign links = block.settings.links | split: '|' -%}
+            {%- for label in labels -%}
+              <li><a href="{{ links[forloop.index0] | default: '#' }}">{{ label }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="foot-bottom">
+      <div>{{ section.settings.legal }}</div>
+      <div class="lr">
+        <span>Versand mit DHL</span>
+        <span>Zahlung: Klarna · Visa · Mastercard · PayPal</span>
       </div>
     </div>
-
-    <div class="footer-bottom">
-      <p class="footer-legal">{{ section.settings.legal }}</p>
-      <div class="footer-links">
-        {%- if section.settings.privacy_url != blank -%}
-          <a href="{{ section.settings.privacy_url }}">Datenschutz</a>
-        {%- endif -%}
-        {%- if section.settings.imprint_url != blank -%}
-          <a href="{{ section.settings.imprint_url }}">Impressum</a>
-        {%- endif -%}
-        {%- if section.settings.agb_url != blank -%}
-          <a href="{{ section.settings.agb_url }}">AGB</a>
-        {%- endif -%}
-      </div>
-    </div>
-
   </div>
 </footer>
 
@@ -50,11 +35,8 @@
 {
   "name": "Footer",
   "settings": [
-    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Professionelle Recovery für jeden Athleten." },
-    { "type": "text", "id": "legal", "label": "Copyright", "default": "© 2025 RECOVTEC. Alle Rechte vorbehalten." },
-    { "type": "url", "id": "privacy_url", "label": "Datenschutz URL" },
-    { "type": "url", "id": "imprint_url", "label": "Impressum URL" },
-    { "type": "url", "id": "agb_url", "label": "AGB URL" }
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Eigenmarke für professionelle Recovery. Faire Preise, volle Ausstattung, ehrlich kalkuliert." },
+    { "type": "text", "id": "legal", "label": "Copyright", "default": "© 2026 Recovtec · Deutschland" }
   ],
   "blocks": [
     {
@@ -62,17 +44,17 @@
       "name": "Spalte",
       "settings": [
         { "type": "text", "id": "heading", "label": "Überschrift", "default": "Shop" },
-        { "type": "textarea", "id": "labels", "label": "Link-Labels (mit | trennen)", "default": "Recovery Boots|Zubehör|Bundles" },
-        { "type": "textarea", "id": "links", "label": "Link-URLs (mit | trennen)", "default": "/collections/all|/collections/zubehoer|/collections/bundles" }
+        { "type": "textarea", "id": "labels", "label": "Link-Labels (| getrennt)", "default": "Recovery Boots|Bald: Massagepistole|Zubehör" },
+        { "type": "textarea", "id": "links", "label": "Link-URLs (| getrennt)", "default": "/collections/all|#|#" }
       ]
     }
   ],
   "presets": [{
     "name": "Footer",
     "blocks": [
-      { "type": "column", "settings": { "heading": "Shop", "labels": "Recovery Boots|Zubehör|Bundles", "links": "/collections/all|/collections/zubehoer|/collections/bundles" } },
-      { "type": "column", "settings": { "heading": "Hilfe", "labels": "FAQ|Versand & Rückgabe|Kontakt", "links": "/#faq|/pages/versand|/pages/kontakt" } },
-      { "type": "column", "settings": { "heading": "Unternehmen", "labels": "Über uns|Presse|Partner", "links": "/pages/ueber-uns|/pages/presse|/pages/partner" } }
+      { "type": "column", "settings": { "heading": "Shop", "labels": "Recovery Boots|Bald: Massagepistole|Zubehör", "links": "/collections/all|#|#" } },
+      { "type": "column", "settings": { "heading": "Service", "labels": "Versand & Lieferung|Rückgabe|Garantie|Größenberater", "links": "/pages/versand|/pages/rueckgabe|/pages/garantie|#" } },
+      { "type": "column", "settings": { "heading": "Unternehmen", "labels": "Über Recovtec|Kontakt|Impressum|Datenschutz|AGB", "links": "/pages/ueber-uns|/pages/kontakt|/pages/impressum|/pages/datenschutz|/pages/agb" } }
     ]
   }]
 }

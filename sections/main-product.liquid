@@ -1,180 +1,201 @@
-<div class="pdp-wrap" data-product-id="{{ product.id }}">
-
-  <!-- Gallery -->
-  <div class="pdp-gallery">
-    <div class="gallery-main">
-      {%- assign featured = product.featured_image -%}
-      {%- if featured -%}
-        <img
-          id="gallery-main-img"
-          src="{{ featured | image_url: width: 1200 }}"
-          alt="{{ featured.alt | escape }}"
-          loading="eager"
-          fetchpriority="high"
-        >
-      {%- else -%}
-        <div class="placeholder" style="aspect-ratio:1">
-          <div class="placeholder-label">Produktfoto</div>
-        </div>
-      {%- endif -%}
-    </div>
-    {%- if product.images.size > 1 -%}
-      <div class="gallery-thumbs">
-        {%- for img in product.images -%}
-          <button
-            class="thumb {% if forloop.first %}active{% endif %}"
-            data-src="{{ img | image_url: width: 1200 }}"
-            data-alt="{{ img.alt | escape }}"
-            aria-label="Bild {{ forloop.index }}"
-          >
-            <img src="{{ img | image_url: width: 160 }}" alt="{{ img.alt | escape }}" loading="lazy">
-          </button>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
+<div class="breadcrumb">
+  <div class="container">
+    <a href="{{ routes.root_url }}">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 7H2M6 3L2 7l4 4"/></svg>
+      Zurück
+    </a>
+    <span class="sep">/</span>
+    <a href="{{ routes.root_url }}">Startseite</a>
+    <span class="sep">/</span>
+    <span>{{ product.title }}</span>
   </div>
+</div>
 
-  <!-- Buy Box -->
-  <div class="pdp-buybox">
+<section class="pdp" id="pdp-main">
+  <div class="container">
+    <div class="pdp-grid">
 
-    {%- if section.settings.eyebrow != blank -%}
-      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
-    {%- endif -%}
-
-    <h1 class="pdp-title">{{ product.title }}</h1>
-
-    <!-- Stars -->
-    <div class="pdp-rating">
-      <div class="star-row">
-        {%- for i in (1..5) -%}{% render 'icon', icon: 'star' %}{%- endfor -%}
-      </div>
-      <span class="pdp-rating-score">{{ section.settings.rating_score }}</span>
-      <a href="#reviews" class="pdp-rating-count">{{ section.settings.rating_count }}</a>
-    </div>
-
-    <!-- Price -->
-    <div class="pdp-price-row">
-      <span class="pdp-price">{{ product.selected_or_first_available_variant.price | money }}</span>
-      {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
-        <span class="pdp-price-compare">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
-        <span class="pdp-badge">{{ section.settings.badge_label }}</span>
-      {%- endif -%}
-    </div>
-
-    <!-- Short Description -->
-    {%- if section.settings.short_desc != blank -%}
-      <p class="pdp-short-desc">{{ section.settings.short_desc }}</p>
-    {%- endif -%}
-
-    <!-- Variant / Size Selector -->
-    {%- unless product.has_only_default_variant -%}
-      {%- for option in product.options_with_values -%}
-        <div class="pdp-option">
-          <div class="pdp-option-label">
-            <span>{{ option.name }}</span>
-            <button class="size-guide-trigger link-btn" type="button" aria-controls="size-guide-modal">
-              {% render 'icon', icon: 'backpack' %} Größentabelle
-            </button>
-          </div>
-          <div class="pdp-size-grid">
-            {%- for value in option.values -%}
-              <button
-                class="size-btn {% if option.selected_value == value %}active{% endif %}"
-                data-option="{{ option.position }}"
-                data-value="{{ value }}"
-                type="button"
-              >{{ value }}</button>
+      <!-- Gallery -->
+      <div class="pdp-gallery">
+        <div class="gallery-main">
+          {%- if product.featured_image != blank -%}
+            <img id="gallery-main-img"
+              src="{{ product.featured_image | image_url: width: 1200 }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              loading="eager" fetchpriority="high">
+          {%- else -%}
+            <div class="placeholder" style="height:100%;min-height:500px">
+              <div class="placeholder-label">RECOVTEC PRO · Frontansicht · auf Modell</div>
+            </div>
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="gallery-thumbs five">
+            {%- for img in product.images limit: 5 -%}
+              <button class="gallery-thumb {% if forloop.first %}active{% endif %}"
+                data-src="{{ img | image_url: width: 1200 }}"
+                data-alt="{{ img.alt | escape }}"
+                aria-label="Bild {{ forloop.index }}">
+                <img src="{{ img | image_url: width: 160 }}" alt="{{ img.alt | escape }}" loading="lazy">
+              </button>
             {%- endfor -%}
           </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Info -->
+      <div class="pdp-info">
+        <div class="pdp-info-inner">
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+          <h1>{{ product.title }}</h1>
+          <p class="lede">{{ section.settings.lede | default: product.description | strip_html | truncate: 160 }}</p>
+
+          <div class="pdp-price-row">
+            <div class="pdp-price">{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</div>
+            <div class="pdp-price-meta">Inkl. MwSt.</div>
+          </div>
+
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <div class="size-block">
+                <div class="size-head">
+                  <span class="label">{{ option.name }} wählen</span>
+                  <button type="button" class="size-guide-link size-guide-trigger">Größentabelle <span aria-hidden="true">↗</span></button>
+                </div>
+                <div class="size-options">
+                  {%- for variant in product.variants -%}
+                    {%- if variant.option1 == option.values[forloop.index0] or option.values.size == 1 -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- for value in option.values -%}
+                    {%- assign variant_for_value = product.variants | where: "option1", value | first -%}
+                    <button type="button"
+                      class="size-opt {% if option.selected_value == value %}selected{% endif %}"
+                      data-variant-id="{{ variant_for_value.id }}"
+                      data-option="{{ option.position }}"
+                      data-value="{{ value }}">
+                      {{ option.name }} {{ value }}
+                    </button>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <div class="stock-status">
+            {%- if product.selected_or_first_available_variant.available -%}
+              <span class="stock-dot" aria-hidden="true"></span>
+              <span><strong>Auf Lager</strong> · in 1–3 Werktagen bei dir.</span>
+            {%- else -%}
+              <span style="color:var(--mute)">Derzeit nicht verfügbar</span>
+            {%- endif -%}
+          </div>
+
+          <div class="add-row">
+            <form id="pdp-atc-form">
+              <input type="hidden" name="id" id="pdp-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+              <button type="submit" class="btn btn-primary btn-lg btn-add"
+                {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+                In den Warenkorb
+                <span class="btn-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span>
+              </button>
+            </form>
+          </div>
+
+          <div class="pdp-trust-pills">
+            <div class="trust-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12a8 8 0 0 1 14-5l2-2v6h-6l2.5-2.5"/><path d="M20 12a8 8 0 0 1-14 5l-2 2v-6h6l-2.5 2.5"/></svg><span>30 Tage Geld zurück</span></div>
+            <div class="trust-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg><span>1 Jahr Garantie</span></div>
+            <div class="trust-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 7h11v9H2zM13 10h5l3 3v3h-8z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><span>Kostenloser Versand</span></div>
+            <div class="trust-pill"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg><span>Rucksack &amp; Laschen inklusive</span></div>
+          </div>
         </div>
-      {%- endfor -%}
-    {%- endunless -%}
+      </div>
 
-    <!-- Stock Status -->
-    <div class="pdp-stock">
-      {%- if product.selected_or_first_available_variant.available -%}
-        <span class="stock-dot in"></span>
-        <span>{{ section.settings.in_stock_label }}</span>
-      {%- else -%}
-        <span class="stock-dot out"></span>
-        <span>{{ section.settings.out_stock_label }}</span>
-      {%- endif -%}
     </div>
+  </div>
+</section>
 
-    <!-- ATC -->
-    <form id="pdp-atc-form" class="pdp-atc-form">
-      <input type="hidden" name="id" id="pdp-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
-      <button
-        type="submit"
-        class="btn btn-primary btn-lg pdp-atc-btn"
-        {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
-      >
-        {{ section.settings.atc_label }}
-        <span class="btn-icon">{% render 'icon', icon: 'cart' %}</span>
-      </button>
-    </form>
-
-    <!-- Trust Pills -->
-    <div class="trust-pills">
-      <div class="trust-pill">{% render 'icon', icon: 'truck' %} <span>{{ section.settings.pill_shipping }}</span></div>
-      <div class="trust-pill">{% render 'icon', icon: 'refresh' %} <span>{{ section.settings.pill_return }}</span></div>
-      <div class="trust-pill">{% render 'icon', icon: 'warranty' %} <span>{{ section.settings.pill_warranty }}</span></div>
-    </div>
-
-    <!-- Full Description -->
-    {%- if product.description != blank -%}
-      <div class="pdp-desc rte">{{ product.description }}</div>
-    {%- endif -%}
-
-  </div><!-- /buybox -->
-
-</div><!-- /pdp-wrap -->
-
-<!-- Sticky ATC (hidden by default, shown when buybox scrolls out of view) -->
-<div class="sticky-atc" id="sticky-atc" aria-hidden="true">
+<!-- Sticky ATC -->
+<div class="sticky-atc" id="sticky-atc">
   <div class="container sticky-atc-inner">
-    <span class="sticky-atc-title">{{ product.title }}</span>
-    <span class="sticky-atc-price">{{ product.selected_or_first_available_variant.price | money }}</span>
-    <button class="btn btn-primary sticky-atc-btn" data-sticky-atc>
-      {{ section.settings.atc_label }}
-    </button>
+    <div class="sticky-prod">
+      <div class="sticky-img">
+        {%- if product.featured_image -%}
+          <img src="{{ product.featured_image | image_url: width: 120 }}" alt="{{ product.title }}">
+        {%- endif -%}
+      </div>
+      <div class="sticky-meta">
+        <div class="sticky-name">{{ product.title }}</div>
+        <div class="sticky-price">{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }} · Größe M</div>
+      </div>
+    </div>
+    <div class="sticky-actions">
+      <div class="sticky-size">
+        {%- unless product.has_only_default_variant -%}
+          {%- for value in product.options_with_values[0].values -%}
+            <button class="sticky-size-opt {% if forloop.first %}selected{% endif %}">{{ value }}</button>
+          {%- endfor -%}
+        {%- endunless -%}
+      </div>
+      <button class="btn btn-primary" data-sticky-atc>
+        In den Warenkorb <span class="btn-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span>
+      </button>
+    </div>
   </div>
 </div>
 
 <!-- Size Guide Modal -->
-<div class="modal-overlay" id="size-guide-modal" role="dialog" aria-modal="true" aria-label="Größentabelle" hidden>
-  <div class="modal-box">
-    <header class="modal-head">
-      <h3>Größentabelle</h3>
-      <button class="modal-close" aria-label="Schließen">{% render 'icon', icon: 'close' %}</button>
-    </header>
-    <div class="modal-body">
-      {{ section.settings.size_guide_content }}
+<div class="sg-overlay" id="sg-overlay"></div>
+<aside class="sg-modal" id="size-guide-modal" role="dialog" aria-label="Größentabelle">
+  <header class="sg-head">
+    <span class="sg-eyebrow">Größentabelle</span>
+    <button class="sg-close" aria-label="Schließen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  </header>
+  <div class="sg-body">
+    <div class="sg-brand">RECOVTEC</div>
+    <p class="sg-intro">Die richtige Größe ist entscheidend für die beste Wirkung deiner Recovtec Recovery Boots. Wir machen es dir einfach — keine komplizierten Messungen, nur deine Körpergröße entscheidet.</p>
+    <h3 class="sg-title">Welche Größe<br><strong>passt mir?</strong></h3>
+    <div class="sg-reco">
+      <div class="sg-reco-card">
+        <div class="sg-reco-size">M</div>
+        <div class="sg-reco-meta">
+          <span class="sg-reco-label">Empfohlen für</span>
+          <div class="sg-reco-value">unter 1,80 m</div>
+        </div>
+      </div>
+      <div class="sg-reco-card">
+        <div class="sg-reco-size">L</div>
+        <div class="sg-reco-meta">
+          <span class="sg-reco-label">Empfohlen für</span>
+          <div class="sg-reco-value">über 1,80 m</div>
+        </div>
+      </div>
+    </div>
+    <div class="sg-facts">
+      <div class="sg-fact">
+        <span class="sg-fact-num">+10<small>cm</small></span>
+        <div class="sg-fact-text">
+          <h4>+10 cm Bein-Erweiterung inklusive</h4>
+          <p>Mit den beigelieferten Erweiterungslaschen ist bei <strong>beiden Größen</strong> ein zusätzlicher Spielraum von 10 cm am <strong>ganzen Bein</strong> möglich.</p>
+        </div>
+      </div>
+      <div class="sg-fact">
+        <span class="sg-fact-num">↑</span>
+        <div class="sg-fact-text">
+          <h4>Zwischen zwei Größen?</h4>
+          <p>Wer sich nicht ganz entscheiden kann, dem empfehlen wir die <strong>größere Variante</strong>.</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</aside>
 
 {% schema %}
 {
   "name": "Produkt",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Recovery Boots" },
-    { "type": "text", "id": "badge_label", "label": "Sale Badge", "default": "SALE" },
-    { "type": "text", "id": "rating_score", "label": "Bewertung", "default": "4.9" },
-    { "type": "text", "id": "rating_count", "label": "Anzahl Bewertungen", "default": "142 Bewertungen" },
-    { "type": "text", "id": "short_desc", "label": "Kurzbeschreibung", "default": "Pneumatische Kompression für schnellere Regeneration nach dem Sport." },
-    { "type": "text", "id": "in_stock_label", "label": "Auf Lager Text", "default": "Auf Lager – Versand in 1–3 Tagen" },
-    { "type": "text", "id": "out_stock_label", "label": "Ausverkauft Text", "default": "Derzeit nicht verfügbar" },
-    { "type": "text", "id": "atc_label", "label": "In den Warenkorb Text", "default": "In den Warenkorb" },
-    { "type": "text", "id": "pill_shipping", "label": "Versand Pill", "default": "Kostenloser Versand" },
-    { "type": "text", "id": "pill_return", "label": "Rückgabe Pill", "default": "30 Tage Rückgabe" },
-    { "type": "text", "id": "pill_warranty", "label": "Garantie Pill", "default": "1 Jahr Garantie" },
-    {
-      "type": "richtext",
-      "id": "size_guide_content",
-      "label": "Größentabellen-Inhalt",
-      "default": "<table><thead><tr><th>Größe</th><th>Schuhgröße</th><th>Beingröße</th></tr></thead><tbody><tr><td>S/M</td><td>36–42</td><td>bis 90 cm</td></tr><tr><td>L/XL</td><td>42–48</td><td>ab 90 cm</td></tr></tbody></table>"
-    }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Recovtec — Recovery" },
+    { "type": "textarea", "id": "lede", "label": "Kurzbeschreibung", "default": "Pneumatische Recovery Boots für aktive Muskelregeneration. Kabellos, leise, mit 5 Modi und 7 fein abgestuften Druckstufen bis 240 mmHg." }
   ],
   "presets": [{ "name": "Produkt" }]
 }

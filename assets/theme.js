@@ -1,189 +1,311 @@
-/* Recovtec Theme JS */
-
+/* RECOVTEC Theme JS */
 (function () {
   'use strict';
 
-  // ── Cart state (localStorage, overridden by Shopify cart API in production) ──
-  function getCart() {
-    try { return JSON.parse(localStorage.getItem('rt-cart') || '[]'); } catch { return []; }
+  // ===== Cart (Shopify AJAX API) =====
+  const Cart = {
+    async get() {
+      const r = await fetch('/cart.js');
+      return r.json();
+    },
+    async add(id, qty) {
+      const r = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, quantity: qty })
+      });
+      return r.json();
+    },
+    async change(line, qty) {
+      const r = await fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ line, quantity: qty })
+      });
+      return r.json();
+    },
+    async remove(line) { return Cart.change(line, 0); }
+  };
+
+  // ===== Toast =====
+  let toastTimer;
+  function showToast(msg) {
+    const el = document.getElementById('toast');
+    if (!el) return;
+    el.querySelector('.toast-msg').textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
   }
-  function saveCart(lines) {
-    try { localStorage.setItem('rt-cart', JSON.stringify(lines)); } catch {}
+
+  // ===== Cart Drawer =====
+  function formatMoney(cents) {
+    return (cents / 100).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' €';
   }
 
-  // ── Cart Drawer ──
-  const drawerOverlay = document.querySelector('.drawer-overlay');
-  const drawer        = document.querySelector('.drawer');
-  const drawerBody    = document.querySelector('.drawer-body');
-  const drawerFoot    = document.querySelector('.drawer-foot');
-  const cartCountEls  = document.querySelectorAll('.cart-count');
-
-  function openDrawer()  { drawerOverlay?.classList.add('open'); drawer?.classList.add('open'); renderDrawer(); }
-  function closeDrawer() { drawerOverlay?.classList.remove('open'); drawer?.classList.remove('open'); }
-
-  drawerOverlay?.addEventListener('click', closeDrawer);
-  document.querySelector('.drawer-close')?.addEventListener('click', closeDrawer);
-  document.querySelectorAll('[data-cart-open]').forEach(el => el.addEventListener('click', openDrawer));
-
-  function updateCartCount() {
-    const lines = getCart();
-    const count = lines.reduce((s, l) => s + l.qty, 0);
-    cartCountEls.forEach(el => {
-      el.textContent = count;
-      el.style.display = count > 0 ? 'flex' : 'none';
-    });
-  }
-
-  function renderDrawer() {
-    if (!drawerBody) return;
-    const lines = getCart();
-    if (lines.length === 0) {
-      drawerBody.innerHTML = `<div class="cart-empty"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5h2.5l2.2 11.5a1.5 1.5 0 0 0 1.5 1.2h8a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6.5"/><circle cx="9" cy="20.5" r="1.2"/><circle cx="18" cy="20.5" r="1.2"/></svg><div><div style="font-weight:600;margin-bottom:4px">Noch leer</div><div style="font-size:13px;color:var(--mute)">Füge die Recovery Boots hinzu.</div></div></div>`;
-      if (drawerFoot) drawerFoot.style.display = 'none';
-      return;
-    }
-    drawerBody.innerHTML = lines.map((l, i) => `
+  function renderCartLine(item, index) {
+    const img = item.image
+      ? `<img src="${item.image}" alt="${item.title}" loading="lazy">`
+      : `<div class="placeholder"></div>`;
+    return `
       <div class="cart-line">
-        <div class="img"></div>
+        <div class="img">${img}</div>
         <div class="info">
-          <div class="name">${l.name}</div>
-          <div class="opt">Größe ${l.size}</div>
+          <div class="name">${item.product_title}</div>
+          <div class="opt">${item.variant_title && item.variant_title !== 'Default Title' ? item.variant_title : ''}</div>
           <div class="qty-row">
-            <button data-qty-dec="${i}">−</button>
-            <span class="v">${l.qty}</span>
-            <button data-qty-inc="${i}">+</button>
+            <button data-line="${index + 1}" data-qty="${item.quantity - 1}" aria-label="weniger">−</button>
+            <span class="v">${item.quantity}</span>
+            <button data-line="${index + 1}" data-qty="${item.quantity + 1}" aria-label="mehr">+</button>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-          <div class="price">${(l.price * l.qty).toLocaleString('de-DE')} €</div>
-          <button class="remove" data-remove="${i}">Entfernen</button>
+          <div class="price">${formatMoney(item.line_price)}</div>
+          <button class="remove" data-line="${index + 1}" data-qty="0">Entfernen</button>
         </div>
-      </div>`).join('');
+      </div>`;
+  }
 
-    const total = lines.reduce((s, l) => s + l.price * l.qty, 0);
-    if (drawerFoot) {
-      drawerFoot.style.display = 'flex';
-      drawerFoot.innerHTML = `
-        <div class="sub"><span class="lbl">Zwischensumme</span><span class="val">${total.toLocaleString('de-DE')} €</span></div>
-        <button class="btn btn-primary btn-lg" style="width:100%">Zur Kasse <span class="btn-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span></button>
-        <div class="note">Versand 1–3 Werktage · 30 Tage Geld zurück</div>`;
+  async function refreshDrawer() {
+    const cart = await Cart.get();
+    const body = document.querySelector('.drawer-body');
+    const foot = document.querySelector('.drawer-foot');
+    const countEl = document.querySelector('.cart-count');
+
+    const totalQty = cart.item_count;
+    if (countEl) {
+      countEl.textContent = totalQty;
+      countEl.style.display = totalQty > 0 ? 'flex' : 'none';
+    }
+    const titleEl = document.querySelector('.drawer-head .title');
+    if (titleEl) titleEl.textContent = `Warenkorb · ${totalQty}`;
+
+    if (!body) return;
+
+    if (cart.items.length === 0) {
+      body.innerHTML = `
+        <div class="cart-empty">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5h2.5l2.2 11.5a1.5 1.5 0 0 0 1.5 1.2h8a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6.5"/><circle cx="9" cy="20.5" r="1.2"/><circle cx="18" cy="20.5" r="1.2"/></svg>
+          <div>
+            <div class="h-4" style="margin-bottom:4px">Noch leer</div>
+            <div style="font-size:13px">Füge die Recovery Boots hinzu — und du bist startklar.</div>
+          </div>
+        </div>`;
+      if (foot) foot.style.display = 'none';
+    } else {
+      body.innerHTML = cart.items.map((item, i) => renderCartLine(item, i)).join('');
+      if (foot) {
+        foot.style.display = 'flex';
+        const subVal = foot.querySelector('.val');
+        if (subVal) subVal.textContent = formatMoney(cart.total_price);
+      }
+      body.querySelectorAll('button[data-line]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const line = parseInt(btn.dataset.line);
+          const qty = parseInt(btn.dataset.qty);
+          await Cart.change(line, qty);
+          await refreshDrawer();
+        });
+      });
+    }
+  }
+
+  function openDrawer() {
+    document.querySelector('.drawer-overlay')?.classList.add('open');
+    document.querySelector('.drawer')?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    document.querySelector('.drawer-overlay')?.classList.remove('open');
+    document.querySelector('.drawer')?.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ===== Add to Cart =====
+  async function addToCart(variantId, qty, stickyCheck) {
+    if (!variantId) return;
+    try {
+      await Cart.add(variantId, qty || 1);
+      await refreshDrawer();
+      showToast('Zum Warenkorb hinzugefügt');
+      if (stickyCheck && document.querySelector('.sticky-atc.show')) return;
+      setTimeout(openDrawer, 400);
+    } catch (e) {
+      console.error('Add to cart failed', e);
+    }
+  }
+
+  // ===== ATC Form (PDP) =====
+  function initATCForm() {
+    const form = document.getElementById('pdp-atc-form');
+    if (!form) return;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = form.querySelector('[name="id"]')?.value;
+      await addToCart(id, 1);
+    });
+  }
+
+  // ===== Size Selector =====
+  function initSizeSelector() {
+    const opts = document.querySelectorAll('.size-opt');
+    if (!opts.length) return;
+    opts.forEach(btn => {
+      btn.addEventListener('click', () => {
+        opts.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        const variantId = btn.dataset.variantId;
+        if (variantId) {
+          const hidden = document.querySelector('#pdp-atc-form [name="id"]');
+          if (hidden) hidden.value = variantId;
+          updateStickyPrice(btn);
+        }
+      });
+    });
+  }
+
+  function updateStickyPrice(activeBtn) {
+    const nameEl = document.querySelector('.sticky-name');
+    const priceEl = document.querySelector('.sticky-price');
+    if (!nameEl || !priceEl) return;
+    const title = document.querySelector('.pdp-info-inner h1')?.textContent || '';
+    const price = document.querySelector('.pdp-price')?.textContent || '';
+    const sizeName = activeBtn?.textContent?.trim() || '';
+    nameEl.textContent = title;
+    priceEl.textContent = `${price} · ${sizeName}`;
+  }
+
+  // ===== Gallery =====
+  function initGallery() {
+    const thumbs = document.querySelectorAll('.gallery-thumb');
+    const mainImg = document.getElementById('gallery-main-img');
+    if (!thumbs.length || !mainImg) return;
+    thumbs.forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        thumbs.forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+        const src = thumb.dataset.src;
+        const alt = thumb.dataset.alt;
+        if (src) { mainImg.src = src; if (alt) mainImg.alt = alt; }
+      });
+    });
+  }
+
+  // ===== FAQ Accordion =====
+  function initAccordion() {
+    document.querySelectorAll('.acc-item').forEach(item => {
+      const trigger = item.querySelector('.acc-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        // Close all in this accordion
+        const acc = item.closest('.acc');
+        if (acc) acc.querySelectorAll('.acc-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  }
+
+  // ===== Sticky ATC =====
+  function initStickyATC() {
+    const sticky = document.getElementById('sticky-atc');
+    const productRef = document.querySelector('.pdp');
+    if (!sticky || !productRef) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      const cartOpen = document.querySelector('.drawer.open');
+      const show = (!entry.isIntersecting || entry.intersectionRatio < 0.15) && !cartOpen;
+      sticky.classList.toggle('show', show);
+    }, { threshold: [0, 0.15, 0.3] });
+    observer.observe(productRef);
+
+    // Sticky size selector sync
+    const stickyOpts = sticky.querySelectorAll('.sticky-size-opt');
+    stickyOpts.forEach(btn => {
+      btn.addEventListener('click', () => {
+        stickyOpts.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        // Sync main size selector
+        const val = btn.textContent.trim();
+        document.querySelectorAll('.size-opt').forEach(mainBtn => {
+          mainBtn.classList.toggle('selected', mainBtn.textContent.trim().includes(val));
+          if (mainBtn.textContent.trim().includes(val) && mainBtn.dataset.variantId) {
+            const hidden = document.querySelector('#pdp-atc-form [name="id"]');
+            if (hidden) hidden.value = mainBtn.dataset.variantId;
+          }
+        });
+      });
+    });
+
+    // Sticky ATC button
+    const stickyAtcBtn = sticky.querySelector('[data-sticky-atc]');
+    if (stickyAtcBtn) {
+      stickyAtcBtn.addEventListener('click', async () => {
+        const id = document.querySelector('#pdp-atc-form [name="id"]')?.value;
+        await addToCart(id, 1, true);
+        sticky.classList.remove('show');
+        openDrawer();
+      });
+    }
+  }
+
+  // ===== Size Guide Modal =====
+  function initSizeGuide() {
+    const modal = document.getElementById('size-guide-modal');
+    if (!modal) return;
+    const overlay = document.getElementById('sg-overlay');
+    const closeBtn = modal.querySelector('.sg-close');
+
+    function openSG() {
+      overlay?.classList.add('open');
+      modal.classList.add('open');
+    }
+    function closeSG() {
+      overlay?.classList.remove('open');
+      modal.classList.remove('open');
     }
 
-    drawerBody.querySelectorAll('[data-qty-dec]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const i = +btn.dataset.qtyDec;
-        const lines = getCart();
-        if (lines[i].qty <= 1) { lines.splice(i, 1); } else { lines[i].qty--; }
-        saveCart(lines); updateCartCount(); renderDrawer();
-      });
+    document.querySelectorAll('.size-guide-trigger, .size-guide-link').forEach(btn => {
+      btn.addEventListener('click', openSG);
     });
-    drawerBody.querySelectorAll('[data-qty-inc]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const i = +btn.dataset.qtyInc;
-        const lines = getCart();
-        lines[i].qty++;
-        saveCart(lines); updateCartCount(); renderDrawer();
-      });
-    });
-    drawerBody.querySelectorAll('[data-remove]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const i = +btn.dataset.remove;
-        const lines = getCart();
-        lines.splice(i, 1);
-        saveCart(lines); updateCartCount(); renderDrawer();
+    closeBtn?.addEventListener('click', closeSG);
+    overlay?.addEventListener('click', closeSG);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSG(); });
+  }
+
+  // ===== Newsletter =====
+  function initNewsletter() {
+    document.querySelectorAll('.final-nl-form').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const input = form.querySelector('input[type="email"]');
+        showToast('Danke! Du wirst benachrichtigt.');
+        if (input) input.value = '';
       });
     });
   }
 
-  // ── Add to Cart ──
-  const PRICE = 499;
-  let selectedSize = 'M';
-
-  document.querySelectorAll('.size-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedSize = btn.dataset.size || btn.textContent.replace('Größe ', '').trim();
+  // ===== Init =====
+  document.addEventListener('DOMContentLoaded', () => {
+    // Cart triggers
+    document.querySelector('[data-cart-open]')?.addEventListener('click', () => {
+      refreshDrawer().then(openDrawer);
     });
-  });
+    document.querySelector('.drawer-close')?.addEventListener('click', closeDrawer);
+    document.querySelector('.drawer-overlay')?.addEventListener('click', closeDrawer);
 
-  document.querySelectorAll('.atc-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const lines = getCart();
-      const idx = lines.findIndex(l => l.name === 'Recovtec Pro' && l.size === selectedSize);
-      if (idx > -1) { lines[idx].qty++; } else { lines.push({ name: 'Recovtec Pro', size: selectedSize, price: PRICE, qty: 1 }); }
-      saveCart(lines);
-      updateCartCount();
-      showToast('Zum Warenkorb hinzugefügt');
-      setTimeout(openDrawer, 400);
+    // Checkout button
+    document.querySelector('.drawer-foot .btn-primary')?.addEventListener('click', () => {
+      window.location.href = '/checkout';
     });
+
+    refreshDrawer();
+    initATCForm();
+    initSizeSelector();
+    initGallery();
+    initAccordion();
+    initStickyATC();
+    initSizeGuide();
+    initNewsletter();
   });
-
-  // ── Toast ──
-  const toast = document.querySelector('.toast');
-  let toastTimer;
-  function showToast(msg) {
-    if (!toast) return;
-    toast.textContent = msg;
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
-  }
-
-  // ── Gallery Thumbnails ──
-  const mainImg = document.querySelector('.gallery-main img');
-  document.querySelectorAll('.gallery-thumb').forEach(thumb => {
-    thumb.addEventListener('click', () => {
-      const src = thumb.querySelector('img')?.src;
-      if (mainImg && src) mainImg.src = src;
-      document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
-      thumb.classList.add('active');
-    });
-  });
-
-  // ── FAQ Accordion ──
-  document.querySelectorAll('.acc-trigger').forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      const item = trigger.closest('.acc-item');
-      const isOpen = item.classList.contains('open');
-      // Close all in same accordion
-      trigger.closest('.acc')?.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    });
-  });
-
-  // ── Size Guide Modal ──
-  const sgOverlay = document.querySelector('.sg-overlay');
-  const sgModal   = document.querySelector('.sg-modal');
-  function openSizeGuide()  { sgOverlay?.classList.add('open'); sgModal?.classList.add('open'); }
-  function closeSizeGuide() { sgOverlay?.classList.remove('open'); sgModal?.classList.remove('open'); }
-  document.querySelector('.size-guide-link')?.addEventListener('click', openSizeGuide);
-  sgOverlay?.addEventListener('click', closeSizeGuide);
-  document.querySelector('.sg-close')?.addEventListener('click', closeSizeGuide);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSizeGuide(); closeDrawer(); } });
-
-  // ── Sticky ATC ──
-  const stickyATC    = document.querySelector('.sticky-atc');
-  const pdpMainRef   = document.querySelector('.pdp-info');
-  if (stickyATC && pdpMainRef) {
-    const io = new IntersectionObserver(entries => {
-      const entry = entries[0];
-      const drawerOpen = drawer?.classList.contains('open');
-      if (!drawerOpen && entry.intersectionRatio < 0.15) {
-        stickyATC.classList.add('visible');
-      } else {
-        stickyATC.classList.remove('visible');
-      }
-    }, { threshold: [0, 0.15] });
-    io.observe(pdpMainRef);
-  }
-
-  // ── Newsletter no-op ──
-  document.querySelectorAll('.final-nl-form').forEach(form => {
-    form.addEventListener('submit', e => { e.preventDefault(); showToast('Danke! Du wirst benachrichtigt.'); });
-  });
-
-  // ── Init ──
-  updateCartCount();
-
 })();

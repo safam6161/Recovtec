@@ -1,62 +1,162 @@
-<section class="product-story section-pad {% if section.settings.dark %}dark{% endif %}">
-  <div class="container">
-    {%- for block in section.blocks -%}
-      <div class="story-row {% cycle 'odd', 'even' %}" {{ block.shopify_attributes }}>
-
-        <div class="story-media">
-          {%- if block.settings.image != blank -%}
-            {{ block.settings.image | image_url: width: 900 | image_tag: alt: block.settings.heading }}
-          {%- else -%}
-            <div class="placeholder">
-              <div class="placeholder-label">Story Bild {{ forloop.index }}</div>
+{%- for block in section.blocks -%}
+  {%- if block.type == 'story' -%}
+    <section id="{{ block.settings.id }}"
+      class="story {% if block.settings.dark %}story-dark{% endif %} {% if block.settings.image_right %}story-flip{% endif %}"
+      {{ block.shopify_attributes }}>
+      <div class="container">
+        <div class="story-grid">
+          <div class="story-media">
+            <div class="story-img">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: alt: block.settings.heading }}
+              {%- else -%}
+                <div class="placeholder {% if block.settings.dark %}dark{% endif %}">
+                  <div class="placeholder-label">{{ block.settings.image_label | default: 'Story Bild' }}</div>
+                </div>
+              {%- endif -%}
             </div>
-          {%- endif -%}
+          </div>
+          <div class="story-text">
+            {%- if block.settings.eyebrow != blank -%}
+              <span class="story-eyebrow">{{ block.settings.eyebrow }}</span>
+            {%- endif -%}
+            <h2 class="story-headline">{{ block.settings.heading }}</h2>
+            {%- if block.settings.lead != blank -%}
+              <p class="story-lead">{{ block.settings.lead }}</p>
+            {%- endif -%}
+            {%- if block.settings.bullets != blank -%}
+              <ul class="story-bullets">
+                {%- assign bullet_items = block.settings.bullets | split: '|' -%}
+                {%- for bullet in bullet_items -%}
+                  {%- assign parts = bullet | split: '::' -%}
+                  <li>
+                    <span class="bullet-num">{{ forloop.index | prepend: '0' }}</span>
+                    <div>
+                      <strong>{{ parts[0] | strip }}</strong>
+                      <span>{{ parts[1] | strip }}</span>
+                    </div>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+            {%- if block.settings.stats != blank -%}
+              <div class="story-stats">
+                {%- assign stat_items = block.settings.stats | split: '|' -%}
+                {%- for stat in stat_items -%}
+                  {%- assign parts = stat | split: '::' -%}
+                  <div class="story-stat">
+                    <div class="story-stat-num">{{ parts[0] | strip }}<small>{{ parts[1] | strip }}</small></div>
+                    <div class="story-stat-label">{{ parts[2] | strip }}</div>
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
         </div>
-
-        <div class="story-body">
-          {%- if block.settings.eyebrow != blank -%}
-            <p class="eyebrow {% if section.settings.dark %}light{% endif %}">{{ block.settings.eyebrow }}</p>
-          {%- endif -%}
-          <h2>{{ block.settings.heading }}</h2>
-          <p>{{ block.settings.text }}</p>
-          {%- if block.settings.cta_label != blank -%}
-            <a href="{{ block.settings.cta_url | default: '#' }}" class="btn btn-primary">
-              {{ block.settings.cta_label }}
-              <span class="btn-icon">{% render 'icon', icon: 'arrow' %}</span>
-            </a>
-          {%- endif -%}
-        </div>
-
       </div>
-    {%- endfor -%}
-  </div>
-</section>
+    </section>
+  {%- elsif block.type == 'guarantee' -%}
+    <section class="guarantee-banner" {{ block.shopify_attributes }}>
+      <div class="container guarantee-content">
+        <div class="guarantee-num">{{ block.settings.days }}</div>
+        <div class="guarantee-text">
+          <span class="guarantee-eyebrow">{{ block.settings.eyebrow }}</span>
+          <h2>{{ block.settings.headline }}</h2>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      </div>
+    </section>
+  {%- elsif block.type == 'mode_levels' -%}
+    <section class="mode-levels" {{ block.shopify_attributes }}>
+      <div class="container">
+        <div class="ml-grid">
+          <div class="ml-card">
+            <span class="ml-eyebrow">{{ block.settings.left_eyebrow }}</span>
+            <h3>{{ block.settings.left_headline }}</h3>
+            <div class="ml-rows">
+              {%- assign level_items = block.settings.levels | split: '|' -%}
+              {%- for lvl in level_items -%}
+                {%- assign parts = lvl | split: '::' -%}
+                <div class="ml-row">
+                  <div class="ml-level {% if forloop.last %}ml-level-strong{% endif %}">{{ parts[0] | strip }}</div>
+                  <div class="ml-desc">{{ parts[1] | strip }}</div>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+          <div class="ml-side">
+            <span class="ml-eyebrow">{{ block.settings.right_eyebrow }}</span>
+            <h4>{{ block.settings.right_headline }}</h4>
+            <p>{{ block.settings.right_text }}</p>
+            <div class="ml-graph">
+              {%- if block.settings.graph_image != blank -%}
+                {{ block.settings.graph_image | image_url: width: 800 | image_tag: alt: 'Druckkurve' }}
+              {%- else -%}
+                <div class="placeholder"><div class="placeholder-label">DRUCKKURVE · Pressure Control · Sensor-Diagramm</div></div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+{%- endfor -%}
 
 {% schema %}
 {
   "name": "Product Story",
-  "settings": [
-    { "type": "checkbox", "id": "dark", "label": "Dunkler Hintergrund", "default": false }
-  ],
   "blocks": [
     {
-      "type": "row",
+      "type": "story",
       "name": "Story Row",
       "settings": [
+        { "type": "text", "id": "id", "label": "Anker-ID", "default": "story-1" },
         { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "text", "id": "image_label", "label": "Platzhalter-Label", "default": "Story Bild" },
+        { "type": "checkbox", "id": "image_right", "label": "Bild rechts", "default": false },
+        { "type": "checkbox", "id": "dark", "label": "Dunkler Hintergrund", "default": false },
         { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-        { "type": "text", "id": "heading", "label": "Überschrift", "default": "Technologie, die einen Unterschied macht" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "Unsere Recovery Boots nutzen pneumatische Kompressionstechnologie, die ursprünglich in der Sportwissenschaft und Rehabilitation entwickelt wurde." },
-        { "type": "text", "id": "cta_label", "label": "Button Text" },
-        { "type": "url", "id": "cta_url", "label": "Button Link" }
+        { "type": "text", "id": "heading", "label": "Überschrift", "default": "360° Kompression." },
+        { "type": "textarea", "id": "lead", "label": "Lead-Text", "default": "Vom Fuß über die Wade bis hoch zum Oberschenkel — die Boots umschließen das ganze Bein." },
+        { "type": "textarea", "id": "bullets", "label": "Bullets (Titel::Text | getrennt)" },
+        { "type": "textarea", "id": "stats", "label": "Stats (Zahl::Einheit::Label | getrennt)" }
+      ]
+    },
+    {
+      "type": "guarantee",
+      "name": "Garantie Banner",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "days", "label": "Tage", "default": "30" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Risikofrei testen" },
+        { "type": "text", "id": "headline", "label": "Headline", "default": "Tage Geld zurück." },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Probier die Boots in Ruhe zuhause. Wenn sie dich nicht überzeugen, schickst du sie kostenfrei zurück — ohne Diskussion, ohne Begründung." }
+      ]
+    },
+    {
+      "type": "mode_levels",
+      "name": "Druck-Empfehlung",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "left_eyebrow", "label": "Links Eyebrow", "default": "Druck-Empfehlung · 5 Stufen" },
+        { "type": "text", "id": "left_headline", "label": "Links Headline", "default": "Die richtige Stufe\nfür jeden Tag." },
+        { "type": "textarea", "id": "levels", "label": "Stufen (Label::Text | getrennt)", "default": "Stufe 1::Für die tägliche Massage und sanfte Entspannung.|Stufe 2–3::Ideal zum Aufwärmen vor dem Training und zum Lockern der Muskeln.|Stufe 4–5::Tiefe Regeneration, schnelle Erholung und gezielte Massage nach harten Einheiten." },
+        { "type": "text", "id": "right_eyebrow", "label": "Rechts Eyebrow", "default": "Intelligente Drucksteuerung" },
+        { "type": "text", "id": "right_headline", "label": "Rechts Headline", "default": "Pressure Control Technology" },
+        { "type": "textarea", "id": "right_text", "label": "Rechts Text", "default": "Ein intelligenter Drucksensor passt die Massage automatisch an deine Beinform an. So bekommt jedes Bein den richtigen Druck — angenehm und effektiv, unabhängig von der Beingröße." },
+        { "type": "image_picker", "id": "graph_image", "label": "Diagramm Bild" }
       ]
     }
   ],
   "presets": [{
     "name": "Product Story",
     "blocks": [
-      { "type": "row", "settings": { "eyebrow": "Technologie", "heading": "Pneumatische Kompression", "text": "Sequenzielle Luftkammern massieren deine Beine von den Füßen aufwärts – genau wie eine professionelle manuelle Lymphdrainage." } },
-      { "type": "row", "settings": { "eyebrow": "Design", "heading": "Ergonomisch & komfortabel", "text": "Das anatomische Design passt sich deinen Beinen an. Leichte Materialien, einfacher Verschluss – in Sekunden bereit." } }
+      { "type": "story", "settings": { "id": "story-360", "eyebrow": "360° Kompression · 4 Zonen", "heading": "360° Kompression.\nVolle Beinabdeckung.", "lead": "Vom Fuß über die Wade bis hoch zum Oberschenkel — die Boots umschließen das ganze Bein. Vier Kammern sorgen für gleichmäßigen Druck auf jeder Höhe, ohne Lücken oder Druckstellen.", "image_label": "360° KOMPRESSION · 4 ZONEN · Bein in Boots umschlossen" } },
+      { "type": "story", "settings": { "id": "story-controller", "eyebrow": "Technologie · Controller", "heading": "Volle Kontrolle.\nDirekt am Gerät.", "lead": "LED-Farbdisplay am Bein. Keine App, kein Pairing, kein Konto. Modi und Druckstufen wählst du in Sekunden.", "image_right": true, "stats": "bis 240::mmHg::Druckstufen|5::Modi::Massage-Programme|3::Std::Akkulaufzeit|<45::dB::Flüsterleise im Betrieb", "image_label": "CONTROLLER DETAIL · LED-Farbdisplay · Makro" } },
+      { "type": "guarantee", "settings": {} },
+      { "type": "story", "settings": { "id": "story-modi", "eyebrow": "5 Massage-Modi", "heading": "Fünf Programme.\nEin Knopfdruck.", "lead": "Vom sanften Cool-Down bis zur Tiefen-Regeneration nach harten Einheiten. Jeder Modus arbeitet mit einem eigenen Druckmuster — wähle das passende Programm direkt am LED-Controller.", "bullets": "Modi 1::Wave Massage — sanfte Druckwelle durchs ganze Bein, ideal für die tägliche Massage und Entspannung.|Modi 2::Sequential Squeezing + Double Wave — aufsteigender Druckaufbau kombiniert mit Doppelwelle, das umfassendste Programm.|Modi 3::Double Wave — zwei überlagerte Druckwellen, perfekt zum Aufwärmen vor dem Workout.|Modi 4::All Squeezing — gleichzeitige Vollkompression aller Zonen für tiefe Regeneration und schnelle Erholung.|Modi 5::Sequential Squeezing — klassischer sequenzieller Aufbau vom Fuß nach oben, der bewährte Recovery-Standard.", "image_label": "MASSAGE-MODI · 5 Programme · Diagramm mit Druckzonen" } },
+      { "type": "mode_levels", "settings": {} },
+      { "type": "story", "settings": { "id": "story-paket", "eyebrow": "Im Paket enthalten", "heading": "Alles dabei.\nOhne Aufpreis.", "lead": "Boots, Transport-Rucksack mit integriertem Ladeanschluss, Erweiterungslaschen für +10 cm Spielraum am ganzen Bein. Andere verkaufen das einzeln — bei uns ist alles im Karton.", "bullets": "Recovtec Pro Boots::Doppellagiges Rautengewebe, LED-Controller.|Transport-Rucksack::Gepolstert, mit integriertem Ladeanschluss — laden unterwegs ohne Auspacken.|Erweiterungslaschen::+10 cm Spielraum am ganzen Bein — passt auch bei kräftigeren Beinen.", "image_right": true, "dark": true, "image_label": "FLATLAY · Boots + Rucksack + Erweiterungslaschen · Top-Down" } }
     ]
   }]
 }

@@ -1,25 +1,34 @@
-<section class="faq section-pad" id="faq">
+<section class="faq" id="faq">
   <div class="container">
-
-    <div class="faq-head">
-      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
-      <h2>{{ section.settings.headline }}</h2>
+    <div class="faq-grid">
+      <div class="faq-side">
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2 class="h-2">{{ section.settings.headline }}</h2>
+        <p>{{ section.settings.subtext }}</p>
+        <div class="contact-card">
+          <span class="label">Direkter Kontakt</span>
+          <div class="h-4">{{ section.settings.email }}</div>
+          <a href="mailto:{{ section.settings.email }}">Nachricht schreiben →</a>
+        </div>
+      </div>
+      <div>
+        <div class="acc">
+          {%- for block in section.blocks -%}
+            <div class="acc-item" {{ block.shopify_attributes }}>
+              <button class="acc-trigger">
+                {{ block.settings.question }}
+                <span class="plus">+</span>
+              </button>
+              <div class="acc-body">
+                <div>
+                  <div class="acc-body-inner">{{ block.settings.answer }}</div>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
     </div>
-
-    <div class="faq-list">
-      {%- for block in section.blocks -%}
-        <details class="faq-item" {{ block.shopify_attributes }}>
-          <summary class="faq-q">
-            <span>{{ block.settings.question }}</span>
-            <span class="faq-icon">{% render 'icon', icon: 'arrow' %}</span>
-          </summary>
-          <div class="faq-a">
-            <p>{{ block.settings.answer }}</p>
-          </div>
-        </details>
-      {%- endfor -%}
-    </div>
-
   </div>
 </section>
 
@@ -27,27 +36,30 @@
 {
   "name": "FAQ",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "06 — FAQ" },
-    { "type": "text", "id": "headline", "label": "Headline", "default": "Häufige Fragen." }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "05 — FAQ" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Häufige Fragen.\nKlare Antworten." },
+    { "type": "text", "id": "subtext", "label": "Subtext", "default": "Du hast eine andere Frage? Schreib uns direkt — meistens antworten wir innerhalb eines Werktages." },
+    { "type": "text", "id": "email", "label": "E-Mail", "default": "support@recovtec.de" }
   ],
   "blocks": [
     {
       "type": "item",
       "name": "Frage",
       "settings": [
-        { "type": "text", "id": "question", "label": "Frage", "default": "Für wen sind die Recovery Boots geeignet?" },
-        { "type": "textarea", "id": "answer", "label": "Antwort", "default": "Für alle, die regelmäßig Sport treiben – egal ob Läufer, Radfahrer, Kraftsportler oder Teamsportler." }
+        { "type": "text", "id": "question", "label": "Frage", "default": "Für wen sind die Recovery Boots gedacht?" },
+        { "type": "textarea", "id": "answer", "label": "Antwort", "default": "Für alle, die ihre Beine regelmäßig belasten — Läufer, Kraftsportler, Mannschaftssportler, CrossFit-Athleten, Triathleten." }
       ]
     }
   ],
   "presets": [{
     "name": "FAQ",
     "blocks": [
-      { "type": "item", "settings": { "question": "Für wen sind die Recovery Boots geeignet?", "answer": "Für alle, die regelmäßig Sport treiben – egal ob Läufer, Radfahrer, Kraftsportler oder Teamsportler. Auch bei berufsbedingtem langen Stehen oder Sitzen sind die Boots eine hervorragende Entlastung." } },
-      { "type": "item", "settings": { "question": "Wie oft und wie lange sollte ich die Boots nutzen?", "answer": "20–30 Minuten nach dem Training reichen für eine optimale Wirkung. Du kannst sie täglich nutzen – viele Athleten schwören auf die abendliche Routine direkt nach dem Sport oder vor dem Schlafen." } },
-      { "type": "item", "settings": { "question": "Gibt es eine Größe, die für alle passt?", "answer": "Ja, die RECOVTEC Boots sind in zwei Größen erhältlich: S/M (Schuhgröße 36–42) und L/XL (Schuhgröße 42–48). Das Bein-Design passt für nahezu alle Beinlängen." } },
-      { "type": "item", "settings": { "question": "Wie lange dauert die Lieferung?", "answer": "Wir liefern innerhalb von 1–3 Werktagen innerhalb Deutschlands, Österreichs und der Schweiz. Der Versand ist ab einem Bestellwert von 50 € kostenlos." } },
-      { "type": "item", "settings": { "question": "Gilt die 30-Tage-Geld-zurück-Garantie?", "answer": "Absolut. Wenn du nicht 100 % zufrieden bist, schickst du die Boots einfach zurück und wir erstatten den vollen Kaufpreis – ohne Wenn und Aber." } }
+      { "type": "item", "settings": { "question": "Für wen sind die Recovery Boots gedacht?", "answer": "Für alle, die ihre Beine regelmäßig belasten — Läufer, Kraftsportler, Mannschaftssportler, CrossFit-Athleten, Triathleten. Aber auch für lange Bürotage und schwere Beine nach einem stressigen Tag." } },
+      { "type": "item", "settings": { "question": "Wie oft und wie lange soll ich sie nutzen?", "answer": "Eine Session dauert 20–30 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel, solange du dich wohl fühlst." } },
+      { "type": "item", "settings": { "question": "Welche Druckstufe sollte ich am Anfang wählen?", "answer": "Starte mit Stufe 80 mmHg. Das ist angenehm und effektiv. Steigere dich nach Bedarf — höhere Stufen für tiefere Regeneration, niedrigere für sanftes Cool-Down." } },
+      { "type": "item", "settings": { "question": "Brauche ich eine App oder WLAN?", "answer": "Nein. Anschalten, Modus und Druckstufe am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto. Bewusst so designt." } },
+      { "type": "item", "settings": { "question": "Welche Größe passt mir?", "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die mitgelieferten Erweiterungslaschen geben dir zusätzlichen Spielraum von +10 cm." } },
+      { "type": "item", "settings": { "question": "Was, wenn sie mir nicht gefallen?", "answer": "30 Tage Geld-zurück-Garantie. Du testest sie zuhause — gefallen sie dir nicht, schickst du sie kostenfrei zurück und bekommst dein Geld zurück. Ohne Diskussion." } }
     ]
   }]
 }

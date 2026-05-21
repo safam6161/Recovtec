@@ -1,17 +1,37 @@
-<section class="final-cta dark">
+<section class="final-cta">
+  <div class="final-bg"></div>
   <div class="container">
-    <p class="eyebrow light">{{ section.settings.eyebrow }}</p>
-    <h2 class="final-cta-headline">{{ section.settings.headline }}</h2>
-    <p class="final-cta-sub">{{ section.settings.subtext }}</p>
-    <div class="final-cta-actions">
-      <a href="{{ section.settings.cta_url | default: routes.collections_url }}" class="btn btn-primary btn-lg">
-        {{ section.settings.cta_label }}
-        <span class="btn-icon">{% render 'icon', icon: 'arrow' %}</span>
-      </a>
-      <div class="final-cta-pills">
-        <span>{% render 'icon', icon: 'truck' %} Kostenloser Versand</span>
-        <span>{% render 'icon', icon: 'refresh' %} 30 Tage Rückgabe</span>
-        <span>{% render 'icon', icon: 'shield' %} 1 Jahr Garantie</span>
+    <div class="final-cta-inner">
+      <h2>
+        {%- assign lines = section.settings.headline | newline_to_br | split: '<br />' -%}
+        {%- for line in lines -%}
+          <span style="display:block">{% if forloop.last %}<em>{{ line }}</em>{% else %}{{ line }}{% endif %}</span>
+        {%- endfor -%}
+      </h2>
+      <div class="side">
+        <p>{{ section.settings.subtext }}</p>
+        <a href="{{ section.settings.cta_url | default: routes.collections_url }}" class="btn btn-primary btn-lg" style="align-self:flex-start">
+          {{ section.settings.cta_label }}
+          <span class="btn-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 9h14M11 4l5 5-5 5"/></svg></span>
+        </a>
+        <div class="final-cta-guarantees">
+          <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 7h11v9H2zM13 10h5l3 3v3h-8z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg> Kostenloser Versand</div>
+          <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12a8 8 0 0 1 14-5l2-2v6h-6l2.5-2.5"/><path d="M20 12a8 8 0 0 1-14 5l-2 2v-6h6l-2.5 2.5"/></svg> 30 Tage Rückgabe</div>
+          <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg> 1–3 Tage Lieferung</div>
+          <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg> 1 Jahr Garantie</div>
+        </div>
+        <div class="final-cta-nl">
+          <div class="nl-lbl">Newsletter — Updates &amp; frühe Drops</div>
+          <form class="final-nl-form" action="/contact#newsletter-form" method="post" accept-charset="UTF-8">
+            <input type="hidden" name="form_type" value="customer">
+            <input type="hidden" name="utf8" value="✓">
+            <input type="email" name="contact[email]" required placeholder="deine@email.de">
+            <button type="submit" aria-label="Abonnieren">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 9h14M11 4l5 5-5 5"/></svg>
+            </button>
+          </form>
+          <div class="nl-fine">Kein Spam. Jederzeit abbestellbar.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -21,10 +41,9 @@
 {
   "name": "Final CTA",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Bereit?" },
-    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Trainiere hart. Erhol dich härter." },
-    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Starte noch heute mit professioneller Recovery – für zuhause, für jeden Athleten." },
-    { "type": "text", "id": "cta_label", "label": "Button Text", "default": "Jetzt kaufen" },
+    { "type": "textarea", "id": "headline", "label": "Headline (letzte Zeile wird kursiv)", "default": "Bereit für die\nbessere Recovery?" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Ein Produkt. Alles dabei. Direkt vom Hersteller verschickt. Wenn's nicht passt, schickst du es zurück — kostenlos, ohne Diskussion." },
+    { "type": "text", "id": "cta_label", "label": "Button Text", "default": "Jetzt zur Produktseite" },
     { "type": "url", "id": "cta_url", "label": "Button Link" }
   ],
   "presets": [{ "name": "Final CTA" }]

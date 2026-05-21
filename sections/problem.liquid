@@ -1,24 +1,22 @@
-<section class="problem section-pad" id="problem">
+<section class="problem" id="problem">
   <div class="container">
-    <div class="problem-grid">
-
-      <div class="problem-left">
-        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <div class="problem-inner">
+      <div>
+        <span class="eyebrow" style="display:block;margin-bottom:24px">{{ section.settings.eyebrow }}</span>
         <h2 class="problem-headline">{{ section.settings.headline }}</h2>
+        <p>{{ section.settings.intro }}</p>
       </div>
-
-      <div class="problem-right">
+      <ul class="problem-list">
         {%- for block in section.blocks -%}
-          <div class="problem-item" {{ block.shopify_attributes }}>
+          <li {{ block.shopify_attributes }}>
             <span class="num">{{ forloop.index | prepend: '0' }}</span>
-            <div class="problem-item-body">
+            <div>
               <h4>{{ block.settings.title }}</h4>
               <p>{{ block.settings.text }}</p>
             </div>
-          </div>
+          </li>
         {%- endfor -%}
-      </div>
-
+      </ul>
     </div>
   </div>
 </section>
@@ -28,25 +26,26 @@
   "name": "Problem",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "01 — Warum Recovery" },
-    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Du trainierst. Aber deine Beine bleiben schwer." }
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Du trainierst.\nAber deine Beine bleiben schwer." },
+    { "type": "textarea", "id": "intro", "label": "Intro-Text", "default": "Jeder, der ernsthaft trainiert, kennt das Problem: harter Tag im Gym, langer Lauf, Ligaspiel — und am nächsten Tag fühlen sich die Beine an wie Beton. Stretchen reicht oft nicht. Foam Roller ist Arbeit. Pause ist keine Option." }
   ],
   "blocks": [
     {
       "type": "item",
       "name": "Schmerzpunkt",
       "settings": [
-        { "type": "text", "id": "title", "label": "Titel", "default": "Muskelkater blockiert dich" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "Nach intensivem Training brauchst du Tage, bis du wieder Vollgas geben kannst." }
+        { "type": "text", "id": "title", "label": "Titel", "default": "Müde Beine am nächsten Tag" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Schwere, steife Muskulatur bremst dich beim nächsten Workout aus." }
       ]
     }
   ],
   "presets": [{
     "name": "Problem",
     "blocks": [
-      { "type": "item", "settings": { "title": "Muskelkater blockiert dich", "text": "Nach intensivem Training brauchst du Tage, bis du wieder Vollgas geben kannst." } },
-      { "type": "item", "settings": { "title": "Schwere Beine bremsen dich aus", "text": "Laktat und Entzündungen sammeln sich an – dein Körper kommt nicht hinterher." } },
-      { "type": "item", "settings": { "title": "Zu wenig Zeit für echte Erholung", "text": "Massagen und Physiotherapie kosten Zeit und Geld, die du nicht immer hast." } },
-      { "type": "item", "settings": { "title": "Schlechte Schlafqualität", "text": "Ohne gute Recovery leidet der Schlaf – der wichtigste Regenerationsfaktor überhaupt." } }
+      { "type": "item", "settings": { "title": "Müde Beine am nächsten Tag", "text": "Schwere, steife Muskulatur bremst dich beim nächsten Workout aus — und du kommst gar nicht zur eigentlichen Leistung." } },
+      { "type": "item", "settings": { "title": "Stretchen und Roller reichen nicht", "text": "Die Standard-Tools helfen — aber nur oberflächlich. Tiefe Muskulatur kommt damit selten in Bewegung." } },
+      { "type": "item", "settings": { "title": "Mehr Volumen, weniger Fortschritt", "text": "Wer häufig trainiert, ohne richtig zu erholen, sammelt Müdigkeit an — Leistung stagniert, Verletzungsrisiko steigt." } },
+      { "type": "item", "settings": { "title": "Keine Zeit fürs Studio", "text": "Recovery-Lounges kosten Mitgliedschaft plus Anfahrt. An Trainingstagen ist das ein Termin zu viel." } }
     ]
   }]
 }

@@ -25,7 +25,10 @@
   {% section 'footer' %}
 
   {% render 'cart-drawer' %}
-  <div class="toast"></div>
+  <div class="toast" id="toast">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7.5l3 3 7-7"/></svg>
+    <span class="toast-msg"></span>
+  </div>
 
   {{ 'theme.js' | asset_url | script_tag }}
 </body>
