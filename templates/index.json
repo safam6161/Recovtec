@@ -1,13 +1,5 @@
 {
   "sections": {
-    "announcement": {
-      "type": "announcement-bar",
-      "settings": {
-        "item_1": "Kostenloser Versand",
-        "item_2": "30 Tage Geld zurück",
-        "item_3": "1 Jahr Garantie"
-      }
-    },
     "hero": {
       "type": "hero",
       "settings": {
@@ -21,8 +13,8 @@
       "blocks": {
         "t1": { "type": "item", "settings": { "icon": "truck", "label": "1–3 Tage Lieferung" } },
         "t2": { "type": "item", "settings": { "icon": "refresh", "label": "30 Tage Geld zurück" } },
-        "t3": { "type": "item", "settings": { "icon": "truck", "label": "Kostenloser Versand" } },
-        "t4": { "type": "item", "settings": { "icon": "ce", "label": "1 Jahr Garantie" } }
+        "t3": { "type": "item", "settings": { "icon": "package", "label": "Kostenloser Versand" } },
+        "t4": { "type": "item", "settings": { "icon": "warranty", "label": "1 Jahr Garantie" } }
       }
     },
     "problem": {
@@ -81,7 +73,7 @@
       },
       "block_order": ["c1","c2"],
       "blocks": {
-        "c1": { "type": "col", "settings": { "col_label": "Recovtec Pro", "badge": "DAS PAKET", "highlight": true } },
+        "c1": { "type": "col", "settings": { "col_label": "Recovtec Pro", "badge": "", "highlight": true } },
         "c2": { "type": "col", "settings": { "col_label": "Andere Brands", "badge": "", "highlight": false } }
       }
     },
@@ -142,5 +134,5 @@
       }
     }
   },
-  "order": ["announcement","hero","trust","problem","solution","howto","compare","social","faq","final_cta","footer"]
+  "order": ["hero","trust","problem","solution","howto","compare","social","faq","final_cta","footer"]
 }

@@ -1,13 +1,5 @@
 {
   "sections": {
-    "announcement": {
-      "type": "announcement-bar",
-      "settings": {
-        "item_1": "Kostenloser Versand",
-        "item_2": "30 Tage Geld zurück",
-        "item_3": "1 Jahr Garantie"
-      }
-    },
     "main_product": {
       "type": "main-product",
       "settings": {
@@ -36,7 +28,7 @@
       },
       "block_order": ["c1","c2"],
       "blocks": {
-        "c1": { "type": "col", "settings": { "col_label": "Recovtec Pro", "badge": "DAS PAKET", "highlight": true } },
+        "c1": { "type": "col", "settings": { "col_label": "Recovtec Pro", "badge": "", "highlight": true } },
         "c2": { "type": "col", "settings": { "col_label": "Andere Brands", "badge": "", "highlight": false } }
       }
     },
@@ -82,5 +74,5 @@
       }
     }
   },
-  "order": ["announcement","main_product","story","compare","faq","final_cta","footer"]
+  "order": ["main_product","story","compare","faq","final_cta","footer"]
 }

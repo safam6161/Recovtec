@@ -234,8 +234,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .usp.usp-image .placeholder { height: 100%; }
 .usp-wide { grid-column: span 2; }
 .usp .num { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,250,250,0.35); }
-.usp .big { font-family: var(--f-display); font-size: clamp(40px,5vw,72px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: var(--paper); }
-.usp .big .u { font-size: clamp(16px,2vw,24px); font-weight: 500; margin-left: 4px; color: rgba(250,250,250,0.55); }
+.usp .big { font-family: var(--f-display); font-size: clamp(40px,5vw,72px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: var(--paper); display: flex; flex-direction: column; gap: 4px; }
+.usp .big .u { font-size: clamp(14px,1.4vw,18px); font-weight: 500; letter-spacing: 0.01em; color: rgba(250,250,250,0.60); }
 .usp h3 { font-size: clamp(16px,1.5vw,20px); font-weight: 600; color: var(--paper); }
 .usp p { font-size: 14px; color: rgba(250,250,250,0.55); line-height: 1.6; max-width: 44ch; }
 .usp .cta-link { margin-top: 8px; }
@@ -256,7 +256,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .howto { padding: var(--section-py) 0; background: var(--paper-2); }
 .howto-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .howto-step { background: var(--paper-2); padding: clamp(24px,2.5vw,40px); display: flex; flex-direction: column; gap: 12px; }
-.step-big { font-family: var(--f-display); font-size: clamp(40px,5vw,72px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--paper-3); }
+.step-big { font-family: var(--f-display); font-size: clamp(40px,5vw,72px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: rgba(10,10,10,0.22); }
 .howto-step h4 { font-size: 16px; font-weight: 600; color: var(--ink); margin-top: auto; }
 .howto-step p { font-size: 14px; color: var(--mute); line-height: 1.55; }
 .howto-foot { margin-top: 24px; padding: 24px 32px; background: var(--paper); border: 1px solid var(--line); display: flex; align-items: center; gap: 20px; }
@@ -293,7 +293,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 /* ===== Social Proof ===== */
 .social { padding: var(--section-py) 0; background: var(--paper); }
 .social-grid { display: grid; grid-template-columns: 1fr 2fr; gap: clamp(40px,5vw,80px); align-items: start; }
-.social-rating { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 88px; }
+.social-rating { display: flex; flex-direction: column; gap: 20px; }
 .stars { display: flex; gap: 3px; color: var(--ink); }
 .stars svg { width: 16px; height: 16px; }
 .rating-num { font-family: var(--f-display); font-size: clamp(32px,4vw,52px); font-weight: 700; letter-spacing: -0.03em; color: var(--ink); line-height: 1; }
@@ -506,9 +506,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .ml-rows { display: flex; flex-direction: column; }
 .ml-row { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
 .ml-row:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
-.ml-level { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,250,250,0.45); flex-shrink: 0; width: 72px; padding-top: 1px; }
-.ml-level-strong { color: rgba(250,250,250,0.85); }
-.ml-desc { font-size: 13px; color: rgba(250,250,250,0.55); line-height: 1.5; }
+.ml-level { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,250,250,0.70); flex-shrink: 0; width: 72px; padding-top: 1px; }
+.ml-level-strong { color: rgba(250,250,250,0.95); }
+.ml-desc { font-size: 13px; color: rgba(250,250,250,0.80); line-height: 1.5; }
 .ml-graph { aspect-ratio: 16/9; overflow: hidden; margin-top: 8px; }
 .ml-graph .placeholder { height: 100%; min-height: 120px; }
 
