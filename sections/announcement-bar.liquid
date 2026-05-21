@@ -1,20 +1,31 @@
 <div class="announce">
   <div class="announce-track">
-    <span>{{ section.settings.item_1 }}</span>
-    <span class="dot"></span>
-    <span>{{ section.settings.item_2 }}</span>
-    <span class="dot"></span>
-    <span>{{ section.settings.item_3 }}</span>
+    {%- for block in section.blocks -%}
+      {%- unless forloop.first -%}<span class="dot"></span>{%- endunless -%}
+      <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+    {%- endfor -%}
   </div>
 </div>
 
 {% schema %}
 {
   "name": "Announcement Bar",
-  "settings": [
-    { "type": "text", "id": "item_1", "label": "Punkt 1", "default": "Kostenloser Versand" },
-    { "type": "text", "id": "item_2", "label": "Punkt 2", "default": "30 Tage Geld zurück" },
-    { "type": "text", "id": "item_3", "label": "Punkt 3", "default": "1 Jahr Garantie" }
-  ]
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Punkt",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Kostenloser Versand" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Announcement Bar",
+    "blocks": [
+      { "type": "item", "settings": { "text": "Kostenloser Versand" } },
+      { "type": "item", "settings": { "text": "30 Tage Geld zurück" } },
+      { "type": "item", "settings": { "text": "1 Jahr Garantie" } }
+    ]
+  }]
 }
 {% endschema %}

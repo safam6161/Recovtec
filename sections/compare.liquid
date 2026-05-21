@@ -9,25 +9,25 @@
 
     <div class="compare-table two-col">
       <div class="compare-cell head feat-name" style="background:rgba(255,255,255,0.04)">Merkmal</div>
-      {%- for block in section.blocks -%}
-        <div class="compare-cell head {% if block.settings.highlight %}us{% endif %}" {{ block.shopify_attributes }}>
-          {{ block.settings.col_label }}
-          {%- if block.settings.badge != blank -%}<span class="compare-tag">{{ block.settings.badge }}</span>{%- endif -%}
-        </div>
-      {%- endfor -%}
+      <div class="compare-cell head us">{{ section.settings.col1_label }}</div>
+      <div class="compare-cell head">{{ section.settings.col2_label }}</div>
 
-      {%- assign rows = section.settings.rows | split: '|' -%}
-      {%- for row in rows -%}
-        {%- assign cells = row | split: ',' -%}
-        <div class="compare-cell feat-name">{{ cells[0] | strip }}</div>
-        {%- for block in section.blocks -%}
-          {%- assign val = cells[forloop.index] | strip -%}
-          <div class="compare-cell {% if block.settings.highlight %}us{% endif %}">
-            {%- if val == 'check' -%}<span class="check">✓ Inklusive</span>
-            {%- elsif val == 'x' -%}<span class="x">— Nicht enthalten</span>
-            {%- else -%}{{ val }}{%- endif -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'row' -%}
+          <div class="compare-cell feat-name" {{ block.shopify_attributes }}>{{ block.settings.feature }}</div>
+          {%- assign our_val = block.settings.our_value | strip -%}
+          {%- assign their_val = block.settings.competitor_value | strip -%}
+          <div class="compare-cell us">
+            {%- if our_val == 'check' -%}<span class="check">✓ Inklusive</span>
+            {%- elsif our_val == 'x' -%}<span class="x">— Nicht enthalten</span>
+            {%- else -%}{{ our_val }}{%- endif -%}
           </div>
-        {%- endfor -%}
+          <div class="compare-cell">
+            {%- if their_val == 'check' -%}<span class="check">✓ Inklusive</span>
+            {%- elsif their_val == 'x' -%}<span class="x">— Nicht enthalten</span>
+            {%- else -%}{{ their_val }}{%- endif -%}
+          </div>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   </div>
@@ -35,33 +35,34 @@
 
 {% schema %}
 {
-  "name": "Compare",
+  "name": "Vergleich",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "04 — Vergleich" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Vergleich" },
     { "type": "textarea", "id": "headline", "label": "Headline", "default": "Recovtec Pro vs. der Rest.\nVolle Ausstattung, kein Hokuspokus." },
-    {
-      "type": "textarea",
-      "id": "rows",
-      "label": "Zeilen (Merkmal, Wert1, Wert2 — mit | getrennt; check / x für Icons)",
-      "default": "Druckstufen,bis 240 mmHg,bis 180 mmHg|Massage-Modi,5,3|Akkubetrieb,Ja · 3 Std,Teils|Lautstärke,< 45 dB,> 60 dB|App / Pairing nötig,Nein,Oft ja|Rucksack inklusive,check,x|Erweiterungslaschen,check,x"
-    }
+    { "type": "text", "id": "col1_label", "label": "Spalte 1 — Name (Recovtec)", "default": "Recovtec Pro" },
+    { "type": "text", "id": "col2_label", "label": "Spalte 2 — Name (Konkurrenz)", "default": "Andere Brands" }
   ],
   "blocks": [
     {
-      "type": "col",
-      "name": "Spalte",
+      "type": "row",
+      "name": "Vergleichs-Zeile",
       "settings": [
-        { "type": "text", "id": "col_label", "label": "Spalten-Label", "default": "Recovtec Pro" },
-        { "type": "text", "id": "badge", "label": "Badge (optional)", "default": "DAS PAKET" },
-        { "type": "checkbox", "id": "highlight", "label": "Hervorheben", "default": true }
+        { "type": "text", "id": "feature", "label": "Merkmal", "default": "Druckstufen" },
+        { "type": "text", "id": "our_value", "label": "Recovtec Wert (check / x / Text)", "default": "bis 240 mmHg" },
+        { "type": "text", "id": "competitor_value", "label": "Konkurrenz Wert (check / x / Text)", "default": "bis 180 mmHg" }
       ]
     }
   ],
   "presets": [{
-    "name": "Compare",
+    "name": "Vergleich",
     "blocks": [
-      { "type": "col", "settings": { "col_label": "Recovtec Pro", "badge": "DAS PAKET", "highlight": true } },
-      { "type": "col", "settings": { "col_label": "Andere Brands", "badge": "", "highlight": false } }
+      { "type": "row", "settings": { "feature": "Druckstufen", "our_value": "bis 240 mmHg", "competitor_value": "bis 180 mmHg" } },
+      { "type": "row", "settings": { "feature": "Massage-Modi", "our_value": "5", "competitor_value": "3" } },
+      { "type": "row", "settings": { "feature": "Akkubetrieb", "our_value": "Ja · 3 Std", "competitor_value": "Teils" } },
+      { "type": "row", "settings": { "feature": "Lautstärke", "our_value": "< 45 dB", "competitor_value": "> 60 dB" } },
+      { "type": "row", "settings": { "feature": "App / Pairing nötig", "our_value": "Nein", "competitor_value": "Oft ja" } },
+      { "type": "row", "settings": { "feature": "Rucksack inklusive", "our_value": "check", "competitor_value": "x" } },
+      { "type": "row", "settings": { "feature": "Erweiterungslaschen", "our_value": "check", "competitor_value": "x" } }
     ]
   }]
 }

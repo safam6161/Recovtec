@@ -11,12 +11,12 @@
       "type": "product-story",
       "block_order": ["story1","story2","guarantee","story3","modes","story4"],
       "blocks": {
-        "story1": { "type": "story", "settings": { "id": "story-360", "eyebrow": "360° Kompression · 4 Zonen", "heading": "360° Kompression.\nVolle Beinabdeckung.", "lead": "Vom Fuß über die Wade bis hoch zum Oberschenkel — die Boots umschließen das ganze Bein. Vier Kammern sorgen für gleichmäßigen Druck auf jeder Höhe, ohne Lücken oder Druckstellen.", "image_label": "360° KOMPRESSION · 4 ZONEN · Bein in Boots umschlossen · cyan/blau Tech-Look", "image_right": false, "dark": false } },
-        "story2": { "type": "story", "settings": { "id": "story-controller", "eyebrow": "Technologie · Controller", "heading": "Volle Kontrolle.\nDirekt am Gerät.", "lead": "LED-Farbdisplay am Bein. Keine App, kein Pairing, kein Konto. Modi und Druckstufen wählst du in Sekunden.", "stats": "bis 240::mmHg::Druckstufen|5::Modi::Massage-Programme|3::Std::Akkulaufzeit|<45::dB::Flüsterleise im Betrieb", "image_label": "CONTROLLER DETAIL · LED-Farbdisplay · Makro", "image_right": true, "dark": false } },
+        "story1": { "type": "story", "settings": { "id": "story-360", "eyebrow": "360° Kompression · 4 Zonen", "heading": "360° Kompression.\nVolle Beinabdeckung.", "lead": "Vom Fuß über die Wade bis hoch zum Oberschenkel — die Boots umschließen das ganze Bein. Vier Kammern sorgen für gleichmäßigen Druck auf jeder Höhe, ohne Lücken oder Druckstellen.", "image_label": "360° KOMPRESSION · 4 ZONEN", "image_right": false, "dark": false } },
+        "story2": { "type": "story", "settings": { "id": "story-controller", "eyebrow": "Technologie · Controller", "heading": "Volle Kontrolle.\nDirekt am Gerät.", "lead": "LED-Farbdisplay am Bein. Keine App, kein Pairing, kein Konto. Modi und Druckstufen wählst du in Sekunden.", "stats": "bis 240::mmHg::Druckstufen|5::Modi::Massage-Programme|3::Std::Akkulaufzeit|<45::dB::Flüsterleise im Betrieb", "image_label": "CONTROLLER DETAIL · LED-Farbdisplay", "image_right": true, "dark": false } },
         "guarantee": { "type": "guarantee", "settings": { "days": "30", "eyebrow": "Risikofrei testen", "headline": "Tage Geld zurück.", "text": "Probier die Boots in Ruhe zuhause. Wenn sie dich nicht überzeugen, schickst du sie kostenfrei zurück — ohne Diskussion, ohne Begründung." } },
-        "story3": { "type": "story", "settings": { "id": "story-modi", "eyebrow": "5 Massage-Modi", "heading": "Fünf Programme.\nEin Knopfdruck.", "lead": "Vom sanften Cool-Down bis zur Tiefen-Regeneration nach harten Einheiten. Jeder Modus arbeitet mit einem eigenen Druckmuster — wähle das passende Programm direkt am LED-Controller.", "bullets": "Modi 1::Wave Massage — sanfte Druckwelle durchs ganze Bein, ideal für die tägliche Massage und Entspannung.|Modi 2::Sequential Squeezing + Double Wave — aufsteigender Druckaufbau kombiniert mit Doppelwelle, das umfassendste Programm.|Modi 3::Double Wave — zwei überlagerte Druckwellen, perfekt zum Aufwärmen vor dem Workout.|Modi 4::All Squeezing — gleichzeitige Vollkompression aller Zonen für tiefe Regeneration und schnelle Erholung.|Modi 5::Sequential Squeezing — klassischer sequenzieller Aufbau vom Fuß nach oben, der bewährte Recovery-Standard.", "image_label": "MASSAGE-MODI · 5 Programme · Bein-Diagramme mit Druckzonen", "image_right": false, "dark": false } },
+        "story3": { "type": "story", "settings": { "id": "story-modi", "eyebrow": "5 Massage-Modi", "heading": "Fünf Programme.\nEin Knopfdruck.", "lead": "Vom sanften Cool-Down bis zur Tiefen-Regeneration nach harten Einheiten. Jeder Modus arbeitet mit einem eigenen Druckmuster — wähle das passende Programm direkt am LED-Controller.", "bullets": "Modi 1::Wave Massage — sanfte Druckwelle durchs ganze Bein, ideal für die tägliche Massage und Entspannung.|Modi 2::Sequential Squeezing + Double Wave — aufsteigender Druckaufbau kombiniert mit Doppelwelle, das umfassendste Programm.|Modi 3::Double Wave — zwei überlagerte Druckwellen, perfekt zum Aufwärmen vor dem Workout.|Modi 4::All Squeezing — gleichzeitige Vollkompression aller Zonen für tiefe Regeneration und schnelle Erholung.|Modi 5::Sequential Squeezing — klassischer sequenzieller Aufbau vom Fuß nach oben, der bewährte Recovery-Standard.", "image_label": "MASSAGE-MODI · 5 Programme", "image_right": false, "dark": false } },
         "modes": { "type": "mode_levels", "settings": { "left_eyebrow": "Druck-Empfehlung · 5 Stufen", "left_headline": "Die richtige Stufe\nfür jeden Tag.", "levels": "Stufe 1::Für die tägliche Massage und sanfte Entspannung.|Stufe 2–3::Ideal zum Aufwärmen vor dem Training und zum Lockern der Muskeln.|Stufe 4–5::Tiefe Regeneration, schnelle Erholung und gezielte Massage nach harten Einheiten.", "right_eyebrow": "Intelligente Drucksteuerung", "right_headline": "Pressure Control Technology", "right_text": "Ein intelligenter Drucksensor passt die Massage automatisch an deine Beinform an. So bekommt jedes Bein den richtigen Druck — angenehm und effektiv, unabhängig von der Beingröße." } },
-        "story4": { "type": "story", "settings": { "id": "story-paket", "eyebrow": "Im Paket enthalten", "heading": "Alles dabei.\nOhne Aufpreis.", "lead": "Boots, Transport-Rucksack mit integriertem Ladeanschluss, Erweiterungslaschen für +10 cm Spielraum am ganzen Bein. Andere verkaufen das einzeln — bei uns ist alles im Karton.", "bullets": "Recovtec Pro Boots::Doppellagiges Rautengewebe, LED-Controller.|Transport-Rucksack::Gepolstert, mit integriertem Ladeanschluss — laden unterwegs ohne Auspacken.|Erweiterungslaschen::+10 cm Spielraum am ganzen Bein — passt auch bei kräftigeren Beinen.", "image_label": "FLATLAY · Boots + Rucksack + Erweiterungslaschen · Top-Down Komposition", "image_right": true, "dark": true } }
+        "story4": { "type": "story", "settings": { "id": "story-paket", "eyebrow": "Im Paket enthalten", "heading": "Alles dabei.\nOhne Aufpreis.", "lead": "Boots, Transport-Rucksack mit integriertem Ladeanschluss, Erweiterungslaschen für +10 cm Spielraum am ganzen Bein. Andere verkaufen das einzeln — bei uns ist alles im Karton.", "bullets": "Recovtec Pro Boots::Doppellagiges Rautengewebe, LED-Controller.|Transport-Rucksack::Gepolstert, mit integriertem Ladeanschluss — laden unterwegs ohne Auspacken.|Erweiterungslaschen::+10 cm Spielraum am ganzen Bein — passt auch bei kräftigeren Beinen.", "image_label": "FLATLAY · Boots + Rucksack + Erweiterungslaschen", "image_right": true, "dark": true } }
       }
     },
     "compare": {
@@ -24,12 +24,18 @@
       "settings": {
         "eyebrow": "Vergleich",
         "headline": "Recovtec Pro vs. der Rest.\nVolle Ausstattung, kein Hokuspokus.",
-        "rows": "Druckstufen,bis 240 mmHg,bis 180 mmHg|Massage-Modi,5,3|Lautstärke,< 45 dB,> 60 dB|Kabel am Bein,Kurzer Schlauch,Lange Schläuche & Kabel|App / Pairing nötig,Nein,Oft ja|Rucksack inklusive,check,x|Erweiterungslaschen,check,x"
+        "col1_label": "Recovtec Pro",
+        "col2_label": "Andere Brands"
       },
-      "block_order": ["c1","c2"],
+      "block_order": ["r1","r2","r3","r4","r5","r6","r7"],
       "blocks": {
-        "c1": { "type": "col", "settings": { "col_label": "Recovtec Pro", "badge": "", "highlight": true } },
-        "c2": { "type": "col", "settings": { "col_label": "Andere Brands", "badge": "", "highlight": false } }
+        "r1": { "type": "row", "settings": { "feature": "Druckstufen", "our_value": "bis 240 mmHg", "competitor_value": "bis 180 mmHg" } },
+        "r2": { "type": "row", "settings": { "feature": "Massage-Modi", "our_value": "5", "competitor_value": "3" } },
+        "r3": { "type": "row", "settings": { "feature": "Lautstärke", "our_value": "< 45 dB", "competitor_value": "> 60 dB" } },
+        "r4": { "type": "row", "settings": { "feature": "Kabel am Bein", "our_value": "Kurzer Schlauch", "competitor_value": "Lange Schläuche & Kabel" } },
+        "r5": { "type": "row", "settings": { "feature": "App / Pairing nötig", "our_value": "Nein", "competitor_value": "Oft ja" } },
+        "r6": { "type": "row", "settings": { "feature": "Rucksack inklusive", "our_value": "check", "competitor_value": "x" } },
+        "r7": { "type": "row", "settings": { "feature": "Erweiterungslaschen", "our_value": "check", "competitor_value": "x" } }
       }
     },
     "faq": {
@@ -57,20 +63,30 @@
       "settings": {
         "headline": "Eine Entscheidung.\nBessere Beine.",
         "subtext": "Ein Produkt. Alles dabei. Wenn's nicht passt, schickst du es zurück — kostenlos, ohne Diskussion.",
-        "cta_label": "In den Warenkorb"
+        "cta_label": "In den Warenkorb",
+        "trust_1": "Kostenloser Versand",
+        "trust_2": "30 Tage Rückgabe",
+        "trust_3": "1–3 Tage Lieferung",
+        "trust_4": "1 Jahr Garantie",
+        "show_newsletter": true,
+        "nl_label": "Newsletter — Updates & frühe Drops",
+        "nl_placeholder": "deine@email.de",
+        "nl_fine": "Kein Spam. Jederzeit abbestellbar."
       }
     },
     "footer": {
       "type": "footer",
       "settings": {
         "tagline": "Eigenmarke für professionelle Recovery. Faire Preise, volle Ausstattung, ehrlich kalkuliert.",
-        "legal": "© 2026 Recovtec · Deutschland"
+        "legal": "© 2026 Recovtec · Deutschland",
+        "shipping_note": "Versand mit DHL",
+        "payment_note": "Zahlung: Klarna · Visa · Mastercard · PayPal"
       },
       "block_order": ["fcol1","fcol2","fcol3"],
       "blocks": {
-        "fcol1": { "type": "column", "settings": { "heading": "Shop", "labels": "Recovery Boots|Bald: Massagepistole|Zubehör", "links": "/collections/all|#|#" } },
-        "fcol2": { "type": "column", "settings": { "heading": "Service", "labels": "Versand & Lieferung|Rückgabe|Garantie|Größenberater", "links": "/pages/versand|/pages/rueckgabe|/pages/garantie|#" } },
-        "fcol3": { "type": "column", "settings": { "heading": "Unternehmen", "labels": "Über Recovtec|Kontakt|Impressum|Datenschutz|AGB", "links": "/pages/ueber-uns|/pages/kontakt|/pages/impressum|/pages/datenschutz|/pages/agb" } }
+        "fcol1": { "type": "column", "settings": { "heading": "Shop", "link_1_label": "Recovery Boots", "link_1_url": "/collections/all", "link_2_label": "Bald: Massagepistole", "link_2_url": "#", "link_3_label": "Zubehör", "link_3_url": "#" } },
+        "fcol2": { "type": "column", "settings": { "heading": "Service", "link_1_label": "Versand & Lieferung", "link_1_url": "/pages/versand", "link_2_label": "Rückgabe", "link_2_url": "/pages/rueckgabe", "link_3_label": "Garantie", "link_3_url": "/pages/garantie", "link_4_label": "Größenberater", "link_4_url": "#" } },
+        "fcol3": { "type": "column", "settings": { "heading": "Unternehmen", "link_1_label": "Über Recovtec", "link_1_url": "/pages/ueber-uns", "link_2_label": "Kontakt", "link_2_url": "/pages/kontakt", "link_3_label": "Impressum", "link_3_url": "/pages/impressum", "link_4_label": "Datenschutz", "link_4_url": "/pages/datenschutz", "link_5_label": "AGB", "link_5_url": "/pages/agb" } }
       }
     }
   },
