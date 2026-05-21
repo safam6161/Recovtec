@@ -7,11 +7,11 @@
     </a>
 
     <div class="nav-links">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'link' -%}
-          <a href="{{ block.settings.url | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
-        {%- endif -%}
-      {%- endfor -%}
+      {%- if section.settings.menu != blank -%}
+        {%- for link in linklists[section.settings.menu].links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- endif -%}
     </div>
 
     <div class="nav-actions">
@@ -31,29 +31,12 @@
   "name": "Header",
   "settings": [
     { "type": "text", "id": "logo_text", "label": "Logo Text", "default": "RECOVTEC" },
+    { "type": "link_list", "id": "menu", "label": "Hauptmenü", "default": "main-menu" },
     { "type": "header", "content": "Barrierefreiheit" },
     { "type": "text", "id": "aria_search", "label": "Suche Label", "default": "Suche" },
     { "type": "text", "id": "aria_account", "label": "Konto Label", "default": "Konto" },
     { "type": "text", "id": "aria_cart", "label": "Warenkorb Label", "default": "Warenkorb öffnen" }
   ],
-  "blocks": [
-    {
-      "type": "link",
-      "name": "Nav Link",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Link Text", "default": "Warum Recovery" },
-        { "type": "url", "id": "url", "label": "Link URL" }
-      ]
-    }
-  ],
-  "presets": [{
-    "name": "Header",
-    "blocks": [
-      { "type": "link", "settings": { "label": "Warum Recovery", "url": "/#problem" } },
-      { "type": "link", "settings": { "label": "Boots", "url": "/collections/all" } },
-      { "type": "link", "settings": { "label": "Anwendung", "url": "/#howto" } },
-      { "type": "link", "settings": { "label": "FAQ", "url": "/#faq" } }
-    ]
-  }]
+  "presets": [{ "name": "Header" }]
 }
 {% endschema %}
