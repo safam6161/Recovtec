@@ -56,6 +56,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 /* ===== Layout ===== */
 .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--pad); }
 .section-pad { padding: var(--section-py) 0; }
+#problem, #solution, #howto, #compare, #social, #faq { scroll-margin-top: 72px; }
 
 /* ===== Buttons ===== */
 .btn {

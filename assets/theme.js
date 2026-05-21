@@ -285,6 +285,24 @@
     });
   }
 
+  // ===== Anchor Nav =====
+  function initAnchorNav() {
+    const NAV_HEIGHT = 72;
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      const hash = href.includes('#') ? '#' + href.split('#')[1] : null;
+      if (!hash) return;
+      link.addEventListener('click', e => {
+        const target = document.querySelector(hash);
+        if (!target) return;
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT;
+        window.scrollTo({ top, behavior: 'smooth' });
+        history.pushState(null, '', hash);
+      });
+    });
+  }
+
   // ===== Init =====
   document.addEventListener('DOMContentLoaded', () => {
     // Cart triggers
@@ -300,6 +318,7 @@
     });
 
     refreshDrawer();
+    initAnchorNav();
     initATCForm();
     initSizeSelector();
     initGallery();
