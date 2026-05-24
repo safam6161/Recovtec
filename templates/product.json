@@ -73,16 +73,7 @@
         "nl_placeholder": "deine@email.de",
         "nl_fine": "Kein Spam. Jederzeit abbestellbar."
       }
-    },
-    "footer": {
-      "type": "footer",
-      "settings": {
-        "tagline": "Eigenmarke für professionelle Recovery. Faire Preise, volle Ausstattung, ehrlich kalkuliert.",
-        "legal": "© 2026 Recovtec · Deutschland",
-        "shipping_note": "Versand mit DHL",
-        "payment_note": "Zahlung: Klarna · Visa · Mastercard · PayPal"
-      }
     }
   },
-  "order": ["main_product","story","compare","faq","final_cta","footer"]
+  "order": ["main_product","story","compare","faq","final_cta"]
 }
