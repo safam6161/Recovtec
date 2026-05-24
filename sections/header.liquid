@@ -21,10 +21,33 @@
         {% render 'icon', icon: 'cart' %}
         <span class="cart-count" aria-live="polite" style="display:none">0</span>
       </button>
+      <button class="icon-btn nav-burger" aria-label="Menü öffnen" aria-expanded="false" data-menu-toggle>
+        {% render 'icon', icon: 'menu' %}
+      </button>
     </div>
 
   </div>
+
+  {%- if section.settings.menu != blank -%}
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      {%- for link in linklists[section.settings.menu].links -%}
+        <a href="{{ link.url }}" data-menu-link>{{ link.title }}</a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
 </nav>
+
+<script>
+  (function(){
+    var btn = document.querySelector('[data-menu-toggle]');
+    var menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+    function close(){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); document.body.classList.remove('menu-open'); }
+    function open(){ menu.hidden = false; btn.setAttribute('aria-expanded','true'); document.body.classList.add('menu-open'); }
+    btn.addEventListener('click', function(){ menu.hidden ? open() : close(); });
+    menu.querySelectorAll('[data-menu-link]').forEach(function(a){ a.addEventListener('click', close); });
+  })();
+</script>
 
 {% schema %}
 {
