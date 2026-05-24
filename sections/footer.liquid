@@ -1,21 +1,18 @@
 <style>
-  .footer .foot-brand { display:block !important; text-align:left !important; }
-  .footer .foot-brand .nav-logo {
-    display:inline-flex !important;
-    justify-content:flex-start !important;
-    align-items:center !important;
-    margin:0 auto 16px 0 !important;
-    color:var(--paper) !important;
-    width:auto !important;
+  .foot-logo {
+    display:flex; align-items:center; gap:8px;
+    font-family:var(--f-display); font-size:15px; font-weight:700;
+    letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--paper); text-decoration:none;
+    margin-bottom:16px;
   }
-  .footer .foot-brand p { text-align:left !important; margin-left:0 !important; }
 </style>
 
 <footer class="footer">
   <div class="container">
     <div class="foot-top">
       <div class="foot-brand">
-        <a href="{{ routes.root_url }}" class="nav-logo">
+        <a href="{{ routes.root_url }}" class="foot-logo">
           <span class="mark"></span>
           RECOVTEC
         </a>
