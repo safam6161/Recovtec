@@ -23,7 +23,8 @@
     {%- for block in section.blocks -%}
       {%- if block.type == 'foot' -%}
         <div class="howto-foot" {{ block.shopify_attributes }}>
-          <div class="ico">{% render 'icon', icon: block.settings.icon | default: 'bolt' %}</div>
+          {%- assign foot_icon = block.settings.icon | default: 'bolt' -%}
+          <div class="ico">{% render 'icon', icon: foot_icon %}</div>
           <div class="txt">
             <h5>{{ block.settings.title }}</h5>
             <p>{{ block.settings.text }}</p>
