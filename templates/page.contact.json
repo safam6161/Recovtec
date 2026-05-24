@@ -1,22 +1,17 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
-      "type": "main-contact",
-      "settings": {
-        "eyebrow": "Kontakt",
-        "headline": "Wir sind für dich da.",
-        "subtext": "Fragen zur Bestellung, Größenberatung oder zu unseren Produkten? Schreib uns — meistens antworten wir innerhalb eines Werktages.",
-        "submit_label": "Nachricht senden",
-        "success_title": "Danke!",
-        "success_text": "Wir melden uns innerhalb eines Werktages.",
-        "support_title": "Support",
-        "support_text": "Schreib uns direkt — wir antworten persönlich und ehrlich.",
-        "email_general": "info@recovtec.de",
-        "email_support": "support@recovtec.de",
-        "email_returns": "",
-        "hours_title": "Antwortzeit",
-        "hours_text": "Mo – Fr · 9 – 17 Uhr · Antwort innerhalb eines Werktages."
-      }
+      "type": "main-page",
+      "settings": {}
     }
   },
   "order": ["main"]
