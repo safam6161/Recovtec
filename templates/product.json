@@ -82,11 +82,10 @@
         "shipping_note": "Versand mit DHL",
         "payment_note": "Zahlung: Klarna · Visa · Mastercard · PayPal"
       },
-      "block_order": ["fcol1","fcol2","fcol3"],
+      "block_order": ["fcol1","fcol2"],
       "blocks": {
-        "fcol1": { "type": "column", "settings": { "heading": "Shop", "link_1_label": "Recovery Boots", "link_1_url": "/collections/all", "link_2_label": "Bald: Massagepistole", "link_2_url": "#", "link_3_label": "Zubehör", "link_3_url": "#" } },
-        "fcol2": { "type": "column", "settings": { "heading": "Service", "link_1_label": "Versand & Lieferung", "link_1_url": "/pages/versand", "link_2_label": "Rückgabe", "link_2_url": "/pages/rueckgabe", "link_3_label": "Garantie", "link_3_url": "/pages/garantie", "link_4_label": "Größenberater", "link_4_url": "#" } },
-        "fcol3": { "type": "column", "settings": { "heading": "Unternehmen", "link_1_label": "Über Recovtec", "link_1_url": "/pages/ueber-uns", "link_2_label": "Kontakt", "link_2_url": "/pages/kontakt", "link_3_label": "Impressum", "link_3_url": "/pages/impressum", "link_4_label": "Datenschutz", "link_4_url": "/pages/datenschutz", "link_5_label": "AGB", "link_5_url": "/pages/agb" } }
+        "fcol1": { "type": "column", "settings": { "heading": "Service", "menu": "footer-service" } },
+        "fcol2": { "type": "column", "settings": { "heading": "Unternehmen", "menu": "footer-unternehmen" } }
       }
     }
   },

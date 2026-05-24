@@ -12,15 +12,11 @@
         <div class="foot-col" {{ block.shopify_attributes }}>
           <h5>{{ block.settings.heading }}</h5>
           <ul>
-            {%- for i in (1..6) -%}
-              {%- assign lbl_key = "link_" | append: i | append: "_label" -%}
-              {%- assign url_key = "link_" | append: i | append: "_url" -%}
-              {%- assign lbl = block.settings[lbl_key] -%}
-              {%- assign url = block.settings[url_key] -%}
-              {%- if lbl != blank -%}
-                <li><a href="{{ url | default: '#' }}">{{ lbl }}</a></li>
-              {%- endif -%}
-            {%- endfor -%}
+            {%- if block.settings.menu != blank -%}
+              {%- for link in linklists[block.settings.menu].links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            {%- endif -%}
           </ul>
         </div>
       {%- endfor -%}
@@ -50,28 +46,16 @@
       "name": "Spalte",
       "limit": 4,
       "settings": [
-        { "type": "text", "id": "heading", "label": "Überschrift", "default": "Shop" },
-        { "type": "text", "id": "link_1_label", "label": "Link 1 — Text" },
-        { "type": "url", "id": "link_1_url", "label": "Link 1 — URL" },
-        { "type": "text", "id": "link_2_label", "label": "Link 2 — Text" },
-        { "type": "url", "id": "link_2_url", "label": "Link 2 — URL" },
-        { "type": "text", "id": "link_3_label", "label": "Link 3 — Text" },
-        { "type": "url", "id": "link_3_url", "label": "Link 3 — URL" },
-        { "type": "text", "id": "link_4_label", "label": "Link 4 — Text" },
-        { "type": "url", "id": "link_4_url", "label": "Link 4 — URL" },
-        { "type": "text", "id": "link_5_label", "label": "Link 5 — Text" },
-        { "type": "url", "id": "link_5_url", "label": "Link 5 — URL" },
-        { "type": "text", "id": "link_6_label", "label": "Link 6 — Text" },
-        { "type": "url", "id": "link_6_url", "label": "Link 6 — URL" }
+        { "type": "text", "id": "heading", "label": "Spalten-Überschrift", "default": "Service" },
+        { "type": "link_list", "id": "menu", "label": "Menü auswählen", "default": "footer-service" }
       ]
     }
   ],
   "presets": [{
     "name": "Footer",
     "blocks": [
-      { "type": "column", "settings": { "heading": "Shop", "link_1_label": "Recovery Boots", "link_1_url": "/collections/all", "link_2_label": "Bald: Massagepistole", "link_2_url": "#", "link_3_label": "Zubehör", "link_3_url": "#" } },
-      { "type": "column", "settings": { "heading": "Service", "link_1_label": "Versand & Lieferung", "link_1_url": "/pages/versand", "link_2_label": "Rückgabe", "link_2_url": "/pages/rueckgabe", "link_3_label": "Garantie", "link_3_url": "/pages/garantie", "link_4_label": "Größenberater", "link_4_url": "#" } },
-      { "type": "column", "settings": { "heading": "Unternehmen", "link_1_label": "Über Recovtec", "link_1_url": "/pages/ueber-uns", "link_2_label": "Kontakt", "link_2_url": "/pages/kontakt", "link_3_label": "Impressum", "link_3_url": "/pages/impressum", "link_4_label": "Datenschutz", "link_4_url": "/pages/datenschutz", "link_5_label": "AGB", "link_5_url": "/pages/agb" } }
+      { "type": "column", "settings": { "heading": "Service", "menu": "footer-service" } },
+      { "type": "column", "settings": { "heading": "Unternehmen", "menu": "footer-unternehmen" } }
     ]
   }]
 }

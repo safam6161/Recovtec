@@ -276,11 +276,26 @@
   // ===== Newsletter =====
   function initNewsletter() {
     document.querySelectorAll('.final-nl-form').forEach(form => {
-      form.addEventListener('submit', e => {
+      form.addEventListener('submit', async e => {
         e.preventDefault();
-        const input = form.querySelector('input[type="email"]');
-        showToast('Danke! Du wirst benachrichtigt.');
-        if (input) input.value = '';
+        const email = form.querySelector('input[type="email"]')?.value?.trim();
+        if (!email) return;
+        try {
+          await fetch('/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+              form_type: 'customer',
+              utf8: '✓',
+              'contact[email]': email,
+              'contact[tags]': 'newsletter'
+            })
+          });
+        } catch (_) {}
+        const wrap = form.closest('.final-cta-nl');
+        if (wrap) {
+          wrap.innerHTML = '<div class="nl-confirm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><div><strong>Fast geschafft!</strong><p>Wir haben dir eine Bestätigungs-E-Mail an <em>' + email + '</em> geschickt. Bitte bestätige deine Anmeldung.</p></div></div>';
+        }
       });
     });
   }
