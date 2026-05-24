@@ -1,0 +1,28 @@
+<section style="padding:80px 24px;max-width:760px;margin:0 auto">
+  <h1 style="font-size:clamp(22px,3vw,32px);font-weight:700;margin-bottom:40px">Warenkorb</h1>
+  {%- if cart.item_count == 0 -%}
+    <p style="color:var(--mute);margin-bottom:32px">Dein Warenkorb ist leer.</p>
+    <a href="{{ routes.root_url }}" class="btn btn-primary">Weiter einkaufen</a>
+  {%- else -%}
+    {%- for item in cart.items -%}
+      <div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--paper-2)">
+        {%- if item.image -%}
+          <img src="{{ item.image | image_url: width: 100 }}" alt="{{ item.image.alt }}" style="width:80px;height:80px;object-fit:cover">
+        {%- endif -%}
+        <div style="flex:1">
+          <p style="font-weight:600">{{ item.product.title }}</p>
+          <p style="color:var(--mute);font-size:14px">{{ item.variant.title }}</p>
+          <p>{{ item.line_price | money }}</p>
+        </div>
+      </div>
+    {%- endfor -%}
+    <div style="margin-top:32px;text-align:right">
+      <p style="font-size:18px;font-weight:600;margin-bottom:24px">Gesamt: {{ cart.total_price | money }}</p>
+      <a href="{{ routes.checkout_url }}" class="btn btn-primary">Zur Kasse</a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{ "name": "Warenkorb" }
+{% endschema %}

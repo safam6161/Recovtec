@@ -1,0 +1,33 @@
+<section style="padding:80px 24px;max-width:760px;margin:0 auto">
+  <h1 style="font-size:clamp(24px,3vw,36px);font-weight:700;margin-bottom:32px">Suche</h1>
+  <form action="{{ routes.search_url }}" method="get" style="display:flex;gap:8px;margin-bottom:48px">
+    <input type="hidden" name="type" value="product">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Produkte suchen …"
+      style="flex:1;padding:12px 16px;border:1px solid var(--paper-2);background:var(--paper);font-size:16px;font-family:inherit">
+    <button type="submit" class="btn btn-primary">Suchen</button>
+  </form>
+  {%- if search.performed -%}
+    {%- if search.results_count == 0 -%}
+      <p style="color:var(--mute)">Keine Ergebnisse für „{{ search.terms }}".</p>
+    {%- else -%}
+      <p style="color:var(--mute);margin-bottom:24px">{{ search.results_count }} Ergebnis{{ search.results_count | plural: '', 'se' }} für „{{ search.terms }}"</p>
+      <div style="display:grid;gap:16px">
+        {%- for item in search.results -%}
+          <a href="{{ item.url }}" style="display:flex;gap:16px;text-decoration:none;color:inherit;padding:16px;border:1px solid var(--paper-2)">
+            {%- if item.featured_image -%}
+              <img src="{{ item.featured_image | image_url: width: 100 }}" alt="" style="width:60px;height:60px;object-fit:cover">
+            {%- endif -%}
+            <div>
+              <p style="font-weight:600">{{ item.title }}</p>
+              {%- if item.price -%}<p style="color:var(--mute)">{{ item.price | money }}</p>{%- endif -%}
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{ "name": "Suche" }
+{% endschema %}

@@ -1,0 +1,16 @@
+<section style="padding:80px 24px;max-width:1000px;margin:0 auto">
+  <h1 style="font-size:clamp(24px,3vw,36px);font-weight:700;margin-bottom:40px">{{ blog.title }}</h1>
+  <div style="display:grid;gap:32px">
+    {%- for article in blog.articles -%}
+      <a href="{{ article.url }}" style="display:block;text-decoration:none;color:inherit;border-bottom:1px solid var(--paper-2);padding-bottom:32px">
+        <p style="color:var(--mute);font-size:13px;margin-bottom:8px">{{ article.published_at | date: '%d.%m.%Y' }}</p>
+        <h2 style="font-size:clamp(18px,2vw,22px);font-weight:600;margin-bottom:8px">{{ article.title }}</h2>
+        <p style="color:var(--mute)">{{ article.excerpt_or_content | strip_html | truncate: 160 }}</p>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Blog" }
+{% endschema %}
