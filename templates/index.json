@@ -213,7 +213,7 @@
           "settings": {
             "feature": "Druckstufen",
             "our_value": "bis 240 mmHg",
-            "competitor_value": "bis 180 mmHg"
+            "competitor_value": "bis 160 mmHg"
           }
         },
         "r2": {
@@ -406,5 +406,15 @@
       }
     }
   },
-  "order": ["hero","trust","problem","solution","howto","compare","social","faq","final_cta"]
+  "order": [
+    "hero",
+    "trust",
+    "problem",
+    "solution",
+    "howto",
+    "compare",
+    "social",
+    "faq",
+    "final_cta"
+  ]
 }
