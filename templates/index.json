@@ -141,11 +141,6 @@
         "legal": "© 2026 Recovtec · Deutschland",
         "shipping_note": "Versand mit DHL",
         "payment_note": "Zahlung: Klarna · Visa · Mastercard · PayPal"
-      },
-      "block_order": ["fcol1","fcol2"],
-      "blocks": {
-        "fcol1": { "type": "column", "settings": { "heading": "Service", "menu": "footer-service" } },
-        "fcol2": { "type": "column", "settings": { "heading": "Unternehmen", "menu": "footer-unternehmen" } }
       }
     }
   },
