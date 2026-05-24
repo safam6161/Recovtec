@@ -1,121 +1,391 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
       "settings": {
         "headline": "HART TRAINIERT.\nSCHNELL ERHOLT.\nRECOVTEC.",
-        "cta_label": "Jetzt kaufen"
+        "cta_label": "Jetzt kaufen",
+        "cta_url": ""
       }
     },
     "trust": {
       "type": "trust-ribbon",
-      "block_order": ["t1","t2","t3","t4"],
       "blocks": {
-        "t1": { "type": "item", "settings": { "icon": "truck", "label": "1–3 Tage Lieferung" } },
-        "t2": { "type": "item", "settings": { "icon": "refresh", "label": "30 Tage Geld zurück" } },
-        "t3": { "type": "item", "settings": { "icon": "package", "label": "Kostenloser Versand" } },
-        "t4": { "type": "item", "settings": { "icon": "warranty", "label": "1 Jahr Garantie" } }
-      }
+        "t1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "label": "1–3 Tage Lieferung"
+          }
+        },
+        "t2": {
+          "type": "item",
+          "settings": {
+            "icon": "refresh",
+            "label": "30 Tage Geld zurück"
+          }
+        },
+        "t3": {
+          "type": "item",
+          "settings": {
+            "icon": "package",
+            "label": "Kostenloser Versand"
+          }
+        },
+        "t4": {
+          "type": "item",
+          "settings": {
+            "icon": "warranty",
+            "label": "1 Jahr Garantie"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {}
     },
     "problem": {
       "type": "problem",
+      "blocks": {
+        "p1": {
+          "type": "item",
+          "settings": {
+            "title": "Müde Beine am nächsten Tag",
+            "text": "Schwere, steife Muskulatur bremst dich beim nächsten Workout aus — und du kommst gar nicht zur eigentlichen Leistung."
+          }
+        },
+        "p2": {
+          "type": "item",
+          "settings": {
+            "title": "Stretchen und Roller reichen nicht",
+            "text": "Die Standard-Tools helfen — aber nur oberflächlich. Tiefe Muskulatur kommt damit selten in Bewegung."
+          }
+        },
+        "p3": {
+          "type": "item",
+          "settings": {
+            "title": "Mehr Volumen, weniger Fortschritt",
+            "text": "Wer häufig trainiert, ohne richtig zu erholen, sammelt Müdigkeit an — Leistung stagniert, Verletzungsrisiko steigt."
+          }
+        },
+        "p4": {
+          "type": "item",
+          "settings": {
+            "title": "Keine Zeit fürs Studio",
+            "text": "Recovery-Lounges kosten Mitgliedschaft plus Anfahrt. An Trainingstagen ist das ein Termin zu viel."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
       "settings": {
         "eyebrow": "01 — Warum Recovery",
         "headline": "Du trainierst.\nAber deine Beine bleiben schwer.",
         "intro": "Jeder, der ernsthaft trainiert, kennt das Problem: harter Tag im Gym, langer Lauf, Ligaspiel — und am nächsten Tag fühlen sich die Beine an wie Beton. Stretchen reicht oft nicht. Foam Roller ist Arbeit. Pause ist keine Option."
-      },
-      "block_order": ["p1","p2","p3","p4"],
-      "blocks": {
-        "p1": { "type": "item", "settings": { "title": "Müde Beine am nächsten Tag", "text": "Schwere, steife Muskulatur bremst dich beim nächsten Workout aus — und du kommst gar nicht zur eigentlichen Leistung." } },
-        "p2": { "type": "item", "settings": { "title": "Stretchen und Roller reichen nicht", "text": "Die Standard-Tools helfen — aber nur oberflächlich. Tiefe Muskulatur kommt damit selten in Bewegung." } },
-        "p3": { "type": "item", "settings": { "title": "Mehr Volumen, weniger Fortschritt", "text": "Wer häufig trainiert, ohne richtig zu erholen, sammelt Müdigkeit an — Leistung stagniert, Verletzungsrisiko steigt." } },
-        "p4": { "type": "item", "settings": { "title": "Keine Zeit fürs Studio", "text": "Recovery-Lounges kosten Mitgliedschaft plus Anfahrt. An Trainingstagen ist das ein Termin zu viel." } }
       }
     },
     "solution": {
       "type": "solution",
+      "blocks": {
+        "s1": {
+          "type": "usp",
+          "settings": {
+            "big_num": "7",
+            "big_unit": "Stufen",
+            "title": "Volle Kontrolle über deine Recovery",
+            "text": "5 Massagemodi und 7 Druckstufen von 30 bis 240 mmHg. Sanftes Cool-Down oder Tiefen-Regeneration — alles in einem Gerät.",
+            "cta_label": "",
+            "cta_url": ""
+          }
+        },
+        "s2": {
+          "type": "usp",
+          "settings": {
+            "big_num": "3",
+            "big_unit": "Stunden Akku",
+            "title": "Kabellos. Keine App.",
+            "text": "Komplett akkubetrieben, leiser als 45 dB, mit LED-Controller direkt am Bein. Anziehen, drücken, fertig. Auch unterwegs.",
+            "cta_label": "",
+            "cta_url": ""
+          }
+        },
+        "s3": {
+          "type": "usp",
+          "settings": {
+            "big_num": "3",
+            "big_unit": "Teile im Paket",
+            "title": "Alles dabei. Sofort startklar.",
+            "text": "Recovery Boots, ein hochwertiger Transport-Rucksack und Erweiterungslaschen für unterschiedliche Beingrößen. Im Paket enthalten — ohne Aufpreis, ohne Zusatzbestellung.",
+            "cta_label": "So funktioniert's",
+            "cta_url": "#howto"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
       "settings": {
         "eyebrow": "02 — Die Lösung",
         "headline": "Recovery Boots.\nIm Wohnzimmer. Sofort.",
         "subtext": "Pneumatische Kompression in 5 Modi und 7 fein abgestuften Druckstufen — komplett kabellos, flüsterleise, ohne App-Quatsch. Anziehen, einschalten, erholen.",
         "footnote": "1 Jahr Garantie · 30 Tage Geld-zurück-Garantie · Kostenloser Versand in 1–3 Werktagen.",
-        "cta_label": "Zum Produkt"
-      },
-      "block_order": ["s1","s2","s3"],
-      "blocks": {
-        "s1": { "type": "usp", "settings": { "big_num": "7", "big_unit": "Stufen", "title": "Volle Kontrolle über deine Recovery", "text": "5 Massagemodi und 7 Druckstufen von 30 bis 240 mmHg. Sanftes Cool-Down oder Tiefen-Regeneration — alles in einem Gerät." } },
-        "s2": { "type": "usp", "settings": { "big_num": "3", "big_unit": "Stunden Akku", "title": "Kabellos. Keine App.", "text": "Komplett akkubetrieben, leiser als 45 dB, mit LED-Controller direkt am Bein. Anziehen, drücken, fertig. Auch unterwegs." } },
-        "s3": { "type": "usp", "settings": { "big_num": "3", "big_unit": "Teile im Paket", "title": "Alles dabei. Sofort startklar.", "text": "Recovery Boots, ein hochwertiger Transport-Rucksack und Erweiterungslaschen für unterschiedliche Beingrößen. Im Paket enthalten — ohne Aufpreis, ohne Zusatzbestellung.", "cta_label": "So funktioniert's", "cta_url": "#howto" } }
+        "cta_label": "Zum Produkt",
+        "cta_url": ""
       }
     },
     "howto": {
       "type": "howto",
+      "blocks": {
+        "h1": {
+          "type": "step",
+          "settings": {
+            "title": "Anziehen",
+            "text": "Beine in die Boots, Reißverschluss zu."
+          }
+        },
+        "h2": {
+          "type": "step",
+          "settings": {
+            "title": "Modus wählen",
+            "text": "Einer der 5 Modi am LED-Controller wählen."
+          }
+        },
+        "h3": {
+          "type": "step",
+          "settings": {
+            "title": "Druck einstellen",
+            "text": "Start mit Stufe 80 mmHg. Steigere dich nach Bedarf — bis 240 mmHg möglich."
+          }
+        },
+        "h4": {
+          "type": "step",
+          "settings": {
+            "title": "15–45 Minuten erholen",
+            "text": "Hinlegen, Augen zu, Serie schauen. Nach der Session fühlst du den Unterschied."
+          }
+        },
+        "hfoot": {
+          "type": "foot",
+          "settings": {
+            "icon": "bolt",
+            "title": "Direkt einsatzbereit aus der Box",
+            "text": "Akku vorgeladen. Keine Software, kein Pairing, kein Konto. In unter 60 Sekunden startklar."
+          }
+        }
+      },
+      "block_order": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "hfoot"
+      ],
       "settings": {
         "eyebrow": "03 — Anwendung",
         "headline": "In 4 Schritten zur\nbesseren Recovery.",
         "subtext": "Keine App, kein Pairing, keine Anleitung mit 30 Seiten. Anziehen, einschalten, fertig."
-      },
-      "block_order": ["h1","h2","h3","h4","hfoot"],
-      "blocks": {
-        "h1": { "type": "step", "settings": { "title": "Anziehen", "text": "Beine in die Boots, Reißverschluss zu." } },
-        "h2": { "type": "step", "settings": { "title": "Modus wählen", "text": "Einer der 5 Modi am LED-Controller wählen." } },
-        "h3": { "type": "step", "settings": { "title": "Druck einstellen", "text": "Start mit Stufe 80 mmHg. Steigere dich nach Bedarf — bis 240 mmHg möglich." } },
-        "h4": { "type": "step", "settings": { "title": "15–45 Minuten erholen", "text": "Hinlegen, Augen zu, Serie schauen. Nach der Session fühlst du den Unterschied." } },
-        "hfoot": { "type": "foot", "settings": { "title": "Direkt einsatzbereit aus der Box", "text": "Akku vorgeladen. Keine Software, kein Pairing, kein Konto. In unter 60 Sekunden startklar." } }
       }
     },
     "compare": {
       "type": "compare",
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "feature": "Druckstufen",
+            "our_value": "bis 240 mmHg",
+            "competitor_value": "bis 180 mmHg"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "feature": "Massage-Modi",
+            "our_value": "5",
+            "competitor_value": "3"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "feature": "Akkubetrieb",
+            "our_value": "Ja · 3 Std",
+            "competitor_value": "Teils"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "feature": "Lautstärke",
+            "our_value": "< 45 dB",
+            "competitor_value": "> 60 dB"
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "feature": "App / Pairing nötig",
+            "our_value": "Nein",
+            "competitor_value": "Oft ja"
+          }
+        },
+        "r6": {
+          "type": "row",
+          "settings": {
+            "feature": "Rucksack inklusive",
+            "our_value": "check",
+            "competitor_value": "x"
+          }
+        },
+        "r7": {
+          "type": "row",
+          "settings": {
+            "feature": "Erweiterungslaschen",
+            "our_value": "check",
+            "competitor_value": "x"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6",
+        "r7"
+      ],
       "settings": {
         "eyebrow": "04 — Vergleich",
         "headline": "Recovtec Pro vs. der Rest.\nVolle Ausstattung, kein Hokuspokus.",
         "col1_label": "Recovtec Pro",
         "col2_label": "Andere Brands"
-      },
-      "block_order": ["r1","r2","r3","r4","r5","r6","r7"],
-      "blocks": {
-        "r1": { "type": "row", "settings": { "feature": "Druckstufen", "our_value": "bis 240 mmHg", "competitor_value": "bis 180 mmHg" } },
-        "r2": { "type": "row", "settings": { "feature": "Massage-Modi", "our_value": "5", "competitor_value": "3" } },
-        "r3": { "type": "row", "settings": { "feature": "Akkubetrieb", "our_value": "Ja · 3 Std", "competitor_value": "Teils" } },
-        "r4": { "type": "row", "settings": { "feature": "Lautstärke", "our_value": "< 45 dB", "competitor_value": "> 60 dB" } },
-        "r5": { "type": "row", "settings": { "feature": "App / Pairing nötig", "our_value": "Nein", "competitor_value": "Oft ja" } },
-        "r6": { "type": "row", "settings": { "feature": "Rucksack inklusive", "our_value": "check", "competitor_value": "x" } },
-        "r7": { "type": "row", "settings": { "feature": "Erweiterungslaschen", "our_value": "check", "competitor_value": "x" } }
       }
     },
     "social": {
       "type": "social-proof",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "text": "Bei mir nach jeder langen Einheit Pflicht. Beine fühlen sich am nächsten Tag deutlich frischer an.",
+            "name": "Jonas K.",
+            "subtitle": "Triathlon · Hamburg"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "text": "Endlich Recovery zuhause, ohne Studio. Leise genug, dass meine Freundin sie kaum hört.",
+            "name": "Lukas M.",
+            "subtitle": "CrossFit · München"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "text": "Bedienung in 30 Sekunden verstanden. Kein App-Quatsch, einfach an und gut.",
+            "name": "Sarah F.",
+            "subtitle": "Marathon · Köln"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
       "settings": {
         "eyebrow": "04 — Stimmen",
         "headline": "Frühe Tester sind überzeugt.",
         "subtext": "Wir bauen unsere Community gerade auf. Werde Teil davon — und gib uns dein Feedback.",
         "rating": "4,9 / 5",
         "review_count": "aus 27 frühen Bewertungen",
-        "rating_note": "Wir sammeln Bewertungen erst seit kurzem. Jede Rückmeldung hilft — und wird gelesen."
-      },
-      "block_order": ["r1","r2","r3"],
-      "blocks": {
-        "r1": { "type": "review", "settings": { "text": "Bei mir nach jeder langen Einheit Pflicht. Beine fühlen sich am nächsten Tag deutlich frischer an.", "name": "Jonas K.", "subtitle": "Triathlon · Hamburg" } },
-        "r2": { "type": "review", "settings": { "text": "Endlich Recovery zuhause, ohne Studio. Leise genug, dass meine Freundin sie kaum hört.", "name": "Lukas M.", "subtitle": "CrossFit · München" } },
-        "r3": { "type": "review", "settings": { "text": "Bedienung in 30 Sekunden verstanden. Kein App-Quatsch, einfach an und gut.", "name": "Sarah F.", "subtitle": "Marathon · Köln" } }
+        "rating_note": "Wir sammeln Bewertungen erst seit kurzem. Jede Rückmeldung hilft — und wird gelesen.",
+        "show_empty_card": true,
+        "empty_label": "Bald hier",
+        "empty_heading": "Dein Erfahrungsbericht",
+        "empty_text": "Wir freuen uns auf deine Bewertung — direkt nach den ersten 2 Wochen. Foto vom Setup gern dabei."
       }
     },
     "faq": {
       "type": "faq",
+      "blocks": {
+        "faq1": {
+          "type": "item",
+          "settings": {
+            "question": "Für wen sind die Recovery Boots gedacht?",
+            "answer": "Für alle, die ihre Beine regelmäßig belasten — Läufer, Kraftsportler, Mannschaftssportler, CrossFit-Athleten, Triathleten. Aber auch für lange Bürotage und schwere Beine nach einem stressigen Tag."
+          }
+        },
+        "faq2": {
+          "type": "item",
+          "settings": {
+            "question": "Wie oft und wie lange soll ich sie nutzen?",
+            "answer": "Eine Session dauert 20–30 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel, solange du dich wohl fühlst."
+          }
+        },
+        "faq3": {
+          "type": "item",
+          "settings": {
+            "question": "Welche Druckstufe sollte ich am Anfang wählen?",
+            "answer": "Starte mit Stufe 80 mmHg. Das ist angenehm und effektiv. Steigere dich nach Bedarf — höhere Stufen für tiefere Regeneration, niedrigere für sanftes Cool-Down."
+          }
+        },
+        "faq4": {
+          "type": "item",
+          "settings": {
+            "question": "Brauche ich eine App oder WLAN?",
+            "answer": "Nein. Anschalten, Modus und Druckstufe am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto. Bewusst so designt."
+          }
+        },
+        "faq5": {
+          "type": "item",
+          "settings": {
+            "question": "Welche Größe passt mir?",
+            "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die mitgelieferten Erweiterungslaschen geben dir zusätzlichen Spielraum von +10 cm."
+          }
+        },
+        "faq6": {
+          "type": "item",
+          "settings": {
+            "question": "Was, wenn sie mir nicht gefallen?",
+            "answer": "30 Tage Geld-zurück-Garantie. Du testest sie zuhause — gefallen sie dir nicht, schickst du sie kostenfrei zurück und bekommst dein Geld zurück. Ohne Diskussion."
+          }
+        }
+      },
+      "block_order": [
+        "faq1",
+        "faq2",
+        "faq3",
+        "faq4",
+        "faq5",
+        "faq6"
+      ],
       "settings": {
         "eyebrow": "05 — FAQ",
         "headline": "Häufige Fragen.\nKlare Antworten.",
         "subtext": "Du hast eine andere Frage? Schreib uns direkt — meistens antworten wir innerhalb eines Werktages.",
         "email": "support@recovtec.de"
-      },
-      "block_order": ["faq1","faq2","faq3","faq4","faq5","faq6"],
-      "blocks": {
-        "faq1": { "type": "item", "settings": { "question": "Für wen sind die Recovery Boots gedacht?", "answer": "Für alle, die ihre Beine regelmäßig belasten — Läufer, Kraftsportler, Mannschaftssportler, CrossFit-Athleten, Triathleten. Aber auch für lange Bürotage und schwere Beine nach einem stressigen Tag." } },
-        "faq2": { "type": "item", "settings": { "question": "Wie oft und wie lange soll ich sie nutzen?", "answer": "Eine Session dauert 20–30 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel, solange du dich wohl fühlst." } },
-        "faq3": { "type": "item", "settings": { "question": "Welche Druckstufe sollte ich am Anfang wählen?", "answer": "Starte mit Stufe 80 mmHg. Das ist angenehm und effektiv. Steigere dich nach Bedarf — höhere Stufen für tiefere Regeneration, niedrigere für sanftes Cool-Down." } },
-        "faq4": { "type": "item", "settings": { "question": "Brauche ich eine App oder WLAN?", "answer": "Nein. Anschalten, Modus und Druckstufe am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto. Bewusst so designt." } },
-        "faq5": { "type": "item", "settings": { "question": "Welche Größe passt mir?", "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die mitgelieferten Erweiterungslaschen geben dir zusätzlichen Spielraum von +10 cm." } },
-        "faq6": { "type": "item", "settings": { "question": "Was, wenn sie mir nicht gefallen?", "answer": "30 Tage Geld-zurück-Garantie. Du testest sie zuhause — gefallen sie dir nicht, schickst du sie kostenfrei zurück und bekommst dein Geld zurück. Ohne Diskussion." } }
       }
     },
     "final_cta": {
@@ -124,6 +394,7 @@
         "headline": "Bereit für die\nbessere Recovery?",
         "subtext": "Ein Produkt. Alles dabei. Direkt vom Hersteller verschickt. Wenn's nicht passt, schickst du es zurück — kostenlos, ohne Diskussion.",
         "cta_label": "Jetzt zur Produktseite",
+        "cta_url": "",
         "trust_1": "Kostenloser Versand",
         "trust_2": "30 Tage Rückgabe",
         "trust_3": "1–3 Tage Lieferung",
