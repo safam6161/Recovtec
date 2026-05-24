@@ -20,11 +20,11 @@
         "success_text": "Wir melden uns innerhalb eines Werktages.",
         "support_title": "Support",
         "support_text": "Schreib uns direkt — wir antworten persönlich und ehrlich.",
-        "email_general": "info@recovtec.de",
+        "email_general": "",
         "email_support": "support@recovtec.de",
         "email_returns": "",
-        "hours_title": "Antwortzeit",
-        "hours_text": "Mo – Fr · 9 – 17 Uhr · Antwort innerhalb eines Werktages."
+        "hours_title": "",
+        "hours_text": ""
       }
     }
   },
