@@ -127,7 +127,8 @@
   .contact-mail:first-of-type { border-top: 1px solid var(--line); }
   .contact-mail:hover { opacity: 0.7; }
   .contact-mail span { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); }
-  .contact-mail strong { font-size: 14px; font-weight: 600; word-break: break-all; }
+ .contact-mail strong { font-size: 14px; font-weight: 600; word-break: break-all; text-decoration: none; }
+.contact-mail, .contact-mail:hover, .contact-mail:focus { text-decoration: none !important; }
   @media (max-width:880px) {
     .contact-grid { grid-template-columns: 1fr; }
     .contact-row { grid-template-columns: 1fr; }
