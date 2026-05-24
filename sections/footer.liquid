@@ -1,12 +1,12 @@
 <footer class="footer">
   <div class="container">
     <div class="foot-top">
-      <div class="foot-brand">
-        <a href="{{ routes.root_url }}" class="nav-logo" style="color:var(--paper)">
+      <div class="foot-brand" style="text-align:left;align-items:flex-start">
+        <a href="{{ routes.root_url }}" class="nav-logo" style="color:var(--paper);justify-content:flex-start">
           <span class="mark"></span>
           RECOVTEC
         </a>
-        <p>{{ section.settings.tagline }}</p>
+        <p style="text-align:left">{{ section.settings.tagline }}</p>
       </div>
 
       {%- if section.settings.menu_service != blank -%}
