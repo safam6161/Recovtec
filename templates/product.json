@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main_product": {
@@ -9,53 +18,240 @@
     },
     "story": {
       "type": "product-story",
-      "block_order": ["story1","story2","guarantee","story3","modes","story4"],
       "blocks": {
-        "story1": { "type": "story", "settings": { "id": "story-360", "eyebrow": "360° Kompression · 4 Zonen", "heading": "360° Kompression.\nVolle Beinabdeckung.", "lead": "Vom Fuß über die Wade bis hoch zum Oberschenkel — die Boots umschließen das ganze Bein. Vier Kammern sorgen für gleichmäßigen Druck auf jeder Höhe, ohne Lücken oder Druckstellen.", "image_label": "360° KOMPRESSION · 4 ZONEN", "image_right": false, "dark": false } },
-        "story2": { "type": "story", "settings": { "id": "story-controller", "eyebrow": "Technologie · Controller", "heading": "Volle Kontrolle.\nDirekt am Gerät.", "lead": "LED-Farbdisplay am Bein. Keine App, kein Pairing, kein Konto. Modi und Druckstufen wählst du in Sekunden.", "stats": "bis 240::mmHg::Druckstufen|5::Modi::Massage-Programme|3::Std::Akkulaufzeit|<45::dB::Flüsterleise im Betrieb", "image_label": "CONTROLLER DETAIL · LED-Farbdisplay", "image_right": true, "dark": false } },
-        "guarantee": { "type": "guarantee", "settings": { "days": "30", "eyebrow": "Risikofrei testen", "headline": "Tage Geld zurück.", "text": "Probier die Boots in Ruhe zuhause. Wenn sie dich nicht überzeugen, schickst du sie kostenfrei zurück — ohne Diskussion, ohne Begründung." } },
-        "story3": { "type": "story", "settings": { "id": "story-modi", "eyebrow": "5 Massage-Modi", "heading": "Fünf Programme.\nEin Knopfdruck.", "lead": "Vom sanften Cool-Down bis zur Tiefen-Regeneration nach harten Einheiten. Jeder Modus arbeitet mit einem eigenen Druckmuster — wähle das passende Programm direkt am LED-Controller.", "bullets": "Modi 1::Wave Massage — sanfte Druckwelle durchs ganze Bein, ideal für die tägliche Massage und Entspannung.|Modi 2::Sequential Squeezing + Double Wave — aufsteigender Druckaufbau kombiniert mit Doppelwelle, das umfassendste Programm.|Modi 3::Double Wave — zwei überlagerte Druckwellen, perfekt zum Aufwärmen vor dem Workout.|Modi 4::All Squeezing — gleichzeitige Vollkompression aller Zonen für tiefe Regeneration und schnelle Erholung.|Modi 5::Sequential Squeezing — klassischer sequenzieller Aufbau vom Fuß nach oben, der bewährte Recovery-Standard.", "image_label": "MASSAGE-MODI · 5 Programme", "image_right": false, "dark": false } },
-        "modes": { "type": "mode_levels", "settings": { "left_eyebrow": "Druck-Empfehlung · 5 Stufen", "left_headline": "Die richtige Stufe\nfür jeden Tag.", "levels": "Stufe 1::Für die tägliche Massage und sanfte Entspannung.|Stufe 2–3::Ideal zum Aufwärmen vor dem Training und zum Lockern der Muskeln.|Stufe 4–5::Tiefe Regeneration, schnelle Erholung und gezielte Massage nach harten Einheiten.", "right_eyebrow": "Intelligente Drucksteuerung", "right_headline": "Pressure Control Technology", "right_text": "Ein intelligenter Drucksensor passt die Massage automatisch an deine Beinform an. So bekommt jedes Bein den richtigen Druck — angenehm und effektiv, unabhängig von der Beingröße." } },
-        "story4": { "type": "story", "settings": { "id": "story-paket", "eyebrow": "Im Paket enthalten", "heading": "Alles dabei.\nOhne Aufpreis.", "lead": "Boots, Transport-Rucksack mit integriertem Ladeanschluss, Erweiterungslaschen für +10 cm Spielraum am ganzen Bein. Andere verkaufen das einzeln — bei uns ist alles im Karton.", "bullets": "Recovtec Pro Boots::Doppellagiges Rautengewebe, LED-Controller.|Transport-Rucksack::Gepolstert, mit integriertem Ladeanschluss — laden unterwegs ohne Auspacken.|Erweiterungslaschen::+10 cm Spielraum am ganzen Bein — passt auch bei kräftigeren Beinen.", "image_label": "FLATLAY · Boots + Rucksack + Erweiterungslaschen", "image_right": true, "dark": true } }
-      }
+        "story1": {
+          "type": "story",
+          "settings": {
+            "id": "story-360",
+            "image_label": "360° KOMPRESSION · 4 ZONEN",
+            "image_right": false,
+            "dark": false,
+            "eyebrow": "360° Kompression · 4 Zonen",
+            "heading": "360° Kompression.\nVolle Beinabdeckung.",
+            "lead": "Vom Fuß über die Wade bis hoch zum Oberschenkel — die Boots umschließen das ganze Bein. Vier Kammern sorgen für gleichmäßigen Druck auf jeder Höhe, ohne Lücken oder Druckstellen."
+          }
+        },
+        "story2": {
+          "type": "story",
+          "settings": {
+            "id": "story-controller",
+            "image_label": "CONTROLLER DETAIL · LED-Farbdisplay",
+            "image_right": true,
+            "dark": false,
+            "eyebrow": "Technologie · Controller",
+            "heading": "Volle Kontrolle.\nDirekt am Gerät.",
+            "lead": "LED-Farbdisplay am Bein. Keine App, kein Pairing, kein Konto. Modi und Druckstufen wählst du in Sekunden.",
+            "stats": "bis 240::mmHg::Druckstufen|5::Modi::Massage-Programme|3::Std::Akkulaufzeit|<45::dB::Flüsterleise im Betrieb"
+          }
+        },
+        "guarantee": {
+          "type": "guarantee",
+          "settings": {
+            "days": "30",
+            "eyebrow": "Risikofrei testen",
+            "headline": "Tage Geld zurück.",
+            "text": "Probier die Boots in Ruhe zuhause. Wenn sie dich nicht überzeugen, schickst du sie kostenfrei zurück — ohne Diskussion, ohne Begründung."
+          }
+        },
+        "story3": {
+          "type": "story",
+          "settings": {
+            "id": "story-modi",
+            "image_label": "MASSAGE-MODI · 5 Programme",
+            "image_right": false,
+            "dark": false,
+            "eyebrow": "5 Massage-Modi",
+            "heading": "Fünf Programme.\nEin Knopfdruck.",
+            "lead": "Vom sanften Cool-Down bis zur Tiefen-Regeneration nach harten Einheiten. Jeder Modus arbeitet mit einem eigenen Druckmuster — wähle das passende Programm direkt am LED-Controller.",
+            "bullets": "Modi 1::Wave Massage — sanfte Druckwelle durchs ganze Bein, ideal für die tägliche Massage und Entspannung.|Modi 2::Sequential Squeezing + Double Wave — aufsteigender Druckaufbau kombiniert mit Doppelwelle, das umfassendste Programm.|Modi 3::Double Wave — zwei überlagerte Druckwellen, perfekt zum Aufwärmen vor dem Workout.|Modi 4::All Squeezing — gleichzeitige Vollkompression aller Zonen für tiefe Regeneration und schnelle Erholung.|Modi 5::Sequential Squeezing — klassischer sequenzieller Aufbau vom Fuß nach oben, der bewährte Recovery-Standard."
+          }
+        },
+        "modes": {
+          "type": "mode_levels",
+          "settings": {
+            "left_eyebrow": "Druck-Empfehlung · 5 Stufen",
+            "left_headline": "Die richtige Stufe\nfür jeden Tag.",
+            "levels": "Stufe 1::Für die tägliche Massage und sanfte Entspannung.|Stufe 2–3::Ideal zum Aufwärmen vor dem Training und zum Lockern der Muskeln.|Stufe 4–5::Tiefe Regeneration, schnelle Erholung und gezielte Massage nach harten Einheiten.",
+            "right_eyebrow": "Intelligente Drucksteuerung",
+            "right_headline": "Pressure Control Technology",
+            "right_text": "Ein intelligenter Drucksensor passt die Massage automatisch an deine Beinform an. So bekommt jedes Bein den richtigen Druck — angenehm und effektiv, unabhängig von der Beingröße."
+          }
+        },
+        "story4": {
+          "type": "story",
+          "settings": {
+            "id": "story-paket",
+            "image_label": "FLATLAY · Boots + Rucksack + Erweiterungslaschen",
+            "image_right": true,
+            "dark": true,
+            "eyebrow": "Im Paket enthalten",
+            "heading": "Alles dabei.\nOhne Aufpreis.",
+            "lead": "Boots, Transport-Rucksack mit integriertem Ladeanschluss, Erweiterungslaschen für +10 cm Spielraum am ganzen Bein. Andere verkaufen das einzeln — bei uns ist alles im Karton.",
+            "bullets": "Recovtec Pro Boots::Doppellagiges Rautengewebe, LED-Controller.|Transport-Rucksack::Gepolstert, mit integriertem Ladeanschluss — laden unterwegs ohne Auspacken.|Erweiterungslaschen::+10 cm Spielraum am ganzen Bein — passt auch bei kräftigeren Beinen."
+          }
+        }
+      },
+      "block_order": [
+        "story1",
+        "story2",
+        "guarantee",
+        "story3",
+        "modes",
+        "story4"
+      ],
+      "settings": {}
     },
     "compare": {
       "type": "compare",
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "feature": "Druckstufen",
+            "our_value": "bis 240 mmHg",
+            "competitor_value": "bis 180 mmHg"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "feature": "Massage-Modi",
+            "our_value": "5",
+            "competitor_value": "3"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "feature": "Lautstärke",
+            "our_value": "< 45 dB",
+            "competitor_value": "> 60 dB"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "feature": "Kabel am Bein",
+            "our_value": "Kurzer Schlauch",
+            "competitor_value": "Lange Schläuche & Kabel"
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "feature": "App / Pairing nötig",
+            "our_value": "Nein",
+            "competitor_value": "Oft ja"
+          }
+        },
+        "r6": {
+          "type": "row",
+          "settings": {
+            "feature": "Rucksack inklusive",
+            "our_value": "check",
+            "competitor_value": "x"
+          }
+        },
+        "r7": {
+          "type": "row",
+          "settings": {
+            "feature": "Erweiterungslaschen",
+            "our_value": "check",
+            "competitor_value": "x"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6",
+        "r7"
+      ],
       "settings": {
         "eyebrow": "Vergleich",
         "headline": "Recovtec Pro vs. der Rest.\nVolle Ausstattung, kein Hokuspokus.",
         "col1_label": "Recovtec Pro",
         "col2_label": "Andere Brands"
-      },
-      "block_order": ["r1","r2","r3","r4","r5","r6","r7"],
-      "blocks": {
-        "r1": { "type": "row", "settings": { "feature": "Druckstufen", "our_value": "bis 240 mmHg", "competitor_value": "bis 180 mmHg" } },
-        "r2": { "type": "row", "settings": { "feature": "Massage-Modi", "our_value": "5", "competitor_value": "3" } },
-        "r3": { "type": "row", "settings": { "feature": "Lautstärke", "our_value": "< 45 dB", "competitor_value": "> 60 dB" } },
-        "r4": { "type": "row", "settings": { "feature": "Kabel am Bein", "our_value": "Kurzer Schlauch", "competitor_value": "Lange Schläuche & Kabel" } },
-        "r5": { "type": "row", "settings": { "feature": "App / Pairing nötig", "our_value": "Nein", "competitor_value": "Oft ja" } },
-        "r6": { "type": "row", "settings": { "feature": "Rucksack inklusive", "our_value": "check", "competitor_value": "x" } },
-        "r7": { "type": "row", "settings": { "feature": "Erweiterungslaschen", "our_value": "check", "competitor_value": "x" } }
       }
     },
     "faq": {
       "type": "faq",
+      "blocks": {
+        "faq1": {
+          "type": "item",
+          "settings": {
+            "question": "Wie schnell wird geliefert?",
+            "answer": "Versand innerhalb Deutschlands in 1–3 Werktagen, komplett kostenlos. Bestellst du vor 14 Uhr, geht das Paket noch am gleichen Tag raus."
+          }
+        },
+        "faq2": {
+          "type": "item",
+          "settings": {
+            "question": "Kann ich die Boots zurücksenden, wenn sie mir nicht gefallen?",
+            "answer": "Ja. Du hast 30 Tage Zeit, die Boots zuhause zu testen. Gefallen sie dir nicht, schickst du sie kostenfrei zurück und bekommst dein Geld zurück. Ohne Diskussion."
+          }
+        },
+        "faq3": {
+          "type": "item",
+          "settings": {
+            "question": "Welche Größe passt mir?",
+            "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die Erweiterungslaschen sind dabei und bieten +10 cm Spielraum am ganzen Bein — bei Zweifeln nimm die größere Variante."
+          }
+        },
+        "faq4": {
+          "type": "item",
+          "settings": {
+            "question": "Brauche ich eine App oder WLAN?",
+            "answer": "Nein. Anschalten, Modus und Druckstufe direkt am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto."
+          }
+        },
+        "faq5": {
+          "type": "item",
+          "settings": {
+            "question": "Wie oft sollte ich sie nutzen?",
+            "answer": "Eine Session dauert 15–45 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel."
+          }
+        },
+        "faq6": {
+          "type": "item",
+          "settings": {
+            "question": "Welche Druckstufe als Anfänger?",
+            "answer": "Starte mit Stufe 80 mmHg. Angenehm und effektiv. Steigere dich nach Bedarf — höhere Stufen für tiefere Regeneration."
+          }
+        },
+        "faq7": {
+          "type": "item",
+          "settings": {
+            "question": "Wie lange hält der Akku?",
+            "answer": "Bis zu 3 Stunden im Betrieb. Reicht für mehrere Sessions ohne Aufladen — auch unterwegs oder im Trainingslager."
+          }
+        },
+        "faq8": {
+          "type": "item",
+          "settings": {
+            "question": "Was ist mit Garantie?",
+            "answer": "1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei."
+          }
+        }
+      },
+      "block_order": [
+        "faq1",
+        "faq2",
+        "faq3",
+        "faq4",
+        "faq5",
+        "faq6",
+        "faq7",
+        "faq8"
+      ],
       "settings": {
         "eyebrow": "FAQ",
         "headline": "Noch Fragen?\nWir antworten.",
         "subtext": "Du hast eine andere Frage? Schreib uns direkt — meistens antworten wir innerhalb eines Werktages.",
         "email": "support@recovtec.de"
-      },
-      "block_order": ["faq1","faq2","faq3","faq4","faq5","faq6","faq7","faq8"],
-      "blocks": {
-        "faq1": { "type": "item", "settings": { "question": "Wie schnell wird geliefert?", "answer": "Versand innerhalb Deutschlands in 1–3 Werktagen, komplett kostenlos. Bestellst du vor 14 Uhr, geht das Paket noch am gleichen Tag raus." } },
-        "faq2": { "type": "item", "settings": { "question": "Kann ich die Boots zurücksenden, wenn sie mir nicht gefallen?", "answer": "Ja. Du hast 30 Tage Zeit, die Boots zuhause zu testen. Gefallen sie dir nicht, schickst du sie kostenfrei zurück und bekommst dein Geld zurück. Ohne Diskussion." } },
-        "faq3": { "type": "item", "settings": { "question": "Welche Größe passt mir?", "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die Erweiterungslaschen sind dabei und bieten +10 cm Spielraum am ganzen Bein — bei Zweifeln nimm die größere Variante." } },
-        "faq4": { "type": "item", "settings": { "question": "Brauche ich eine App oder WLAN?", "answer": "Nein. Anschalten, Modus und Druckstufe direkt am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto." } },
-        "faq5": { "type": "item", "settings": { "question": "Wie oft sollte ich sie nutzen?", "answer": "Eine Session dauert 15–45 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel." } },
-        "faq6": { "type": "item", "settings": { "question": "Welche Druckstufe als Anfänger?", "answer": "Starte mit Stufe 80 mmHg. Angenehm und effektiv. Steigere dich nach Bedarf — höhere Stufen für tiefere Regeneration." } },
-        "faq7": { "type": "item", "settings": { "question": "Wie lange hält der Akku?", "answer": "Bis zu 3 Stunden im Betrieb. Reicht für mehrere Sessions ohne Aufladen — auch unterwegs oder im Trainingslager." } },
-        "faq8": { "type": "item", "settings": { "question": "Was ist mit Garantie?", "answer": "1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei." } }
       }
     },
     "final_cta": {
@@ -84,5 +280,12 @@
       }
     }
   },
-  "order": ["main_product","story","compare","faq","final_cta","footer"]
+  "order": [
+    "main_product",
+    "story",
+    "compare",
+    "faq",
+    "final_cta",
+    "footer"
+  ]
 }
