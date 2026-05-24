@@ -1,8 +1,13 @@
+<style>
+  .footer .foot-brand { display:flex; flex-direction:column; align-items:flex-start; }
+  .footer .foot-brand .nav-logo { justify-content:flex-start; align-self:flex-start; color:var(--paper); }
+</style>
+
 <footer class="footer">
   <div class="container">
     <div class="foot-top">
-      <div class="foot-brand" style="text-align:left;align-items:flex-start">
-        <a href="{{ routes.root_url }}" class="nav-logo" style="color:var(--paper);justify-content:flex-start">
+      <div class="foot-brand">
+        <a href="{{ routes.root_url }}" class="nav-logo">
           <span class="mark"></span>
           RECOVTEC
         </a>
