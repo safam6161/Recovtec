@@ -52,6 +52,16 @@
           "button_vertical_position": "lowest",
           "greeting_message": ""
         }
+      },
+      "12739210202647819536": {
+        "type": "shopify://apps/hotjar-install/blocks/global-api-events/2903e4ea-7615-463e-8b60-582f487dac4f",
+        "disabled": false,
+        "settings": {}
+      },
+      "8669066016853369741": {
+        "type": "shopify://apps/hotjar-install/blocks/global/2903e4ea-7615-463e-8b60-582f487dac4f",
+        "disabled": false,
+        "settings": {}
       }
     }
   }
