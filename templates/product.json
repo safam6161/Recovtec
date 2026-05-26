@@ -13,7 +13,35 @@
       "type": "main-product",
       "settings": {
         "eyebrow": "Recovtec — Recovery",
-        "lede": "Pneumatische Recovery Boots für aktive Muskelregeneration. Kabellos, leise, mit 5 Modi und 7 fein abgestuften Druckstufen bis 240 mmHg."
+        "lede": "Pneumatische Recovery Boots für aktive Muskelregeneration. Kabellos, leise, mit 5 Modi und 7 fein abgestuften Druckstufen bis 240 mmHg.",
+        "price_note": "Inkl. MwSt.",
+        "atc_label": "In den Warenkorb",
+        "in_stock_text": "Auf Lager · in 1–3 Werktagen bei dir.",
+        "out_of_stock_text": "Derzeit nicht verfügbar",
+        "trust_1": "30 Tage Geld zurück",
+        "trust_2": "1 Jahr Garantie",
+        "trust_3": "Kostenloser Versand",
+        "trust_4": "Rucksack & Laschen inklusive",
+        "breadcrumb_back": "Zurück",
+        "breadcrumb_home": "Startseite",
+        "sg_link_label": "Größentabelle",
+        "sg_title": "Größentabelle",
+        "logo_text": "RECOVTEC",
+        "sg_intro": "Die richtige Größe ist entscheidend für die beste Wirkung deiner Recovtec Recovery Boots. Wir machen es dir einfach — keine komplizierten Messungen, nur deine Körpergröße entscheidet.",
+        "sg_heading": "Welche Größe passt mir?",
+        "sg_size_label": "Empfohlen für",
+        "sg_size1_name": "M",
+        "sg_size1_value": "unter 1,80 m",
+        "sg_size2_name": "L",
+        "sg_size2_value": "über 1,80 m",
+        "sg_fact1_num": "+10",
+        "sg_fact1_unit": "cm",
+        "sg_fact1_title": "+10 cm Bein-Erweiterung inklusive",
+        "sg_fact1_text": "Mit den beigelieferten Erweiterungslaschen ist bei beiden Größen ein zusätzlicher Spielraum von 10 cm am ganzen Bein möglich.",
+        "sg_fact2_icon": "↑",
+        "sg_fact2_title": "Zwischen zwei Größen?",
+        "sg_fact2_text": "Wer sich nicht ganz entscheiden kann, dem empfehlen wir die größere Variante.",
+        "img_placeholder": "RECOVTEC PRO · Frontansicht · auf Modell"
       }
     },
     "story": {
@@ -28,7 +56,9 @@
             "dark": false,
             "eyebrow": "360° Kompression · 4 Zonen",
             "heading": "360° Kompression.\nVolle Beinabdeckung.",
-            "lead": "Vom Fuß über die Wade bis hoch zum Oberschenkel — die Boots umschließen das ganze Bein. Vier Kammern sorgen für gleichmäßigen Druck auf jeder Höhe, ohne Lücken oder Druckstellen."
+            "lead": "Vom Fuß über die Wade bis hoch zum Oberschenkel — die Boots umschließen das ganze Bein. Vier Kammern sorgen für gleichmäßigen Druck auf jeder Höhe, ohne Lücken oder Druckstellen.",
+            "bullets": "",
+            "stats": ""
           }
         },
         "story2": {
@@ -41,6 +71,7 @@
             "eyebrow": "Technologie · Controller",
             "heading": "Volle Kontrolle.\nDirekt am Gerät.",
             "lead": "LED-Farbdisplay am Bein. Keine App, kein Pairing, kein Konto. Modi und Druckstufen wählst du in Sekunden.",
+            "bullets": "",
             "stats": "bis 240::mmHg::Druckstufen|5::Modi::Massage-Programme|3::Std::Akkulaufzeit|<45::dB::Flüsterleise im Betrieb"
           }
         },
@@ -63,7 +94,8 @@
             "eyebrow": "5 Massage-Modi",
             "heading": "Fünf Programme.\nEin Knopfdruck.",
             "lead": "Vom sanften Cool-Down bis zur Tiefen-Regeneration nach harten Einheiten. Jeder Modus arbeitet mit einem eigenen Druckmuster — wähle das passende Programm direkt am LED-Controller.",
-            "bullets": "Modi 1::Wave Massage — sanfte Druckwelle durchs ganze Bein, ideal für die tägliche Massage und Entspannung.|Modi 2::Sequential Squeezing + Double Wave — aufsteigender Druckaufbau kombiniert mit Doppelwelle, das umfassendste Programm.|Modi 3::Double Wave — zwei überlagerte Druckwellen, perfekt zum Aufwärmen vor dem Workout.|Modi 4::All Squeezing — gleichzeitige Vollkompression aller Zonen für tiefe Regeneration und schnelle Erholung.|Modi 5::Sequential Squeezing — klassischer sequenzieller Aufbau vom Fuß nach oben, der bewährte Recovery-Standard."
+            "bullets": "Modi 1::Wave Massage — sanfte Druckwelle durchs ganze Bein, ideal für die tägliche Massage und Entspannung.|Modi 2::Sequential Squeezing + Double Wave — aufsteigender Druckaufbau kombiniert mit Doppelwelle, das umfassendste Programm.|Modi 3::Double Wave — zwei überlagerte Druckwellen, perfekt zum Aufwärmen vor dem Workout.|Modi 4::All Squeezing — gleichzeitige Vollkompression aller Zonen für tiefe Regeneration und schnelle Erholung.|Modi 5::Sequential Squeezing — klassischer sequenzieller Aufbau vom Fuß nach oben, der bewährte Recovery-Standard.",
+            "stats": ""
           }
         },
         "modes": {
@@ -87,7 +119,8 @@
             "eyebrow": "Im Paket enthalten",
             "heading": "Alles dabei.\nOhne Aufpreis.",
             "lead": "Boots, Transport-Rucksack mit integriertem Ladeanschluss, Erweiterungslaschen für +10 cm Spielraum am ganzen Bein. Andere verkaufen das einzeln — bei uns ist alles im Karton.",
-            "bullets": "Recovtec Pro Boots::Doppellagiges Rautengewebe, LED-Controller.|Transport-Rucksack::Gepolstert, mit integriertem Ladeanschluss — laden unterwegs ohne Auspacken.|Erweiterungslaschen::+10 cm Spielraum am ganzen Bein — passt auch bei kräftigeren Beinen."
+            "bullets": "Recovtec Pro Boots::Doppellagiges Rautengewebe, LED-Controller.|Transport-Rucksack::Gepolstert, mit integriertem Ladeanschluss — laden unterwegs ohne Auspacken.|Erweiterungslaschen::+10 cm Spielraum am ganzen Bein — passt auch bei kräftigeren Beinen.",
+            "stats": ""
           }
         }
       },
@@ -109,7 +142,7 @@
           "settings": {
             "feature": "Druckstufen",
             "our_value": "bis 240 mmHg",
-            "competitor_value": "bis 180 mmHg"
+            "competitor_value": "bis 160 mmHg"
           }
         },
         "r2": {
@@ -260,6 +293,7 @@
         "headline": "Eine Entscheidung.\nBessere Beine.",
         "subtext": "Ein Produkt. Alles dabei. Wenn's nicht passt, schickst du es zurück — kostenlos, ohne Diskussion.",
         "cta_label": "In den Warenkorb",
+        "cta_url": "",
         "trust_1": "Kostenloser Versand",
         "trust_2": "30 Tage Rückgabe",
         "trust_3": "1–3 Tage Lieferung",
@@ -269,7 +303,64 @@
         "nl_placeholder": "deine@email.de",
         "nl_fine": "Kein Spam. Jederzeit abbestellbar."
       }
+    },
+    "1779812357c32a4326": {
+      "type": "apps",
+      "settings": {}
+    },
+    "177981239699d97d24": {
+      "type": "apps",
+      "settings": {}
+    },
+    "17798124291570cc56": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_MKFc7K": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "all",
+            "products": [],
+            "star_rating": "all",
+            "show_review_media": true,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "medium",
+            "text_size": "medium",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": true,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#F9F9F9",
+            "stars_color": "",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "Customers are saying",
+            "show_average_rating": true
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_MKFc7K"
+      ],
+      "settings": {}
     }
   },
-  "order": ["main_product","story","compare","faq","final_cta"]
+  "order": [
+    "main_product",
+    "story",
+    "compare",
+    "17798124291570cc56",
+    "faq",
+    "final_cta",
+    "1779812357c32a4326",
+    "177981239699d97d24"
+  ]
 }
