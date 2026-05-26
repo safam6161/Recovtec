@@ -16,7 +16,7 @@
 
     <div class="nav-actions">
       <button class="icon-btn" type="button" aria-label="{{ section.settings.aria_search | default: 'Suche' }}" aria-expanded="false" aria-controls="search-overlay" data-search-open>{% render 'icon', icon: 'search' %}</button>
-      <button class="icon-btn" aria-label="{{ section.settings.aria_account | default: 'Konto' }}">{% render 'icon', icon: 'user' %}</button>
+      <a class="icon-btn" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" aria-label="{{ section.settings.aria_account | default: 'Konto' }}">{% render 'icon', icon: 'user' %}</a>
       <button class="icon-btn cart-btn" aria-label="{{ section.settings.aria_cart | default: 'Warenkorb öffnen' }}" data-cart-open>
         {% render 'icon', icon: 'cart' %}
         <span class="cart-count" aria-live="polite" style="display:none">0</span>
