@@ -15,7 +15,7 @@
     </div>
 
     <div class="nav-actions">
-      <button class="icon-btn" aria-label="{{ section.settings.aria_search | default: 'Suche' }}">{% render 'icon', icon: 'search' %}</button>
+      <button class="icon-btn" type="button" aria-label="{{ section.settings.aria_search | default: 'Suche' }}" aria-expanded="false" aria-controls="search-overlay" data-search-open>{% render 'icon', icon: 'search' %}</button>
       <button class="icon-btn" aria-label="{{ section.settings.aria_account | default: 'Konto' }}">{% render 'icon', icon: 'user' %}</button>
       <button class="icon-btn cart-btn" aria-label="{{ section.settings.aria_cart | default: 'Warenkorb öffnen' }}" data-cart-open>
         {% render 'icon', icon: 'cart' %}
@@ -37,15 +37,58 @@
   {%- endif -%}
 </nav>
 
+<div id="search-overlay" class="search-overlay" hidden role="dialog" aria-modal="true" aria-label="{{ section.settings.aria_search | default: 'Suche' }}">
+  <div class="search-overlay-backdrop" data-search-close></div>
+  <div class="search-overlay-panel">
+    <form action="{{ routes.search_url }}" method="get" class="search-overlay-form" role="search">
+      <input type="hidden" name="type" value="product">
+      <input type="search" name="q" autocomplete="off" placeholder="{{ section.settings.search_placeholder | default: 'Produkte suchen …' }}" class="search-overlay-input" data-search-input aria-label="{{ section.settings.aria_search | default: 'Suche' }}">
+      <button type="submit" class="icon-btn" aria-label="{{ section.settings.aria_search | default: 'Suche' }}">{% render 'icon', icon: 'search' %}</button>
+      <button type="button" class="icon-btn" aria-label="Schließen" data-search-close>{% render 'icon', icon: 'close' %}</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .search-overlay{position:fixed;inset:0;z-index:1000}
+  .search-overlay[hidden]{display:none}
+  .search-overlay-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.4)}
+  .search-overlay-panel{position:relative;background:var(--paper,#fff);border-bottom:1px solid var(--paper-2,#e5e5e5);padding:16px 24px}
+  .search-overlay-form{display:flex;gap:8px;align-items:center;max-width:960px;margin:0 auto}
+  .search-overlay-input{flex:1;padding:12px 16px;border:1px solid var(--paper-2,#e5e5e5);background:var(--paper,#fff);font-size:16px;font-family:inherit;outline:none}
+  .search-overlay-input:focus{border-color:var(--ink,#111)}
+</style>
+
 <script>
   (function(){
     var btn = document.querySelector('[data-menu-toggle]');
     var menu = document.getElementById('mobile-menu');
-    if (!btn || !menu) return;
-    function close(){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); document.body.classList.remove('menu-open'); }
-    function open(){ menu.hidden = false; btn.setAttribute('aria-expanded','true'); document.body.classList.add('menu-open'); }
-    btn.addEventListener('click', function(){ menu.hidden ? open() : close(); });
-    menu.querySelectorAll('[data-menu-link]').forEach(function(a){ a.addEventListener('click', close); });
+    if (btn && menu) {
+      function closeMenu(){ menu.hidden = true; btn.setAttribute('aria-expanded','false'); document.body.classList.remove('menu-open'); }
+      function openMenu(){ menu.hidden = false; btn.setAttribute('aria-expanded','true'); document.body.classList.add('menu-open'); }
+      btn.addEventListener('click', function(){ menu.hidden ? openMenu() : closeMenu(); });
+      menu.querySelectorAll('[data-menu-link]').forEach(function(a){ a.addEventListener('click', closeMenu); });
+    }
+
+    var searchOverlay = document.getElementById('search-overlay');
+    var searchOpenBtn = document.querySelector('[data-search-open]');
+    var searchInput = searchOverlay && searchOverlay.querySelector('[data-search-input]');
+    if (searchOverlay && searchOpenBtn) {
+      function closeSearch(){
+        searchOverlay.hidden = true;
+        searchOpenBtn.setAttribute('aria-expanded','false');
+        document.body.classList.remove('search-open');
+      }
+      function openSearch(){
+        searchOverlay.hidden = false;
+        searchOpenBtn.setAttribute('aria-expanded','true');
+        document.body.classList.add('search-open');
+        if (searchInput) { setTimeout(function(){ searchInput.focus(); }, 0); }
+      }
+      searchOpenBtn.addEventListener('click', function(){ searchOverlay.hidden ? openSearch() : closeSearch(); });
+      searchOverlay.querySelectorAll('[data-search-close]').forEach(function(el){ el.addEventListener('click', closeSearch); });
+      document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !searchOverlay.hidden) closeSearch(); });
+    }
   })();
 </script>
 
@@ -57,6 +100,7 @@
     { "type": "link_list", "id": "menu", "label": "Hauptmenü", "default": "main-menu" },
     { "type": "header", "content": "Barrierefreiheit" },
     { "type": "text", "id": "aria_search", "label": "Suche Label", "default": "Suche" },
+    { "type": "text", "id": "search_placeholder", "label": "Such-Platzhalter", "default": "Produkte suchen …" },
     { "type": "text", "id": "aria_account", "label": "Konto Label", "default": "Konto" },
     { "type": "text", "id": "aria_cart", "label": "Warenkorb Label", "default": "Warenkorb öffnen" }
   ],
