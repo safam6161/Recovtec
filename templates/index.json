@@ -13,8 +13,10 @@
       "type": "hero",
       "settings": {
         "headline": "HART TRAINIERT.\nSCHNELL ERHOLT.\nRECOVTEC.",
+        "subhead": "Pneumatische Recovery Boots — kabellos, leise, 5 Modi, 7 Druckstufen bis 240 mmHg. 30 Tage testen.",
         "cta_label": "Produkt ansehen",
-        "cta_url": "shopify://products/recovtec-pro-recovery-boots"
+        "cta_url": "shopify://products/recovtec-pro-recovery-boots",
+        "price_label": "Ab 499 € · inkl. MwSt. · kostenloser Versand"
       }
     },
     "trust": {
@@ -314,6 +316,7 @@
         "r2",
         "r3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "04 — Stimmen",
         "headline": "Frühe Tester sind überzeugt.",
