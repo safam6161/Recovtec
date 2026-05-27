@@ -2,6 +2,8 @@
   <div class="hero-media">
     {%- if section.settings.hero_image != blank -%}
       {{ section.settings.hero_image | image_url: width: 1800 | image_tag: alt: section.settings.hero_image.alt, loading: 'eager', fetchpriority: 'high' }}
+    {%- elsif section.settings.hero_image_url != blank -%}
+      <img src="{{ section.settings.hero_image_url }}" alt="Recovtec Recovery Boots" loading="eager" fetchpriority="high">
     {%- else -%}
       <div class="hero-placeholder">
         <div class="placeholder-label" style="background:rgba(0,0,0,0.55);color:rgba(255,255,255,0.7)">HERO · Sportler nach hartem Training mit Recovery Boots · Bild oder Video, full-bleed</div>
@@ -34,6 +36,7 @@
   "name": "Hero",
   "settings": [
     { "type": "image_picker", "id": "hero_image", "label": "Hero Bild" },
+    { "type": "text", "id": "hero_image_url", "label": "Hero Bild URL (Fallback)", "info": "Wird genutzt wenn kein Hero-Bild ausgewählt ist." },
     { "type": "textarea", "id": "headline", "label": "Headline", "default": "HART TRAINIERT.\nSCHNELL ERHOLT.\nRECOVTEC." },
     { "type": "textarea", "id": "subhead", "label": "Sub-Headline", "default": "Pneumatische Recovery Boots — kabellos, leise, 5 Modi, 7 Druckstufen bis 240 mmHg. 30 Tage testen." },
     { "type": "text", "id": "cta_label", "label": "Button Text", "default": "Produkt ansehen" },
