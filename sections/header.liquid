@@ -15,7 +15,9 @@
     </div>
 
     <div class="nav-actions">
+      {%- if section.settings.show_search -%}
       <button class="icon-btn" type="button" aria-label="{{ section.settings.aria_search | default: 'Suche' }}" aria-expanded="false" aria-controls="search-overlay" data-search-open>{% render 'icon', icon: 'search' %}</button>
+      {%- endif -%}
       <a class="icon-btn" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" aria-label="{{ section.settings.aria_account | default: 'Konto' }}">{% render 'icon', icon: 'user' %}</a>
       <button class="icon-btn cart-btn" aria-label="{{ section.settings.aria_cart | default: 'Warenkorb öffnen' }}" data-cart-open>
         {% render 'icon', icon: 'cart' %}
@@ -37,6 +39,7 @@
   {%- endif -%}
 </nav>
 
+{%- if section.settings.show_search -%}
 <div id="search-overlay" class="search-overlay" hidden role="dialog" aria-modal="true" aria-label="{{ section.settings.aria_search | default: 'Suche' }}">
   <div class="search-overlay-backdrop" data-search-close></div>
   <div class="search-overlay-panel">
@@ -48,6 +51,7 @@
     </form>
   </div>
 </div>
+{%- endif -%}
 
 <style>
   .search-overlay{position:fixed;inset:0;z-index:1000}
@@ -98,6 +102,8 @@
   "settings": [
     { "type": "text", "id": "logo_text", "label": "Logo Text", "default": "RECOVTEC" },
     { "type": "link_list", "id": "menu", "label": "Hauptmenü", "default": "main-menu" },
+    { "type": "header", "content": "Funktionen" },
+    { "type": "checkbox", "id": "show_search", "label": "Suche anzeigen", "default": false },
     { "type": "header", "content": "Barrierefreiheit" },
     { "type": "text", "id": "aria_search", "label": "Suche Label", "default": "Suche" },
     { "type": "text", "id": "search_placeholder", "label": "Such-Platzhalter", "default": "Produkte suchen …" },
