@@ -13,12 +13,12 @@
       "type": "main-product",
       "settings": {
         "eyebrow": "Recovtec — Recovery",
-        "lede": "Pneumatische Recovery Boots für aktive Muskelregeneration. Kabellos, leise, mit 5 Modi und 7 fein abgestuften Druckstufen bis 240 mmHg.",
+        "lede": "Frische Beine in 20 Minuten. Pneumatische Recovery Boots mit 5 Modi und 7 Druckstufen bis 240 mmHg. Kabellos, leise, ohne App.",
         "price_note": "Inkl. MwSt.",
         "atc_label": "In den Warenkorb",
         "in_stock_text": "Auf Lager · in 1–3 Werktagen bei dir.",
         "out_of_stock_text": "Derzeit nicht verfügbar",
-        "trust_1": "30 Tage Geld zurück",
+        "trust_1": "30 Tage Geld-zurück-Garantie",
         "trust_2": "1 Jahr Garantie",
         "trust_3": "Kostenloser Versand",
         "trust_4": "Rucksack & Laschen inklusive",
@@ -55,7 +55,7 @@
             "image_right": false,
             "dark": true,
             "eyebrow": "360° Kompression · 4 Zonen",
-            "heading": "360° Kompression.Volle Beinabdeckung.",
+            "heading": "360° Kompression. Volle Beinabdeckung.",
             "lead": "Vom Fuß über die Wade bis hoch zum Oberschenkel — die Boots umschließen das ganze Bein. Vier Kammern sorgen für gleichmäßigen Druck auf jeder Höhe, ohne Lücken oder Druckstellen.",
             "bullets": "",
             "stats": ""
@@ -117,7 +117,7 @@
             "image_right": true,
             "dark": false,
             "eyebrow": "Im Paket enthalten",
-            "heading": "Alles dabei.Ohne Aufpreis.",
+            "heading": "Alles dabei. Ohne Aufpreis.",
             "lead": "Boots, Transport-Rucksack mit integriertem Ladeanschluss, Erweiterungslaschen für +10 cm Spielraum am ganzen Bein. Andere verkaufen das einzeln — bei uns ist alles im Karton.",
             "bullets": "Recovtec Pro Boots::Doppellagiges Rautengewebe, LED-Controller.|Transport-Rucksack::Gepolstert, mit integriertem Ladeanschluss — laden unterwegs ohne Auspacken.|Erweiterungslaschen::+10 cm Spielraum am ganzen Bein — passt auch bei kräftigeren Beinen.",
             "stats": ""
@@ -205,7 +205,7 @@
       ],
       "settings": {
         "eyebrow": "Vergleich",
-        "headline": "Recovtec Pro vs. der Rest.\nVolle Ausstattung, kein Hokuspokus.",
+        "headline": "Recovtec Pro vs. der Rest.\nVolle Ausstattung. Ehrlich kalkuliert.",
         "col1_label": "Recovtec Pro",
         "col2_label": "Andere Brands"
       }
@@ -292,7 +292,7 @@
           "type": "item",
           "settings": {
             "question": "Welche Druckstufe als Anfänger?",
-            "answer": "Starte mit Stufe 80 mmHg. Angenehm und effektiv. Steigere dich nach Bedarf — höhere Stufen für tiefere Regeneration."
+            "answer": "Starte mit Stufe 2. Angenehm und effektiv. Steigere dich nach Bedarf — höhere Stufen für tiefere Regeneration. Maximum ist Stufe 7 (240 mmHg)."
           }
         },
         "faq7": {
@@ -332,10 +332,10 @@
       "settings": {
         "headline": "Eine Entscheidung.\nBessere Beine.",
         "subtext": "Ein Produkt. Alles dabei. Wenn's nicht passt, schickst du es zurück — kostenlos, ohne Diskussion.",
-        "cta_label": "In den Warenkorb",
-        "cta_url": "",
+        "cta_label": "Jetzt bestellen",
+        "cta_url": "shopify://products/recovtec-pro-recovery-boots",
         "trust_1": "Kostenloser Versand",
-        "trust_2": "30 Tage Rückgabe",
+        "trust_2": "30 Tage Geld-zurück-Garantie",
         "trust_3": "1–3 Tage Lieferung",
         "trust_4": "1 Jahr Garantie",
         "show_newsletter": true,

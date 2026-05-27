@@ -13,8 +13,10 @@
       "type": "hero",
       "settings": {
         "headline": "HART TRAINIERT.\nSCHNELL ERHOLT.\nRECOVTEC.",
-        "cta_label": "Jetzt kaufen",
-        "cta_url": "shopify://products/recovtec-pro-recovery-boots"
+        "subhead": "Pneumatische Recovery Boots — kabellos, leise, 5 Modi, 7 Druckstufen bis 240 mmHg. 30 Tage testen.",
+        "cta_label": "Produkt ansehen",
+        "cta_url": "shopify://products/recovtec-pro-recovery-boots",
+        "price_label": "Ab 499 € · inkl. MwSt. · kostenloser Versand"
       }
     },
     "trust": {
@@ -31,7 +33,7 @@
           "type": "item",
           "settings": {
             "icon": "refresh",
-            "label": "30 Tage Geld zurück"
+            "label": "30 Tage Geld-zurück-Garantie"
           }
         },
         "t3": {
@@ -146,9 +148,9 @@
       "settings": {
         "eyebrow": "02 — Die Lösung",
         "headline": "Recovery Boots.\nIm Wohnzimmer. Sofort.",
-        "subtext": "Pneumatische Kompression in 5 Modi und 7 fein abgestuften Druckstufen — komplett kabellos, flüsterleise, ohne App-Quatsch. Anziehen, einschalten, erholen.",
-        "footnote": "1 Jahr Garantie · 30 Tage Geld-zurück-Garantie · Kostenloser Versand in 1–3 Werktagen.",
-        "cta_label": "Zum Produkt",
+        "subtext": "Pneumatische Kompression in 5 Modi und 7 fein abgestuften Druckstufen — komplett kabellos, flüsterleise, ohne App. Anziehen, einschalten, erholen.",
+        "footnote": "",
+        "cta_label": "Jetzt bestellen",
         "cta_url": "shopify://products/recovtec-pro-recovery-boots"
       }
     },
@@ -173,7 +175,7 @@
           "type": "step",
           "settings": {
             "title": "Druck einstellen",
-            "text": "Start mit Stufe 80 mmHg. Steigere dich nach Bedarf — bis 240 mmHg möglich."
+            "text": "Start mit Stufe 2. Steigere dich nach Bedarf — bis Stufe 7 (max. 240 mmHg)."
           }
         },
         "h4": {
@@ -276,7 +278,7 @@
       ],
       "settings": {
         "eyebrow": "04 — Vergleich",
-        "headline": "Recovtec Pro vs. der Rest.\nVolle Ausstattung, kein Hokuspokus.",
+        "headline": "Recovtec Pro vs. der Rest.\nVolle Ausstattung. Ehrlich kalkuliert.",
         "col1_label": "Recovtec Pro",
         "col2_label": "Andere Brands"
       }
@@ -303,7 +305,7 @@
         "r3": {
           "type": "review",
           "settings": {
-            "text": "Bedienung in 30 Sekunden verstanden. Kein App-Quatsch, einfach an und gut.",
+            "text": "Bedienung in 30 Sekunden verstanden. Keine App nötig, einfach an und gut.",
             "name": "Sarah F.",
             "subtitle": "Marathon · Köln"
           }
@@ -330,6 +332,13 @@
     "faq": {
       "type": "faq",
       "blocks": {
+        "faq_shipping": {
+          "type": "item",
+          "settings": {
+            "question": "Wie schnell wird geliefert?",
+            "answer": "Versand innerhalb Deutschlands in 1–3 Werktagen, komplett kostenlos. Bestellst du vor 14 Uhr, geht das Paket noch am gleichen Tag raus."
+          }
+        },
         "faq1": {
           "type": "item",
           "settings": {
@@ -348,7 +357,7 @@
           "type": "item",
           "settings": {
             "question": "Welche Druckstufe sollte ich am Anfang wählen?",
-            "answer": "Starte mit Stufe 80 mmHg. Das ist angenehm und effektiv. Steigere dich nach Bedarf — höhere Stufen für tiefere Regeneration, niedrigere für sanftes Cool-Down."
+            "answer": "Starte mit Stufe 2. Das ist angenehm und effektiv. Steigere dich nach Bedarf — höhere Stufen für tiefere Regeneration, niedrigere für sanftes Cool-Down. Maximum ist Stufe 7 (240 mmHg)."
           }
         },
         "faq4": {
@@ -374,6 +383,7 @@
         }
       },
       "block_order": [
+        "faq_shipping",
         "faq1",
         "faq2",
         "faq3",
@@ -393,10 +403,10 @@
       "settings": {
         "headline": "Bereit für die\nbessere Recovery?",
         "subtext": "Ein Produkt. Alles dabei. Direkt vom Hersteller verschickt. Wenn's nicht passt, schickst du es zurück — kostenlos, ohne Diskussion.",
-        "cta_label": "Jetzt zur Produktseite",
-        "cta_url": "",
+        "cta_label": "Jetzt bestellen",
+        "cta_url": "shopify://products/recovtec-pro-recovery-boots",
         "trust_1": "Kostenloser Versand",
-        "trust_2": "30 Tage Rückgabe",
+        "trust_2": "30 Tage Geld-zurück-Garantie",
         "trust_3": "1–3 Tage Lieferung",
         "trust_4": "1 Jahr Garantie",
         "show_newsletter": true,

@@ -14,11 +14,17 @@
       {%- assign lines = section.settings.headline | newline_to_br | split: '<br />' -%}
       {%- for line in lines -%}<span style="display:block">{{ line }}</span>{%- endfor -%}
     </h1>
+    {%- if section.settings.subhead != blank -%}
+      <p class="hero-subhead">{{ section.settings.subhead }}</p>
+    {%- endif -%}
     <div class="hero-cta-row">
       <a href="{{ section.settings.cta_url | default: '#solution' }}" class="btn btn-primary btn-lg">
         {{ section.settings.cta_label }}
         <span class="btn-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span>
       </a>
+      {%- if section.settings.price_label != blank -%}
+        <span class="hero-price">{{ section.settings.price_label }}</span>
+      {%- endif -%}
     </div>
   </div>
 </section>
@@ -29,8 +35,10 @@
   "settings": [
     { "type": "image_picker", "id": "hero_image", "label": "Hero Bild" },
     { "type": "textarea", "id": "headline", "label": "Headline", "default": "HART TRAINIERT.\nSCHNELL ERHOLT.\nRECOVTEC." },
-    { "type": "text", "id": "cta_label", "label": "Button Text", "default": "Jetzt kaufen" },
-    { "type": "url", "id": "cta_url", "label": "Button Link" }
+    { "type": "textarea", "id": "subhead", "label": "Sub-Headline", "default": "Pneumatische Recovery Boots — kabellos, leise, 5 Modi, 7 Druckstufen bis 240 mmHg. 30 Tage testen." },
+    { "type": "text", "id": "cta_label", "label": "Button Text", "default": "Produkt ansehen" },
+    { "type": "url", "id": "cta_url", "label": "Button Link" },
+    { "type": "text", "id": "price_label", "label": "Preis-Hinweis", "default": "Ab 499 € · inkl. MwSt. · kostenloser Versand" }
   ],
   "presets": [{ "name": "Hero" }]
 }
