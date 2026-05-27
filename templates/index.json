@@ -173,7 +173,7 @@
           "type": "step",
           "settings": {
             "title": "Druck einstellen",
-            "text": "Start mit Stufe 2. Steigere dich nach Bedarf — bis Stufe 7 (max. 240 mmHg)."
+            "text": "Start mit Stufe 80 mmHg. Steigere dich nach Bedarf — bis 240 mmHg möglich."
           }
         },
         "h4": {
