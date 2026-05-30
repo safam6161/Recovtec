@@ -35,7 +35,10 @@
           <h5>{{ section.settings.col2_heading }}</h5>
           <ul>
             {%- for link in linklists[section.settings.menu_company].links -%}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- assign link_title = link.title | downcase | strip -%}
+              {%- unless link_title == 'über uns' -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endunless -%}
             {%- endfor -%}
           </ul>
         </div>
