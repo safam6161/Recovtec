@@ -1,0 +1,80 @@
+{% comment %} Recovtec — Produktvideo (mobil-optimiert, vertikal 9:16) {% endcomment %}
+<style>
+  .rv-video-section { padding: clamp(40px,6vw,80px) 0; background: {{ section.settings.bg_color }}; }
+  .rv-video-wrap { max-width: {{ section.settings.max_width }}px; margin: 0 auto; text-align: center; }
+  .rv-video-eyebrow { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); margin-bottom: 12px; }
+  .rv-video-title { font-family: var(--f-display); font-size: clamp(26px,4vw,44px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 28px; }
+  .rv-video-frame {
+    position: relative; margin: 0 auto; width: 100%;
+    max-width: {{ section.settings.video_width }}px;
+    aspect-ratio: 9 / 16;
+    border-radius: 18px; overflow: hidden;
+    background: #000; box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+  }
+  .rv-video-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .rv-video-cta { margin-top: 28px; }
+  @media (max-width: 749px) {
+    .rv-video-frame { max-width: 86vw; border-radius: 14px; }
+  }
+</style>
+
+<section class="rv-video-section">
+  <div class="container">
+    <div class="rv-video-wrap">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="rv-video-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="rv-video-title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      <div class="rv-video-frame">
+        {%- if section.settings.video != blank -%}
+          {{ section.settings.video | video_tag: image_size: '800x', autoplay: true, loop: true, muted: true, controls: section.settings.show_controls, playsinline: true }}
+        {%- elsif section.settings.video_url != blank -%}
+          <video
+            {% if section.settings.poster != blank %}poster="{{ section.settings.poster | image_url: width: 800 }}"{% endif %}
+            autoplay muted loop playsinline preload="metadata"
+            {% if section.settings.show_controls %}controls{% endif %}>
+            <source src="{{ section.settings.video_url }}" type="video/mp4">
+          </video>
+        {%- else -%}
+          <div class="placeholder dark" style="position:absolute;inset:0">
+            <span class="placeholder-label">Video hinzufügen (Theme-Editor)</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <div class="rv-video-cta">
+          <a href="{{ section.settings.button_link }}" class="btn btn-primary btn-lg">{{ section.settings.button_label }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Produktvideo",
+  "tag": "section",
+  "class": "section-product-video",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Kleine Überschrift", "default": "In Aktion" },
+    { "type": "text", "id": "title", "label": "Titel", "default": "Recovery auf Knopfdruck" },
+    { "type": "header", "content": "Video" },
+    { "type": "video", "id": "video", "label": "Video (in Shopify hochladen)", "info": "Empfohlen. Lade dein vertikales 9:16-Video hier hoch." },
+    { "type": "text", "id": "video_url", "label": "ODER Video-URL (mp4)", "info": "Alternative: direkte .mp4-URL, falls du das Video extern hostest." },
+    { "type": "image_picker", "id": "poster", "label": "Vorschaubild (Poster)", "info": "Wird vor dem Abspielen angezeigt (nur bei Video-URL)." },
+    { "type": "checkbox", "id": "show_controls", "label": "Steuerelemente anzeigen", "default": false },
+    { "type": "header", "content": "Darstellung" },
+    { "type": "range", "id": "video_width", "label": "Videobreite (Desktop)", "min": 280, "max": 600, "step": 20, "unit": "px", "default": 380 },
+    { "type": "range", "id": "max_width", "label": "Bereichsbreite", "min": 600, "max": 1320, "step": 20, "unit": "px", "default": 900 },
+    { "type": "color", "id": "bg_color", "label": "Hintergrundfarbe", "default": "#fafafa" },
+    { "type": "header", "content": "Button (optional)" },
+    { "type": "text", "id": "button_label", "label": "Button-Text", "default": "Jetzt sichern" },
+    { "type": "url", "id": "button_link", "label": "Button-Link" }
+  ],
+  "presets": [{ "name": "Produktvideo" }]
+}
+{% endschema %}
