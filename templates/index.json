@@ -12,6 +12,7 @@
     "hero": {
       "type": "hero",
       "settings": {
+        "hero_image": "shopify://shop_images/hf_20260530_101000_2e2f10fc-9d09-4d5e-a008-293266c0bbe2.png",
         "hero_image_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Du6LtVkzxOQHE01bX6gtePPMUQ/hf_20260527_205941_a19f000e-2dc5-4268-bd2a-21375bb1cb1d.png",
         "headline": "HART TRAINIERT.\nSCHNELL ERHOLT.\nRECOVTEC.",
         "subhead": "",
