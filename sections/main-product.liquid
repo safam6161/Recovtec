@@ -30,8 +30,8 @@
           {%- endif -%}
         </div>
         {%- if product.images.size > 1 -%}
-          <div class="gallery-thumbs five">
-            {%- for img in product.images limit: 5 -%}
+          <div class="gallery-thumbs">
+            {%- for img in product.images -%}
               <button class="gallery-thumb {% if forloop.first %}active{% endif %}"
                 data-src="{{ img | image_url: width: 1200 }}"
                 data-alt="{{ img.alt | escape }}"
