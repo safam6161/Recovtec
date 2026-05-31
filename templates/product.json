@@ -65,11 +65,12 @@
           "type": "story",
           "settings": {
             "id": "story-controller",
+            "image": "shopify://shop_images/Bedieneinheit_angepasst_fed42756-0338-448e-8e22-d23045cf6a8c.png",
             "image_label": "CONTROLLER DETAIL · LED-Farbdisplay",
             "image_right": true,
             "dark": false,
             "eyebrow": "Technologie · Controller",
-            "heading": "Volle Kontrolle.\nDirekt am Gerät.",
+            "heading": "Volle Kontrolle.Direkt am Gerät.",
             "lead": "LED-Farbdisplay am Bein. Keine App, kein Pairing, kein Konto. Modi und Druckstufen wählst du in Sekunden.",
             "bullets": "",
             "stats": "bis 240::mmHg::Druckstufen|5::Modi::Massage-Programme|3::Std::Akkulaufzeit|<45::dB::Flüsterleise im Betrieb"
