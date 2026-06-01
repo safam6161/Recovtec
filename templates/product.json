@@ -51,6 +51,7 @@
           "type": "story",
           "settings": {
             "id": "story-360",
+            "image": "shopify://shop_images/hf_20260601_200247_61c6e104-d208-4a2a-821f-36d18ed0ec46.png",
             "image_label": "360° KOMPRESSION · 4 ZONEN",
             "image_right": false,
             "dark": true,
@@ -65,7 +66,6 @@
           "type": "story",
           "settings": {
             "id": "story-controller",
-            "image": "shopify://shop_images/Bedieneinheit_angepasst_fed42756-0338-448e-8e22-d23045cf6a8c.png",
             "image_label": "CONTROLLER DETAIL · LED-Farbdisplay",
             "image_right": true,
             "dark": false,
