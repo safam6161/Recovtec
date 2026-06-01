@@ -473,7 +473,10 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .story-flip .story-media { order: 2; }
 .story-flip .story-text { order: 1; }
 .story-img { aspect-ratio: 4/5; overflow: hidden; }
+.story-img img { width: 100%; height: 100%; object-fit: cover; }
 .story-img .placeholder { height: 100%; min-height: 400px; }
+/* 360°-Block: reines Schwarz, damit das schwarze Bild randlos verschmilzt */
+#story-360 { background: #000; }
 .story-eyebrow { display: block; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-bottom: 16px; }
 .story-dark .story-eyebrow { color: rgba(250,250,250,0.35); }
 .story-headline { font-size: clamp(26px,3vw,44px); letter-spacing: -0.025em; line-height: 1.05; color: var(--ink); margin-bottom: 20px; }
