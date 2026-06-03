@@ -66,6 +66,7 @@
           "type": "story",
           "settings": {
             "id": "story-controller",
+            "image": "shopify://shop_images/Bedieneinheit_angepasst.png",
             "image_label": "CONTROLLER DETAIL · LED-Farbdisplay",
             "image_right": true,
             "dark": false,
