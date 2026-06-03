@@ -477,7 +477,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .story-img .placeholder { height: 100%; min-height: 400px; }
 /* Modi-Diagramm vollständig zeigen (Infografik nicht zuschneiden) */
 #story-modi .story-img { aspect-ratio: auto; overflow: visible; }
-#story-modi .story-img img { height: auto; object-fit: contain; }
+#story-modi .story-img img { height: auto; object-fit: contain; mix-blend-mode: multiply; }
 /* 360°-Block: reines Schwarz, damit das schwarze Bild randlos verschmilzt */
 #story-360 { background: #000; }
 .story-eyebrow { display: block; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-bottom: 16px; }
