@@ -241,7 +241,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 }
 .usp { background: var(--ink); padding: clamp(28px,3vw,48px); display: flex; flex-direction: column; gap: 12px; }
 .usp.usp-image { grid-row: span 2; padding: 0; overflow: hidden; }
-.usp.usp-image .ph { aspect-ratio: 4 / 5; }
+.usp.usp-image .ph { flex: 1; min-height: 420px; }
 .usp.usp-image .ph img { width: 100%; height: 100%; object-fit: cover; }
 .usp.usp-image .placeholder { height: 100%; }
 .usp-wide { grid-column: span 2; }
