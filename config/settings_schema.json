@@ -3,7 +3,9 @@
     "name": "theme_info",
     "theme_name": "RECOVTEC",
     "theme_version": "1.0.0",
-    "theme_author": "RECOVTEC"
+    "theme_author": "RECOVTEC",
+    "theme_documentation_url": "https://recovtec.com",
+    "theme_support_url": "https://recovtec.com"
   },
   {
     "name": "Farben",
