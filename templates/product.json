@@ -104,9 +104,9 @@
         "modes": {
           "type": "mode_levels",
           "settings": {
-            "left_eyebrow": "Druck-Empfehlung · 5 Stufen",
-            "left_headline": "Die richtige Stufe\nfür jeden Tag.",
-            "levels": "Stufe 1::Für die tägliche Massage und sanfte Entspannung.|Stufe 2–3::Ideal zum Aufwärmen vor dem Training und zum Lockern der Muskeln.|Stufe 4–5::Tiefe Regeneration, schnelle Erholung und gezielte Massage nach harten Einheiten.",
+            "left_eyebrow": "Modus-Empfehlung · 5 Modi",
+            "left_headline": "Der richtige Modus\nfür jeden Tag.",
+            "levels": "Modus 1::Für die tägliche Massage und sanfte Entspannung.|Modus 2–3::Ideal zum Aufwärmen vor dem Training und zum Lockern der Muskeln.|Modus 4–5::Tiefe Regeneration, schnelle Erholung und gezielte Massage nach harten Einheiten.",
             "right_eyebrow": "Intelligente Drucksteuerung",
             "right_headline": "Pressure Control Technology",
             "right_text": "Ein intelligenter Drucksensor passt die Massage automatisch an deine Beinform an. So bekommt jedes Bein den richtigen Druck — angenehm und effektiv, unabhängig von der Beingröße."

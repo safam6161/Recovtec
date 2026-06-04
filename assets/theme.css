@@ -518,15 +518,15 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .ml-side { background: var(--paper); padding: clamp(28px,3vw,48px); display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--line); }
 .ml-eyebrow { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,250,250,0.35); }
 .ml-side .ml-eyebrow { color: var(--mute); }
-.ml-card h3 { font-size: clamp(20px,2vw,28px); letter-spacing: -0.02em; color: var(--paper); }
+.ml-card h3 { font-size: clamp(23px,2.4vw,32px); letter-spacing: -0.02em; color: var(--paper); }
 .ml-side h4 { font-size: 18px; font-weight: 600; color: var(--ink); }
 .ml-side p { font-size: 14px; color: var(--mute); line-height: 1.65; }
 .ml-rows { display: flex; flex-direction: column; }
-.ml-row { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.ml-row { display: flex; gap: 16px; align-items: flex-start; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
 .ml-row:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
-.ml-level { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,250,250,0.70); flex-shrink: 0; width: 72px; padding-top: 1px; }
+.ml-level { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,250,250,0.70); flex-shrink: 0; width: 88px; padding-top: 1px; }
 .ml-level-strong { color: rgba(250,250,250,0.95); }
-.ml-desc { font-size: 13px; color: rgba(250,250,250,0.80); line-height: 1.5; }
+.ml-desc { font-size: 15px; color: rgba(250,250,250,0.80); line-height: 1.6; }
 .ml-graph { aspect-ratio: 16/9; overflow: hidden; margin-top: 8px; }
 .ml-graph .placeholder { height: 100%; min-height: 120px; }
 
