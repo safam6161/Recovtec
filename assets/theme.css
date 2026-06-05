@@ -347,6 +347,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .contact-card .h-4 { font-size: 16px; color: var(--ink); }
 .contact-card a { font-size: 13px; color: var(--mute); text-decoration: underline; text-underline-offset: 3px; transition: color 0.15s; }
 .contact-card a:hover { color: var(--ink); }
+.faq-contact-btn { align-self: flex-start; margin-top: 4px; }
 .acc { border-top: 1px solid var(--line); }
 .acc-item { border-bottom: 1px solid var(--line); }
 .acc-trigger {
