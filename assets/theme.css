@@ -160,6 +160,10 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
   background: var(--ink); overflow: hidden;
   display: flex; align-items: center;
 }
+/* Web/Desktop: Hero im 16:9-Format des Bildes -> Bild wird vollstaendig ohne Zoom gezeigt. Mobile/App bleibt unveraendert. */
+@media (min-width: 1025px) {
+  .hero { height: auto; aspect-ratio: 16 / 9; }
+}
 .hero-media { position: absolute; inset: 0; }
 .hero-media img, .hero-media video { width: 100%; height: 100%; object-fit: cover; }
 .hero-placeholder {
