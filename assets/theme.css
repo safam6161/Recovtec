@@ -195,9 +195,10 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
   font-family: var(--f-body); font-size: 14px;
   color: rgba(255,255,255,0.85); letter-spacing: 0.01em;
 }
-/* Web/Desktop (>=1025px): Hero als kompakter Banner (gedeckelte Hoehe, ~Referenzgroesse). Bild fuellt per cover. Mobile/App (<=1024px) bleibt unveraendert. */
+/* Web/Desktop (>=1025px): Hero hoeher + Bildausschnitt unten verankert, damit die Boots komplett sichtbar bleiben. Mobile/App (<=1024px) bleibt unveraendert. */
 @media (min-width: 1025px) {
-  .hero { height: clamp(460px, 72vh, 700px); }
+  .hero { height: clamp(540px, 88vh, 960px); }
+  .hero-media img { object-position: center bottom; }
 }
 
 /* ===== Trust Ribbon ===== */
