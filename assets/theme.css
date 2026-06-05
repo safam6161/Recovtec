@@ -240,8 +240,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
   border: 1px solid rgba(255,255,255,0.08);
 }
 .usp { background: var(--ink); padding: clamp(28px,3vw,48px); display: flex; flex-direction: column; gap: 12px; }
-.usp.usp-image { grid-row: span 2; padding: 0; overflow: hidden; }
-.usp.usp-image .ph { flex: 1; min-height: 420px; }
+.usp.usp-image { grid-row: span 2; padding: 0; overflow: hidden; align-items: center; justify-content: center; }
+/* Desktop: Bild im natürlichen 4:5-Format mittig in der hohen Spalte (kein starkes Beschneiden); restlicher Platz = nahtloses Sektions-Schwarz */
+.usp.usp-image .ph { width: 100%; aspect-ratio: 4 / 5; flex: 0 0 auto; max-height: 100%; }
 .usp.usp-image .ph img {
   width: 100%; height: 100%; object-fit: cover;
   /* Ränder weich in den dunklen Hintergrund auslaufen lassen, damit die Bildecken/-kanten unsichtbar werden */
