@@ -1,9 +1,23 @@
 <section class="hero">
   <div class="hero-media">
-    {%- if section.settings.hero_image != blank -%}
-      {{ section.settings.hero_image | image_url: width: 1800 | image_tag: alt: section.settings.hero_image.alt, loading: 'eager', fetchpriority: 'high' }}
-    {%- elsif section.settings.hero_image_url != blank -%}
-      <img src="{{ section.settings.hero_image_url }}" alt="Recovtec Recovery Boots" loading="eager" fetchpriority="high">
+    {%- assign hero_has_desktop = false -%}
+    {%- if section.settings.hero_image != blank or section.settings.hero_image_url != blank -%}{%- assign hero_has_desktop = true -%}{%- endif -%}
+    {%- assign hero_has_mobile = false -%}
+    {%- if section.settings.hero_image_mobile != blank -%}{%- assign hero_has_mobile = true -%}{%- endif -%}
+
+    {%- if hero_has_desktop or hero_has_mobile -%}
+      <picture>
+        {%- if hero_has_mobile and hero_has_desktop -%}
+          <source media="(max-width: 1024px)" srcset="{{ section.settings.hero_image_mobile | image_url: width: 1200 }}">
+        {%- endif -%}
+        {%- if section.settings.hero_image != blank -%}
+          <img src="{{ section.settings.hero_image | image_url: width: 2000 }}" alt="{{ section.settings.hero_image.alt | default: 'Recovtec Recovery Boots' }}" loading="eager" fetchpriority="high">
+        {%- elsif section.settings.hero_image_url != blank -%}
+          <img src="{{ section.settings.hero_image_url }}" alt="Recovtec Recovery Boots" loading="eager" fetchpriority="high">
+        {%- else -%}
+          <img src="{{ section.settings.hero_image_mobile | image_url: width: 2000 }}" alt="{{ section.settings.hero_image_mobile.alt | default: 'Recovtec Recovery Boots' }}" loading="eager" fetchpriority="high">
+        {%- endif -%}
+      </picture>
     {%- else -%}
       <div class="hero-placeholder">
         <div class="placeholder-label" style="background:rgba(0,0,0,0.55);color:rgba(255,255,255,0.7)">HERO · Sportler nach hartem Training mit Recovery Boots · Bild oder Video, full-bleed</div>
@@ -37,6 +51,7 @@
   "settings": [
     { "type": "image_picker", "id": "hero_image", "label": "Hero Bild" },
     { "type": "text", "id": "hero_image_url", "label": "Hero Bild URL (Fallback)", "info": "Wird genutzt wenn kein Hero-Bild ausgewählt ist." },
+    { "type": "image_picker", "id": "hero_image_mobile", "label": "Hero Bild (Mobil)", "info": "Optional. Eigenes hohes/quadratisches Bild fürs Handy. Wenn leer, wird das Desktop-Bild verwendet." },
     { "type": "textarea", "id": "headline", "label": "Headline", "default": "HART TRAINIERT.\nSCHNELL ERHOLT.\nRECOVTEC." },
     { "type": "textarea", "id": "subhead", "label": "Sub-Headline", "default": "Pneumatische Recovery Boots — kabellos, leise, 5 Modi, 7 Druckstufen bis 240 mmHg. 30 Tage testen." },
     { "type": "text", "id": "cta_label", "label": "Button Text", "default": "Produkt ansehen" },
