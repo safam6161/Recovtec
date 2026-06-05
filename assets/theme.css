@@ -641,6 +641,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 }
 @media (max-width:720px) {
   .ribbon-inner { grid-template-columns: 1fr 1fr; }
+  /* Grid auf volle Breite: Trennlinien werden genauso lang wie die obere/untere Leisten-Linie */
+  .ribbon .container { padding-left: 0; padding-right: 0; }
   /* 2x2: Trennlinien sauber verbinden — kein überstehender Strich rechts, horizontale Linie nach der oberen Reihe */
   .ribbon-item { border-bottom: 1px solid var(--line); }
   .ribbon-item:nth-child(even) { border-right: none; }
