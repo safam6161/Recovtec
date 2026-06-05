@@ -10,6 +10,12 @@
           <div class="h-4">{{ section.settings.email }}</div>
           <a href="mailto:{{ section.settings.email }}">Nachricht schreiben →</a>
         </div>
+        {%- if section.settings.contact_button_label != blank -%}
+          <a href="{{ section.settings.contact_button_url | default: '/pages/kontakt' }}" class="btn btn-primary faq-contact-btn">
+            {{ section.settings.contact_button_label }}
+            <span class="btn-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 9h14M11 4l5 5-5 5"/></svg></span>
+          </a>
+        {%- endif -%}
       </div>
       <div>
         <div class="acc">
@@ -39,7 +45,9 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "05 — FAQ" },
     { "type": "textarea", "id": "headline", "label": "Headline", "default": "Häufige Fragen.\nKlare Antworten." },
     { "type": "text", "id": "subtext", "label": "Subtext", "default": "Du hast eine andere Frage? Schreib uns direkt — meistens antworten wir innerhalb eines Werktages." },
-    { "type": "text", "id": "email", "label": "E-Mail", "default": "support@recovtec.de" }
+    { "type": "text", "id": "email", "label": "E-Mail", "default": "support@recovtec.de" },
+    { "type": "text", "id": "contact_button_label", "label": "Button Text", "default": "Zum Kontaktformular" },
+    { "type": "url", "id": "contact_button_url", "label": "Button Link (Kontaktseite)" }
   ],
   "blocks": [
     {
