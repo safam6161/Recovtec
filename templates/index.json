@@ -398,7 +398,9 @@
         "eyebrow": "05 — FAQ",
         "headline": "Häufige Fragen.\nKlare Antworten.",
         "subtext": "Du hast eine andere Frage? Schreib uns direkt — meistens antworten wir innerhalb eines Werktages.",
-        "email": "support@recovtec.de"
+        "email": "support@recovtec.de",
+        "contact_button_label": "Zum Kontaktformular",
+        "contact_button_url": "shopify://pages/contact"
       }
     },
     "final_cta": {
