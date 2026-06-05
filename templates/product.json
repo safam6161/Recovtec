@@ -116,6 +116,7 @@
           "type": "story",
           "settings": {
             "id": "story-paket",
+            "image": "shopify://shop_images/hf_20260601_185648_b8ec2646-1669-45ca-b1a1-cf01ffa8348b.png",
             "image_label": "FLATLAY · Boots + Rucksack + Erweiterungslaschen",
             "image_right": true,
             "dark": false,
