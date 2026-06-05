@@ -1,3 +1,4 @@
+{%- comment -%} Product Story: Story-Reihen, Garantie-Banner, Druck-Empfehlung & Pumpen-Block {%- endcomment -%}
 {%- for block in section.blocks -%}
   {%- if block.type == 'story' -%}
     <section id="{{ block.settings.id }}"
@@ -88,15 +89,28 @@
             <span class="ml-eyebrow">{{ block.settings.right_eyebrow }}</span>
             <h4>{{ block.settings.right_headline }}</h4>
             <p>{{ block.settings.right_text }}</p>
-            <div style="margin-top:8px;background:var(--paper-2);border:1px solid var(--line);padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;gap:16px;">
-              <span style="font-family:var(--f-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mute);">Hochleistungs-Luftpumpe</span>
-              <div style="display:flex;align-items:baseline;gap:8px;line-height:1;">
-                <span style="font-family:var(--f-display);font-size:clamp(44px,5.5vw,68px);font-weight:700;letter-spacing:-0.03em;color:var(--ink);">12</span>
-                <span style="font-family:var(--f-mono);font-size:14px;font-weight:500;color:var(--mute);">L/min</span>
+            {%- if block.settings.graph_image != blank -%}
+              <div class="ml-graph">
+                {{ block.settings.graph_image | image_url: width: 800 | image_tag: alt: 'Druckkurve' }}
               </div>
-              <div style="font-family:var(--f-display);font-size:clamp(16px,1.7vw,20px);font-weight:600;line-height:1.25;color:var(--ink);">In unter 1 Minute aufgepumpt</div>
-              <p style="font-size:13.5px;color:var(--mute);line-height:1.65;margin:0;">Leistungsstarke, patentierte 3D-Pumpe für besonders schnelles Aufpumpen.</p>
-            </div>
+            {%- else -%}
+              <div class="pump-spec">
+                {%- if block.settings.pump_eyebrow != blank -%}
+                  <span class="pump-eyebrow">{{ block.settings.pump_eyebrow }}</span>
+                {%- endif -%}
+                <div class="pump-main">
+                  {%- if block.settings.pump_value != blank -%}
+                    <div class="pump-figure">{{ block.settings.pump_value }}<small>{{ block.settings.pump_unit }}</small></div>
+                  {%- endif -%}
+                  {%- if block.settings.pump_headline != blank -%}
+                    <div class="pump-headline">{{ block.settings.pump_headline }}</div>
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.pump_text != blank -%}
+                  <p>{{ block.settings.pump_text }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
           </div>
         </div>
       </div>
@@ -146,7 +160,13 @@
         { "type": "text", "id": "right_eyebrow", "label": "Rechts Eyebrow", "default": "Intelligente Drucksteuerung" },
         { "type": "text", "id": "right_headline", "label": "Rechts Headline", "default": "Pressure Control Technology" },
         { "type": "textarea", "id": "right_text", "label": "Rechts Text", "default": "Ein intelligenter Drucksensor passt die Massage automatisch an deine Beinform an. So bekommt jedes Bein den richtigen Druck — angenehm und effektiv, unabhängig von der Beingröße." },
-        { "type": "image_picker", "id": "graph_image", "label": "Diagramm Bild" }
+        { "type": "image_picker", "id": "graph_image", "label": "Diagramm Bild" },
+        { "type": "header", "content": "Luftpumpe (wird gezeigt, wenn kein Diagramm-Bild gesetzt ist)" },
+        { "type": "text", "id": "pump_eyebrow", "label": "Pumpe Eyebrow", "default": "Hochleistungs-Luftpumpe" },
+        { "type": "text", "id": "pump_value", "label": "Pumpe Wert", "default": "12" },
+        { "type": "text", "id": "pump_unit", "label": "Pumpe Einheit", "default": "L/min" },
+        { "type": "text", "id": "pump_headline", "label": "Pumpe Headline", "default": "In unter 1 Minute aufgepumpt" },
+        { "type": "textarea", "id": "pump_text", "label": "Pumpe Text", "default": "Leistungsstarke, patentierte 3D-Pumpe für besonders schnelles Aufpumpen." }
       ]
     }
   ],
