@@ -160,10 +160,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
   background: var(--ink); overflow: hidden;
   display: flex; align-items: center;
 }
-/* Web/Desktop: Hero im 16:9-Format des Bildes -> Bild wird vollstaendig ohne Zoom gezeigt. Mobile/App bleibt unveraendert. */
-@media (min-width: 1025px) {
-  .hero { height: auto; aspect-ratio: 16 / 9; }
-}
 .hero-media { position: absolute; inset: 0; }
 .hero-media img, .hero-media video { width: 100%; height: 100%; object-fit: cover; }
 .hero-placeholder {
@@ -197,6 +193,13 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .hero-price {
   font-family: var(--f-body); font-size: 14px;
   color: rgba(255,255,255,0.85); letter-spacing: 0.01em;
+}
+/* Web/Desktop (>=1025px): kompletten Bildausschnitt zeigen — Hero-Hoehe folgt dem Bild (kein Zoom, keine weissen Raender). Mobile/App (<=1024px) bleibt unveraendert. */
+@media (min-width: 1025px) {
+  .hero { height: auto; aspect-ratio: auto; display: block; }
+  .hero-media { position: relative; inset: auto; }
+  .hero-media img, .hero-media video { height: auto; object-fit: contain; }
+  .hero-content { position: absolute; inset: 0; margin: 0 auto; justify-content: center; }
 }
 
 /* ===== Trust Ribbon ===== */
