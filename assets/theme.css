@@ -194,12 +194,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
   font-family: var(--f-body); font-size: 14px;
   color: rgba(255,255,255,0.85); letter-spacing: 0.01em;
 }
-/* Web/Desktop (>=1025px): kompletten Bildausschnitt zeigen — Hero-Hoehe folgt dem Bild (kein Zoom, keine weissen Raender). Mobile/App (<=1024px) bleibt unveraendert. */
+/* Web/Desktop (>=1025px): Hero als kompakter Banner (gedeckelte Hoehe, ~Referenzgroesse). Bild fuellt per cover. Mobile/App (<=1024px) bleibt unveraendert. */
 @media (min-width: 1025px) {
-  .hero { height: auto; aspect-ratio: auto; display: block; }
-  .hero-media { position: relative; inset: auto; }
-  .hero-media img, .hero-media video { height: auto; object-fit: contain; }
-  .hero-content { position: absolute; inset: 0; margin: 0 auto; justify-content: center; }
+  .hero { height: clamp(460px, 72vh, 700px); }
 }
 
 /* ===== Trust Ribbon ===== */
