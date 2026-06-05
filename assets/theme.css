@@ -641,6 +641,10 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 }
 @media (max-width:720px) {
   .ribbon-inner { grid-template-columns: 1fr 1fr; }
+  /* 2x2: Trennlinien sauber verbinden — kein überstehender Strich rechts, horizontale Linie nach der oberen Reihe */
+  .ribbon-item { border-bottom: 1px solid var(--line); }
+  .ribbon-item:nth-child(even) { border-right: none; }
+  .ribbon-item:nth-last-child(-n+2) { border-bottom: none; }
   .testimonial-cards { grid-template-columns: 1fr; }
   .compare-cell { padding: 12px 10px; font-size: 12px; }
   .foot-top { grid-template-columns: 1fr; }
