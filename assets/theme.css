@@ -158,7 +158,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
   position: relative;
   height: clamp(520px, 88vh, 880px);
   background: var(--ink); overflow: hidden;
-  display: flex; align-items: center;
+  display: flex; align-items: flex-start;
 }
 .hero-media { position: absolute; inset: 0; }
 .hero-media img, .hero-media video { width: 100%; height: 100%; object-fit: cover; }
@@ -175,7 +175,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 }
 .hero-content {
   position: relative; z-index: 2;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 40px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
+  padding-top: clamp(16px, 3.5vh, 40px);
 }
 .hero-headline {
   font-family: var(--f-display);
@@ -189,7 +190,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
   line-height: 1.5; color: rgba(255,255,255,0.92);
   max-width: 640px; margin: -16px 0 0;
 }
-.hero-cta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: clamp(48px, 12vh, 140px); }
+.hero-cta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 0; }
 .hero-cta-row .btn { height: 54px; padding: 0 30px; font-size: 14px; }
 .hero-price {
   font-family: var(--f-body); font-size: 14px;
