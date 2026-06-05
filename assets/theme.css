@@ -203,6 +203,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
   /* Headline weiter oben, Button direkt darunter */
   .hero-content { padding-top: clamp(56px, 13vh, 150px); gap: 24px; }
   .hero-cta-row { margin-top: 0; }
+  /* Button im Web: weisser Hintergrund, schwarze Schrift */
+  .hero-cta-row .btn-primary { background: var(--paper); color: var(--ink); }
+  .hero-cta-row .btn-primary:hover { background: var(--paper-2); }
 }
 
 /* ===== Trust Ribbon ===== */
