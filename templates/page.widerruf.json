@@ -1,9 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "widerruf",
+      "settings": {
+        "eyebrow": "Widerruf",
+        "headline": "Vertrag widerrufen",
+        "intro": "Du möchtest deinen Kauf widerrufen? Trage die Pflichtangaben ein und klicke auf „Widerruf bestätigen“. Den Eingang bestätigen wir dir per E-Mail mit Inhalt und Zeitpunkt.",
+        "declaration": "Hiermit widerrufe(n) ich/wir den von mir/uns abgeschlossenen Vertrag über den Kauf der folgenden Waren. Mit Klick auf „Widerruf bestätigen“ wird der Widerruf verbindlich erklärt.",
+        "success_title": "Dein Widerruf ist eingegangen.",
+        "success_text": "Wir haben deine Widerrufserklärung erhalten. Eine Bestätigung mit Inhalt und Zeitpunkt erhältst du zusätzlich per E-Mail."
+      }
+    },
+    "17807444446b448171": {
+      "type": "apps",
+      "blocks": {
+        "eu_widerruf_button_button_z4iCUr": {
+          "type": "shopify://apps/eu-widerruf-button/blocks/button/019b2ca9-9838-7858-9694-3a8051afa76e",
+          "settings": {
+            "button_text": "Widerruf einreichen",
+            "button_style": "filled",
+            "button_size": "medium",
+            "button_bg_color": "#000000",
+            "button_text_color": "#FFFFFF",
+            "button_border_color": "#000000",
+            "button_alignment": "center",
+            "full_width": false,
+            "section_padding": 40
+          }
+        }
+      },
+      "block_order": [
+        "eu_widerruf_button_button_z4iCUr"
+      ],
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "17807444446b448171"
+  ]
 }
