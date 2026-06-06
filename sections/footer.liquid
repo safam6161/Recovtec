@@ -28,17 +28,6 @@
         <p style="text-align:left">{{ section.settings.tagline }}</p>
       </div>
 
-      {%- if section.settings.menu_service != blank -%}
-        <div class="foot-col">
-          <h5>{{ section.settings.col1_heading }}</h5>
-          <ul>
-            {%- for link in linklists[section.settings.menu_service].links -%}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {%- endfor -%}
-          </ul>
-        </div>
-      {%- endif -%}
-
       {%- if section.settings.menu_company != blank -%}
         <div class="foot-col">
           <h5>{{ section.settings.col2_heading }}</h5>
@@ -75,12 +64,9 @@
   "name": "Footer",
   "settings": [
     { "type": "text", "id": "tagline", "label": "Tagline", "default": "Eigenmarke für professionelle Recovery. Faire Preise, volle Ausstattung, ehrlich kalkuliert." },
-    { "type": "header", "content": "Spalte 1 - Service" },
-    { "type": "text", "id": "col1_heading", "label": "Ueberschrift Spalte 1", "default": "Service" },
-    { "type": "link_list", "id": "menu_service", "label": "Menue Spalte 1" },
-    { "type": "header", "content": "Spalte 2 - Unternehmen" },
-    { "type": "text", "id": "col2_heading", "label": "Ueberschrift Spalte 2", "default": "Unternehmen" },
-    { "type": "link_list", "id": "menu_company", "label": "Menue Spalte 2" },
+    { "type": "header", "content": "Spalte Unternehmen" },
+    { "type": "text", "id": "col2_heading", "label": "Ueberschrift", "default": "Unternehmen" },
+    { "type": "link_list", "id": "menu_company", "label": "Menue Unternehmen" },
     { "type": "header", "content": "Fusszeile" },
     { "type": "text", "id": "legal", "label": "Copyright", "default": "(c) 2026 Recovtec - Deutschland" },
     { "type": "text", "id": "shipping_note", "label": "Versand-Hinweis", "default": "Versand mit DHL" },
