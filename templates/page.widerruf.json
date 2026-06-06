@@ -22,25 +22,6 @@
     },
     "17807444446b448171": {
       "type": "apps",
-      "blocks": {
-        "eu_widerruf_button_button_z4iCUr": {
-          "type": "shopify://apps/eu-widerruf-button/blocks/button/019b2ca9-9838-7858-9694-3a8051afa76e",
-          "settings": {
-            "button_text": "Widerruf einreichen",
-            "button_style": "filled",
-            "button_size": "medium",
-            "button_bg_color": "#000000",
-            "button_text_color": "#FFFFFF",
-            "button_border_color": "#000000",
-            "button_alignment": "center",
-            "full_width": false,
-            "section_padding": 40
-          }
-        }
-      },
-      "block_order": [
-        "eu_widerruf_button_button_z4iCUr"
-      ],
       "settings": {}
     }
   },
