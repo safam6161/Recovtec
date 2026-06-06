@@ -30,63 +30,51 @@
         <input type="hidden" name="contact[subject]" value="Widerrufserklärung (über Widerrufsbutton)">
         <input type="hidden" name="contact[body]" id="wf-body" value="">
 
-        <!-- Schritt 1: Formular -->
-        <div class="wf-step" data-wf-step="1">
-          <p class="wf-decl">{{ section.settings.declaration | default: 'Hiermit widerrufe(n) ich/wir den von mir/uns abgeschlossenen Vertrag über den Kauf der folgenden Waren:' }}</p>
+        <p class="wf-decl">{{ section.settings.declaration | default: 'Hiermit widerrufe(n) ich/wir den von mir/uns abgeschlossenen Vertrag über den Kauf der folgenden Waren. Mit Klick auf „Widerruf bestätigen“ wird der Widerruf verbindlich erklärt.' }}</p>
 
-          <label class="wf-full">
-            <span>Ware / Produkt *</span>
-            <input type="text" name="contact[Ware / Produkt]" required>
+        <div class="wf-row">
+          <label>
+            <span>Name *</span>
+            <input type="text" name="contact[name]" required value="{% if customer %}{{ customer.name }}{% endif %}">
           </label>
-
-          <div class="wf-row wf-row-3">
-            <label>
-              <span>Bestellnummer</span>
-              <input type="text" name="contact[Bestellnummer]">
-            </label>
-            <label>
-              <span>Bestellt am</span>
-              <input type="text" name="contact[Bestellt am]" placeholder="TT.MM.JJJJ">
-            </label>
-            <label>
-              <span>Erhalten am</span>
-              <input type="text" name="contact[Erhalten am]" placeholder="TT.MM.JJJJ">
-            </label>
-          </div>
-
-          <div class="wf-row">
-            <label>
-              <span>Name *</span>
-              <input type="text" name="contact[name]" required value="{% if customer %}{{ customer.name }}{% endif %}">
-            </label>
-            <label>
-              <span>E-Mail *</span>
-              <input type="email" name="contact[email]" required value="{% if customer %}{{ customer.email }}{% endif %}">
-            </label>
-          </div>
-
-          <label class="wf-full">
-            <span>Anschrift *</span>
-            <input type="text" name="contact[Anschrift]" required placeholder="Straße & Hausnummer, PLZ, Ort">
+          <label>
+            <span>E-Mail *</span>
+            <input type="email" name="contact[email]" required value="{% if customer %}{{ customer.email }}{% endif %}">
           </label>
-
-          <label class="wf-check">
-            <input type="checkbox" name="contact[Erklärung]" value="Ja – Widerruf des oben genannten Vertrags" required>
-            <span>{{ section.settings.checkbox | default: 'Ich erkläre hiermit verbindlich den Widerruf des oben angegebenen Vertrags.' }}</span>
-          </label>
-
-          <button type="button" class="btn btn-primary" data-wf-next>Weiter zur Bestätigung</button>
         </div>
 
-        <!-- Schritt 2: Prüfen & bestätigen -->
-        <div class="wf-step" data-wf-step="2" hidden>
-          <p class="wf-step2-hint">Bitte prüfe deine Angaben. Mit „Widerruf bestätigen" sendest du die verbindliche Widerrufserklärung ab.</p>
-          <pre class="wf-review" id="wf-review"></pre>
-          <div class="wf-actions">
-            <button type="button" class="wf-btn-line" data-wf-back>Zurück &amp; ändern</button>
-            <button type="submit" class="btn btn-primary" data-wf-confirm>Widerruf bestätigen</button>
-          </div>
+        <label class="wf-full">
+          <span>Bestellnummer *</span>
+          <input type="text" name="contact[Bestellnummer]" required placeholder="z. B. #1234">
+          <small class="wf-hint">Zur eindeutigen Zuordnung deiner Bestellung — findest du in deiner Bestellbestätigung.</small>
+        </label>
+
+        <p class="wf-optional-head">Freiwillige Angaben (helfen uns bei der Zuordnung):</p>
+
+        <label class="wf-full">
+          <span>Ware / Produkt (optional)</span>
+          <input type="text" name="contact[Ware / Produkt]">
+        </label>
+
+        <div class="wf-row">
+          <label>
+            <span>Bestellt am (optional)</span>
+            <input type="text" name="contact[Bestellt am]" placeholder="TT.MM.JJJJ">
+          </label>
+          <label>
+            <span>Erhalten am (optional)</span>
+            <input type="text" name="contact[Erhalten am]" placeholder="TT.MM.JJJJ">
+          </label>
         </div>
+
+        <label class="wf-full">
+          <span>Anschrift (optional)</span>
+          <input type="text" name="contact[Anschrift]" placeholder="Straße &amp; Hausnummer, PLZ, Ort">
+        </label>
+
+        <p class="wf-required-note">* Pflichtfeld. Alle weiteren Angaben sind freiwillig.</p>
+
+        <button type="submit" class="btn btn-primary" id="wf-confirm">Widerruf bestätigen</button>
       {%- endif -%}
     {% endform %}
 
@@ -95,31 +83,29 @@
 
 <style>
   .wf { padding: clamp(48px,6vw,96px) 0; background: var(--paper); }
-  .wf-inner { max-width: 760px; }
+  .wf-inner { max-width: 720px; }
   .wf-head { margin-bottom: clamp(28px,3.5vw,48px); }
   .wf-title { font-family: var(--f-display); font-size: clamp(28px,3.5vw,44px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin: 12px 0 16px; }
   .wf-sub { font-size: 15px; color: var(--mute); line-height: 1.6; max-width: 60ch; }
   .wf-form { display: flex; flex-direction: column; gap: 16px; }
-  .wf-decl { font-size: 14px; color: var(--ink); line-height: 1.6; margin-bottom: 4px; }
+  .wf-decl { font-size: 14px; color: var(--ink); line-height: 1.6; }
   .wf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .wf-row-3 { grid-template-columns: 1fr 1fr 1fr; }
   .wf-form label { display: flex; flex-direction: column; gap: 6px; }
-  .wf-form label.wf-check { flex-direction: row; align-items: flex-start; gap: 10px; }
   .wf-form label span { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
-  .wf-check span { text-transform: none; letter-spacing: 0; font-family: var(--f-body); font-size: 14px; color: var(--ink); line-height: 1.5; }
-  .wf-check input { margin-top: 2px; width: 18px; height: 18px; flex-shrink: 0; accent-color: var(--ink); }
   .wf-form input[type="text"], .wf-form input[type="email"] {
     width: 100%; padding: 12px 14px; font: inherit; font-size: 15px;
     background: var(--paper); color: var(--ink); border: 1px solid var(--line-2); border-radius: 0;
   }
   .wf-form input:focus { outline: none; border-color: var(--ink); }
-  .wf-step2-hint { font-size: 14px; color: var(--mute); line-height: 1.6; }
-  .wf-review, .wf-receipt {
+  .wf-hint { font-family: var(--f-body); font-size: 12px; color: var(--mute); margin-top: 2px; }
+  .wf-optional-head { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); margin-top: 8px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .wf-required-note { font-size: 12px; color: var(--mute); }
+  #wf-confirm { align-self: flex-start; margin-top: 4px; }
+  .wf-receipt {
     font-family: var(--f-mono); font-size: 13px; line-height: 1.7; color: var(--ink);
     white-space: pre-wrap; word-break: break-word; margin: 0;
     padding: 18px 20px; background: var(--paper-2); border: 1px solid var(--line);
   }
-  .wf-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 4px; }
   .wf-btn-line {
     display: inline-flex; align-items: center; height: 52px; padding: 0 22px;
     font-family: var(--f-ui); font-size: 14px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase;
@@ -134,7 +120,7 @@
   .wf-success .wf-receipt { background: rgba(255,255,255,0.6); border-color: #b6e1c5; color: #14492a; margin: 14px 0 18px; }
   .wf-errors { padding: 14px 18px; background: #fdecec; border: 1px solid #f3b8b8; color: #8a1c1c; font-size: 14px; }
   @media (max-width:680px) {
-    .wf-row, .wf-row-3 { grid-template-columns: 1fr; }
+    .wf-row { grid-template-columns: 1fr; }
   }
 </style>
 
@@ -158,19 +144,18 @@
     return;
   }
 
-  var step1 = form.querySelector('[data-wf-step="1"]');
-  var step2 = form.querySelector('[data-wf-step="2"]');
-  var review = document.getElementById('wf-review');
   var bodyField = document.getElementById('wf-body');
 
-  function collect(){
+  // Beim Absenden (nur wenn Pflichtfelder gültig sind) strukturierte
+  // Widerrufserklärung + Zeitstempel zusammenbauen.
+  form.addEventListener('submit', function(){
     var map = [
-      ['contact[Ware / Produkt]', 'Ware / Produkt'],
-      ['contact[Bestellnummer]', 'Bestellnummer'],
-      ['contact[Bestellt am]', 'Bestellt am'],
-      ['contact[Erhalten am]', 'Erhalten am'],
       ['contact[name]', 'Name'],
       ['contact[email]', 'E-Mail'],
+      ['contact[Bestellnummer]', 'Bestellnummer'],
+      ['contact[Ware / Produkt]', 'Ware / Produkt'],
+      ['contact[Bestellt am]', 'Bestellt am'],
+      ['contact[Erhalten am]', 'Erhalten am'],
       ['contact[Anschrift]', 'Anschrift']
     ];
     var lines = [];
@@ -179,32 +164,12 @@
       var val = el ? (el.value || '').trim() : '';
       if (val) lines.push(p[1] + ': ' + val);
     });
-    return lines;
-  }
-
-  var nextBtn = form.querySelector('[data-wf-next]');
-  if (nextBtn) nextBtn.addEventListener('click', function(){
-    var requireds = step1.querySelectorAll('[required]');
-    for (var i = 0; i < requireds.length; i++){
-      if (!requireds[i].checkValidity()){ requireds[i].reportValidity(); return; }
-    }
     var stamp = new Date().toLocaleString('de-DE');
     var text = 'Hiermit widerrufe ich den von mir abgeschlossenen Vertrag über den Kauf der folgenden Waren:\n\n'
-             + collect().join('\n')
+             + lines.join('\n')
              + '\n\nErklärt am: ' + stamp;
-    review.textContent = text;
-    bodyField.value = text;
+    if (bodyField) bodyField.value = text;
     try { sessionStorage.setItem('wf_receipt', text); } catch (e) {}
-    step1.hidden = true;
-    step2.hidden = false;
-    var top = form.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top: top, behavior: 'smooth' });
-  });
-
-  var backBtn = form.querySelector('[data-wf-back]');
-  if (backBtn) backBtn.addEventListener('click', function(){
-    step2.hidden = true;
-    step1.hidden = false;
   });
 })();
 </script>
@@ -215,9 +180,8 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Widerruf" },
     { "type": "text", "id": "headline", "label": "Überschrift", "default": "Vertrag widerrufen" },
-    { "type": "textarea", "id": "intro", "label": "Einleitung", "default": "Du möchtest deinen Kauf widerrufen? Fülle das folgende Formular aus. Im nächsten Schritt bestätigst du den Widerruf verbindlich. Den Eingang bestätigen wir dir per E-Mail." },
-    { "type": "textarea", "id": "declaration", "label": "Widerrufserklärung (Einleitungssatz)", "default": "Hiermit widerrufe(n) ich/wir den von mir/uns abgeschlossenen Vertrag über den Kauf der folgenden Waren:" },
-    { "type": "text", "id": "checkbox", "label": "Bestätigungs-Checkbox", "default": "Ich erkläre hiermit verbindlich den Widerruf des oben angegebenen Vertrags." },
+    { "type": "textarea", "id": "intro", "label": "Einleitung", "default": "Du möchtest deinen Kauf widerrufen? Trage die Pflichtangaben ein und klicke auf „Widerruf bestätigen“. Den Eingang bestätigen wir dir per E-Mail mit Inhalt und Zeitpunkt." },
+    { "type": "textarea", "id": "declaration", "label": "Widerrufserklärung (Einleitungssatz)", "default": "Hiermit widerrufe(n) ich/wir den von mir/uns abgeschlossenen Vertrag über den Kauf der folgenden Waren. Mit Klick auf „Widerruf bestätigen“ wird der Widerruf verbindlich erklärt." },
     { "type": "header", "content": "Bestätigung nach Absenden" },
     { "type": "text", "id": "success_title", "label": "Titel", "default": "Dein Widerruf ist eingegangen." },
     { "type": "textarea", "id": "success_text", "label": "Text", "default": "Wir haben deine Widerrufserklärung erhalten. Eine Bestätigung mit Inhalt und Zeitpunkt erhältst du zusätzlich per E-Mail." }
