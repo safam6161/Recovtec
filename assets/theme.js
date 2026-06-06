@@ -248,12 +248,17 @@
 
         try {
           const action = (form.getAttribute('action') || '/contact').split('#')[0];
+          // Shopify beantwortet eine erfolgreiche Anmeldung mit einem Redirect.
+          // redirect:'manual' => NICHT folgen, sonst CORS-Fehler bei eigener Domain.
           const res = await fetch(action, {
             method: 'POST',
             headers: { 'Accept': 'application/json' },
-            body: new FormData(form)
+            body: new FormData(form),
+            redirect: 'manual'
           });
-          if (!res.ok) throw new Error('Newsletter request failed: ' + res.status);
+          // Erfolg = Redirect (opaqueredirect / Status 0) ODER 2xx. Sonst echter Fehler.
+          const success = res.type === 'opaqueredirect' || res.status === 0 || res.ok;
+          if (!success) throw new Error('Newsletter request failed: ' + res.status);
 
           // Erfolg: Formular ausblenden, dauerhafte Bestätigung anzeigen
           if (input) input.value = '';
