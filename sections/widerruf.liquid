@@ -49,30 +49,7 @@
           <small class="wf-hint">Zur eindeutigen Zuordnung deiner Bestellung — findest du in deiner Bestellbestätigung.</small>
         </label>
 
-        <p class="wf-optional-head">Freiwillige Angaben (helfen uns bei der Zuordnung):</p>
-
-        <label class="wf-full">
-          <span>Ware / Produkt (optional)</span>
-          <input type="text" name="contact[Ware / Produkt]">
-        </label>
-
-        <div class="wf-row">
-          <label>
-            <span>Bestellt am (optional)</span>
-            <input type="text" name="contact[Bestellt am]" placeholder="TT.MM.JJJJ">
-          </label>
-          <label>
-            <span>Erhalten am (optional)</span>
-            <input type="text" name="contact[Erhalten am]" placeholder="TT.MM.JJJJ">
-          </label>
-        </div>
-
-        <label class="wf-full">
-          <span>Anschrift (optional)</span>
-          <input type="text" name="contact[Anschrift]" placeholder="Straße &amp; Hausnummer, PLZ, Ort">
-        </label>
-
-        <p class="wf-required-note">* Pflichtfeld. Alle weiteren Angaben sind freiwillig.</p>
+        <p class="wf-required-note">* Pflichtfeld.</p>
 
         <button type="submit" class="btn btn-primary" id="wf-confirm">Widerruf bestätigen</button>
       {%- endif -%}
@@ -98,7 +75,6 @@
   }
   .wf-form input:focus { outline: none; border-color: var(--ink); }
   .wf-hint { font-family: var(--f-body); font-size: 12px; color: var(--mute); margin-top: 2px; }
-  .wf-optional-head { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); margin-top: 8px; padding-top: 16px; border-top: 1px solid var(--line); }
   .wf-required-note { font-size: 12px; color: var(--mute); }
   #wf-confirm { align-self: flex-start; margin-top: 4px; }
   .wf-receipt {
@@ -152,11 +128,7 @@
     var map = [
       ['contact[name]', 'Name'],
       ['contact[email]', 'E-Mail'],
-      ['contact[Bestellnummer]', 'Bestellnummer'],
-      ['contact[Ware / Produkt]', 'Ware / Produkt'],
-      ['contact[Bestellt am]', 'Bestellt am'],
-      ['contact[Erhalten am]', 'Erhalten am'],
-      ['contact[Anschrift]', 'Anschrift']
+      ['contact[Bestellnummer]', 'Bestellnummer']
     ];
     var lines = [];
     map.forEach(function(p){
