@@ -6,6 +6,15 @@
     color:var(--paper); text-decoration:none;
     margin-bottom:16px;
   }
+  .foot-widerruf-row { margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .foot-widerruf {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border:1px solid rgba(255,255,255,0.45);
+    font-family:var(--f-ui); font-size:13px; font-weight:600; letter-spacing:0.03em; text-transform:uppercase;
+    color:var(--paper); text-decoration:none;
+    transition:background .15s, color .15s, border-color .15s;
+  }
+  .foot-widerruf:hover { background:var(--paper); color:var(--ink); border-color:var(--paper); }
 </style>
 
 <footer class="footer">
@@ -45,6 +54,12 @@
       {%- endif -%}
     </div>
 
+    {%- if section.settings.widerruf_url != blank -%}
+      <div class="foot-widerruf-row">
+        <a class="foot-widerruf" href="{{ section.settings.widerruf_url }}">{{ section.settings.widerruf_label | default: 'Vertrag widerrufen' }}</a>
+      </div>
+    {%- endif -%}
+
     <div class="foot-bottom">
       <div>{{ section.settings.legal }}</div>
       <div class="lr">
@@ -69,7 +84,10 @@
     { "type": "header", "content": "Fusszeile" },
     { "type": "text", "id": "legal", "label": "Copyright", "default": "(c) 2026 Recovtec - Deutschland" },
     { "type": "text", "id": "shipping_note", "label": "Versand-Hinweis", "default": "Versand mit DHL" },
-    { "type": "text", "id": "payment_note", "label": "Zahlungs-Hinweis", "default": "Zahlung: Klarna, Visa, Mastercard, PayPal" }
+    { "type": "text", "id": "payment_note", "label": "Zahlungs-Hinweis", "default": "Zahlung: Klarna, Visa, Mastercard, PayPal" },
+    { "type": "header", "content": "Widerrufsbutton (Pflicht ab 19.06.2026)" },
+    { "type": "text", "id": "widerruf_label", "label": "Widerruf-Button Text", "default": "Vertrag widerrufen" },
+    { "type": "text", "id": "widerruf_url", "label": "Widerruf-Button Link", "default": "/pages/widerruf" }
   ],
   "presets": [{ "name": "Footer" }]
 }
