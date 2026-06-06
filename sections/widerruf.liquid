@@ -49,6 +49,11 @@
           <small class="wf-hint">Zur eindeutigen Zuordnung deiner Bestellung — findest du in deiner Bestellbestätigung.</small>
         </label>
 
+        <label class="wf-full">
+          <span>Anschrift (optional)</span>
+          <input type="text" name="contact[Anschrift]" placeholder="Straße &amp; Hausnummer, PLZ, Ort">
+        </label>
+
         <p class="wf-required-note">* Pflichtfeld.</p>
 
         <button type="submit" class="btn btn-primary" id="wf-confirm">Widerruf bestätigen</button>
@@ -128,7 +133,8 @@
     var map = [
       ['contact[name]', 'Name'],
       ['contact[email]', 'E-Mail'],
-      ['contact[Bestellnummer]', 'Bestellnummer']
+      ['contact[Bestellnummer]', 'Bestellnummer'],
+      ['contact[Anschrift]', 'Anschrift']
     ];
     var lines = [];
     map.forEach(function(p){
