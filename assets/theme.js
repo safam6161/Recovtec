@@ -122,13 +122,12 @@
   }
 
   // ===== Add to Cart =====
-  async function addToCart(variantId, qty, stickyCheck) {
+  async function addToCart(variantId, qty) {
     if (!variantId) return;
     try {
       await Cart.add(variantId, qty || 1);
       await refreshDrawer();
       showToast('Zum Warenkorb hinzugefügt');
-      if (stickyCheck && document.querySelector('.sticky-atc.show')) return;
       setTimeout(openDrawer, 400);
     } catch (e) {
       console.error('Add to cart failed', e);
@@ -158,21 +157,9 @@
         if (variantId) {
           const hidden = document.querySelector('#pdp-atc-form [name="id"]');
           if (hidden) hidden.value = variantId;
-          updateStickyPrice(btn);
         }
       });
     });
-  }
-
-  function updateStickyPrice(activeBtn) {
-    const nameEl = document.querySelector('.sticky-name');
-    const priceEl = document.querySelector('.sticky-price');
-    if (!nameEl || !priceEl) return;
-    const title = document.querySelector('.pdp-info-inner h1')?.textContent || '';
-    const price = document.querySelector('.pdp-price')?.textContent || '';
-    const sizeName = activeBtn?.textContent?.trim() || '';
-    nameEl.textContent = title;
-    priceEl.textContent = `${price} · ${sizeName}`;
   }
 
   // ===== Gallery =====
@@ -204,49 +191,6 @@
         if (!isOpen) item.classList.add('open');
       });
     });
-  }
-
-  // ===== Sticky ATC =====
-  function initStickyATC() {
-    const sticky = document.getElementById('sticky-atc');
-    const productRef = document.querySelector('.pdp');
-    if (!sticky || !productRef) return;
-
-    const observer = new IntersectionObserver(([entry]) => {
-      const cartOpen = document.querySelector('.drawer.open');
-      const show = (!entry.isIntersecting || entry.intersectionRatio < 0.15) && !cartOpen;
-      sticky.classList.toggle('show', show);
-    }, { threshold: [0, 0.15, 0.3] });
-    observer.observe(productRef);
-
-    // Sticky size selector sync
-    const stickyOpts = sticky.querySelectorAll('.sticky-size-opt');
-    stickyOpts.forEach(btn => {
-      btn.addEventListener('click', () => {
-        stickyOpts.forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        // Sync main size selector
-        const val = btn.textContent.trim();
-        document.querySelectorAll('.size-opt').forEach(mainBtn => {
-          mainBtn.classList.toggle('selected', mainBtn.textContent.trim().includes(val));
-          if (mainBtn.textContent.trim().includes(val) && mainBtn.dataset.variantId) {
-            const hidden = document.querySelector('#pdp-atc-form [name="id"]');
-            if (hidden) hidden.value = mainBtn.dataset.variantId;
-          }
-        });
-      });
-    });
-
-    // Sticky ATC button
-    const stickyAtcBtn = sticky.querySelector('[data-sticky-atc]');
-    if (stickyAtcBtn) {
-      stickyAtcBtn.addEventListener('click', async () => {
-        const id = document.querySelector('#pdp-atc-form [name="id"]')?.value;
-        await addToCart(id, 1, true);
-        sticky.classList.remove('show');
-        openDrawer();
-      });
-    }
   }
 
   // ===== Size Guide Modal =====
@@ -323,7 +267,6 @@
     initSizeSelector();
     initGallery();
     initAccordion();
-    initStickyATC();
     initSizeGuide();
     initNewsletter();
   });
