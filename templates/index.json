@@ -337,64 +337,104 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "faq_shipping": {
+        "faq1": {
           "type": "item",
           "settings": {
             "question": "Wie schnell wird geliefert?",
             "answer": "Versand innerhalb Deutschlands in 1–3 Werktagen, komplett kostenlos. Bestellst du vor 14 Uhr, geht das Paket noch am gleichen Tag raus."
           }
         },
-        "faq1": {
-          "type": "item",
-          "settings": {
-            "question": "Für wen sind die Recovery Boots gedacht?",
-            "answer": "Für alle, die ihre Beine regelmäßig belasten — Läufer, Kraftsportler, Mannschaftssportler, CrossFit-Athleten, Triathleten. Aber auch für lange Bürotage und schwere Beine nach einem stressigen Tag."
-          }
-        },
         "faq2": {
           "type": "item",
           "settings": {
-            "question": "Wie oft und wie lange soll ich sie nutzen?",
-            "answer": "Eine Session dauert 20–30 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel, solange du dich wohl fühlst."
+            "question": "Kann ich die Boots zurücksenden, wenn sie mir nicht gefallen?",
+            "answer": "Ja. Du hast 30 Tage Zeit, die Boots zuhause zu testen. Gefallen sie dir nicht, schickst du sie zurück und bekommst dein Geld zurück — ohne Diskussion."
           }
         },
         "faq3": {
           "type": "item",
           "settings": {
-            "question": "Welche Druckstufe sollte ich am Anfang wählen?",
-            "answer": "Starte mit Stufe 2. Das ist angenehm und effektiv. Steigere dich nach Bedarf — höhere Stufen für tiefere Regeneration, niedrigere für sanftes Cool-Down. Maximum ist Stufe 7 (240 mmHg)."
+            "question": "Welche Größe passt mir?",
+            "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die Erweiterungslaschen sind dabei und bieten +10 cm Spielraum am ganzen Bein — bei Zweifeln nimm die größere Variante."
           }
         },
         "faq4": {
           "type": "item",
           "settings": {
             "question": "Brauche ich eine App oder WLAN?",
-            "answer": "Nein. Anschalten, Modus und Druckstufe am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto. Bewusst so designt."
+            "answer": "Nein. Anschalten, Modus und Druckstufe direkt am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto."
           }
         },
         "faq5": {
           "type": "item",
           "settings": {
-            "question": "Welche Größe passt mir?",
-            "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die mitgelieferten Erweiterungslaschen geben dir zusätzlichen Spielraum von +10 cm."
+            "question": "Wie oft sollte ich sie nutzen?",
+            "answer": "Eine Session dauert 15–45 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel."
           }
         },
-        "faq6": {
+        "faq7": {
           "type": "item",
           "settings": {
-            "question": "Was, wenn sie mir nicht gefallen?",
-            "answer": "30 Tage Geld-zurück-Garantie. Du testest sie zuhause — gefallen sie dir nicht, schickst du sie kostenfrei zurück und bekommst dein Geld zurück. Ohne Diskussion."
+            "question": "Wie lange hält der Akku?",
+            "answer": "Bis zu 3 Stunden im Betrieb. Reicht für mehrere Sessions ohne Aufladen — auch unterwegs oder im Trainingslager."
+          }
+        },
+        "faq8": {
+          "type": "item",
+          "settings": {
+            "question": "Was ist mit Garantie?",
+            "answer": "1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei."
+          }
+        },
+        "faq_how": {
+          "type": "item",
+          "settings": {
+            "question": "Wie funktionieren die Recovery Boots und was bringen sie?",
+            "answer": "Die Boots umschließen das ganze Bein und füllen sich in vier Kammern nacheinander mit Luft — vom Fuß aufwärts Richtung Oberschenkel. Dieser wandernde Druck unterstützt den Rücktransport von Blut und Lymphe und fördert die Durchblutung. Das spürst du als leichtere Beine, weniger Muskelkater und schnellere Erholung nach dem Training."
+          }
+        },
+        "faq_forwho": {
+          "type": "item",
+          "settings": {
+            "question": "Für wen sind die Recovery Boots geeignet?",
+            "answer": "Für alle, die ihre Beine regelmäßig belasten — Läufer, Kraft- und Mannschaftssportler, Triathleten, CrossFitter. Aber genauso für lange Bürotage, viel Stehen oder Reisen, wenn sich die Beine schwer anfühlen. Du musst kein Profi sein, um davon zu profitieren."
+          }
+        },
+        "faq_when": {
+          "type": "item",
+          "settings": {
+            "question": "Vor oder nach dem Training — wann nutze ich sie am besten?",
+            "answer": "Beides funktioniert. Vor dem Training (kurz, ca. 10–15 Min.) regst du die Durchblutung an und wärmst die Muskeln auf. Nach dem Training (15–45 Min.) lockern sie die Beine und beschleunigen die Erholung. Auch an Ruhetagen oder nach langem Stehen tun sie gut."
+          }
+        },
+        "faq_contra": {
+          "type": "item",
+          "settings": {
+            "question": "Wer sollte die Boots nicht verwenden?",
+            "answer": "Bitte kläre die Nutzung vorher mit deinem Arzt ab, wenn du eine akute Thrombose (Blutgerinnsel), eine schwere Herz- oder Lungenerkrankung, offene Wunden, Hautinfektionen oder eine fortgeschrittene arterielle Durchblutungsstörung hast. Auch in der Schwangerschaft solltest du vorher ärztlichen Rat einholen. Im Zweifel gilt: erst fragen, dann nutzen."
+          }
+        },
+        "faq_clean": {
+          "type": "item",
+          "settings": {
+            "question": "Wie reinige und pflege ich die Boots?",
+            "answer": "Wisch die Innenseite nach der Nutzung einfach mit einem leicht feuchten Tuch und etwas mildem Reiniger ab — nicht in die Waschmaschine. Kurz trocknen lassen, bevor du sie verstaust. Prüf ab und zu Schlauch und Anschlüsse. So bleiben sie lange hygienisch und einsatzbereit."
           }
         }
       },
       "block_order": [
-        "faq_shipping",
-        "faq1",
-        "faq2",
+        "faq_how",
+        "faq_forwho",
+        "faq_when",
+        "faq5",
+        "faq_contra",
         "faq3",
         "faq4",
-        "faq5",
-        "faq6"
+        "faq7",
+        "faq_clean",
+        "faq1",
+        "faq2",
+        "faq8"
       ],
       "settings": {
         "eyebrow": "05 — FAQ",
