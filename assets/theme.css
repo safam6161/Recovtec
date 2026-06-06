@@ -580,20 +580,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .spec-row > div:first-child { color: var(--mute); }
 .spec-row > div:last-child { color: var(--ink); font-weight: 500; }
 
-/* ===== Sticky ATC ===== */
-.sticky-atc { position: fixed; bottom: 0; left: 0; right: 0; z-index: 150; background: var(--paper); border-top: 1px solid var(--line); transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.32,0,0.15,1); box-shadow: 0 -4px 24px rgba(10,10,10,0.08); }
-.sticky-atc.show { transform: translateY(0); }
-.sticky-atc-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
-.sticky-prod { display: flex; align-items: center; gap: 12px; }
-.sticky-img { width: 44px; height: 52px; overflow: hidden; flex-shrink: 0; background: var(--paper-3); }
-.sticky-img img { width: 100%; height: 100%; object-fit: cover; }
-.sticky-name { font-size: 14px; font-weight: 600; color: var(--ink); }
-.sticky-price { font-size: 13px; color: var(--mute); margin-top: 2px; }
-.sticky-actions { display: flex; align-items: center; gap: 12px; }
-.sticky-size { display: flex; gap: 4px; }
-.sticky-size-opt { height: 36px; padding: 0 14px; border: 1px solid var(--line-2); background: transparent; font-size: 13px; font-weight: 500; color: var(--ink); cursor: pointer; transition: background 0.15s, border-color 0.15s, color 0.15s; }
-.sticky-size-opt.selected { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-
 /* ===== Size Guide Modal ===== */
 .sg-overlay { position: fixed; inset: 0; background: rgba(10,10,10,0.5); z-index: 400; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
 .sg-overlay.open { opacity: 1; pointer-events: all; }
@@ -632,7 +618,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
   .pdp-grid { grid-template-columns: 1fr; }
   .pdp-gallery { position: static; }
   .gallery-main { max-height: 480px; }
-  .sticky-size { display: none; }
   .story-grid { grid-template-columns: 1fr; }
   .story-flip .story-media,.story-flip .story-text { order: unset; }
   .ml-grid { grid-template-columns: 1fr; }
