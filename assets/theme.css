@@ -679,3 +679,40 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
   .nav { position: relative; }
   body.menu-open { overflow: hidden; }
 }
+
+/* ===== Account: Newsletter-Bestätigung (/account/subscribe & /unsubscribe) ===== */
+.tpl-subscribe main {
+  min-height: calc(100vh - 68px);
+  min-height: calc(100dvh - 68px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 14px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: clamp(48px, 12vw, 100px) var(--pad);
+  box-sizing: border-box;
+}
+.tpl-subscribe main h1 {
+  font-size: clamp(30px, 7vw, 48px);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+.tpl-subscribe main p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--mute);
+  max-width: 44ch;
+  margin: 0 auto;
+}
+.tpl-subscribe main a {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.tpl-subscribe main a:hover { opacity: 0.7; }
