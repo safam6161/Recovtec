@@ -220,11 +220,53 @@
   // ===== Newsletter =====
   function initNewsletter() {
     document.querySelectorAll('.final-nl-form').forEach(form => {
-      form.addEventListener('submit', e => {
+      form.addEventListener('submit', async e => {
         e.preventDefault();
+
         const input = form.querySelector('input[type="email"]');
-        showToast('Danke! Du wirst benachrichtigt.');
-        if (input) input.value = '';
+        const button = form.querySelector('button[type="submit"]');
+        const wrap = form.closest('[data-newsletter]') || form.parentElement;
+        const msg = wrap ? wrap.querySelector('.final-nl-msg') : null;
+        const fine = wrap ? wrap.querySelector('.nl-fine') : null;
+
+        // Browser-Validierung als Sicherheitsnetz (leere/ungültige E-Mail)
+        if (input && !input.checkValidity()) {
+          input.reportValidity();
+          return;
+        }
+
+        if (button) button.disabled = true;
+        form.classList.add('is-loading');
+
+        function show(type, fallback) {
+          if (!msg) return;
+          msg.textContent = (type === 'success' ? msg.dataset.success : msg.dataset.error) || fallback;
+          msg.classList.toggle('is-success', type === 'success');
+          msg.classList.toggle('is-error', type === 'error');
+          msg.hidden = false;
+        }
+
+        try {
+          const action = (form.getAttribute('action') || '/contact').split('#')[0];
+          const res = await fetch(action, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(form)
+          });
+          if (!res.ok) throw new Error('Newsletter request failed: ' + res.status);
+
+          // Erfolg: Formular ausblenden, dauerhafte Bestätigung anzeigen
+          if (input) input.value = '';
+          form.hidden = true;
+          if (fine) fine.hidden = true;
+          show('success', 'Danke! Wir haben dir eine Bestätigungs-E-Mail geschickt — bitte bestätige deine Anmeldung.');
+        } catch (err) {
+          console.error('Newsletter signup failed', err);
+          if (button) button.disabled = false;
+          show('error', 'Hoppla, das hat nicht geklappt. Bitte versuche es gleich noch einmal.');
+        } finally {
+          form.classList.remove('is-loading');
+        }
       });
     });
   }

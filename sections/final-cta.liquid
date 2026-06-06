@@ -21,17 +21,20 @@
           <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg> {{ section.settings.trust_4 }}</div>
         </div>
         {%- if section.settings.show_newsletter -%}
-        <div class="final-cta-nl">
+        <div class="final-cta-nl" data-newsletter>
           <div class="nl-lbl">{{ section.settings.nl_label }}</div>
           <form class="final-nl-form" action="/contact#newsletter-form" method="post" accept-charset="UTF-8">
             <input type="hidden" name="form_type" value="customer">
             <input type="hidden" name="utf8" value="✓">
-            <input type="email" name="contact[email]" required placeholder="{{ section.settings.nl_placeholder }}">
+            <input type="email" name="contact[email]" required autocomplete="email" placeholder="{{ section.settings.nl_placeholder }}">
             <button type="submit" aria-label="Abonnieren">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 9h14M11 4l5 5-5 5"/></svg>
             </button>
           </form>
           <div class="nl-fine">{{ section.settings.nl_fine }}</div>
+          <div class="final-nl-msg" role="status" aria-live="polite" hidden
+               data-success="{{ section.settings.nl_success | escape }}"
+               data-error="{{ section.settings.nl_error | escape }}"></div>
         </div>
         {%- endif -%}
       </div>
@@ -56,7 +59,9 @@
     { "type": "checkbox", "id": "show_newsletter", "label": "Newsletter anzeigen", "default": true },
     { "type": "text", "id": "nl_label", "label": "Newsletter Label", "default": "Newsletter — Updates & frühe Drops" },
     { "type": "text", "id": "nl_placeholder", "label": "E-Mail Placeholder", "default": "deine@email.de" },
-    { "type": "text", "id": "nl_fine", "label": "Newsletter Hinweis", "default": "Kein Spam. Jederzeit abbestellbar." }
+    { "type": "text", "id": "nl_fine", "label": "Newsletter Hinweis", "default": "Kein Spam. Jederzeit abbestellbar." },
+    { "type": "textarea", "id": "nl_success", "label": "Erfolgsmeldung (nach Eintragung)", "default": "Fast geschafft! Wir haben dir eine Bestätigungs-E-Mail geschickt. Bitte bestätige deine Anmeldung über den Link in der E-Mail." },
+    { "type": "textarea", "id": "nl_error", "label": "Fehlermeldung", "default": "Hoppla, das hat nicht geklappt. Bitte versuche es gleich noch einmal." }
   ],
   "presets": [{ "name": "Final CTA" }]
 }
