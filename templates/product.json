@@ -269,7 +269,7 @@
           "type": "item",
           "settings": {
             "question": "Kann ich die Boots zurücksenden, wenn sie mir nicht gefallen?",
-            "answer": "Ja. Du hast 30 Tage Zeit, die Boots zuhause zu testen. Gefallen sie dir nicht, schickst du sie kostenfrei zurück und bekommst dein Geld zurück. Ohne Diskussion."
+            "answer": "Ja. Du hast 30 Tage Zeit, die Boots zuhause zu testen. Gefallen sie dir nicht, schickst du sie zurück und bekommst dein Geld zurück — ohne Diskussion. Der Rückversand ist allerdings nicht kostenlos."
           }
         },
         "faq3": {
@@ -304,7 +304,7 @@
           "type": "item",
           "settings": {
             "question": "Was ist mit Garantie?",
-            "answer": "1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei."
+            "answer": "1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei — der Rückversand zu uns ist allerdings nicht kostenlos."
           }
         },
         "faq_how": {
