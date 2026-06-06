@@ -386,6 +386,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .final-nl-form button { width: 48px; height: 48px; background: rgba(255,255,255,0.08); border: none; border-left: 1px solid rgba(255,255,255,0.15); color: var(--paper); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s; }
 .final-nl-form button:hover { background: rgba(255,255,255,0.15); }
 .nl-fine { font-size: 11px; color: rgba(250,250,250,0.3); }
+.final-nl-sink { display: none; }
 .final-nl-form.is-loading button { opacity: 0.5; pointer-events: none; }
 .final-nl-msg { font-size: 13px; line-height: 1.55; padding: 12px 14px; }
 .final-nl-msg.is-success { color: #d8f3e3; background: rgba(46,160,96,0.16); border: 1px solid rgba(46,160,96,0.42); }

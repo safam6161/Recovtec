@@ -220,57 +220,71 @@
   // ===== Newsletter =====
   function initNewsletter() {
     document.querySelectorAll('.final-nl-form').forEach(form => {
+      const wrap = form.closest('[data-newsletter]') || form.parentElement;
+      const input = form.querySelector('input[type="email"]');
+      const button = form.querySelector('button[type="submit"]');
+      const msg = wrap ? wrap.querySelector('.final-nl-msg') : null;
+      const fine = wrap ? wrap.querySelector('.nl-fine') : null;
+      const sink = wrap ? wrap.querySelector('.final-nl-sink') : null;
+
+      function show(type, fallback) {
+        if (!msg) return;
+        msg.textContent = (type === 'success' ? msg.dataset.success : msg.dataset.error) || fallback;
+        msg.classList.toggle('is-success', type === 'success');
+        msg.classList.toggle('is-error', type === 'error');
+        msg.hidden = false;
+      }
+      function succeed() {
+        if (input) input.value = '';
+        form.hidden = true;
+        if (fine) fine.hidden = true;
+        form.classList.remove('is-loading');
+        show('success', 'Danke! Wir haben dir eine Bestätigungs-E-Mail geschickt — bitte bestätige deine Anmeldung.');
+      }
+
+      // Bevorzugt: nativer Submit in ein verstecktes iframe.
+      // -> Kein Reload (Antwort landet im iframe) und kein CORS-Problem.
+      if (sink && form.getAttribute('target')) {
+        let submitting = false;
+        sink.addEventListener('load', () => {
+          if (!submitting) return; // initiales Laden des leeren iframe ignorieren
+          submitting = false;
+          succeed();
+        });
+        form.addEventListener('submit', () => {
+          // Native Validierung blockt ungültige/leere E-Mails bereits vor diesem Event.
+          submitting = true;
+          if (button) button.disabled = true;
+          form.classList.add('is-loading');
+          // Sicherheitsnetz, falls das load-Event ausbleibt:
+          setTimeout(() => { if (submitting) { submitting = false; succeed(); } }, 4000);
+          // KEIN preventDefault -> Submit geht nativ ins iframe
+        });
+        return;
+      }
+
+      // Fallback (kein iframe im HTML): AJAX, Redirect als Erfolg werten.
       form.addEventListener('submit', async e => {
         e.preventDefault();
-
-        const input = form.querySelector('input[type="email"]');
-        const button = form.querySelector('button[type="submit"]');
-        const wrap = form.closest('[data-newsletter]') || form.parentElement;
-        const msg = wrap ? wrap.querySelector('.final-nl-msg') : null;
-        const fine = wrap ? wrap.querySelector('.nl-fine') : null;
-
-        // Browser-Validierung als Sicherheitsnetz (leere/ungültige E-Mail)
-        if (input && !input.checkValidity()) {
-          input.reportValidity();
-          return;
-        }
-
+        if (input && !input.checkValidity()) { input.reportValidity(); return; }
         if (button) button.disabled = true;
         form.classList.add('is-loading');
-
-        function show(type, fallback) {
-          if (!msg) return;
-          msg.textContent = (type === 'success' ? msg.dataset.success : msg.dataset.error) || fallback;
-          msg.classList.toggle('is-success', type === 'success');
-          msg.classList.toggle('is-error', type === 'error');
-          msg.hidden = false;
-        }
-
         try {
           const action = (form.getAttribute('action') || '/contact').split('#')[0];
-          // Shopify beantwortet eine erfolgreiche Anmeldung mit einem Redirect.
-          // redirect:'manual' => NICHT folgen, sonst CORS-Fehler bei eigener Domain.
           const res = await fetch(action, {
             method: 'POST',
             headers: { 'Accept': 'application/json' },
             body: new FormData(form),
             redirect: 'manual'
           });
-          // Erfolg = Redirect (opaqueredirect / Status 0) ODER 2xx. Sonst echter Fehler.
-          const success = res.type === 'opaqueredirect' || res.status === 0 || res.ok;
-          if (!success) throw new Error('Newsletter request failed: ' + res.status);
-
-          // Erfolg: Formular ausblenden, dauerhafte Bestätigung anzeigen
-          if (input) input.value = '';
-          form.hidden = true;
-          if (fine) fine.hidden = true;
-          show('success', 'Danke! Wir haben dir eine Bestätigungs-E-Mail geschickt — bitte bestätige deine Anmeldung.');
+          const ok = res.type === 'opaqueredirect' || res.status === 0 || res.ok;
+          if (!ok) throw new Error('Newsletter request failed: ' + res.status);
+          succeed();
         } catch (err) {
           console.error('Newsletter signup failed', err);
           if (button) button.disabled = false;
-          show('error', 'Hoppla, das hat nicht geklappt. Bitte versuche es gleich noch einmal.');
-        } finally {
           form.classList.remove('is-loading');
+          show('error', 'Hoppla, das hat nicht geklappt. Bitte versuche es gleich noch einmal.');
         }
       });
     });
