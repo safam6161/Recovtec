@@ -293,13 +293,6 @@
             "answer": "Eine Session dauert 15–45 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel."
           }
         },
-        "faq6": {
-          "type": "item",
-          "settings": {
-            "question": "Welche Druckstufe als Anfänger?",
-            "answer": "Starte mit Stufe 2. Angenehm und effektiv. Steigere dich nach Bedarf — höhere Stufen für tiefere Regeneration. Maximum ist Stufe 7 (240 mmHg)."
-          }
-        },
         "faq7": {
           "type": "item",
           "settings": {
@@ -342,13 +335,6 @@
             "answer": "Bitte kläre die Nutzung vorher mit deinem Arzt ab, wenn du eine akute Thrombose (Blutgerinnsel), eine schwere Herz- oder Lungenerkrankung, offene Wunden, Hautinfektionen oder eine fortgeschrittene arterielle Durchblutungsstörung hast. Auch in der Schwangerschaft solltest du vorher ärztlichen Rat einholen. Im Zweifel gilt: erst fragen, dann nutzen."
           }
         },
-        "faq_veins": {
-          "type": "item",
-          "settings": {
-            "question": "Kann ich die Boots bei Krampfadern oder geschwollenen Beinen nutzen?",
-            "answer": "Viele empfinden die sanfte Kompression bei schweren oder geschwollenen Beinen als angenehm. Bei Krampfadern, bekannten Venenproblemen oder anhaltenden Schwellungen besprich die Nutzung aber bitte vorher mit deinem Arzt, damit nichts dagegenspricht."
-          }
-        },
         "faq_clean": {
           "type": "item",
           "settings": {
@@ -362,9 +348,7 @@
         "faq_forwho",
         "faq_when",
         "faq5",
-        "faq6",
         "faq_contra",
-        "faq_veins",
         "faq3",
         "faq4",
         "faq7",
