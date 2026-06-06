@@ -12,7 +12,7 @@
   {{ content_for_header }}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 </head>
-<body{% if request.path contains '/account/subscribe' or request.path contains '/account/unsubscribe' %} class="tpl-subscribe"{% endif %}>
+<body{% if request.path contains '/account/subscribe' %} class="tpl-subscribe tpl-subscribe--confirm"{% elsif request.path contains '/account/unsubscribe' %} class="tpl-subscribe"{% endif %}>
   {% section 'header' %}
 
   <main id="main" tabindex="-1">

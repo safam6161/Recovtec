@@ -716,3 +716,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
   text-underline-offset: 3px;
 }
 .tpl-subscribe main a:hover { opacity: 0.7; }
+/* "Abmelden"-Link nur auf der Bestätigungsseite ausblenden */
+.tpl-subscribe--confirm main a,
+.tpl-subscribe--confirm main button,
+.tpl-subscribe--confirm main form { display: none; }
