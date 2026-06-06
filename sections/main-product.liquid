@@ -119,35 +119,6 @@
   </div>
 </section>
 
-<!-- Sticky ATC -->
-<div class="sticky-atc" id="sticky-atc">
-  <div class="container sticky-atc-inner">
-    <div class="sticky-prod">
-      <div class="sticky-img">
-        {%- if product.featured_image -%}
-          <img src="{{ product.featured_image | image_url: width: 120 }}" alt="{{ product.title }}">
-        {%- endif -%}
-      </div>
-      <div class="sticky-meta">
-        <div class="sticky-name">{{ product.title }}</div>
-        <div class="sticky-price">{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</div>
-      </div>
-    </div>
-    <div class="sticky-actions">
-      <div class="sticky-size">
-        {%- unless product.has_only_default_variant -%}
-          {%- for value in product.options_with_values[0].values -%}
-            <button class="sticky-size-opt {% if forloop.first %}selected{% endif %}">{{ value }}</button>
-          {%- endfor -%}
-        {%- endunless -%}
-      </div>
-      <button class="btn btn-primary" data-sticky-atc>
-        {{ section.settings.atc_label | default: 'In den Warenkorb' }} <span class="btn-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span>
-      </button>
-    </div>
-  </div>
-</div>
-
 <!-- Size Guide Modal -->
 <div class="sg-overlay" id="sg-overlay"></div>
 <aside class="sg-modal" id="size-guide-modal" role="dialog" aria-label="{{ section.settings.sg_title | default: 'Größentabelle' }}">
