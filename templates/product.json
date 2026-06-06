@@ -313,16 +313,64 @@
             "question": "Was ist mit Garantie?",
             "answer": "1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei."
           }
+        },
+        "faq_how": {
+          "type": "item",
+          "settings": {
+            "question": "Wie funktionieren die Recovery Boots und was bringen sie?",
+            "answer": "Die Boots umschließen das ganze Bein und füllen sich in vier Kammern nacheinander mit Luft — vom Fuß aufwärts Richtung Oberschenkel. Dieser wandernde Druck unterstützt den Rücktransport von Blut und Lymphe und fördert die Durchblutung. Das spürst du als leichtere Beine, weniger Muskelkater und schnellere Erholung nach dem Training."
+          }
+        },
+        "faq_forwho": {
+          "type": "item",
+          "settings": {
+            "question": "Für wen sind die Recovery Boots geeignet?",
+            "answer": "Für alle, die ihre Beine regelmäßig belasten — Läufer, Kraft- und Mannschaftssportler, Triathleten, CrossFitter. Aber genauso für lange Bürotage, viel Stehen oder Reisen, wenn sich die Beine schwer anfühlen. Du musst kein Profi sein, um davon zu profitieren."
+          }
+        },
+        "faq_when": {
+          "type": "item",
+          "settings": {
+            "question": "Vor oder nach dem Training — wann nutze ich sie am besten?",
+            "answer": "Beides funktioniert. Vor dem Training (kurz, ca. 10–15 Min.) regst du die Durchblutung an und wärmst die Muskeln auf. Nach dem Training (15–45 Min.) lockern sie die Beine und beschleunigen die Erholung. Auch an Ruhetagen oder nach langem Stehen tun sie gut."
+          }
+        },
+        "faq_contra": {
+          "type": "item",
+          "settings": {
+            "question": "Wer sollte die Boots nicht verwenden?",
+            "answer": "Bitte kläre die Nutzung vorher mit deinem Arzt ab, wenn du eine akute Thrombose (Blutgerinnsel), eine schwere Herz- oder Lungenerkrankung, offene Wunden, Hautinfektionen oder eine fortgeschrittene arterielle Durchblutungsstörung hast. Auch in der Schwangerschaft solltest du vorher ärztlichen Rat einholen. Im Zweifel gilt: erst fragen, dann nutzen."
+          }
+        },
+        "faq_veins": {
+          "type": "item",
+          "settings": {
+            "question": "Kann ich die Boots bei Krampfadern oder geschwollenen Beinen nutzen?",
+            "answer": "Viele empfinden die sanfte Kompression bei schweren oder geschwollenen Beinen als angenehm. Bei Krampfadern, bekannten Venenproblemen oder anhaltenden Schwellungen besprich die Nutzung aber bitte vorher mit deinem Arzt, damit nichts dagegenspricht."
+          }
+        },
+        "faq_clean": {
+          "type": "item",
+          "settings": {
+            "question": "Wie reinige und pflege ich die Boots?",
+            "answer": "Wisch die Innenseite nach der Nutzung einfach mit einem leicht feuchten Tuch und etwas mildem Reiniger ab — nicht in die Waschmaschine. Kurz trocknen lassen, bevor du sie verstaust. Prüf ab und zu Schlauch und Anschlüsse. So bleiben sie lange hygienisch und einsatzbereit."
+          }
         }
       },
       "block_order": [
-        "faq1",
-        "faq2",
-        "faq3",
-        "faq4",
+        "faq_how",
+        "faq_forwho",
+        "faq_when",
         "faq5",
         "faq6",
+        "faq_contra",
+        "faq_veins",
+        "faq3",
+        "faq4",
         "faq7",
+        "faq_clean",
+        "faq1",
+        "faq2",
         "faq8"
       ],
       "settings": {
