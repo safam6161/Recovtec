@@ -6,11 +6,62 @@
   <title>{{ page_title }}{% unless page_title contains shop.name %} — {{ shop.name }}{% endunless %}</title>
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
   <link rel="canonical" href="{{ canonical_url }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  {%- comment -%} Schriften: Marken-Schriften (Google Fonts) oder Theme-Editor-Schriften (font_picker) {%- endcomment -%}
+  {%- if settings.use_custom_fonts -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    {%- assign heading_family = '"Inter Tight", "Inter", system-ui, sans-serif' -%}
+    {%- assign body_family = '"Space Grotesk", "Inter Tight", system-ui, sans-serif' -%}
+    {%- assign mono_family = '"JetBrains Mono", ui-monospace, monospace' -%}
+  {%- else -%}
+    {%- assign heading_font_bold = settings.heading_font | font_modify: 'weight', 'bold' -%}
+    {%- assign body_font_bold = settings.body_font | font_modify: 'weight', 'bold' -%}
+    <style>
+      {{ settings.heading_font | font_face: font_display: 'swap' }}
+      {{ heading_font_bold | font_face: font_display: 'swap' }}
+      {{ settings.body_font | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+    </style>
+    {%- assign heading_family = settings.heading_font.family | append: ', ' | append: settings.heading_font.fallback_families -%}
+    {%- assign body_family = settings.body_font.family | append: ', ' | append: settings.body_font.fallback_families -%}
+    {%- assign mono_family = 'ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace' -%}
+  {%- endif -%}
+
   {{ content_for_header }}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  {%- comment -%} Theme-Einstellungen als CSS-Custom-Properties (steuerbar im Theme-Editor) {%- endcomment -%}
+  <style>
+    :root{
+      /* Farben */
+      --color-background: {{ settings.color_background }};
+      --color-text: {{ settings.color_text }};
+      --color-secondary: {{ settings.color_secondary }};
+      --color-primary: {{ settings.color_primary }};
+      --color-primary-hover: {{ settings.color_primary | color_lighten: 6 }};
+      --color-button-text: {{ settings.color_button_text }};
+      --color-accent: {{ settings.color_accent }};
+
+      /* Aliase auf die bestehenden Theme-Tokens, damit das CSS unverändert weiterläuft */
+      --ink: var(--color-text);
+      --paper: var(--color-background);
+      --mute: var(--color-secondary);
+      --green: var(--color-accent);
+
+      /* Schriften */
+      --f-display: {{ heading_family }};
+      --f-ui: {{ body_family }};
+      --f-body: {{ body_family }};
+      --f-mono: {{ mono_family }};
+
+      /* Abstände */
+      --container: {{ settings.layout_max_width }}px;
+      --pad: clamp(20px, 4vw, {{ settings.page_padding_desktop }}px);
+      --section-py: clamp(64px, 9vw, {{ settings.section_spacing_desktop }}px);
+    }
+  </style>
 </head>
 <body{% if request.path contains '/account/subscribe' %} class="tpl-subscribe tpl-subscribe--confirm"{% elsif request.path contains '/account/unsubscribe' %} class="tpl-subscribe"{% endif %}>
   {% section 'header' %}

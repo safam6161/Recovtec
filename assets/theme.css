@@ -1,24 +1,21 @@
 /* ===== RECOVTEC THEME — Design Token Reset ===== */
+/*
+ * Die zentralen Tokens (Farben, Schriften, Abstände) werden im Theme-Editor
+ * gesetzt und kommen als CSS-Custom-Properties aus layout/theme.liquid:
+ *   --color-background / --paper, --color-text / --ink,
+ *   --color-secondary / --mute, --color-primary, --color-button-text,
+ *   --color-accent / --green, --f-display, --f-ui, --f-body, --f-mono,
+ *   --container, --pad, --section-py
+ * Hier verbleiben nur die davon abgeleiteten internen Abstufungen.
+ */
 :root {
-  --ink:     #0a0a0a;
   --ink-2:   #1a1a1a;
   --ink-3:   #2a2a2a;
-  --paper:   #fafafa;
   --paper-2: #f2f2f2;
   --paper-3: #e8e8e8;
   --line:    rgba(10,10,10,0.10);
   --line-2:  rgba(10,10,10,0.18);
-  --mute:    #6b6b6b;
   --mute-2:  #8a8a8a;
-  --green:   #16a34a;
-
-  --f-display: "Inter Tight", "Inter", system-ui, sans-serif;
-  --f-ui:      "Space Grotesk", "Inter Tight", system-ui, sans-serif;
-  --f-mono:    "JetBrains Mono", ui-monospace, monospace;
-
-  --container: 1320px;
-  --pad:       clamp(20px, 4vw, 56px);
-  --section-py: clamp(64px, 9vw, 128px);
 }
 
 /* ===== Base Reset ===== */
@@ -74,8 +71,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
   transition: background 0.15s, transform 0.12s;
   white-space: nowrap;
 }
-.btn-primary { background: var(--ink); color: var(--paper); height: 52px; padding: 0 24px; }
-.btn-primary:hover { background: var(--ink-2); transform: translateY(-1px); }
+.btn-primary { background: var(--color-primary); color: var(--color-button-text); height: 52px; padding: 0 24px; }
+.btn-primary:hover { background: var(--color-primary-hover); transform: translateY(-1px); }
 .btn-primary:hover .btn-icon { transform: translateX(3px); }
 .btn-lg { height: 60px; padding: 0 32px; font-size: 15px; }
 .btn-icon { transition: transform 0.15s; display: flex; align-items: center; }
