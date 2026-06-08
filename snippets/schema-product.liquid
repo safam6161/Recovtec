@@ -1,0 +1,52 @@
+{%- comment -%}
+  JSON-LD Product-Schema (schema.org) für die Produktseite.
+  Eingebunden über sections/main-product.liquid.
+  Hinweis: Shopify-Preise liegen in der kleinsten Währungseinheit (Cent) vor,
+  daher | divided_by: 100.0 für den Dezimalbetrag (korrekt für EUR/USD u. Ä.).
+{%- endcomment -%}
+{%- if product != blank -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "url": {{ canonical_url | json }},
+  {%- if product.images.size > 0 %}
+  "image": [
+    {%- for image in product.images limit: 8 -%}
+      {%- assign img_url = image | image_url: width: 1600 -%}
+      {%- unless img_url contains '://' -%}{%- assign img_url = 'https:' | append: img_url -%}{%- endunless -%}
+      {{ img_url | json }}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ],
+  {%- endif %}
+  {%- if product.description != blank %}
+  "description": {{ product.description | strip_html | strip_newlines | json }},
+  {%- endif %}
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product.vendor | default: shop.name | json }}
+  },
+  {%- if product.selected_or_first_available_variant.sku != blank %}
+  "sku": {{ product.selected_or_first_available_variant.sku | json }},
+  {%- endif %}
+  "offers": [
+    {%- for variant in product.variants -%}
+    {
+      "@type": "Offer",
+      {%- if variant.sku != blank %}
+      "sku": {{ variant.sku | json }},
+      {%- endif %}
+      "name": {{ variant.title | json }},
+      "price": "{{ variant.price | divided_by: 100.0 }}",
+      "priceCurrency": {{ shop.currency | json }},
+      "availability": "https://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+      "itemCondition": "https://schema.org/NewCondition",
+      "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
+      "url": "{{ shop.url }}{{ product.url }}?variant={{ variant.id }}"
+    }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}

@@ -1,0 +1,17 @@
+{%- comment -%}
+  JSON-LD Organization-Schema (schema.org) – global, eingebunden über layout/theme.liquid.
+  Logo nur, wenn im Theme-Editor ein Favicon/Logo hinterlegt ist.
+{%- endcomment -%}
+{%- if settings.favicon != blank -%}
+  {%- assign org_logo = settings.favicon | image_url: width: 512 -%}
+  {%- unless org_logo contains '://' -%}{%- assign org_logo = 'https:' | append: org_logo -%}{%- endunless -%}
+{%- endif -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "url": {{ shop.url | json }}{% if org_logo %},
+  "logo": {{ org_logo | json }}{% endif %}
+}
+</script>

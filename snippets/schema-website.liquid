@@ -1,0 +1,20 @@
+{%- comment -%}
+  JSON-LD WebSite-Schema (schema.org) inkl. Sitelinks-Suchfeld – global,
+  eingebunden über layout/theme.liquid.
+{%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  "name": {{ shop.name | json }},
+  "url": {{ shop.url | json }},
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "{{ shop.url }}/search?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
