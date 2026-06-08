@@ -10,15 +10,124 @@
   {
     "name": "Farben",
     "settings": [
-      { "type": "color", "id": "color_ink", "label": "Primaere Textfarbe", "default": "#0a0a0a" },
-      { "type": "color", "id": "color_paper", "label": "Primaerer Hintergrund", "default": "#fafafa" },
-      { "type": "color", "id": "color_accent", "label": "Akzentfarbe", "default": "#0a0a0a" }
+      {
+        "type": "header",
+        "content": "Basis"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Hintergrund",
+        "default": "#fafafa"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text",
+        "default": "#0a0a0a",
+        "info": "Haupttextfarbe. Wird im aktuellen Design auch für dunkle Flächen/Sektionen (z. B. Footer, dunkle Abschnitte) verwendet."
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Sekundärtext (gedämpft)",
+        "default": "#6b6b6b"
+      },
+      {
+        "type": "header",
+        "content": "Buttons & Akzent"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primärfarbe / Buttons",
+        "default": "#0a0a0a"
+      },
+      {
+        "type": "color",
+        "id": "color_button_text",
+        "label": "Button-Text",
+        "default": "#fafafa"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Akzent (Erfolg/Highlights)",
+        "default": "#16a34a"
+      }
+    ]
+  },
+  {
+    "name": "Typografie",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "use_custom_fonts",
+        "label": "Marken-Schriften verwenden (Inter Tight & Space Grotesk)",
+        "default": true,
+        "info": "Aktiv = die individuellen Marken-Schriften des Themes (über Google Fonts). Deaktiviert = die unten gewählten Theme-Schriften aus der Shopify-Bibliothek (font_picker)."
+      },
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Überschriften-Schrift",
+        "default": "assistant_n4",
+        "info": "Wird nur verwendet, wenn „Marken-Schriften verwenden“ deaktiviert ist."
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Fließtext-Schrift",
+        "default": "assistant_n4",
+        "info": "Wird nur verwendet, wenn „Marken-Schriften verwenden“ deaktiviert ist."
+      }
+    ]
+  },
+  {
+    "name": "Layout & Abstände",
+    "settings": [
+      {
+        "type": "range",
+        "id": "layout_max_width",
+        "min": 1100,
+        "max": 1600,
+        "step": 20,
+        "unit": "px",
+        "label": "Maximale Inhaltsbreite",
+        "default": 1320
+      },
+      {
+        "type": "range",
+        "id": "page_padding_desktop",
+        "min": 20,
+        "max": 96,
+        "step": 4,
+        "unit": "px",
+        "label": "Seitenrand (Desktop)",
+        "default": 56,
+        "info": "Linker/rechter Innenabstand der Inhalte auf großen Bildschirmen."
+      },
+      {
+        "type": "range",
+        "id": "section_spacing_desktop",
+        "min": 64,
+        "max": 200,
+        "step": 4,
+        "unit": "px",
+        "label": "Sektions-Abstand (Desktop)",
+        "default": 128,
+        "info": "Vertikaler Abstand der Sektionen (oben/unten) auf großen Bildschirmen."
+      }
     ]
   },
   {
     "name": "Favicon",
     "settings": [
-      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
     ]
   }
 ]
