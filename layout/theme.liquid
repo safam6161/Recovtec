@@ -62,6 +62,10 @@
       --section-py: clamp(64px, 9vw, {{ settings.section_spacing_desktop }}px);
     }
   </style>
+
+  {%- comment -%} Strukturierte Daten (JSON-LD): Organization & WebSite – global {%- endcomment -%}
+  {% render 'schema-organization' %}
+  {% render 'schema-website' %}
 </head>
 <body{% if request.path contains '/account/subscribe' %} class="tpl-subscribe tpl-subscribe--confirm"{% elsif request.path contains '/account/unsubscribe' %} class="tpl-subscribe"{% endif %}>
   {% section 'header' %}
