@@ -7,6 +7,9 @@
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
   <link rel="canonical" href="{{ canonical_url }}">
 
+  {%- comment -%} OpenGraph & Twitter Cards für die Social-Media-Vorschau {%- endcomment -%}
+  {% render 'meta-social' %}
+
   {%- comment -%} Schriften: Marken-Schriften (Google Fonts) oder Theme-Editor-Schriften (font_picker) {%- endcomment -%}
   {%- if settings.use_custom_fonts -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
