@@ -13,7 +13,7 @@
         {%- if block.type == 'step' -%}
           <div class="howto-step" {{ block.shopify_attributes }}>
             <div class="step-big">{{ forloop.index | prepend: '0' }}</div>
-            <h4>{{ block.settings.title }}</h4>
+            <h3>{{ block.settings.title }}</h3>
             <p>{{ block.settings.text }}</p>
           </div>
         {%- endif -%}
@@ -26,7 +26,7 @@
           {%- assign foot_icon = block.settings.icon | default: 'bolt' -%}
           <div class="ico">{% render 'icon', icon: foot_icon %}</div>
           <div class="txt">
-            <h5>{{ block.settings.title }}</h5>
+            <h4>{{ block.settings.title }}</h4>
             <p>{{ block.settings.text }}</p>
           </div>
         </div>
