@@ -30,7 +30,7 @@
 
       {%- if section.settings.menu_company != blank -%}
         <div class="foot-col">
-          <h5>{{ section.settings.col2_heading }}</h5>
+          <h2>{{ section.settings.col2_heading }}</h2>
           <ul>
             {%- for link in linklists[section.settings.menu_company].links -%}
               {%- assign link_title = link.title | downcase | strip -%}
