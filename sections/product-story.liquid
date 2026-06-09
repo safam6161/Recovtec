@@ -10,7 +10,7 @@
             <div class="story-img">
               {%- if block.settings.image != blank -%}
                 {%- assign story_alt = block.settings.image.alt | default: block.settings.heading | strip_newlines -%}
-                {{ block.settings.image | image_url: width: 900 | image_tag: alt: story_alt }}
+                {{ block.settings.image | image_tag: loading: 'lazy', widths: '450, 660, 900, 1320', sizes: '(min-width: 990px) 45vw, 100vw', alt: story_alt }}
               {%- else -%}
                 <div class="placeholder {% if block.settings.dark %}dark{% endif %}">
                   <div class="placeholder-label">{{ block.settings.image_label | default: 'Story Bild' }}</div>
@@ -93,7 +93,7 @@
             {%- if block.settings.graph_image != blank -%}
               <div class="ml-graph">
                 {%- assign graph_alt = block.settings.graph_image.alt | default: 'Druckkurve' -%}
-                {{ block.settings.graph_image | image_url: width: 800 | image_tag: alt: graph_alt }}
+                {{ block.settings.graph_image | image_tag: loading: 'lazy', widths: '400, 600, 800, 1000', sizes: '(min-width: 990px) 45vw, 100vw', alt: graph_alt }}
               </div>
             {%- else -%}
               <div class="pump-spec">

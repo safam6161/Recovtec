@@ -15,7 +15,7 @@
         {%- for item in search.results -%}
           <a href="{{ item.url }}" style="display:flex;gap:16px;text-decoration:none;color:inherit;padding:16px;border:1px solid var(--paper-2)">
             {%- if item.featured_image -%}
-              <img src="{{ item.featured_image | image_url: width: 100 }}" alt="" style="width:60px;height:60px;object-fit:cover">
+              <img src="{{ item.featured_image | image_url: width: 120 }}" alt="" width="60" height="60" loading="lazy" style="width:60px;height:60px;object-fit:cover">
             {%- endif -%}
             <div>
               <p style="font-weight:600">{{ item.title }}</p>

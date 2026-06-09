@@ -11,11 +11,17 @@
           <source media="(max-width: 1024px)" srcset="{{ section.settings.hero_image_mobile | image_url: width: 1200 }}">
         {%- endif -%}
         {%- if section.settings.hero_image != blank -%}
-          <img src="{{ section.settings.hero_image | image_url: width: 2000 }}" alt="{{ section.settings.hero_image.alt | default: 'Recovtec Recovery Boots' }}" loading="eager" fetchpriority="high">
+          <img src="{{ section.settings.hero_image | image_url: width: 2000 }}"
+               srcset="{{ section.settings.hero_image | image_url: width: 1000 }} 1000w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w, {{ section.settings.hero_image | image_url: width: 2600 }} 2600w"
+               sizes="100vw"
+               width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}"
+               alt="{{ section.settings.hero_image.alt | default: 'Recovtec Recovery Boots' }}" loading="eager" fetchpriority="high">
         {%- elsif section.settings.hero_image_url != blank -%}
           <img src="{{ section.settings.hero_image_url }}" alt="Recovtec Recovery Boots" loading="eager" fetchpriority="high">
         {%- else -%}
-          <img src="{{ section.settings.hero_image_mobile | image_url: width: 2000 }}" alt="{{ section.settings.hero_image_mobile.alt | default: 'Recovtec Recovery Boots' }}" loading="eager" fetchpriority="high">
+          <img src="{{ section.settings.hero_image_mobile | image_url: width: 2000 }}"
+               width="{{ section.settings.hero_image_mobile.width }}" height="{{ section.settings.hero_image_mobile.height }}"
+               alt="{{ section.settings.hero_image_mobile.alt | default: 'Recovtec Recovery Boots' }}" loading="eager" fetchpriority="high">
         {%- endif -%}
       </picture>
     {%- else -%}
