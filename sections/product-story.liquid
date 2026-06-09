@@ -9,7 +9,8 @@
           <div class="story-media">
             <div class="story-img">
               {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 900 | image_tag: alt: block.settings.heading }}
+                {%- assign story_alt = block.settings.image.alt | default: block.settings.heading | strip_newlines -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: alt: story_alt }}
               {%- else -%}
                 <div class="placeholder {% if block.settings.dark %}dark{% endif %}">
                   <div class="placeholder-label">{{ block.settings.image_label | default: 'Story Bild' }}</div>
@@ -91,7 +92,8 @@
             <p>{{ block.settings.right_text }}</p>
             {%- if block.settings.graph_image != blank -%}
               <div class="ml-graph">
-                {{ block.settings.graph_image | image_url: width: 800 | image_tag: alt: 'Druckkurve' }}
+                {%- assign graph_alt = block.settings.graph_image.alt | default: 'Druckkurve' -%}
+                {{ block.settings.graph_image | image_url: width: 800 | image_tag: alt: graph_alt }}
               </div>
             {%- else -%}
               <div class="pump-spec">

@@ -21,7 +21,7 @@
           {%- if product.featured_image != blank -%}
             <img id="gallery-main-img"
               src="{{ product.featured_image | image_url: width: 1200 }}"
-              alt="{{ product.featured_image.alt | escape }}"
+              alt="{{ product.featured_image.alt | default: product.title | escape }}"
               loading="eager" fetchpriority="high">
           {%- else -%}
             <div class="placeholder" style="height:100%;min-height:500px">
@@ -32,11 +32,13 @@
         {%- if product.images.size > 1 -%}
           <div class="gallery-thumbs">
             {%- for img in product.images -%}
+              {%- assign thumb_fallback = product.title | append: ' – Ansicht ' | append: forloop.index -%}
+              {%- assign thumb_alt = img.alt | default: thumb_fallback -%}
               <button class="gallery-thumb {% if forloop.first %}active{% endif %}"
                 data-src="{{ img | image_url: width: 1200 }}"
-                data-alt="{{ img.alt | escape }}"
+                data-alt="{{ thumb_alt | escape }}"
                 aria-label="Bild {{ forloop.index }}">
-                <img src="{{ img | image_url: width: 160 }}" alt="{{ img.alt | escape }}" loading="lazy">
+                <img src="{{ img | image_url: width: 160 }}" alt="{{ thumb_alt | escape }}" loading="lazy">
               </button>
             {%- endfor -%}
           </div>
