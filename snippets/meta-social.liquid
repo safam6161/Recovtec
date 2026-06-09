@@ -1,0 +1,43 @@
+{%- comment -%}
+  OpenGraph- & Twitter-Card-Meta-Tags – global, eingebunden über layout/theme.liquid.
+  Werte dynamisch aus page_title, page_description, canonical_url und shop.
+  Bild: Produktbild auf Produktseiten, Artikelbild auf Blog-Artikeln,
+  sonst das Teilen-Bild bzw. Favicon aus den Theme-Einstellungen.
+{%- endcomment -%}
+{%- liquid
+  case request.page_type
+    when 'product'
+      assign og_type = 'product'
+    when 'article'
+      assign og_type = 'article'
+    else
+      assign og_type = 'website'
+  endcase
+
+  if request.page_type == 'product' and product.featured_image
+    assign og_image = product.featured_image
+  elsif request.page_type == 'article' and article.image
+    assign og_image = article.image
+  elsif settings.social_share_image != blank
+    assign og_image = settings.social_share_image
+  elsif settings.favicon != blank
+    assign og_image = settings.favicon
+  endif
+
+  assign og_description = page_description | default: shop.description | default: shop.name
+-%}
+<meta property="og:site_name" content="{{ shop.name | escape }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:description" content="{{ og_description | escape }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_title | escape }}">
+<meta name="twitter:description" content="{{ og_description | escape }}">
+{%- if og_image -%}
+  {%- assign og_image_url = og_image | image_url: width: 1200 -%}
+  {%- unless og_image_url contains '://' -%}{%- assign og_image_url = 'https:' | append: og_image_url -%}{%- endunless -%}
+  <meta property="og:image" content="{{ og_image_url }}">
+  <meta property="og:image:secure_url" content="{{ og_image_url }}">
+  <meta name="twitter:image" content="{{ og_image_url }}">
+{%- endif -%}

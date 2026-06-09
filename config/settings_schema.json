@@ -121,12 +121,18 @@
     ]
   },
   {
-    "name": "Favicon",
+    "name": "Favicon & Teilen-Bild",
     "settings": [
       {
         "type": "image_picker",
         "id": "favicon",
         "label": "Favicon"
+      },
+      {
+        "type": "image_picker",
+        "id": "social_share_image",
+        "label": "Teilen-Bild (Social Media)",
+        "info": "Wird beim Teilen (Facebook, WhatsApp, X …) genutzt, wenn die Seite kein eigenes Bild hat (z. B. Produktbild). Empfohlen: 1200 × 630 px."
       }
     ]
   }
