@@ -7,7 +7,7 @@
     {%- for item in cart.items -%}
       <div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--paper-2)">
         {%- if item.image -%}
-          <img src="{{ item.image | image_url: width: 100 }}" alt="{{ item.image.alt }}" style="width:80px;height:80px;object-fit:cover">
+          <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.image.alt }}" width="80" height="80" loading="lazy" style="width:80px;height:80px;object-fit:cover">
         {%- endif -%}
         <div style="flex:1">
           <p style="font-weight:600">{{ item.product.title }}</p>

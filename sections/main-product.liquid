@@ -21,6 +21,7 @@
           {%- if product.featured_image != blank -%}
             <img id="gallery-main-img"
               src="{{ product.featured_image | image_url: width: 1200 }}"
+              width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}"
               alt="{{ product.featured_image.alt | default: product.title | escape }}"
               loading="eager" fetchpriority="high">
           {%- else -%}
@@ -38,7 +39,7 @@
                 data-src="{{ img | image_url: width: 1200 }}"
                 data-alt="{{ thumb_alt | escape }}"
                 aria-label="Bild {{ forloop.index }}">
-                <img src="{{ img | image_url: width: 160 }}" alt="{{ thumb_alt | escape }}" loading="lazy">
+                {{ img | image_tag: loading: 'lazy', widths: '64, 128, 192', sizes: '64px', alt: thumb_alt }}
               </button>
             {%- endfor -%}
           </div>

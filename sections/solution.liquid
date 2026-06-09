@@ -12,7 +12,7 @@
       <div class="usp usp-image">
         <div class="ph">
           {%- if section.settings.product_image != blank -%}
-            {{ section.settings.product_image | image_url: width: 800 | image_tag: alt: 'Recovtec Pro Recovery Boots' }}
+            {{ section.settings.product_image | image_tag: loading: 'lazy', widths: '240, 320, 480, 640', sizes: '(min-width: 1024px) 320px, 80vw', alt: 'Recovtec Pro Recovery Boots' }}
           {%- else -%}
             <div class="placeholder dark"><div class="placeholder-label">PRODUKTBILD · Recovery Boots Frontansicht · auf transparentem oder dunklem Hintergrund · 4:5</div></div>
           {%- endif -%}
