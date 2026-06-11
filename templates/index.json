@@ -337,55 +337,6 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "faq1": {
-          "type": "item",
-          "settings": {
-            "question": "Wie schnell wird geliefert?",
-            "answer": "Versand innerhalb Deutschlands in 1–3 Werktagen, komplett kostenlos. Bestellst du vor 14 Uhr, geht das Paket noch am gleichen Tag raus."
-          }
-        },
-        "faq2": {
-          "type": "item",
-          "settings": {
-            "question": "Kann ich die Boots zurücksenden, wenn sie mir nicht gefallen?",
-            "answer": "Ja. Du hast 30 Tage Zeit, die Boots zuhause zu testen. Gefallen sie dir nicht, schickst du sie zurück und bekommst dein Geld zurück — ohne Diskussion."
-          }
-        },
-        "faq3": {
-          "type": "item",
-          "settings": {
-            "question": "Welche Größe passt mir?",
-            "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die Erweiterungslaschen sind dabei und bieten +10 cm Spielraum am ganzen Bein — bei Zweifeln nimm die größere Variante."
-          }
-        },
-        "faq4": {
-          "type": "item",
-          "settings": {
-            "question": "Brauche ich eine App oder WLAN?",
-            "answer": "Nein. Anschalten, Modus und Druckstufe direkt am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto."
-          }
-        },
-        "faq5": {
-          "type": "item",
-          "settings": {
-            "question": "Wie oft sollte ich sie nutzen?",
-            "answer": "Eine Session dauert 15–45 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel."
-          }
-        },
-        "faq7": {
-          "type": "item",
-          "settings": {
-            "question": "Wie lange hält der Akku?",
-            "answer": "Bis zu 3 Stunden im Betrieb. Reicht für mehrere Sessions ohne Aufladen — auch unterwegs oder im Trainingslager."
-          }
-        },
-        "faq8": {
-          "type": "item",
-          "settings": {
-            "question": "Was ist mit Garantie?",
-            "answer": "1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei."
-          }
-        },
         "faq_how": {
           "type": "item",
           "settings": {
@@ -407,6 +358,13 @@
             "answer": "Beides funktioniert. Vor dem Training (kurz, ca. 10–15 Min.) regst du die Durchblutung an und wärmst die Muskeln auf. Nach dem Training (15–45 Min.) lockern sie die Beine und beschleunigen die Erholung. Auch an Ruhetagen oder nach langem Stehen tun sie gut."
           }
         },
+        "faq5": {
+          "type": "item",
+          "settings": {
+            "question": "Wie oft sollte ich sie nutzen?",
+            "answer": "Eine Session dauert 15–45 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel."
+          }
+        },
         "faq_contra": {
           "type": "item",
           "settings": {
@@ -414,11 +372,53 @@
             "answer": "Bitte kläre die Nutzung vorher mit deinem Arzt ab, wenn du eine akute Thrombose (Blutgerinnsel), eine schwere Herz- oder Lungenerkrankung, offene Wunden, Hautinfektionen oder eine fortgeschrittene arterielle Durchblutungsstörung hast. Auch in der Schwangerschaft solltest du vorher ärztlichen Rat einholen. Im Zweifel gilt: erst fragen, dann nutzen."
           }
         },
+        "faq3": {
+          "type": "item",
+          "settings": {
+            "question": "Welche Größe passt mir?",
+            "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die Erweiterungslaschen sind dabei und bieten +10 cm Spielraum am ganzen Bein — bei Zweifeln nimm die größere Variante."
+          }
+        },
+        "faq4": {
+          "type": "item",
+          "settings": {
+            "question": "Brauche ich eine App oder WLAN?",
+            "answer": "Nein. Anschalten, Modus und Druckstufe direkt am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto."
+          }
+        },
+        "faq7": {
+          "type": "item",
+          "settings": {
+            "question": "Wie lange hält der Akku?",
+            "answer": "Bis zu 3 Stunden im Betrieb. Reicht für mehrere Sessions ohne Aufladen — auch unterwegs oder im Trainingslager."
+          }
+        },
         "faq_clean": {
           "type": "item",
           "settings": {
             "question": "Wie reinige und pflege ich die Boots?",
             "answer": "Wisch die Innenseite nach der Nutzung einfach mit einem leicht feuchten Tuch und etwas mildem Reiniger ab — nicht in die Waschmaschine. Kurz trocknen lassen, bevor du sie verstaust. Prüf ab und zu Schlauch und Anschlüsse. So bleiben sie lange hygienisch und einsatzbereit."
+          }
+        },
+        "faq1": {
+          "type": "item",
+          "settings": {
+            "question": "Wie schnell wird geliefert?",
+            "answer": "Versand innerhalb Deutschlands in 1–3 Werktagen, komplett kostenlos. Bestellst du vor 14 Uhr, geht das Paket noch am gleichen Tag raus."
+          }
+        },
+        "faq2": {
+          "type": "item",
+          "settings": {
+            "question": "Kann ich die Boots zurücksenden, wenn sie mir nicht gefallen?",
+            "answer": "Ja. Du hast 30 Tage Zeit, die Boots zuhause zu testen. Gefallen sie dir nicht, schickst du sie zurück und bekommst dein Geld zurück — ohne Diskussion."
+          }
+        },
+        "faq8": {
+          "type": "item",
+          "settings": {
+            "question": "Was ist mit Garantie?",
+            "answer": "1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei."
           }
         }
       },
@@ -459,7 +459,9 @@
         "show_newsletter": true,
         "nl_label": "Newsletter — Updates & frühe Drops",
         "nl_placeholder": "deine@email.de",
-        "nl_fine": "Kein Spam. Jederzeit abbestellbar."
+        "nl_fine": "Kein Spam. Jederzeit abbestellbar.",
+        "nl_success": "Fast geschafft! Wir haben dir eine Bestätigungs-E-Mail geschickt. Bitte bestätige deine Anmeldung über den Link in der E-Mail.",
+        "nl_error": "Hoppla, das hat nicht geklappt. Bitte versuche es gleich noch einmal."
       }
     }
   },
