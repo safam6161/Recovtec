@@ -8,9 +8,10 @@
         <div class="story-grid">
           <div class="story-media">
             <div class="story-img">
-              {%- if block.settings.image != blank -%}
+              {%- assign story_image_src = block.settings.image | image_url: width: 1320 -%}
+              {%- if story_image_src != blank -%}
                 {%- assign story_alt = block.settings.image.alt | default: block.settings.heading | strip_newlines -%}
-                {{ block.settings.image | image_tag: loading: 'lazy', widths: '450, 660, 900, 1320', sizes: '(min-width: 990px) 45vw, 100vw', alt: story_alt }}
+                {{ story_image_src | image_tag: loading: 'lazy', widths: '450, 660, 900, 1320', sizes: '(min-width: 990px) 45vw, 100vw', alt: story_alt }}
               {%- else -%}
                 <div class="placeholder {% if block.settings.dark %}dark{% endif %}">
                   <div class="placeholder-label">{{ block.settings.image_label | default: 'Story Bild' }}</div>
@@ -90,10 +91,11 @@
             <span class="ml-eyebrow">{{ block.settings.right_eyebrow }}</span>
             <h4>{{ block.settings.right_headline }}</h4>
             <p>{{ block.settings.right_text }}</p>
-            {%- if block.settings.graph_image != blank -%}
+            {%- assign graph_image_src = block.settings.graph_image | image_url: width: 1000 -%}
+            {%- if graph_image_src != blank -%}
               <div class="ml-graph">
                 {%- assign graph_alt = block.settings.graph_image.alt | default: 'Druckkurve' -%}
-                {{ block.settings.graph_image | image_tag: loading: 'lazy', widths: '400, 600, 800, 1000', sizes: '(min-width: 990px) 45vw, 100vw', alt: graph_alt }}
+                {{ graph_image_src | image_tag: loading: 'lazy', widths: '400, 600, 800, 1000', sizes: '(min-width: 990px) 45vw, 100vw', alt: graph_alt }}
               </div>
             {%- else -%}
               <div class="pump-spec">
@@ -163,7 +165,7 @@
         { "type": "text", "id": "right_headline", "label": "Rechts Headline", "default": "Pressure Control Technology" },
         { "type": "textarea", "id": "right_text", "label": "Rechts Text", "default": "Ein intelligenter Drucksensor passt die Massage automatisch an deine Beinform an. So bekommt jedes Bein den richtigen Druck — angenehm und effektiv, unabhängig von der Beingröße." },
         { "type": "image_picker", "id": "graph_image", "label": "Diagramm Bild" },
-        { "type": "header", "content": "Luftpumpe (wird gezeigt, wenn kein Diagramm-Bild gesetzt ist)" },
+        { "type": "header", "content": "Luftpumpe (wenn kein Diagramm-Bild gesetzt)" },
         { "type": "text", "id": "pump_eyebrow", "label": "Pumpe Eyebrow", "default": "Hochleistungs-Luftpumpe" },
         { "type": "text", "id": "pump_value", "label": "Pumpe Wert", "default": "12" },
         { "type": "text", "id": "pump_unit", "label": "Pumpe Einheit", "default": "L/min" },
