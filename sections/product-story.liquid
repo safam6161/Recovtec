@@ -8,8 +8,9 @@
         <div class="story-grid">
           <div class="story-media">
             <div class="story-img">
-              {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 900 | image_tag: alt: block.settings.heading }}
+              {%- assign story_image_src = block.settings.image | image_url: width: 900 -%}
+              {%- if story_image_src != blank -%}
+                {{ story_image_src | image_tag: alt: block.settings.heading }}
               {%- else -%}
                 <div class="placeholder {% if block.settings.dark %}dark{% endif %}">
                   <div class="placeholder-label">{{ block.settings.image_label | default: 'Story Bild' }}</div>
@@ -89,9 +90,10 @@
             <span class="ml-eyebrow">{{ block.settings.right_eyebrow }}</span>
             <h4>{{ block.settings.right_headline }}</h4>
             <p>{{ block.settings.right_text }}</p>
-            {%- if block.settings.graph_image != blank -%}
+            {%- assign graph_image_src = block.settings.graph_image | image_url: width: 800 -%}
+            {%- if graph_image_src != blank -%}
               <div class="ml-graph">
-                {{ block.settings.graph_image | image_url: width: 800 | image_tag: alt: 'Druckkurve' }}
+                {{ graph_image_src | image_tag: alt: 'Druckkurve' }}
               </div>
             {%- else -%}
               <div class="pump-spec">
