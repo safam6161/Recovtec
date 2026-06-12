@@ -39,7 +39,7 @@
                 data-src="{{ img | image_url: width: 1200 }}"
                 data-alt="{{ thumb_alt | escape }}"
                 aria-label="Bild {{ forloop.index }}">
-                {{ img | image_tag: loading: 'lazy', widths: '64, 128, 192', sizes: '64px', alt: thumb_alt }}
+                {{ img | image_url: width: 192 | image_tag: loading: 'lazy', widths: '64, 128, 192', sizes: '64px', alt: thumb_alt }}
               </button>
             {%- endfor -%}
           </div>
