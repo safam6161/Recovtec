@@ -2,7 +2,7 @@
   <p style="color:var(--mute);font-size:13px;margin-bottom:16px">{{ article.published_at | date: '%d.%m.%Y' }}</p>
   <h1 style="font-size:clamp(24px,3vw,36px);font-weight:700;margin-bottom:32px">{{ article.title }}</h1>
   {%- if article.image -%}
-    {{ article.image | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 760px) 712px, 100vw', style: 'width:100%;aspect-ratio:16/9;object-fit:cover;margin-bottom:40px', alt: article.image.alt }}
+    {{ article.image | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 760px) 712px, 100vw', style: 'width:100%;aspect-ratio:16/9;object-fit:cover;margin-bottom:40px', alt: article.image.alt }}
   {%- endif -%}
   <div class="rte">{{ article.content }}</div>
   <a href="{{ blog.url }}" style="display:inline-flex;align-items:center;gap:8px;margin-top:48px;color:var(--mute);text-decoration:none;font-size:14px">
