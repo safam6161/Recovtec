@@ -11,7 +11,8 @@
               {%- assign story_image_src = block.settings.image | image_url: width: 1320 -%}
               {%- if story_image_src != blank -%}
                 {%- assign story_alt = block.settings.image.alt | default: block.settings.heading | strip_newlines -%}
-                {{ story_image_src | image_tag: loading: 'lazy', widths: '450, 660, 900, 1320', sizes: '(min-width: 990px) 45vw, 100vw', alt: story_alt }}
+                {%- comment -%} .story-img ist eine 4:5-Box mit object-fit:cover — quadratische Bilder werden ~25% breiter als die Spalte (max. ~590px) gerendert {%- endcomment -%}
+                {{ story_image_src | image_tag: loading: 'lazy', widths: '450, 660, 900, 1320', sizes: '(min-width: 981px) 740px, 115vw', alt: story_alt }}
               {%- else -%}
                 <div class="placeholder {% if block.settings.dark %}dark{% endif %}">
                   <div class="placeholder-label">{{ block.settings.image_label | default: 'Story Bild' }}</div>
