@@ -11,9 +11,10 @@
     <div class="usp-grid">
       <div class="usp usp-image">
         <div class="ph">
-          {%- assign product_image_src = section.settings.product_image | image_url: width: 640 -%}
+          {%- assign product_image_src = section.settings.product_image | image_url: width: 1200 -%}
           {%- if product_image_src != blank -%}
-            {{ product_image_src | image_tag: loading: 'lazy', widths: '240, 320, 480, 640', sizes: '(min-width: 1024px) 320px, 80vw', alt: 'Recovtec Pro Recovery Boots' }}
+            {%- comment -%} .ph füllt 2 Grid-Reihen (~400×560px) mit object-fit:cover — die Box-Höhe bestimmt die gerenderte Bildbreite, nicht die Spaltenbreite {%- endcomment -%}
+            {{ product_image_src | image_tag: loading: 'lazy', widths: '320, 480, 640, 800, 1200', sizes: '(min-width: 1025px) 580px, 96vw', alt: 'Recovtec Pro Recovery Boots' }}
           {%- elsif section.settings.product_image_url != blank -%}
             <img src="{{ section.settings.product_image_url }}" alt="Recovtec Pro Recovery Boots" loading="lazy">
           {%- else -%}
