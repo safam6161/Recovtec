@@ -1,0 +1,44 @@
+{%- comment -%}
+  JSON-LD FAQPage-Schema (schema.org).
+
+  Wird dynamisch aus den Blocks der FAQ-Section erzeugt, damit die
+  strukturierten Daten und der sichtbare FAQ-Inhalt immer übereinstimmen.
+
+  Aufruf aus einer Section (z. B. sections/faq.liquid):
+    {% render 'schema-faq', faq_blocks: section.blocks %}
+
+  Gibt nur dann ein Script aus, wenn mindestens eine vollständige
+  Frage-Antwort-Kombination vorhanden ist – nie ein leeres FAQPage.
+{%- endcomment -%}
+{%- liquid
+  assign faq_items_count = 0
+  for block in faq_blocks
+    if block.settings.question != blank and block.settings.answer != blank
+      assign faq_items_count = faq_items_count | plus: 1
+    endif
+  endfor
+-%}
+{%- if faq_items_count > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- assign faq_rendered = 0 -%}
+    {%- for block in faq_blocks -%}
+      {%- if block.settings.question != blank and block.settings.answer != blank -%}
+        {%- assign faq_rendered = faq_rendered | plus: 1 -%}
+        {
+          "@type": "Question",
+          "name": {{ block.settings.question | strip_html | strip | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ block.settings.answer | strip_html | strip | json }}
+          }
+        }{% unless faq_rendered == faq_items_count %},{% endunless %}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
