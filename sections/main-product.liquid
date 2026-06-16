@@ -19,10 +19,17 @@
       <div class="pdp-gallery">
         <div class="gallery-main">
           {%- if product.featured_image != blank -%}
+            {%- comment -%} Eindeutigen Alt-Text sicherstellen: leere oder generische (= Produkttitel) Alt-Texte durch eine eindeutige Ansicht-Nummer ersetzen; echte, individuell gepflegte Bild-Alt-Texte bleiben erhalten {%- endcomment -%}
+            {%- assign main_alt = product.featured_image.alt | strip -%}
+            {%- assign main_alt_compare = main_alt | downcase -%}
+            {%- assign title_compare = product.title | strip | downcase -%}
+            {%- if main_alt == blank or main_alt_compare == title_compare -%}
+              {%- assign main_alt = product.title | append: ' – Ansicht ' | append: product.featured_image.position -%}
+            {%- endif -%}
             <img id="gallery-main-img"
               src="{{ product.featured_image | image_url: width: 1200 }}"
               width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}"
-              alt="{{ product.featured_image.alt | default: product.title | escape }}"
+              alt="{{ main_alt | escape }}"
               loading="eager" fetchpriority="high">
           {%- else -%}
             <div class="placeholder" style="height:100%;min-height:500px">
@@ -32,9 +39,14 @@
         </div>
         {%- if product.images.size > 1 -%}
           <div class="gallery-thumbs">
+            {%- assign title_compare = product.title | strip | downcase -%}
             {%- for img in product.images -%}
-              {%- assign thumb_fallback = product.title | append: ' – Ansicht ' | append: forloop.index -%}
-              {%- assign thumb_alt = img.alt | default: thumb_fallback -%}
+              {%- comment -%} Gleiche Logik wie beim Hauptbild: doppelte oder leere Alt-Texte vermeiden {%- endcomment -%}
+              {%- assign thumb_alt = img.alt | strip -%}
+              {%- assign thumb_alt_compare = thumb_alt | downcase -%}
+              {%- if thumb_alt == blank or thumb_alt_compare == title_compare -%}
+                {%- assign thumb_alt = product.title | append: ' – Ansicht ' | append: forloop.index -%}
+              {%- endif -%}
               <button class="gallery-thumb {% if forloop.first %}active{% endif %}"
                 data-src="{{ img | image_url: width: 1200 }}"
                 data-alt="{{ thumb_alt | escape }}"
