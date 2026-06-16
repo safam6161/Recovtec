@@ -13,7 +13,7 @@
       "type": "hero",
       "settings": {
         "hero_image": "shopify://shop_images/hf_20260605_212104_61a2ac01-a08d-4c81-a1f3-035a056f0e00.png",
-        "hero_image_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Du6LtVkzxOQHE01bX6gtePPMUQ/hf_20260527_205941_a19f000e-2dc5-4268-bd2a-21375bb1cb1d.png",
+        "hero_image_url": "",
         "hero_image_mobile": "shopify://shop_images/hf_20260605_204603_a52da527-b761-461c-9607-89777b031583.png",
         "headline": "HART TRAINIERT.\nSCHNELL ERHOLT.\nRECOVTEC.",
         "subhead": "",
@@ -150,6 +150,7 @@
       ],
       "settings": {
         "product_image": "shopify://shop_images/hf_20260601_185648_b8ec2646-1669-45ca-b1a1-cf01ffa8348b.png",
+        "product_image_url": "",
         "eyebrow": "02 — Die Lösung",
         "headline": "Recovery Boots.\nIm Wohnzimmer. Sofort.",
         "subtext": "Pneumatische Kompression in 5 Modi und 7 fein abgestuften Druckstufen — komplett kabellos, flüsterleise, ohne App. Anziehen, einschalten, erholen.",
