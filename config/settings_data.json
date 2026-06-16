@@ -9,13 +9,18 @@
  */
 {
   "current": {
+    "use_custom_fonts": false,
+    "heading_font": "inter_n3",
+    "body_font": "space_grotesk_n4",
     "sections": {
       "header": {
         "type": "header",
         "settings": {
           "logo_text": "RECOVTEC",
           "menu": "main-menu",
+          "show_search": false,
           "aria_search": "Suche",
+          "search_placeholder": "Produkte suchen …",
           "aria_account": "Konto",
           "aria_cart": "Warenkorb öffnen"
         }
@@ -24,13 +29,13 @@
         "type": "footer",
         "settings": {
           "tagline": "Eigenmarke für professionelle Recovery. Faire Preise, volle Ausstattung, ehrlich kalkuliert.",
-          "col1_heading": "Service",
-          "menu_service": "footer",
           "col2_heading": "Unternehmen",
           "menu_company": "fu-zeile-unternehmen",
           "legal": "(c) 2026 Recovtec - Deutschland",
           "shipping_note": "",
-          "payment_note": ""
+          "payment_note": "",
+          "widerruf_label": "Vertrag widerrufen",
+          "widerruf_url": "/pages/widerruf"
         }
       }
     },
