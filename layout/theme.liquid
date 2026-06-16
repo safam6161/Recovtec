@@ -7,6 +7,12 @@
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
   <link rel="canonical" href="{{ canonical_url }}">
 
+  {%- comment -%} Favicon: im Theme-Editor unter „Theme-Einstellungen → Favicon & Teilen-Bild" auswählbar {%- endcomment -%}
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+  {%- endif -%}
+
   {%- comment -%} OpenGraph & Twitter Cards für die Social-Media-Vorschau {%- endcomment -%}
   {% render 'meta-social' %}
 
