@@ -6,6 +6,17 @@
     "theme_author": "Recovtec"
   },
   {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Wird im Browser-Tab und in Lesezeichen angezeigt. Empfohlen: quadratisch, 32 × 32 px (PNG). Größere Bilder werden automatisch verkleinert."
+      }
+    ]
+  },
+  {
     "name": "Farben",
     "settings": [
       {
