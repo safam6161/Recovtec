@@ -12,6 +12,7 @@
     "use_custom_fonts": false,
     "heading_font": "inter_n3",
     "body_font": "space_grotesk_n4",
+    "favicon": "shopify://shop_images/recovtecfavicon.png",
     "sections": {
       "header": {
         "type": "header",
