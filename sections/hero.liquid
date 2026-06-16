@@ -1,3 +1,23 @@
+{%- comment -%}
+  LCP-Preload für das Hero-Bild. Die Quellen sind exakt dieselben wie im <picture> unten,
+  damit der Browser genau die Datei vorlädt, die er danach anzeigt (kein Doppel-Download).
+  Liegt bewusst in der Hero-Section, weil das Bild aus den Section-Einstellungen kommt –
+  der <head> von theme.liquid kann darauf nicht zugreifen. Reine <link>-Hinweise, kein
+  sichtbares Element, keine Layout-Auswirkung.
+{%- endcomment -%}
+{%- if section.settings.hero_image != blank -%}
+  {%- capture hero_preload_srcset -%}{{ section.settings.hero_image | image_url: width: 1000 }} 1000w, {{ section.settings.hero_image | image_url: width: 1600 }} 1600w, {{ section.settings.hero_image | image_url: width: 2000 }} 2000w, {{ section.settings.hero_image | image_url: width: 2600 }} 2600w{%- endcapture -%}
+  {%- if section.settings.hero_image_mobile != blank -%}
+    <link rel="preload" as="image" fetchpriority="high" media="(max-width: 1024px)" imagesrcset="{{ section.settings.hero_image_mobile | image_url: width: 1200 }}">
+    <link rel="preload" as="image" fetchpriority="high" media="(min-width: 1025px)" imagesrcset="{{ hero_preload_srcset }}" imagesizes="100vw">
+  {%- else -%}
+    <link rel="preload" as="image" fetchpriority="high" imagesrcset="{{ hero_preload_srcset }}" imagesizes="100vw">
+  {%- endif -%}
+{%- elsif section.settings.hero_image_url != blank -%}
+  <link rel="preload" as="image" fetchpriority="high" href="{{ section.settings.hero_image_url }}">
+{%- elsif section.settings.hero_image_mobile != blank -%}
+  <link rel="preload" as="image" fetchpriority="high" href="{{ section.settings.hero_image_mobile | image_url: width: 2000 }}">
+{%- endif -%}
 <section class="hero">
   <div class="hero-media">
     {%- assign hero_has_desktop = false -%}
