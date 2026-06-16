@@ -15,6 +15,8 @@
     transition:background .15s, color .15s, border-color .15s;
   }
   .foot-widerruf:hover { background:var(--paper); color:var(--ink); border-color:var(--paper); }
+  .foot-cols { display:flex; gap:clamp(32px,4vw,72px); align-items:start; }
+  @media (max-width:720px) { .foot-cols { flex-direction:column; gap:28px; width:100%; } }
 </style>
 
 <footer class="footer">
@@ -28,19 +30,32 @@
         <p style="text-align:left">{{ section.settings.tagline }}</p>
       </div>
 
-      {%- if section.settings.menu_company != blank -%}
-        <div class="foot-col">
-          <h2>{{ section.settings.col2_heading }}</h2>
-          <ul>
-            {%- for link in linklists[section.settings.menu_company].links -%}
-              {%- assign link_title = link.title | downcase | strip -%}
-              {%- unless link_title == 'über uns' -%}
+      <div class="foot-cols">
+        {%- if section.settings.menu_main != blank -%}
+          <div class="foot-col">
+            <h2>{{ section.settings.col1_heading | default: 'Navigation' }}</h2>
+            <ul>
+              {%- for link in linklists[section.settings.menu_main].links -%}
                 <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-              {%- endunless -%}
-            {%- endfor -%}
-          </ul>
-        </div>
-      {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.menu_company != blank -%}
+          <div class="foot-col">
+            <h2>{{ section.settings.col2_heading }}</h2>
+            <ul>
+              {%- for link in linklists[section.settings.menu_company].links -%}
+                {%- assign link_title = link.title | downcase | strip -%}
+                {%- unless link_title == 'über uns' -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endunless -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </div>
     </div>
 
     {%- if section.settings.widerruf_url != blank -%}
@@ -64,6 +79,9 @@
   "name": "Footer",
   "settings": [
     { "type": "text", "id": "tagline", "label": "Tagline", "default": "Eigenmarke für professionelle Recovery. Faire Preise, volle Ausstattung, ehrlich kalkuliert." },
+    { "type": "header", "content": "Spalte Navigation" },
+    { "type": "text", "id": "col1_heading", "label": "Ueberschrift", "default": "Navigation" },
+    { "type": "link_list", "id": "menu_main", "label": "Menue Navigation", "default": "main-menu" },
     { "type": "header", "content": "Spalte Unternehmen" },
     { "type": "text", "id": "col2_heading", "label": "Ueberschrift", "default": "Unternehmen" },
     { "type": "link_list", "id": "menu_company", "label": "Menue Unternehmen" },
