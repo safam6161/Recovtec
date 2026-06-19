@@ -1,0 +1,149 @@
+<style>
+  .shipping { background: var(--paper); }
+  .shipping-wrap { max-width: 860px; }
+
+  .shipping-head { margin-bottom: clamp(32px,5vw,56px); }
+  .shipping-head .eyebrow { display:block; margin-bottom:14px; }
+  .shipping-head .h-2 { margin-bottom:18px; }
+  .shipping-lede { font-size: clamp(15px,1.6vw,17px); color: var(--mute); line-height:1.6; max-width:62ch; }
+
+  .shipping-facts {
+    display:grid; grid-template-columns: repeat(4,1fr);
+    gap:1px; background:var(--line); border:1px solid var(--line);
+    margin-bottom: clamp(40px,6vw,64px);
+  }
+  .shipping-fact { background:var(--paper); padding:24px 20px; display:flex; flex-direction:column; gap:10px; }
+  .shipping-fact svg { color: var(--ink); }
+  .shipping-fact-val { font-family:var(--f-display); font-size:20px; font-weight:700; color:var(--ink); letter-spacing:-0.01em; }
+  .shipping-fact-label { font-size:13px; color:var(--mute); line-height:1.45; }
+
+  .shipping-detail { display:flex; flex-direction:column; gap: clamp(28px,4vw,40px); }
+  .shipping-block .h-3 { margin-bottom:12px; }
+  .shipping-block p { font-size:15px; color:var(--ink-3); line-height:1.7; }
+  .shipping-block p + p { margin-top:12px; }
+  .shipping-block a { color:var(--ink); text-decoration:underline; text-underline-offset:3px; }
+  .shipping-block a:hover { color:var(--mute); }
+
+  .shipping-cta {
+    margin-top: clamp(36px,5vw,52px); padding-top: clamp(28px,4vw,36px);
+    border-top:1px solid var(--line);
+    display:flex; flex-direction:column; gap:18px; align-items:flex-start;
+  }
+  .shipping-cta p { font-size:15px; color:var(--mute); line-height:1.6; max-width:62ch; }
+
+  .shipping-updated { margin-top:32px; font-family:var(--f-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--mute); }
+
+  @media (max-width: 760px){ .shipping-facts { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 420px){ .shipping-facts { grid-template-columns: 1fr; } }
+</style>
+
+<section class="shipping section-pad">
+  <div class="container shipping-wrap">
+    <header class="shipping-head">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h1 class="h-2">{{ section.settings.headline | default: page.title }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <p class="shipping-lede">{{ section.settings.intro }}</p>
+      {%- endif -%}
+    </header>
+
+    {%- assign fact_blocks = section.blocks | where: 'type', 'fact' -%}
+    {%- if fact_blocks.size > 0 -%}
+      <div class="shipping-facts">
+        {%- for block in fact_blocks -%}
+          <div class="shipping-fact" {{ block.shopify_attributes }}>
+            {% render 'icon', icon: block.settings.icon %}
+            <div class="shipping-fact-val">{{ block.settings.value }}</div>
+            <div class="shipping-fact-label">{{ block.settings.label }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- assign detail_blocks = section.blocks | where: 'type', 'detail' -%}
+    {%- if detail_blocks.size > 0 -%}
+      <div class="shipping-detail">
+        {%- for block in detail_blocks -%}
+          <div class="shipping-block" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h2 class="h-3">{{ block.settings.heading }}</h2>{%- endif -%}
+            <div>{{ block.settings.body }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.note != blank or section.settings.button_label != blank -%}
+      <div class="shipping-cta">
+        {%- if section.settings.note != blank -%}<p>{{ section.settings.note }}</p>{%- endif -%}
+        {%- if section.settings.button_label != blank and section.settings.button_url != blank -%}
+          <a href="{{ section.settings.button_url }}" class="btn btn-primary">
+            {{ section.settings.button_label }}
+            <span class="btn-icon">{% render 'icon', icon: 'arrow-lg' %}</span>
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.updated != blank -%}
+      <div class="shipping-updated">{{ section.settings.updated }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Versand-Info",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (kleine Zeile oben)", "default": "Versand" },
+    { "type": "text", "id": "headline", "label": "Ueberschrift", "default": "Versand & Lieferung" },
+    { "type": "textarea", "id": "intro", "label": "Einleitungstext", "default": "Wir versenden deine Bestellung schnell und fuer dich versandkostenfrei innerhalb Deutschlands. Hier findest du alle Infos zu Versandkosten, Lieferzeiten und Sendungsverfolgung auf einen Blick." },
+    { "type": "header", "content": "Abschluss / Rueckgabe-Hinweis" },
+    { "type": "textarea", "id": "note", "label": "Hinweistext", "default": "Du moechtest etwas zuruecksenden? Du hast ein 30-taegiges Rueckgaberecht und die Ruecksendung ist fuer dich kostenlos. Alle Details findest du in unserer Widerrufsbelehrung." },
+    { "type": "text", "id": "button_label", "label": "Button-Text", "default": "Zur Widerrufsbelehrung" },
+    { "type": "url", "id": "button_url", "label": "Button-Link (zur Widerrufsbelehrung)" },
+    { "type": "header", "content": "Fusszeile" },
+    { "type": "text", "id": "updated", "label": "Stand / Datum", "default": "Stand: Juni 2026" }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Eckdaten-Kachel",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+          { "value": "truck", "label": "LKW" },
+          { "value": "package", "label": "Paket" },
+          { "value": "bolt", "label": "Blitz / schnell" },
+          { "value": "search", "label": "Lupe / Tracking" },
+          { "value": "refresh", "label": "Pfeil Rueckkehr" },
+          { "value": "shield", "label": "Schild" },
+          { "value": "warranty", "label": "Garantie" },
+          { "value": "check", "label": "Haken" }
+        ], "default": "truck" },
+        { "type": "text", "id": "value", "label": "Wert (gross)", "default": "0,00 €" },
+        { "type": "text", "id": "label", "label": "Beschriftung", "default": "Versandkosten innerhalb Deutschlands" }
+      ]
+    },
+    {
+      "type": "detail",
+      "name": "Textabschnitt",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Ueberschrift", "default": "Versandkosten" },
+        { "type": "richtext", "id": "body", "label": "Text", "default": "<p>Innerhalb Deutschlands ist der Versand fuer dich komplett kostenlos.</p>" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Versand-Info",
+    "blocks": [
+      { "type": "fact", "settings": { "icon": "truck", "value": "0,00 €", "label": "Versandkosten innerhalb Deutschlands" } },
+      { "type": "fact", "settings": { "icon": "bolt", "value": "1–3 Werktage", "label": "Voraussichtliche Lieferzeit" } },
+      { "type": "fact", "settings": { "icon": "package", "value": "DHL & GLS", "label": "Unsere Versandpartner" } },
+      { "type": "fact", "settings": { "icon": "search", "value": "Inklusive", "label": "Sendungsverfolgung per E-Mail" } },
+      { "type": "detail", "settings": { "heading": "Versandkosten", "body": "<p>Innerhalb Deutschlands ist der Versand fuer dich komplett kostenlos — unabhaengig vom Bestellwert.</p>" } },
+      { "type": "detail", "settings": { "heading": "Lieferzeit", "body": "<p>Deine Bestellung wird in der Regel innerhalb von 1–3 Werktagen nach Zahlungseingang geliefert.</p>" } }
+    ]
+  }]
+}
+{% endschema %}
