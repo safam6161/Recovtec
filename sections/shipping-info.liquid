@@ -1,5 +1,5 @@
 <style>
-  .shipping { background: var(--paper); }
+  .shipping { background: var(--paper); border-top: 1px solid var(--line); }
   .shipping-wrap { max-width: 860px; }
 
   .shipping-head { margin-bottom: clamp(32px,5vw,56px); }
@@ -43,7 +43,7 @@
       {%- if section.settings.eyebrow != blank -%}
         <span class="eyebrow">{{ section.settings.eyebrow }}</span>
       {%- endif -%}
-      <h1 class="h-2">{{ section.settings.headline | default: page.title }}</h1>
+      <h2 class="h-2">{{ section.settings.headline | default: page.title }}</h2>
       {%- if section.settings.intro != blank -%}
         <p class="shipping-lede">{{ section.settings.intro }}</p>
       {%- endif -%}

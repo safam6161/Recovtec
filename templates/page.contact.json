@@ -26,7 +26,61 @@
         "hours_title": "",
         "hours_text": ""
       }
+    },
+    "shipping": {
+      "type": "shipping-info",
+      "settings": {
+        "eyebrow": "Versand",
+        "headline": "Versand & Lieferung",
+        "intro": "Wir versenden deine Bestellung schnell und für dich versandkostenfrei innerhalb Deutschlands. Hier findest du alle Infos zu Versandkosten, Lieferzeiten und Sendungsverfolgung auf einen Blick.",
+        "note": "Du möchtest etwas zurücksenden? Du hast ein 30-tägiges Rückgaberecht und die Rücksendung ist für dich kostenlos. Alle Details findest du in unserer Widerrufsbelehrung.",
+        "button_label": "Zur Widerrufsbelehrung",
+        "button_url": "/pages/widerrufsbelehrung",
+        "updated": "Stand: Juni 2026"
+      },
+      "blocks": {
+        "fact_1": { "type": "fact", "settings": { "icon": "truck", "value": "0,00 €", "label": "Versandkosten innerhalb Deutschlands" } },
+        "fact_2": { "type": "fact", "settings": { "icon": "bolt", "value": "1–3 Werktage", "label": "Voraussichtliche Lieferzeit" } },
+        "fact_3": { "type": "fact", "settings": { "icon": "package", "value": "DHL & GLS", "label": "Unsere Versandpartner" } },
+        "fact_4": { "type": "fact", "settings": { "icon": "search", "value": "Inklusive", "label": "Sendungsverfolgung per E-Mail" } },
+        "d_1": {
+          "type": "detail",
+          "settings": {
+            "heading": "Versandkosten",
+            "body": "<p>Innerhalb Deutschlands ist der Versand für dich komplett kostenlos — unabhängig vom Bestellwert. Es kommen keine versteckten Gebühren hinzu. Aktuell liefern wir ausschließlich innerhalb Deutschlands.</p>"
+          }
+        },
+        "d_2": {
+          "type": "detail",
+          "settings": {
+            "heading": "Lieferzeit",
+            "body": "<p>Deine Bestellung wird in der Regel innerhalb von <strong>1–3 Werktagen</strong> nach Zahlungseingang geliefert. Werktage sind Montag bis Freitag, ausgenommen Feiertage. Bestellungen, die am Wochenende oder an Feiertagen eingehen, bearbeiten wir am nächsten Werktag.</p><p>Bitte beachte: In Ausnahmefällen — etwa bei sehr hohem Bestellaufkommen rund um Aktionstage — kann sich die Lieferung geringfügig verzögern. Sollte es zu einer längeren Verzögerung kommen, informieren wir dich selbstverständlich per E-Mail.</p>"
+          }
+        },
+        "d_3": {
+          "type": "detail",
+          "settings": {
+            "heading": "Versandpartner & Verpackung",
+            "body": "<p>Wir versenden mit <strong>DHL</strong> und <strong>GLS</strong>. Welcher Partner deine Bestellung übernimmt, hängt vom jeweiligen Paket ab. Deine Ware wird sorgfältig und sicher verpackt, damit sie unbeschädigt bei dir ankommt.</p>"
+          }
+        },
+        "d_4": {
+          "type": "detail",
+          "settings": {
+            "heading": "Sendungsverfolgung",
+            "body": "<p>Sobald deine Bestellung unser Lager verlassen hat, erhältst du automatisch eine Versandbestätigung per E-Mail mit einem Link zur Sendungsverfolgung. So kannst du jederzeit nachvollziehen, wo sich dein Paket gerade befindet.</p>"
+          }
+        },
+        "d_5": {
+          "type": "detail",
+          "settings": {
+            "heading": "Paket beschädigt oder nicht angekommen?",
+            "body": "<p>Falls dein Paket beschädigt ankommt oder etwas nicht stimmt, melde dich einfach bei uns unter <a href=\"mailto:support@recovtec.de\">support@recovtec.de</a> — wir kümmern uns schnell und unkompliziert um eine Lösung.</p>"
+          }
+        }
+      },
+      "order": ["fact_1", "fact_2", "fact_3", "fact_4", "d_1", "d_2", "d_3", "d_4", "d_5"]
     }
   },
-  "order": ["main"]
+  "order": ["main", "shipping"]
 }
