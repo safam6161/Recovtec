@@ -33,10 +33,10 @@
         "eyebrow": "Versand",
         "headline": "Versand & Lieferung",
         "intro": "Wir versenden deine Bestellung schnell und für dich versandkostenfrei innerhalb Deutschlands. Hier findest du alle Infos zu Versandkosten, Lieferzeiten und Sendungsverfolgung auf einen Blick.",
-        "note": "Du möchtest etwas zurücksenden? Du hast ein 30-tägiges Rückgaberecht und die Rücksendung ist für dich kostenlos. Alle Details findest du in unserer Widerrufsbelehrung.",
-        "button_label": "Zur Widerrufsbelehrung",
-        "button_url": "/pages/widerrufsbelehrung",
-        "updated": "Stand: Juni 2026"
+        "note": "Möchtest du etwas zurücksenden? Schreib dazu einfach unseren Support an support@recovtec.de — wir kümmern uns schnell und unkompliziert um deine Rücksendung.",
+        "button_label": "Support kontaktieren",
+        "button_url": "mailto:support@recovtec.de",
+        "updated": ""
       },
       "blocks": {
         "fact_1": { "type": "fact", "settings": { "icon": "truck", "value": "0,00 €", "label": "Versandkosten innerhalb Deutschlands" } },
@@ -68,7 +68,7 @@
           "type": "detail",
           "settings": {
             "heading": "Sendungsverfolgung",
-            "body": "<p>Sobald deine Bestellung unser Lager verlassen hat, erhältst du automatisch eine Versandbestätigung per E-Mail mit einem Link zur Sendungsverfolgung. So kannst du jederzeit nachvollziehen, wo sich dein Paket gerade befindet.</p>"
+            "body": "<p>Sobald deine Bestellung unser Lager verlassen hat, erhältst du automatisch eine E-Mail mit deiner <strong>Sendungsnummer</strong> und einem Link zur Sendungsverfolgung. So kannst du dein Paket jederzeit verfolgen.</p>"
           }
         },
         "d_5": {
