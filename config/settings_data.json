@@ -30,6 +30,8 @@
         "type": "footer",
         "settings": {
           "tagline": "Eigenmarke für professionelle Recovery. Faire Preise, volle Ausstattung, ehrlich kalkuliert.",
+          "col1_heading": "Navigation",
+          "menu_main": "main-menu",
           "col2_heading": "Unternehmen",
           "menu_company": "fu-zeile-unternehmen",
           "legal": "(c) 2026 Recovtec - Deutschland",
@@ -68,6 +70,11 @@
       },
       "3138269044488530766": {
         "type": "shopify://apps/uppromote-affiliate/blocks/core-script/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
+        "disabled": false,
+        "settings": {}
+      },
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
         "settings": {}
       }
