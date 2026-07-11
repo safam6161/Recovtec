@@ -6,6 +6,15 @@
     color:var(--paper); text-decoration:none;
     margin-bottom:16px;
   }
+  .foot-widerruf-btn {
+    height:48px; padding:0 28px;
+    background:transparent; color:var(--paper);
+    border:1px solid rgba(255,255,255,0.25);
+  }
+  .foot-widerruf-btn:hover {
+    background:var(--paper); color:#111;
+    transform:translateY(-1px);
+  }
 </style>
 
 <footer class="footer">
@@ -45,6 +54,14 @@
       {%- endif -%}
     </div>
 
+    {%- if section.settings.widerruf_url != blank -%}
+      <div class="foot-widerruf" style="margin-top:24px;">
+        <a href="{{ section.settings.widerruf_url }}" class="btn foot-widerruf-btn">
+          {{ section.settings.widerruf_label }}
+        </a>
+      </div>
+    {%- endif -%}
+
     <div class="foot-bottom">
       <div>{{ section.settings.legal }}</div>
       <div class="lr">
@@ -66,6 +83,9 @@
     { "type": "header", "content": "Spalte 2 - Unternehmen" },
     { "type": "text", "id": "col2_heading", "label": "Ueberschrift Spalte 2", "default": "Unternehmen" },
     { "type": "link_list", "id": "menu_company", "label": "Menue Spalte 2" },
+    { "type": "header", "content": "Widerruf-Button" },
+    { "type": "text", "id": "widerruf_label", "label": "Button-Text", "default": "Vertrag widerrufen" },
+    { "type": "url", "id": "widerruf_url", "label": "Button-Ziel (Seite waehlen)", "info": "Auf existierende Seite zeigen lassen, z.B. Widerrufsbelehrung. Leer lassen = Button ausgeblendet." },
     { "type": "header", "content": "Fusszeile" },
     { "type": "text", "id": "legal", "label": "Copyright", "default": "(c) 2026 Recovtec - Deutschland" },
     { "type": "text", "id": "shipping_note", "label": "Versand-Hinweis", "default": "Versand mit DHL" },
