@@ -38,7 +38,7 @@
           "shipping_note": "",
           "payment_note": "",
           "widerruf_label": "Vertrag widerrufen",
-          "widerruf_url": "/pages/widerruf"
+          "widerruf_url": "/pages/widerruf-formular"
         }
       }
     },
