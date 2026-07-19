@@ -232,4 +232,16 @@
     margin-top: 32px;
     line-height: 1.5;
   }
+
+  /* Auf dieser Seite NUR bewerten – die Bewertungen anderer werden ausgeblendet */
+  #review-submit .jdgm-rev-widg__title,
+  #review-submit .jdgm-rev-widg__summary,
+  #review-submit .jdgm-rev-widg__sort-wrapper,
+  #review-submit .jdgm-rev-widg__reviews,
+  #review-submit .jdgm-rev-widg__paginate,
+  #review-submit .jdgm-paginate {
+    display: none !important;
+  }
+  /* "Bewertung schreiben"-Button mittig und gut sichtbar */
+  #review-submit .jdgm-rev-widg__header { text-align: center; justify-content: center; }
 </style>
