@@ -111,6 +111,34 @@
       }
     }
 
+    // Fremde Bewertungen zuverlässig ausblenden – egal wie Judge.me sie benennt.
+    // Alles im Widget wird versteckt, AUSSER dem "Bewertung schreiben"-Button und dem Formular.
+    var HIDE = [
+      '.jdgm-rev-widg__title',
+      '.jdgm-rev-widg__summary',
+      '.jdgm-rev-widg__sort-wrapper',
+      '.jdgm-rev-widg__reviews',
+      '.jdgm-rev-widg__paginate',
+      '.jdgm-paginate',
+      '.jdgm-histogram',
+      '.jdgm-rev'
+    ];
+    function hideOthers() {
+      var root = document.getElementById('review-submit');
+      if (!root) return;
+      HIDE.forEach(function (sel) {
+        var nodes = root.querySelectorAll(sel);
+        for (var i = 0; i < nodes.length; i++) {
+          nodes[i].style.setProperty('display', 'none', 'important');
+        }
+      });
+    }
+    hideOthers();
+    var host = document.getElementById('review-submit');
+    if (host && window.MutationObserver) {
+      new MutationObserver(hideOthers).observe(host, { childList: true, subtree: true });
+    }
+
     // Sobald Judge.me den "Bewertung schreiben"-Button gerendert hat, Formular automatisch öffnen
     var opened = false;
     function openForm() {
@@ -123,8 +151,9 @@
     }
     var tries = 0;
     var timer = setInterval(function () {
+      hideOthers();
       openForm();
-      if (opened || ++tries > 40) clearInterval(timer); // max ~20s
+      if (++tries > 40) clearInterval(timer); // max ~20s
     }, 500);
   })();
 </script>
@@ -239,7 +268,9 @@
   #review-submit .jdgm-rev-widg__sort-wrapper,
   #review-submit .jdgm-rev-widg__reviews,
   #review-submit .jdgm-rev-widg__paginate,
-  #review-submit .jdgm-paginate {
+  #review-submit .jdgm-paginate,
+  #review-submit .jdgm-histogram,
+  #review-submit .jdgm-rev {
     display: none !important;
   }
   /* "Bewertung schreiben"-Button mittig und gut sichtbar */
