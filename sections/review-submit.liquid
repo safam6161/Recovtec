@@ -114,6 +114,10 @@
     // Fremde Bewertungen zuverlässig ausblenden – egal wie Judge.me sie benennt.
     // Alles im Widget wird versteckt, AUSSER dem "Bewertung schreiben"-Button und dem Formular.
     var HIDE = [
+      // Neue Judge.me-Version ("revamp")
+      '.jdgm-review-list',
+      '.jm-review-item',
+      // Ältere Judge.me-Versionen (zur Sicherheit)
       '.jdgm-rev-widg__title',
       '.jdgm-rev-widg__summary',
       '.jdgm-rev-widg__sort-wrapper',
@@ -263,6 +267,10 @@
   }
 
   /* Auf dieser Seite NUR bewerten – die Bewertungen anderer werden ausgeblendet */
+  /* Neue Judge.me-Version ("revamp") */
+  #review-submit .jdgm-review-list,
+  #review-submit .jm-review-item,
+  /* Ältere Judge.me-Versionen (zur Sicherheit) */
   #review-submit .jdgm-rev-widg__title,
   #review-submit .jdgm-rev-widg__summary,
   #review-submit .jdgm-rev-widg__sort-wrapper,
