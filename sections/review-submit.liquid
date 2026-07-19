@@ -137,10 +137,43 @@
         }
       });
     }
-    hideOthers();
+
+    // Im Judge.me-Widget NUR den "Bewertung schreiben"-Button übrig lassen
+    // (blendet Titel, Bewertungs-Zahl und Filter/Sortier-Symbole aus – unabhängig
+    // von den internen Judge.me-Bezeichnungen) und macht den Button etwas größer.
+    function slimWidget() {
+      var widget = document.getElementById('judgeme_product_reviews');
+      if (!widget) return;
+      var btn = null;
+      var clickable = widget.querySelectorAll('a, button');
+      for (var i = 0; i < clickable.length; i++) {
+        if (/bewertung schreiben|write a review/i.test(clickable[i].textContent || '')) {
+          btn = clickable[i];
+          break;
+        }
+      }
+      if (!btn) return;
+      // Von Button aus nach oben laufen und alle "Geschwister" ausblenden
+      var node = btn;
+      while (node && node !== widget) {
+        var parent = node.parentElement;
+        if (!parent) break;
+        var kids = parent.children;
+        for (var j = 0; j < kids.length; j++) {
+          if (kids[j] !== node) kids[j].style.setProperty('display', 'none', 'important');
+        }
+        node = parent;
+      }
+      // Button etwas größer
+      btn.style.setProperty('font-size', '16px', 'important');
+      btn.style.setProperty('padding', '18px 44px', 'important');
+    }
+
+    function tidy() { hideOthers(); slimWidget(); }
+    tidy();
     var host = document.getElementById('review-submit');
     if (host && window.MutationObserver) {
-      new MutationObserver(hideOthers).observe(host, { childList: true, subtree: true });
+      new MutationObserver(tidy).observe(host, { childList: true, subtree: true });
     }
 
     // Sobald Judge.me den "Bewertung schreiben"-Button gerendert hat, Formular automatisch öffnen
@@ -155,8 +188,7 @@
     }
     var tries = 0;
     var timer = setInterval(function () {
-      hideOthers();
-      openForm();
+      tidy();
       if (++tries > 40) clearInterval(timer); // max ~20s
     }, 500);
   })();
