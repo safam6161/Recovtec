@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "review-submit",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
