@@ -1,0 +1,235 @@
+{%- comment -%}
+  Bewertungsseite für den Klaviyo-Flow.
+  Der Kunde landet hier über den "Jetzt bewerten"-Button aus der Klaviyo-E-Mail.
+
+  Klaviyo-Link so aufbauen (Produkt wird per URL-Parameter übergeben):
+    https://DEINE-DOMAIN.de/pages/bewertung?product={{ product_handle }}
+  Alternativ per Produkt-ID:
+    https://DEINE-DOMAIN.de/pages/bewertung?id={{ product_id }}
+
+  Wird kein Produkt übergeben, wird das im Theme-Editor gewählte Standard-Produkt angezeigt.
+  Das eigentliche Bewertungsformular stellt Judge.me (bereits mit dem Shop verknüpft).
+{%- endcomment -%}
+
+{%- assign default_product = section.settings.default_product -%}
+
+<section class="review-submit" id="review-submit">
+  <div class="rs-container">
+
+    <div class="rs-head">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow rs-eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h1 class="rs-title">{{ section.settings.headline }}</h1>
+      {%- if section.settings.subtext != blank -%}
+        <p class="rs-subtext">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Produkt-Karte – wird per JS ggf. auf das URL-Produkt aktualisiert {%- endcomment -%}
+    <div class="rs-product" id="rs-product-card">
+      {%- if default_product != blank -%}
+        <img class="rs-product-img"
+             id="rs-product-img"
+             src="{{ default_product.featured_image | image_url: width: 200 }}"
+             alt="{{ default_product.title | escape }}"
+             width="80" height="80" loading="lazy">
+      {%- else -%}
+        <img class="rs-product-img" id="rs-product-img" src="" alt="" width="80" height="80" hidden>
+      {%- endif -%}
+      <div class="rs-product-info">
+        <span class="rs-product-label">Deine Bestellung</span>
+        <span class="rs-product-title" id="rs-product-title">{{ default_product.title | default: shop.name | escape }}</span>
+      </div>
+    </div>
+
+    {%- comment -%} Judge.me Bewertungs-Widget (enthält das "Bewertung schreiben"-Formular) {%- endcomment -%}
+    <div class="rs-widget-wrap">
+      <div style='clear:both'></div>
+      <div id='judgeme_product_reviews'
+           class='jdgm-widget jdgm-review-widget'
+           data-product-title='{{ default_product.title | default: shop.name | escape }}'
+           data-id='{{ default_product.id }}'
+           data-product-id='{{ default_product.id }}'
+           data-widget='review'
+           data-auto-install='false'
+           data-shop-reviews-count='{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}'
+           data-entry-point='review_widget.js'
+           data-entry-key='review-widget/main.js'>
+      </div>
+      {%- if default_product.metafields.judgeme.review_widget_data -%}
+        <script>
+          jdgm = window.jdgm || {};
+          jdgm.data = jdgm.data || {};
+          jdgm.data.reviewWidget = jdgm.data.reviewWidget || {};
+          jdgm.data.reviewWidget[{{ default_product.id }}] = {{ default_product.metafields.judgeme.review_widget_data }};
+        </script>
+      {%- endif -%}
+    </div>
+
+    <p class="rs-fineprint">{{ section.settings.fineprint }}</p>
+  </div>
+</section>
+
+{%- comment -%} Handle → Produktdaten-Map für die URL-Parameter-Auswahl {%- endcomment -%}
+<script>
+  window.RECOVTEC_PRODUCTS = window.RECOVTEC_PRODUCTS || {};
+  {%- for product in collections.all.products -%}
+    window.RECOVTEC_PRODUCTS["{{ product.handle }}"] = {
+      id: {{ product.id }},
+      title: {{ product.title | json }},
+      image: "{{ product.featured_image | image_url: width: 200 }}"
+    };
+    window.RECOVTEC_PRODUCTS["{{ product.id }}"] = window.RECOVTEC_PRODUCTS["{{ product.handle }}"];
+  {%- endfor -%}
+</script>
+
+<script>
+  (function () {
+    // Produkt aus der URL bestimmen (?product=handle oder ?id=123)
+    var params = new URLSearchParams(window.location.search);
+    var key = params.get('product') || params.get('handle') || params.get('id');
+    var map = window.RECOVTEC_PRODUCTS || {};
+    var chosen = key && map[key] ? map[key] : null;
+
+    if (chosen) {
+      // Judge.me-Widget auf das gewählte Produkt umstellen (läuft bevor jdgm das Widget verarbeitet)
+      var widget = document.getElementById('judgeme_product_reviews');
+      if (widget) {
+        widget.setAttribute('data-id', chosen.id);
+        widget.setAttribute('data-product-id', chosen.id);
+        widget.setAttribute('data-product-title', chosen.title);
+      }
+      // Produkt-Karte aktualisieren
+      var titleEl = document.getElementById('rs-product-title');
+      var imgEl = document.getElementById('rs-product-img');
+      if (titleEl) titleEl.textContent = chosen.title;
+      if (imgEl && chosen.image) {
+        imgEl.src = chosen.image;
+        imgEl.alt = chosen.title;
+        imgEl.hidden = false;
+      }
+    }
+
+    // Sobald Judge.me den "Bewertung schreiben"-Button gerendert hat, Formular automatisch öffnen
+    var opened = false;
+    function openForm() {
+      if (opened) return;
+      var link = document.querySelector('#review-submit .jdgm-write-rev-link');
+      if (link) {
+        opened = true;
+        link.click();
+      }
+    }
+    var tries = 0;
+    var timer = setInterval(function () {
+      openForm();
+      if (opened || ++tries > 40) clearInterval(timer); // max ~20s
+    }, 500);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Bewertung abgeben",
+  "settings": [
+    {
+      "type": "product",
+      "id": "default_product",
+      "label": "Standard-Produkt",
+      "info": "Wird angezeigt, wenn in der URL kein Produkt übergeben wird (z. B. ?product=handle aus dem Klaviyo-Link)."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Deine Meinung zählt"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Überschrift",
+      "default": "Wie war deine Erfahrung?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Untertitel",
+      "default": "Danke, dass du dir kurz Zeit nimmst. Deine Bewertung hilft anderen bei der Entscheidung – und uns, noch besser zu werden."
+    },
+    {
+      "type": "textarea",
+      "id": "fineprint",
+      "label": "Hinweistext (unten)",
+      "default": "Deine Bewertung wird über Judge.me verarbeitet und nach kurzer Prüfung veröffentlicht."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bewertung abgeben"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .review-submit {
+    padding: clamp(48px, 8vw, 96px) var(--pad, 24px);
+    background: var(--paper, #fff);
+    color: var(--ink, #111);
+  }
+  .rs-container { max-width: 760px; margin: 0 auto; }
+  .rs-head { text-align: center; margin-bottom: 40px; }
+  .rs-eyebrow { display: block; margin-bottom: 16px; }
+  .rs-title {
+    font-family: var(--f-display, sans-serif);
+    font-size: clamp(30px, 4.4vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    margin: 0 0 16px;
+  }
+  .rs-subtext {
+    font-size: clamp(15px, 1.6vw, 18px);
+    color: var(--mute, #666);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+  .rs-product {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border: 1px solid color-mix(in srgb, var(--ink, #111) 12%, transparent);
+    border-radius: 14px;
+    max-width: 420px;
+    margin: 0 auto 40px;
+    background: color-mix(in srgb, var(--ink, #111) 3%, transparent);
+  }
+  .rs-product-img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+    background: color-mix(in srgb, var(--ink, #111) 6%, transparent);
+  }
+  .rs-product-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .rs-product-label {
+    font-family: var(--f-mono, monospace);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mute, #888);
+  }
+  .rs-product-title { font-weight: 600; font-size: 16px; line-height: 1.2; }
+  .rs-widget-wrap { margin: 0 auto; }
+  .rs-fineprint {
+    text-align: center;
+    font-size: 13px;
+    color: var(--mute, #888);
+    margin-top: 32px;
+    line-height: 1.5;
+  }
+</style>
