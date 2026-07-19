@@ -1,9 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "review-submit",
-      "settings": {}
+      "settings": {
+        "default_product": "recovtec-pro-recovery-boots",
+        "eyebrow": "Deine Meinung zählt",
+        "headline": "Wie war deine Erfahrung?",
+        "subtext": "Danke, dass du dir kurz Zeit nimmst. Deine Bewertung hilft anderen bei der Entscheidung – und uns, noch besser zu werden.",
+        "fineprint": "Deine Bewertung wird über Judge.me verarbeitet und nach kurzer Prüfung veröffentlicht."
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
