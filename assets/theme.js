@@ -193,28 +193,36 @@
     });
   }
 
-  // ===== Size Guide Modal =====
-  function initSizeGuide() {
-    const modal = document.getElementById('size-guide-modal');
+  // ===== Side Modals (Größentabelle, Ratenzahlung) =====
+  function initSideModal(modalId, overlayId, triggerSelector) {
+    const modal = document.getElementById(modalId);
     if (!modal) return;
-    const overlay = document.getElementById('sg-overlay');
+    const overlay = document.getElementById(overlayId);
     const closeBtn = modal.querySelector('.sg-close');
 
-    function openSG() {
+    function open() {
       overlay?.classList.add('open');
       modal.classList.add('open');
     }
-    function closeSG() {
+    function close() {
       overlay?.classList.remove('open');
       modal.classList.remove('open');
     }
 
-    document.querySelectorAll('.size-guide-trigger, .size-guide-link').forEach(btn => {
-      btn.addEventListener('click', openSG);
+    document.querySelectorAll(triggerSelector).forEach(btn => {
+      btn.addEventListener('click', open);
     });
-    closeBtn?.addEventListener('click', closeSG);
-    overlay?.addEventListener('click', closeSG);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSG(); });
+    closeBtn?.addEventListener('click', close);
+    overlay?.addEventListener('click', close);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  }
+
+  function initSizeGuide() {
+    initSideModal('size-guide-modal', 'sg-overlay', '.size-guide-trigger, .size-guide-link');
+  }
+
+  function initPaymentInfo() {
+    initSideModal('payment-info-modal', 'pay-overlay', '.pay-info-trigger');
   }
 
   // ===== Newsletter =====
@@ -329,6 +337,7 @@
     initGallery();
     initAccordion();
     initSizeGuide();
+    initPaymentInfo();
     initNewsletter();
   });
 })();

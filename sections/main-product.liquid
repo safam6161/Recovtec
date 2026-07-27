@@ -70,6 +70,22 @@
             <div class="pdp-price-meta">{{ section.settings.price_note | default: 'Inkl. MwSt.' }}</div>
           </div>
 
+          {%- if section.settings.inst_show -%}
+            <div class="pay-inst">
+              <div class="pay-inst-main">
+                <div class="pay-inst-brands">
+                  <span class="pay-chip pay-chip-klarna">Klarna</span>
+                  <span class="pay-chip pay-chip-paypal"><span>Pay</span>Pal</span>
+                </div>
+                <p class="pay-inst-text">{{ section.settings.inst_text | default: 'Ratenzahlung mit Klarna und PayPal möglich.' }}</p>
+              </div>
+              <button type="button" class="pay-info-btn pay-info-trigger" aria-label="{{ section.settings.inst_info_aria | default: 'Weitere Informationen zur Ratenzahlung' | escape }}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5"/><path d="M12 7.4v.2"/></svg>
+                <span>{{ section.settings.inst_info_label | default: 'Weitere Informationen' }}</span>
+              </button>
+            </div>
+          {%- endif -%}
+
           {%- unless product.has_only_default_variant -%}
             {%- for option in product.options_with_values -%}
               <div class="size-block">
@@ -180,6 +196,43 @@
   </div>
 </aside>
 
+{%- if section.settings.inst_show -%}
+<!-- Ratenzahlung Info Modal -->
+<div class="sg-overlay" id="pay-overlay"></div>
+<aside class="sg-modal pay-modal" id="payment-info-modal" role="dialog" aria-label="{{ section.settings.inst_modal_title | default: 'Ratenzahlung' | escape }}">
+  <header class="sg-head">
+    <span class="sg-eyebrow">{{ section.settings.inst_modal_title | default: 'Ratenzahlung' }}</span>
+    <button class="sg-close" aria-label="Schließen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  </header>
+  <div class="sg-body">
+    <div class="sg-brand">{{ section.settings.logo_text | default: 'RECOVTEC' }}</div>
+    <p class="sg-intro">{{ section.settings.inst_modal_intro }}</p>
+
+    <div class="pay-modal-brands">
+      <span class="pay-chip pay-chip-klarna">Klarna</span>
+      <span class="pay-chip pay-chip-paypal"><span>Pay</span>Pal</span>
+    </div>
+
+    <h2 class="sg-title">{{ section.settings.inst_modal_heading | default: 'So funktioniert’s' }}</h2>
+    <ol class="pay-steps">
+      {%- if section.settings.inst_step1 != blank -%}
+        <li class="pay-step"><span class="pay-step-num">1</span><div class="pay-step-text"><h3>{{ section.settings.inst_step1 }}</h3><p>{{ section.settings.inst_step1_text }}</p></div></li>
+      {%- endif -%}
+      {%- if section.settings.inst_step2 != blank -%}
+        <li class="pay-step"><span class="pay-step-num">2</span><div class="pay-step-text"><h3>{{ section.settings.inst_step2 }}</h3><p>{{ section.settings.inst_step2_text }}</p></div></li>
+      {%- endif -%}
+      {%- if section.settings.inst_step3 != blank -%}
+        <li class="pay-step"><span class="pay-step-num">3</span><div class="pay-step-text"><h3>{{ section.settings.inst_step3 }}</h3><p>{{ section.settings.inst_step3_text }}</p></div></li>
+      {%- endif -%}
+    </ol>
+
+    {%- if section.settings.inst_modal_note != blank -%}
+      <p class="pay-note">{{ section.settings.inst_modal_note }}</p>
+    {%- endif -%}
+  </div>
+</aside>
+{%- endif -%}
+
 {%- comment -%} Strukturierte Daten (JSON-LD) für SEO / Google Rich Results {%- endcomment -%}
 {% render 'schema-product' %}
 {% render 'schema-breadcrumb' %}
@@ -193,6 +246,21 @@
     { "type": "textarea", "id": "lede", "label": "Kurzbeschreibung", "default": "Frische Beine in 15–45 Minuten. Pneumatische Recovery Boots mit 5 Modi und 7 Druckstufen bis 240 mmHg. Kabellos, leise, ohne App." },
     { "type": "text", "id": "price_note", "label": "Preishinweis", "default": "Inkl. MwSt." },
     { "type": "text", "id": "atc_label", "label": "Warenkorb-Button Text", "default": "In den Warenkorb" },
+    { "type": "header", "content": "Ratenzahlung (Klarna / PayPal)" },
+    { "type": "checkbox", "id": "inst_show", "label": "Ratenzahlungs-Hinweis anzeigen", "default": true },
+    { "type": "text", "id": "inst_text", "label": "Hinweis-Text", "default": "Ratenzahlung mit Klarna und PayPal möglich." },
+    { "type": "text", "id": "inst_info_label", "label": "Info-Button Text", "default": "Weitere Informationen" },
+    { "type": "text", "id": "inst_info_aria", "label": "Info-Button Beschriftung (Screenreader)", "default": "Weitere Informationen zur Ratenzahlung" },
+    { "type": "text", "id": "inst_modal_title", "label": "Modal Titel", "default": "Ratenzahlung" },
+    { "type": "textarea", "id": "inst_modal_intro", "label": "Modal Einleitung", "default": "Du möchtest deine Recovery Boots lieber in Raten zahlen? Bei uns geht das über Klarna und PayPal — die Ratenoptionen werden dir nach dem Checkout direkt beim Anbieter angezeigt." },
+    { "type": "text", "id": "inst_modal_heading", "label": "Modal Überschrift", "default": "So funktioniert’s" },
+    { "type": "text", "id": "inst_step1", "label": "Schritt 1 Titel", "default": "Zur Kasse gehen" },
+    { "type": "textarea", "id": "inst_step1_text", "label": "Schritt 1 Text", "default": "Wähle deine Größe, lege das Produkt in den Warenkorb und gehe zur Kasse." },
+    { "type": "text", "id": "inst_step2", "label": "Schritt 2 Titel", "default": "Klarna oder PayPal als Zahlungsart wählen" },
+    { "type": "textarea", "id": "inst_step2_text", "label": "Schritt 2 Text", "default": "Wähle im Checkout Klarna oder PayPal als Zahlungsart aus — statt Karte, Apple Pay oder Überweisung." },
+    { "type": "text", "id": "inst_step3", "label": "Schritt 3 Titel", "default": "Raten nach dem Checkout auswählen" },
+    { "type": "textarea", "id": "inst_step3_text", "label": "Schritt 3 Text", "default": "Nach dem Checkout wirst du zu Klarna bzw. PayPal weitergeleitet. Dort werden dir die verfügbaren Ratenoptionen angezeigt und du wählst die Laufzeit und Rate aus, die zu dir passt." },
+    { "type": "textarea", "id": "inst_modal_note", "label": "Hinweis (klein)", "default": "Die Ratenzahlung wird von Klarna bzw. PayPal angeboten und ist von deren Prüfung abhängig. Welche Laufzeiten verfügbar sind und ob Kosten anfallen, siehst du direkt beim jeweiligen Anbieter." },
     { "type": "header", "content": "Lager-Status" },
     { "type": "text", "id": "in_stock_text", "label": "Auf Lager Text", "default": "Auf Lager · in 1–3 Werktagen bei dir." },
     { "type": "text", "id": "out_of_stock_text", "label": "Ausverkauft Text", "default": "Derzeit nicht verfügbar" },
