@@ -470,10 +470,11 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .pay-inst { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px; background: var(--paper-2); border: 1px solid var(--line); }
 .pay-inst-main { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .pay-inst-brands { display: flex; align-items: center; gap: 6px; }
-.pay-chip { font-family: var(--f-ui); font-size: 11px; font-weight: 700; letter-spacing: -0.01em; line-height: 1; padding: 5px 8px; border-radius: 3px; white-space: nowrap; }
+.pay-chip { font-family: var(--f-ui); font-size: 11px; font-weight: 700; letter-spacing: -0.01em; line-height: 1; padding: 5px 8px; border: 1px solid transparent; border-radius: 3px; white-space: nowrap; }
 .pay-chip-klarna { background: #ffb3c7; color: #0a0a0a; }
-.pay-chip-paypal { background: #003087; color: #fff; }
-.pay-chip-paypal span { color: #009cde; }
+/* PayPal-Wortmarke: weißer Grund, "Pay" in Dunkelblau, "Pal" in Hellblau — wie im Original */
+.pay-chip-paypal { background: #fff; border: 1px solid rgba(0,48,135,0.15); color: #009cde; font-style: italic; }
+.pay-chip-paypal span { color: #003087; }
 .pay-inst-text { font-size: 13px; line-height: 1.45; color: var(--ink-3); }
 .pay-info-btn { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; height: 34px; padding: 0 12px; border: 1px solid var(--line-2); background: var(--paper); font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); transition: border-color 0.15s, color 0.15s; }
 .pay-info-btn:hover { border-color: var(--ink); color: var(--ink); }
