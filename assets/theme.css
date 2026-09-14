@@ -475,12 +475,22 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 /* PayPal-Wortmarke: weißer Grund, "Pay" in Dunkelblau, "Pal" in Hellblau — wie im Original */
 .pay-chip-paypal { background: #fff; border: 1px solid rgba(0,48,135,0.15); color: #009cde; font-style: italic; }
 .pay-chip-paypal span { color: #003087; }
+.pay-inst-rate { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; font-size: 14px; line-height: 1.4; color: var(--ink); }
+.pay-inst-rate strong { font-weight: 700; }
+.pay-inst-rate span { color: var(--ink-3); }
 .pay-inst-text { font-size: 13px; line-height: 1.45; color: var(--ink-3); }
 .pay-info-btn { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; height: 34px; padding: 0 12px; border: 1px solid var(--line-2); background: var(--paper); font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); transition: border-color 0.15s, color 0.15s; }
 .pay-info-btn:hover { border-color: var(--ink); color: var(--ink); }
 .pay-info-btn svg { flex-shrink: 0; }
 
 .pay-modal-brands { display: flex; align-items: center; gap: 8px; }
+.pay-rates { display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.14); }
+.pay-rate { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 14px; }
+.pay-rate + .pay-rate { border-top: 1px solid rgba(255,255,255,0.08); }
+.pay-rate-term { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,250,250,0.6); }
+.pay-rate-amount { font-family: var(--f-display); font-size: 17px; font-weight: 600; color: var(--paper); }
+.pay-rate-amount small { font-family: var(--f-ui); font-size: 12px; font-weight: 400; color: rgba(250,250,250,0.5); margin-left: 4px; }
+.pay-rates-note { font-size: 12px; line-height: 1.55; color: rgba(250,250,250,0.4); }
 .pay-steps { display: flex; flex-direction: column; gap: 20px; }
 .pay-step { display: flex; gap: 16px; align-items: flex-start; }
 .pay-step-num { flex-shrink: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.18); font-family: var(--f-mono); font-size: 13px; color: var(--paper); }
