@@ -763,3 +763,93 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .tpl-subscribe--confirm main a,
 .tpl-subscribe--confirm main button,
 .tpl-subscribe--confirm main form { display: none; }
+
+/* ===== EU-Gewährleistungslabel (harmonisierte Mitteilung, VO (EU) 2025/1960) ===== */
+/* Die amtliche Grafik ist ein textdichtes Hochformat (A4-Verhaeltnis).
+   Sie wird in Shopgroesse gezeigt und oeffnet per Klick in Originalgroesse. */
+.lgl {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  padding: 16px; margin-top: 4px;
+  background: var(--paper-2); border: 1px solid var(--line);
+}
+.lgl + .lgl { margin-top: 8px; }
+
+.lgl-zoom {
+  display: block; padding: 0; max-width: 100%;
+  background: none; border: none; cursor: zoom-in;
+  text-align: left; color: inherit; font: inherit;
+}
+.lgl-img {
+  display: block; width: 100%; height: auto;
+  background: #fff; border: 1px solid var(--line);
+}
+.lgl-zoom-hint {
+  display: block; margin-top: 6px;
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--mute);
+  text-decoration: underline; text-underline-offset: 3px;
+  transition: color 0.15s;
+}
+.lgl-zoom:hover .lgl-zoom-hint { color: var(--ink); }
+.lgl-zoom:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.lgl-text { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.lgl-eyebrow {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--mute);
+}
+.lgl-link {
+  font-size: 13px; line-height: 1.5; color: var(--ink);
+  text-decoration: underline; text-underline-offset: 3px;
+  transition: color 0.15s;
+}
+.lgl-link:hover { color: var(--mute); }
+
+/* Warenkorb: schlanker, ohne eigene Flaeche */
+.lgl--cart {
+  padding: 16px 0 0; margin-top: 4px;
+  background: transparent; border: none; border-top: 1px solid var(--line);
+}
+
+/* Footer: dunkler Grund, daher helle Typo */
+.lgl--footer {
+  padding: 24px 0 0; margin-top: 24px;
+  background: transparent; border: none;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.lgl--footer .lgl-eyebrow,
+.lgl--footer .lgl-zoom-hint { color: rgba(250,250,250,0.4); }
+.lgl--footer .lgl-zoom:hover .lgl-zoom-hint { color: var(--paper); }
+.lgl--footer .lgl-link { color: rgba(250,250,250,0.55); }
+.lgl--footer .lgl-link:hover { color: var(--paper); }
+.lgl--footer .lgl-img { border-color: rgba(255,255,255,0.12); }
+
+/* Lightbox — Label in Originalgroesse */
+.lgl-lightbox {
+  position: fixed; inset: 0; z-index: 300;
+  display: none; align-items: center; justify-content: center;
+  padding: 24px; background: rgba(10,10,10,0.82);
+  overflow: auto; overscroll-behavior: contain;
+}
+.lgl-lightbox.open { display: flex; }
+.lgl-lightbox img {
+  display: block; margin: auto;
+  max-width: min(760px, 100%); width: 100%; height: auto;
+  background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.lgl-lightbox-close {
+  position: fixed; top: 16px; right: 16px;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--paper); border: none; cursor: pointer;
+  font-size: 24px; line-height: 1; color: var(--ink);
+}
+body.lgl-noscroll { overflow: hidden; }
+
+/* Einrichtungs-Hinweis — erscheint ausschliesslich im Theme-Editor */
+.lgl-setup {
+  padding: 14px 16px; margin-top: 4px;
+  background: #fff8e1; border: 1px dashed #d9a400;
+  color: #5a4300; font-size: 13px; line-height: 1.55;
+}
+.lgl-setup strong { display: block; margin-bottom: 4px; color: #3d2d00; }

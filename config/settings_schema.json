@@ -135,5 +135,166 @@
         "info": "Wird beim Teilen (Facebook, WhatsApp, X …) genutzt, wenn die Seite kein eigenes Bild hat (z. B. Produktbild). Empfohlen: 1200 × 630 px."
       }
     ]
+  },
+  {
+    "name": "Gewährleistungslabel (EU-Pflicht)",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Ab 27.09.2026 muss jeder B2C-Shop die harmonisierte Mitteilung zur gesetzlichen Gewährleistung („Gewährleistungslabel\") vor Vertragsschluss gut sichtbar anzeigen — Richtlinie (EU) 2024/825 i. V. m. Durchführungsverordnung (EU) 2025/1960."
+      },
+      {
+        "type": "paragraph",
+        "content": "Wichtig: Die Grafik ist unveränderlich (Wortlaut, Farben, Proportionen, QR-Code) und darf nicht nachgebaut werden. Lade die offizielle Datei der EU-Kommission herunter — deutsche Sprachfassung, farbige Version. Sie steht auf dem Portal „Ihr Europa\" der EU-Kommission kostenlos zum Download bereit."
+      },
+      {
+        "type": "checkbox",
+        "id": "warranty_label_enabled",
+        "label": "Gewährleistungslabel anzeigen",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Grafik"
+      },
+      {
+        "type": "image_picker",
+        "id": "warranty_label_image",
+        "label": "Label-Grafik (PNG)",
+        "info": "Offizielle EU-Grafik, deutsch, farbig. Am besten hochauflösendes PNG."
+      },
+      {
+        "type": "text",
+        "id": "warranty_label_asset",
+        "label": "Alternativ: Dateiname im Theme-Ordner „assets\"",
+        "info": "Nur nötig, wenn du die SVG-Version verwenden willst (SVG lässt sich oben nicht auswählen). Beispiel: gewaehrleistungslabel-de.svg. Wird nur genutzt, wenn oben kein Bild gewählt ist."
+      },
+      {
+        "type": "text",
+        "id": "warranty_label_alt",
+        "label": "Alternativtext (Screenreader)",
+        "default": "EU-Gewährleistungslabel: Auf diese Ware besteht eine gesetzliche Gewährleistung von mindestens zwei Jahren.",
+        "info": "Beschreibt die Grafik für blinde Nutzer und Suchmaschinen."
+      },
+      {
+        "type": "text",
+        "id": "warranty_label_zoom",
+        "label": "Text unter dem Label („Zum Vergrößern klicken“)",
+        "default": "Zum Vergrößern klicken",
+        "info": "Ein Klick auf das Label öffnet es in Originalgröße — sonst ist der Kleintext nicht lesbar. Leer lassen blendet den Hinweis aus, das Klicken bleibt möglich."
+      },
+      {
+        "type": "header",
+        "content": "Größe"
+      },
+      {
+        "type": "range",
+        "id": "warranty_label_width",
+        "min": 160,
+        "max": 420,
+        "step": 10,
+        "unit": "px",
+        "label": "Breite auf der Produktseite",
+        "default": 300,
+        "info": "Die amtliche Grafik ist ein hohes Format (wie ein DIN-A4-Blatt). Bei 300 px Breite ist sie rund 425 px hoch."
+      },
+      {
+        "type": "range",
+        "id": "warranty_label_width_small",
+        "min": 120,
+        "max": 320,
+        "step": 10,
+        "unit": "px",
+        "label": "Breite in Warenkorb & Footer",
+        "default": 200
+      },
+      {
+        "type": "header",
+        "content": "Platzierung"
+      },
+      {
+        "type": "paragraph",
+        "content": "Das Label muss vor dem Kauf erkennbar sein. Eine Platzierung nur in AGB oder Impressum reicht nicht aus. Empfehlung: alle drei Optionen aktiviert lassen."
+      },
+      {
+        "type": "checkbox",
+        "id": "warranty_label_on_product",
+        "label": "Auf der Produktseite (unter dem Warenkorb-Button)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "warranty_label_on_cart",
+        "label": "Im Warenkorb (vor „Zur Kasse\")",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "warranty_label_on_footer",
+        "label": "Im Footer (allgemeiner Hinweis auf jeder Seite)",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Begleittext & Link"
+      },
+      {
+        "type": "text",
+        "id": "warranty_label_eyebrow",
+        "label": "Kleine Überschrift neben dem Label",
+        "default": "Gesetzliche Gewährleistung",
+        "info": "Leer lassen, um nur die Grafik zu zeigen."
+      },
+      {
+        "type": "url",
+        "id": "warranty_label_link_url",
+        "label": "Link „Mehr erfahren\"",
+        "info": "Optional. Sinnvoll ist eine eigene Shop-Seite zur Gewährleistung oder das EU-Portal, auf das auch der QR-Code führt. Am Desktop lässt sich der QR-Code nicht scannen — ein Link hilft."
+      },
+      {
+        "type": "text",
+        "id": "warranty_label_link_label",
+        "label": "Linktext",
+        "default": "Mehr zur gesetzlichen Gewährleistung"
+      },
+      {
+        "type": "header",
+        "content": "GARAN-Label (Haltbarkeitsgarantie)"
+      },
+      {
+        "type": "paragraph",
+        "content": "Nur einschalten, wenn der Hersteller für dieses Produkt eine kostenlose Haltbarkeitsgarantie von MEHR als zwei Jahren gewährt. Eine einjährige Herstellergarantie reicht dafür nicht — dann bleibt diese Option aus."
+      },
+      {
+        "type": "checkbox",
+        "id": "garan_label_enabled",
+        "label": "GARAN-Label auf der Produktseite anzeigen",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "garan_label_image",
+        "label": "GARAN-Grafik (PNG)",
+        "info": "Offizielle EU-Grafik mit der zutreffenden Laufzeit, deutsch, farbig."
+      },
+      {
+        "type": "text",
+        "id": "garan_label_asset",
+        "label": "Alternativ: Dateiname im Theme-Ordner „assets\"",
+        "info": "Für die SVG-Version. Wird nur genutzt, wenn oben kein Bild gewählt ist."
+      },
+      {
+        "type": "text",
+        "id": "garan_label_alt",
+        "label": "Alternativtext (Screenreader)",
+        "default": "GARAN-Label: Der Hersteller gewährt für dieses Produkt eine Haltbarkeitsgarantie."
+      },
+      {
+        "type": "text",
+        "id": "garan_label_eyebrow",
+        "label": "Kleine Überschrift neben dem GARAN-Label",
+        "default": "Haltbarkeitsgarantie des Herstellers"
+      }
+    ]
   }
 ]

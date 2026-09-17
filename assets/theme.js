@@ -316,6 +316,45 @@
     });
   }
 
+  // ===== Gewaehrleistungslabel: Originalgroesse anzeigen =====
+  function initGuaranteeLabel() {
+    let box = null;
+
+    function close() {
+      box?.classList.remove('open');
+      document.body.classList.remove('lgl-noscroll');
+    }
+
+    function open(src, alt) {
+      if (!box) {
+        box = document.createElement('div');
+        box.className = 'lgl-lightbox';
+        box.innerHTML =
+          '<button type="button" class="lgl-lightbox-close" aria-label="Schliessen">&times;</button>' +
+          '<img alt="">';
+        box.addEventListener('click', e => {
+          if (e.target.tagName !== 'IMG') close();
+        });
+        document.body.appendChild(box);
+      }
+      const img = box.querySelector('img');
+      img.src = src;
+      img.alt = alt || '';
+      box.classList.add('open');
+      document.body.classList.add('lgl-noscroll');
+    }
+
+    document.addEventListener('click', e => {
+      const trigger = e.target.closest('[data-lgl-zoom]');
+      if (!trigger) return;
+      open(trigger.dataset.lglZoom, trigger.dataset.lglAlt);
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') close();
+    });
+  }
+
   // ===== Init =====
   document.addEventListener('DOMContentLoaded', () => {
     // Cart triggers
@@ -339,5 +378,6 @@
     initSizeGuide();
     initPaymentInfo();
     initNewsletter();
+    initGuaranteeLabel();
   });
 })();

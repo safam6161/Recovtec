@@ -18,6 +18,7 @@
       <span class="lbl">{{ settings.cart_subtotal | default: 'Zwischensumme' }}</span>
       <span class="val">0 €</span>
     </div>
+    {% render 'legal-guarantee-label', location: 'cart' %}
     <a href="/checkout" class="btn btn-primary btn-lg" style="width:100%;justify-content:center">
       {{ settings.cart_checkout | default: 'Zur Kasse' }} {% render 'icon', icon: 'arrow' %}
     </a>
