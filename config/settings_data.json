@@ -13,6 +13,7 @@
     "heading_font": "inter_n3",
     "body_font": "space_grotesk_n4",
     "favicon": "shopify://shop_images/recovtecfavicon.png",
+    "warranty_label_image": "shopify://shop_images/Legal_guarantee_notice_DE.png",
     "sections": {
       "header": {
         "type": "header",
@@ -60,8 +61,6 @@
         "settings": {
           "greeting_message": "",
           "button_color": "#000000",
-          "secondary_color": "#ffffff",
-          "ternary_color": "#6a6a6a",
           "button_icon": "chat_bubble",
           "button_text": "chat_with_us",
           "button_horizontal_position": "bottom_right",
