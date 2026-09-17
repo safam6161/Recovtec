@@ -6,7 +6,7 @@
     color:var(--paper); text-decoration:none;
     margin-bottom:16px;
   }
-  .foot-widerruf-row { padding-top: 24px; }
+  .foot-widerruf-row { padding-top: 24px; display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
   .foot-widerruf {
     display:inline-flex; align-items:center; gap:8px;
     padding:12px 22px; border:1px solid rgba(255,255,255,0.45);
@@ -58,14 +58,15 @@
       </div>
     </div>
 
-    {%- if section.settings.widerruf_url != blank -%}
+    {%- if section.settings.widerruf_url != blank or settings.warranty_label_enabled -%}
       <div class="foot-widerruf-row">
-        <a class="foot-widerruf" href="{{ section.settings.widerruf_url }}">{{ section.settings.widerruf_label | default: 'Vertrag widerrufen' }}</a>
+        {%- if section.settings.widerruf_url != blank -%}
+          <a class="foot-widerruf" href="{{ section.settings.widerruf_url }}">{{ section.settings.widerruf_label | default: 'Vertrag widerrufen' }}</a>
+        {%- endif -%}
+        {%- comment -%} EU-Gewährleistungslabel — allgemeiner Hinweis auf jeder Seite {%- endcomment -%}
+        {% render 'legal-guarantee-label', location: 'footer' %}
       </div>
     {%- endif -%}
-
-    {%- comment -%} EU-Gewährleistungslabel — allgemeiner Hinweis {%- endcomment -%}
-    {% render 'legal-guarantee-label', location: 'footer' %}
 
     <div class="foot-bottom">
       <div>{{ section.settings.legal }}</div>

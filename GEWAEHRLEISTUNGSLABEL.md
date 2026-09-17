@@ -50,9 +50,18 @@ einjährige Herstellergarantie reicht dafür nicht.
 ## Darstellung
 
 Die amtliche Grafik ist ein textdichtes Hochformat im DIN-A4-Verhältnis, kein
-kleines Siegel. In Shopgröße (300 px auf der Produktseite) ist der Kleintext
-nicht lesbar. Ein Klick öffnet das Label deshalb in Originalgröße. Beides ist
-über die Theme-Einstellungen anpassbar.
+kleines Siegel. Dauerhaft eingeblendet dominiert sie jede Seite, und in
+Shopgröße ist ihr Kleintext ohnehin nicht lesbar.
+
+Standard ist deshalb **Button**: eine Schaltfläche, die das Label per Klick in
+Originalgröße öffnet (schließen per Klick oder Escape).
+
+- **Produktseite und Warenkorb** — kompakte Zeile im Stil der Vertrauens-Pills
+- **Footer** — Button neben „Vertrag widerrufen"
+
+Über *Theme-Einstellungen → Gewährleistungslabel → Darstellung* lässt sich auf
+**Grafik direkt anzeigen** umstellen. Dann greifen auch die Einstellungen für
+Breite, Begleittext und Vergrößerungs-Hinweis.
 
 ## Grenzen
 
