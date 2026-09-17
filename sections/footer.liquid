@@ -64,6 +64,9 @@
       </div>
     {%- endif -%}
 
+    {%- comment -%} EU-Gewährleistungslabel — allgemeiner Hinweis {%- endcomment -%}
+    {% render 'legal-guarantee-label', location: 'footer' %}
+
     <div class="foot-bottom">
       <div>{{ section.settings.legal }}</div>
       <div class="lr">

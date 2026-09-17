@@ -1,0 +1,161 @@
+{%- comment -%}
+  EU-Gewährleistungslabel („harmonisierte Mitteilung") + optionales GARAN-Label
+  ---------------------------------------------------------------------------
+  Pflicht für B2C-Händler ab 27.09.2026.
+  Rechtsgrundlage: Richtlinie (EU) 2024/825, konkretisiert durch die
+  Durchführungsverordnung (EU) 2025/1960.
+
+  WICHTIG: Die Grafik ist rechtlich unveränderlich (Wortlaut, Farben,
+  Proportionen, QR-Code). Sie darf NICHT nachgebaut werden. Es muss die
+  offizielle Datei der EU-Kommission in deutscher Sprache und in der
+  FARBIGEN Fassung verwendet werden (im Onlinehandel ist Farbe Pflicht).
+  Hochladen unter: Theme-Einstellungen → „Gewährleistungslabel (EU-Pflicht)".
+
+  Aufruf:
+    {% render 'legal-guarantee-label', location: 'product' %}
+
+  Parameter:
+    location — 'product' | 'cart' | 'footer'   (steuert Sichtbarkeit + Optik)
+    show_garan — true/false (Standard: nur auf 'product')
+{%- endcomment -%}
+
+{%- liquid
+  assign location = location | default: 'product'
+
+  assign is_visible = false
+  if settings.warranty_label_enabled
+    case location
+      when 'product'
+        assign is_visible = settings.warranty_label_on_product
+      when 'cart'
+        assign is_visible = settings.warranty_label_on_cart
+      when 'footer'
+        assign is_visible = settings.warranty_label_on_footer
+      else
+        assign is_visible = true
+    endcase
+  endif
+
+  comment
+    Quelle der Grafik: Bild-Upload hat Vorrang, sonst Theme-Asset
+    (Asset-Weg erlaubt SVG, das der Bild-Upload nicht unterstützt).
+  endcomment
+  assign warranty_asset = settings.warranty_label_asset | strip
+  assign warranty_src = ''
+  if settings.warranty_label_image != blank
+    assign warranty_src = settings.warranty_label_image | image_url: width: 1200
+  elsif warranty_asset != blank
+    assign warranty_src = warranty_asset | asset_url
+  endif
+
+  assign garan_asset = settings.garan_label_asset | strip
+  assign garan_src = ''
+  if settings.garan_label_image != blank
+    assign garan_src = settings.garan_label_image | image_url: width: 1200
+  elsif garan_asset != blank
+    assign garan_src = garan_asset | asset_url
+  endif
+
+  if show_garan == nil
+    assign show_garan = false
+    if location == 'product'
+      assign show_garan = true
+    endif
+  endif
+  unless settings.garan_label_enabled
+    assign show_garan = false
+  endunless
+
+  assign label_width = settings.warranty_label_width | default: 260
+  if location != 'product'
+    assign label_width = settings.warranty_label_width_small | default: 180
+  endif
+-%}
+
+{%- if is_visible -%}
+  {%- if warranty_src != blank -%}
+    <div class="lgl lgl--{{ location }}">
+      {%- comment -%}
+        Das Label ist ein textdichtes Hochformat. In Shopgröße ist der
+        Kleintext nicht lesbar, deshalb per Klick in Originalgröße.
+      {%- endcomment -%}
+      <button type="button"
+              class="lgl-zoom"
+              style="width:{{ label_width }}px"
+              data-lgl-zoom="{{ warranty_src }}"
+              data-lgl-alt="{{ settings.warranty_label_alt | escape }}"
+              aria-label="{{ settings.warranty_label_zoom | default: 'Zum Vergrößern klicken' }}">
+        <img
+          class="lgl-img"
+          src="{{ warranty_src }}"
+          alt="{{ settings.warranty_label_alt | escape }}"
+          width="{{ label_width }}"
+          loading="lazy"
+          decoding="async">
+        {%- if settings.warranty_label_zoom != blank -%}
+          <span class="lgl-zoom-hint">{{ settings.warranty_label_zoom }}</span>
+        {%- endif -%}
+      </button>
+
+      {%- if settings.warranty_label_eyebrow != blank or settings.warranty_label_link_url != blank -%}
+        <div class="lgl-text">
+          {%- if settings.warranty_label_eyebrow != blank -%}
+            <span class="lgl-eyebrow">{{ settings.warranty_label_eyebrow }}</span>
+          {%- endif -%}
+          {%- if settings.warranty_label_link_url != blank -%}
+            <a class="lgl-link"
+               href="{{ settings.warranty_label_link_url }}"
+               target="_blank"
+               rel="noopener">{{ settings.warranty_label_link_label | default: 'Mehr zur gesetzlichen Gewährleistung' }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- elsif request.design_mode -%}
+    {%- comment -%} Nur im Theme-Editor sichtbar — nie im Live-Shop. {%- endcomment -%}
+    <div class="lgl-setup">
+      <strong>Gewährleistungslabel fehlt noch.</strong>
+      Ab 27.09.2026 ist die harmonisierte Mitteilung im Shop Pflicht.
+      Lade die offizielle Grafik der EU-Kommission (deutsch, farbig) unter
+      <em>Theme-Einstellungen → Gewährleistungslabel (EU-Pflicht)</em> hoch.
+      Dieser Hinweis erscheint nur im Theme-Editor.
+    </div>
+  {%- endif -%}
+
+  {%- if show_garan -%}
+    {%- if garan_src != blank -%}
+      <div class="lgl lgl--{{ location }} lgl--garan">
+        <button type="button"
+                class="lgl-zoom"
+                style="width:{{ label_width }}px"
+                data-lgl-zoom="{{ garan_src }}"
+                data-lgl-alt="{{ settings.garan_label_alt | escape }}"
+                aria-label="{{ settings.warranty_label_zoom | default: 'Zum Vergrößern klicken' }}">
+          <img
+            class="lgl-img"
+            src="{{ garan_src }}"
+            alt="{{ settings.garan_label_alt | escape }}"
+            width="{{ label_width }}"
+            loading="lazy"
+            decoding="async">
+          {%- if settings.warranty_label_zoom != blank -%}
+            <span class="lgl-zoom-hint">{{ settings.warranty_label_zoom }}</span>
+          {%- endif -%}
+        </button>
+        {%- if settings.garan_label_eyebrow != blank -%}
+          <div class="lgl-text">
+            <span class="lgl-eyebrow">{{ settings.garan_label_eyebrow }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- elsif request.design_mode -%}
+      <div class="lgl-setup">
+        <strong>GARAN-Label ist aktiviert, aber keine Grafik hinterlegt.</strong>
+        Das GARAN-Label darf nur verwendet werden, wenn der Hersteller für
+        dieses Produkt eine kostenlose Haltbarkeitsgarantie von mehr als zwei
+        Jahren gewährt. Trifft das nicht zu, schalte es in den
+        Theme-Einstellungen wieder aus.
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}

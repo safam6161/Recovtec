@@ -22,6 +22,9 @@
       <p style="font-size:13px;color:var(--ink-3);margin-bottom:24px"><strong>0 % Zinsen</strong> — schon ab {{ cart_rate | money }} pro Monat mit PayPal (3, 6, 12 oder 24 Raten)</p>
       <a href="{{ routes.checkout_url }}" class="btn btn-primary">Zur Kasse</a>
     </div>
+
+    {%- comment -%} EU-Gewährleistungslabel — vor Vertragsschluss sichtbar {%- endcomment -%}
+    {% render 'legal-guarantee-label', location: 'cart' %}
   {%- endif -%}
 </section>
 
