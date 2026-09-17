@@ -66,14 +66,39 @@
     assign show_garan = false
   endunless
 
-  assign label_width = settings.warranty_label_width | default: 260
+  assign label_width = settings.warranty_label_width | default: 300
   if location != 'product'
-    assign label_width = settings.warranty_label_width_small | default: 180
+    assign label_width = settings.warranty_label_width_small | default: 200
   endif
+
+  comment
+    Darstellung: 'button' zeigt nur eine Schaltflaeche, die das Label per Klick
+    in Originalgroesse oeffnet. 'image' stellt die Grafik direkt dar.
+  endcomment
+  assign label_style = settings.warranty_label_style | default: 'button'
 -%}
 
 {%- if is_visible -%}
   {%- if warranty_src != blank -%}
+    {%- if label_style == 'button' and location == 'footer' -%}
+      {%- comment -%} Im Footer im Stil des Widerruf-Buttons daneben. {%- endcomment -%}
+      <button type="button"
+              class="foot-widerruf lgl-btn-footer"
+              data-lgl-zoom="{{ warranty_src }}"
+              data-lgl-alt="{{ settings.warranty_label_alt | escape }}">
+        {{ settings.warranty_label_button_text | default: 'Gesetzliche Gewährleistung' }}
+      </button>
+    {%- elsif label_style == 'button' -%}
+      {%- comment -%} Kompakte Zeile auf Produktseite und im Warenkorb. {%- endcomment -%}
+      <button type="button"
+              class="lgl-btn lgl-btn--{{ location }}"
+              data-lgl-zoom="{{ warranty_src }}"
+              data-lgl-alt="{{ settings.warranty_label_alt | escape }}">
+        {% render 'icon', icon: 'shield' %}
+        <span class="lgl-btn-text">{{ settings.warranty_label_button_text | default: 'Gesetzliche Gewährleistung' }}</span>
+        <span class="lgl-btn-arrow" aria-hidden="true">↗</span>
+      </button>
+    {%- else -%}
     <div class="lgl lgl--{{ location }}">
       {%- comment -%}
         Das Label ist ein textdichtes Hochformat. In Shopgröße ist der
@@ -111,6 +136,7 @@
         </div>
       {%- endif -%}
     </div>
+    {%- endif -%}
   {%- elsif request.design_mode -%}
     {%- comment -%} Nur im Theme-Editor sichtbar — nie im Live-Shop. {%- endcomment -%}
     <div class="lgl-setup">
@@ -124,6 +150,16 @@
 
   {%- if show_garan -%}
     {%- if garan_src != blank -%}
+      {%- if label_style == 'button' -%}
+        <button type="button"
+                class="lgl-btn lgl-btn--{{ location }}"
+                data-lgl-zoom="{{ garan_src }}"
+                data-lgl-alt="{{ settings.garan_label_alt | escape }}">
+          {% render 'icon', icon: 'warranty' %}
+          <span class="lgl-btn-text">{{ settings.garan_label_button_text | default: 'Haltbarkeitsgarantie ansehen' }}</span>
+          <span class="lgl-btn-arrow" aria-hidden="true">↗</span>
+        </button>
+      {%- else -%}
       <div class="lgl lgl--{{ location }} lgl--garan">
         <button type="button"
                 class="lgl-zoom"
@@ -148,6 +184,7 @@
           </div>
         {%- endif -%}
       </div>
+      {%- endif -%}
     {%- elsif request.design_mode -%}
       <div class="lgl-setup">
         <strong>GARAN-Label ist aktiviert, aber keine Grafik hinterlegt.</strong>

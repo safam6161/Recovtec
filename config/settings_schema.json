@@ -155,6 +155,33 @@
       },
       {
         "type": "header",
+        "content": "Darstellung"
+      },
+      {
+        "type": "select",
+        "id": "warranty_label_style",
+        "label": "Darstellung",
+        "options": [
+          {
+            "value": "button",
+            "label": "Button — Label öffnet sich per Klick"
+          },
+          {
+            "value": "image",
+            "label": "Grafik direkt anzeigen"
+          }
+        ],
+        "default": "button",
+        "info": "Die amtliche Grafik ist ein A4-großes Textdokument. Als Button bleibt der Shop aufgeräumt, das Label ist mit einem Klick da. „Grafik direkt anzeigen“ stellt sie dauerhaft dar."
+      },
+      {
+        "type": "text",
+        "id": "warranty_label_button_text",
+        "label": "Button-Beschriftung",
+        "default": "Gesetzliche Gewährleistung"
+      },
+      {
+        "type": "header",
         "content": "Grafik"
       },
       {
@@ -181,7 +208,7 @@
         "id": "warranty_label_zoom",
         "label": "Text unter dem Label („Zum Vergrößern klicken“)",
         "default": "Zum Vergrößern klicken",
-        "info": "Ein Klick auf das Label öffnet es in Originalgröße — sonst ist der Kleintext nicht lesbar. Leer lassen blendet den Hinweis aus, das Klicken bleibt möglich."
+        "info": "Ein Klick auf das Label öffnet es in Originalgröße — sonst ist der Kleintext nicht lesbar. Leer lassen blendet den Hinweis aus, das Klicken bleibt möglich. Gilt nur bei „Grafik direkt anzeigen“."
       },
       {
         "type": "header",
@@ -196,7 +223,7 @@
         "unit": "px",
         "label": "Breite auf der Produktseite",
         "default": 300,
-        "info": "Die amtliche Grafik ist ein hohes Format (wie ein DIN-A4-Blatt). Bei 300 px Breite ist sie rund 425 px hoch."
+        "info": "Die amtliche Grafik ist ein hohes Format (wie ein DIN-A4-Blatt). Bei 300 px Breite ist sie rund 425 px hoch. Gilt nur bei „Grafik direkt anzeigen“."
       },
       {
         "type": "range",
@@ -206,7 +233,8 @@
         "step": 10,
         "unit": "px",
         "label": "Breite in Warenkorb & Footer",
-        "default": 200
+        "default": 200,
+        "info": "Gilt nur bei „Grafik direkt anzeigen“."
       },
       {
         "type": "header",
@@ -243,7 +271,7 @@
         "id": "warranty_label_eyebrow",
         "label": "Kleine Überschrift neben dem Label",
         "default": "Gesetzliche Gewährleistung",
-        "info": "Leer lassen, um nur die Grafik zu zeigen."
+        "info": "Leer lassen, um nur die Grafik zu zeigen. Gilt nur bei „Grafik direkt anzeigen“."
       },
       {
         "type": "url",
@@ -294,6 +322,12 @@
         "id": "garan_label_eyebrow",
         "label": "Kleine Überschrift neben dem GARAN-Label",
         "default": "Haltbarkeitsgarantie des Herstellers"
+      },
+      {
+        "type": "text",
+        "id": "garan_label_button_text",
+        "label": "GARAN Button-Beschriftung",
+        "default": "Haltbarkeitsgarantie ansehen"
       }
     ]
   }
