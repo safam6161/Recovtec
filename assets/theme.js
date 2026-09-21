@@ -66,6 +66,29 @@
       </div>`;
   }
 
+  // ===== Von Shopify injizierte Hinweise aus dem Warenkorb-Footer ausblenden =====
+  // Shopify schiebt über content_for_header Elemente (z. B. „Gesetzliche
+  // Gewährleistung") in den Drawer-Footer. Alles, was nicht zum Theme gehört,
+  // wird ausgeblendet — bewusst kein remove(), damit ein erneutes Einfügen
+  // durch Shopify keine Endlosschleife mit dem Observer auslöst.
+  function stripInjectedCartNotices(root) {
+    const foot = root || document.querySelector('.drawer-foot');
+    if (!foot) return;
+    foot.querySelectorAll(':scope > *').forEach(el => {
+      if (el.matches('.sub, .btn, .note')) return;
+      el.style.display = 'none';
+    });
+  }
+
+  function watchCartFoot() {
+    const foot = document.querySelector('.drawer-foot');
+    if (!foot || foot.dataset.noticeObserver) return;
+    foot.dataset.noticeObserver = '1';
+    stripInjectedCartNotices(foot);
+    new MutationObserver(() => stripInjectedCartNotices(foot))
+      .observe(foot, { childList: true });
+  }
+
   async function refreshDrawer() {
     const cart = await Cart.get();
     const body = document.querySelector('.drawer-body');
@@ -96,6 +119,7 @@
       body.innerHTML = cart.items.map((item, i) => renderCartLine(item, i)).join('');
       if (foot) {
         foot.style.display = 'flex';
+        stripInjectedCartNotices(foot);
         const subVal = foot.querySelector('.val');
         if (subVal) subVal.textContent = formatMoney(cart.total_price);
       }
@@ -261,6 +285,7 @@
       window.location.href = '/checkout';
     });
 
+    watchCartFoot();
     refreshDrawer();
     initAnchorNav();
     initATCForm();
