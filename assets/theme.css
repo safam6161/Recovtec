@@ -425,6 +425,11 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 }
 .jm-reviews .jm-avg-stars svg { width: 18px; height: 18px; flex: 0 0 auto; }
 
+/* Bilder-Galerie oberhalb der Bewertungsliste ausblenden. Judge.me zeigt dort
+   alle Fotos noch einmal, das Bild steht damit doppelt auf der Seite.
+   Markiert wird strukturell in hideMediaGallery() in theme.js. */
+.jm-reviews--no-media-gallery [data-jm-media-hidden] { display: none !important; }
+
 /* Kopfbereich mit Durchschnitt und Histogramm */
 .jm-reviews .jdgm-rev-widg__summary-text { font-size: 14px; color: var(--ink-3) !important; }
 .jm-reviews .jdgm-histogram__bar { background: var(--line) !important; }

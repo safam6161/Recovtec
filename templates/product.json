@@ -265,7 +265,8 @@
         "hide_widget_title": true,
         "hide_review_date": true,
         "hide_review_count": true,
-        "show_avg_stars": true
+        "show_avg_stars": true,
+        "hide_media_gallery": true
       }
     },
     "faq": {
