@@ -14,7 +14,7 @@
     "body_font": "space_grotesk_n4",
     "favicon": "shopify://shop_images/recovtecfavicon.png",
     "warranty_label_image": "shopify://shop_images/Legal_guarantee_notice_DE.png",
-    "warranty_label_on_product": true,
+    "warranty_label_on_product": false,
     "warranty_label_on_cart": false,
     "warranty_label_on_footer": true,
     "sections": {
