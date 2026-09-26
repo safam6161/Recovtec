@@ -16,6 +16,13 @@
 {%- endcomment -%}
 
 {%- liquid
+  comment
+    Auf der Produktseite liefert Shopify 'product'. Auf anderen Seiten (z. B.
+    Startseite) gibt es das nicht — dort muss das Produkt im Theme-Editor
+    gewählt werden. Ohne Produkt wird die Section nicht ausgegeben.
+  endcomment
+  assign jm_product = section.settings.product | default: product
+
   assign jm_classes = 'jm-reviews'
   if section.settings.bg == 'paper_2'
     assign jm_classes = jm_classes | append: ' jm-reviews--alt'
@@ -37,6 +44,13 @@
   endif
 -%}
 
+{%- if jm_product == blank -%}
+  {%- if request.design_mode -%}
+    <section class="jm-reviews"><div class="container">
+      <p class="jm-reviews-sub">Bitte im Theme-Editor unter „Produkt" das Produkt auswählen, dessen Bewertungen hier erscheinen sollen.</p>
+    </div></section>
+  {%- endif -%}
+{%- else -%}
 <section class="{{ jm_classes }}" id="reviews">
   <div class="container">
     {%- liquid
@@ -73,15 +87,15 @@
     <div class="jm-reviews-widget">
       <!-- Start of Judge.me code -->
       {% assign has_legacy = false %}
-      {% if product.metafields.judgeme.widget.size > 20 %}
+      {% if jm_product.metafields.judgeme.widget.size > 20 %}
         {% assign has_legacy = true %}
       {% endif %}
       <div style='clear:both'></div>
       <div id='judgeme_product_reviews'
            class='jdgm-widget jdgm-review-widget'
-           data-product-title='{{ product.title | escape }}'
-           data-id='{{ product.id }}'
-           data-product-id='{{ product.id }}'
+           data-product-title='{{ jm_product.title | escape }}'
+           data-id='{{ jm_product.id }}'
+           data-product-id='{{ jm_product.id }}'
            data-widget='review'
            data-auto-install='false'
            data-shop-reviews-count='{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}'
@@ -89,26 +103,28 @@
            data-entry-key='review-widget/main.js'>
         {% if has_legacy %}
           <div class='jdgm-legacy-widget-content' style='display: none;'>
-            {{ product.metafields.judgeme.widget }}
+            {{ jm_product.metafields.judgeme.widget }}
           </div>
         {% endif %}
       </div>
-      {% if product.metafields.judgeme.review_widget_data %}
+      {% if jm_product.metafields.judgeme.review_widget_data %}
         <script>
           jdgm.data ||= {};
           jdgm.data.reviewWidget ||= {};
-          jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}
+          jdgm.data.reviewWidget[{{ jm_product.id }}] = {{ jm_product.metafields.judgeme.review_widget_data }}
         </script>
       {% endif %}
       <!-- End of Judge.me code -->
     </div>
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Judge.me Bewertungen",
   "settings": [
+    { "type": "product", "id": "product", "label": "Produkt", "info": "Nur nötig, wenn die Section nicht auf einer Produktseite steht — etwa auf der Startseite." },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "06 — Bewertungen" },
     { "type": "text", "id": "headline", "label": "Headline", "default": "Was Kunden sagen." },
     { "type": "text", "id": "subtext", "label": "Subtext", "info": "Steht rechts neben der Headline. Leer lassen, um ihn auszublenden.", "default": "Alle Bewertungen stammen von verifizierten Käufern und werden ungefiltert angezeigt." },
