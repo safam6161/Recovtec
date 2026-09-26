@@ -90,10 +90,14 @@
                 <div class="pay-inst-brands">
                   <span class="pay-chip pay-chip-paypal"><span>Pay</span>Pal</span>
                 </div>
-                {%- if inst_price > 0 and inst_max_term > 0 -%}
+                {%- if section.settings.inst_show_rates and inst_price > 0 and inst_max_term > 0 -%}
                   <p class="pay-inst-rate">
                     <strong>{{ section.settings.inst_zero_label | default: '0 % Zinsen' }}</strong>
                     <span>{{ section.settings.inst_from_label | default: 'schon ab' }} {{ inst_min_rate | money }} {{ section.settings.inst_permonth_label | default: 'pro Monat' }}</span>
+                  </p>
+                {%- else -%}
+                  <p class="pay-inst-rate">
+                    <strong>{{ section.settings.inst_norate_label | default: '0 % Finanzierung mit PayPal' }}</strong>
                   </p>
                 {%- endif -%}
                 <p class="pay-inst-text">{{ section.settings.inst_text | default: 'Mit PayPal in 3, 6, 12 oder 24 Raten zahlen.' }}</p>
@@ -238,7 +242,7 @@
       assign inst_price = product.selected_or_first_available_variant.price
       assign inst_terms = section.settings.inst_terms | default: '3, 6, 12, 24' | split: ','
     -%}
-    {%- if inst_price > 0 and inst_terms.size > 0 -%}
+    {%- if section.settings.inst_show_rates and inst_price > 0 and inst_terms.size > 0 -%}
       <h2 class="sg-title">{{ section.settings.inst_table_heading | default: 'Deine Raten mit PayPal' }}</h2>
       <div class="pay-rates">
         {%- for term in inst_terms -%}
@@ -293,6 +297,8 @@
     { "type": "header", "content": "Ratenzahlung (PayPal)" },
     { "type": "checkbox", "id": "inst_show", "label": "Ratenzahlungs-Hinweis anzeigen", "default": true },
     { "type": "text", "id": "inst_terms", "label": "Laufzeiten in Monaten (mit Komma trennen)", "default": "3, 6, 12, 24" },
+    { "type": "checkbox", "id": "inst_show_rates", "label": "Konkrete Monatsraten anzeigen", "default": false, "info": "Aus lassen, solange Rabatt-Aktionen laufen: die Raten werden aus dem ungerabatteten Produktpreis berechnet und wären dann zu hoch." },
+    { "type": "text", "id": "inst_norate_label", "label": "Hinweis ohne Betrag", "default": "0 % Finanzierung mit PayPal", "info": "Wird gezeigt, wenn keine konkreten Monatsraten angezeigt werden." },
     { "type": "text", "id": "inst_zero_label", "label": "Zins-Hinweis (fett)", "default": "0 % Zinsen" },
     { "type": "text", "id": "inst_from_label", "label": "Text vor der Rate", "default": "schon ab" },
     { "type": "text", "id": "inst_permonth_label", "label": "Text nach der Rate", "default": "pro Monat" },
