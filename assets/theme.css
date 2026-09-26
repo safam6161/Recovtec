@@ -358,7 +358,16 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .jm-reviews--no-date .jdgm-rev__timestamp,
 .jm-reviews--no-date .jdgm-rev__timeago,
 .jm-reviews--no-date .jm-review-date,
-.jm-reviews--no-date .jm-review__date { display: none !important; }
+.jm-reviews--no-date .jm-review__date,
+/* Judge.me benennt die Klasse je nach Widget-Generation anders, deshalb
+   zusätzlich über Teilstrings. Nur innerhalb der Section, nie global. */
+.jm-reviews--no-date [class*="timestamp"],
+.jm-reviews--no-date [class*="timeago"],
+.jm-reviews--no-date [class*="__date"],
+.jm-reviews--no-date [class*="-date"],
+.jm-reviews--no-date time,
+/* Fallback per JS markiert, siehe initHideReviewDates() in theme.js */
+.jm-reviews--no-date [data-jm-date-hidden] { display: none !important; }
 
 /* Ecken: das Theme ist durchgehend kantig */
 .jm-reviews .jdgm-widget *,
