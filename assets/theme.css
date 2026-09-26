@@ -346,9 +346,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .jm-reviews--alt { background: var(--paper-2); }
 .jm-reviews-sub { max-width: 36ch; color: var(--mute); }
 
-/* Grundschrift: Judge.me setzt sonst seine eigene */
+/* Grundschrift: Judge.me setzt sonst seine eigene.
+   Sterne und Icons sind bewusst ausgenommen: Judge.me rendert sie als Glyphen
+   aus einer eigenen Icon-Schrift. Überschreibt man deren font-family, fällt
+   das Zeichen weg und die Sterne verschwinden — genau das ist hier passiert. */
 .jm-reviews .jdgm-widget,
-.jm-reviews .jdgm-widget * { font-family: var(--f-ui) !important; }
+.jm-reviews .jdgm-widget *:not([class*="star"]):not([class*="Star"]):not([class*="icon"]):not([class*="Icon"]) {
+  font-family: var(--f-ui) !important;
+}
 
 /* Eigene Headline steht schon in der Section-Hülle */
 .jm-reviews--no-widget-title .jdgm-rev-widg__title { display: none !important; }
@@ -383,8 +388,24 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .jm-reviews .jdgm-widget *::after { border-radius: 0 !important; }
 
 /* Sterne in Textfarbe statt Judge.me-Gelb, wie in .stars */
-.jm-reviews .jdgm-star { color: var(--ink) !important; }
-.jm-reviews .jdgm-star.jdgm--off { color: var(--line-2) !important; }
+.jm-reviews .jdgm-star,
+.jm-reviews [class*="star"] { color: var(--ink) !important; letter-spacing: 1px; }
+.jm-reviews .jdgm-star.jdgm--off,
+.jm-reviews [class*="star"][class*="--off"],
+.jm-reviews [class*="star"][class*="empty"] { color: var(--line-2) !important; }
+
+/* Bewertung pro Rezension: gleiche Zeile wie der Name, etwas größer.
+   Ohne !important, damit Judge.mes eigenes Layout gewinnen kann, falls es
+   die Zeile anders aufbaut. */
+.jm-reviews .jdgm-rev__header,
+.jm-reviews [class*="rev__header"] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.jm-reviews [class*="rev__rating"],
+.jm-reviews [class*="review-rating"] { font-size: 15px; line-height: 1; }
 
 /* Kopfbereich mit Durchschnitt und Histogramm */
 .jm-reviews .jdgm-rev-widg__summary-text { font-size: 14px; color: var(--ink-3) !important; }
