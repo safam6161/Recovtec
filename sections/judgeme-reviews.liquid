@@ -1,55 +1,114 @@
-<div class="judgeme-section page-width" style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
-  {%- if section.settings.title != blank -%}
-    <h2 style="text-align: center; margin-bottom: 30px;">{{ section.settings.title }}</h2>
-  {%- endif -%}
+{%- comment -%}
+  Judge.me Bewertungen im Shop-Design
+  -----------------------------------
+  Der Widget-Container unten stammt unverändert aus der manuellen
+  Judge.me-Installation (data-auto-install='false'). Struktur, Klassen und
+  data-Attribute dürfen NICHT angepasst werden — sonst findet das
+  Judge.me-Skript das Widget nicht mehr und es bleibt leer.
 
-  <!-- Start of Judge.me code -->
-  {% assign has_legacy = false %}
-  {% if product.metafields.judgeme.widget.size > 20 %}
-    {% assign has_legacy = true %}
-  {% endif %}
-  <div style='clear:both'></div>
-  <div id='judgeme_product_reviews'
-       class='jdgm-widget jdgm-review-widget'
-       data-product-title='{{ product.title | escape }}'
-       data-id='{{ product.id }}'
-       data-product-id='{{ product.id }}'
-       data-widget='review'
-       data-auto-install='false'
-       data-shop-reviews-count='{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}'
-       data-entry-point='review_widget.js'
-       data-entry-key='review-widget/main.js'>
-    {% if has_legacy %}
-      <div class='jdgm-legacy-widget-content' style='display: none;'>
-        {{ product.metafields.judgeme.widget }}
+  Die Optik kommt deshalb ausschließlich von außen:
+    - diese Section-Hülle (Container, Eyebrow, Headline wie in „Social Proof")
+    - die Regeln unter „Judge.me Bewertungen" in assets/theme.css
+
+  Voraussetzung: Die App-Einbettung „Judge.me Core" muss unter
+  Theme-Einstellungen → App-Einbettungen aktiv sein, sonst lädt das Skript
+  nicht. Sie ist in config/settings_data.json bereits eingetragen.
+{%- endcomment -%}
+
+{%- liquid
+  assign jm_classes = 'jm-reviews'
+  if section.settings.bg == 'paper_2'
+    assign jm_classes = jm_classes | append: ' jm-reviews--alt'
+  endif
+  if section.settings.hide_widget_title
+    assign jm_classes = jm_classes | append: ' jm-reviews--no-widget-title'
+  endif
+-%}
+
+<section class="{{ jm_classes }}" id="reviews">
+  <div class="container">
+    {%- liquid
+      assign has_eyebrow = false
+      assign has_headline = false
+      assign has_subtext = false
+      if section.settings.eyebrow != blank
+        assign has_eyebrow = true
+      endif
+      if section.settings.headline != blank
+        assign has_headline = true
+      endif
+      if section.settings.subtext != blank
+        assign has_subtext = true
+      endif
+    -%}
+
+    {%- if has_eyebrow or has_headline or has_subtext -%}
+      <div class="section-head">
+        <div class="left">
+          {%- if has_eyebrow -%}
+            <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          {%- if has_headline -%}
+            <h2 class="h-2">{{ section.settings.headline }}</h2>
+          {%- endif -%}
+        </div>
+        {%- if has_subtext -%}
+          <p class="jm-reviews-sub">{{ section.settings.subtext }}</p>
+        {%- endif -%}
       </div>
-    {% endif %}
+    {%- endif -%}
+
+    <div class="jm-reviews-widget">
+      <!-- Start of Judge.me code -->
+      {% assign has_legacy = false %}
+      {% if product.metafields.judgeme.widget.size > 20 %}
+        {% assign has_legacy = true %}
+      {% endif %}
+      <div style='clear:both'></div>
+      <div id='judgeme_product_reviews'
+           class='jdgm-widget jdgm-review-widget'
+           data-product-title='{{ product.title | escape }}'
+           data-id='{{ product.id }}'
+           data-product-id='{{ product.id }}'
+           data-widget='review'
+           data-auto-install='false'
+           data-shop-reviews-count='{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}'
+           data-entry-point='review_widget.js'
+           data-entry-key='review-widget/main.js'>
+        {% if has_legacy %}
+          <div class='jdgm-legacy-widget-content' style='display: none;'>
+            {{ product.metafields.judgeme.widget }}
+          </div>
+        {% endif %}
+      </div>
+      {% if product.metafields.judgeme.review_widget_data %}
+        <script>
+          jdgm.data ||= {};
+          jdgm.data.reviewWidget ||= {};
+          jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}
+        </script>
+      {% endif %}
+      <!-- End of Judge.me code -->
+    </div>
   </div>
-  {% if product.metafields.judgeme.review_widget_data %}
-    <script>
-      jdgm.data ||= {};
-      jdgm.data.reviewWidget ||= {};
-      jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}
-    </script>
-  {% endif %}
-  <!-- End of Judge.me code -->
-</div>
+</section>
 
 {% schema %}
 {
   "name": "Judge.me Bewertungen",
   "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Überschrift",
-      "default": "Kundenbewertungen"
-    }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "06 — Bewertungen" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Was Kunden sagen." },
+    { "type": "text", "id": "subtext", "label": "Subtext", "info": "Steht rechts neben der Headline. Leer lassen, um ihn auszublenden.", "default": "Alle Bewertungen stammen von verifizierten Käufern und werden ungefiltert angezeigt." },
+    { "type": "header", "content": "Darstellung" },
+    { "type": "select", "id": "bg", "label": "Hintergrund", "options": [
+        { "value": "paper", "label": "Standard" },
+        { "value": "paper_2", "label": "Abgesetzt (grau)" }
+      ], "default": "paper" },
+    { "type": "checkbox", "id": "hide_widget_title", "label": "Überschrift des Judge.me-Widgets ausblenden", "default": true, "info": "Empfohlen, solange oben eine eigene Headline steht — sonst stehen zwei Überschriften untereinander." }
   ],
   "presets": [
-    {
-      "name": "Judge.me Bewertungen"
-    }
+    { "name": "Judge.me Bewertungen" }
   ]
 }
 {% endschema %}
