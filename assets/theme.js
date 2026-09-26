@@ -355,6 +355,50 @@
     });
   }
 
+  // ===== Judge.me: Datum in den Bewertungen ausblenden =====
+  // Die Regeln in theme.css decken die bekannten Judge.me-Klassen ab. Benennt
+  // Judge.me sie in einer neuen Widget-Generation um, greift dieser Fallback:
+  // Er sucht im Widget Elemente, deren gesamter Text nur aus einem Datum
+  // besteht, und markiert sie für die CSS-Regel [data-jm-date-hidden].
+  const JM_MONTHS = 'Januar|Februar|Maerz|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember'
+                  + '|Jan|Feb|Mrz|Mar|Apr|Jun|Jul|Aug|Sep|Okt|Oct|Nov|Dez|Dec';
+  const JM_UNITS_DE = 'Sekunde|Minute|Stunde|Tag|Woche|Monat|Jahr';
+  const JM_UNITS_EN = 'second|minute|hour|day|week|month|year';
+  const JM_DATE_RE = new RegExp(
+    '^(?:'
+    + '\\d{1,2}[./-]\\d{1,2}[./-]\\d{2,4}'                                  // 26/09/2026, 26.09.2026
+    + '|\\d{4}-\\d{1,2}-\\d{1,2}'                                            // 2026-09-26
+    + '|\\d{1,2}\\.?\\s*(?:' + JM_MONTHS + ')\\.?\\s*\\d{2,4}'               // 26. September 2026
+    + '|(?:' + JM_MONTHS + ')\\.?\\s*\\d{1,2},?\\s*\\d{2,4}'                 // September 26, 2026
+    + '|vor\\s+(?:\\d+|einem|einer)\\s+(?:' + JM_UNITS_DE + ')\\w*'          // vor 2 Tagen
+    + '|(?:\\d+|an?)\\s+(?:' + JM_UNITS_EN + ')s?\\s+ago'                    // 2 days ago
+    + ')$', 'i');
+
+  function markReviewDates(root) {
+    root.querySelectorAll('*').forEach(el => {
+      if (el.children.length) return;                    // nur Blattelemente
+      if (el.hasAttribute('data-jm-date-hidden')) return;
+      const text = (el.textContent || '').trim();
+      if (!text || text.length > 32) return;             // Bewertungstext ausschließen
+      if (!JM_DATE_RE.test(text)) return;
+      el.setAttribute('data-jm-date-hidden', '');
+    });
+  }
+
+  function initHideReviewDates() {
+    const root = document.querySelector('.jm-reviews--no-date');
+    if (!root) return;
+    markReviewDates(root);
+    // Judge.me rendert asynchron und baut bei Seitenwechseln neu auf.
+    let pending = false;
+    const observer = new MutationObserver(() => {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(() => { pending = false; markReviewDates(root); });
+    });
+    observer.observe(root, { childList: true, subtree: true });
+  }
+
   // ===== Init =====
   document.addEventListener('DOMContentLoaded', () => {
     // Cart triggers
@@ -370,6 +414,7 @@
     });
 
     refreshDrawer();
+    initHideReviewDates();
     initAnchorNav();
     initATCForm();
     initSizeSelector();
