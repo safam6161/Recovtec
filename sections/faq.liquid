@@ -11,7 +11,7 @@
           <a href="mailto:{{ section.settings.email }}">Nachricht schreiben →</a>
         </div>
         {%- if section.settings.contact_button_label != blank -%}
-          <a href="{{ section.settings.contact_button_url | default: '/pages/kontakt' }}" class="btn btn-primary faq-contact-btn">
+          <a href="{{ section.settings.contact_button_url | default: '/pages/contact' }}" class="btn btn-primary faq-contact-btn">
             {{ section.settings.contact_button_label }}
             <span class="btn-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 9h14M11 4l5 5-5 5"/></svg></span>
           </a>
