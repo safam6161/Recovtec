@@ -32,6 +32,9 @@
   if section.settings.show_avg_stars
     assign jm_classes = jm_classes | append: ' jm-reviews--avg-stars'
   endif
+  if section.settings.hide_media_gallery
+    assign jm_classes = jm_classes | append: ' jm-reviews--no-media-gallery'
+  endif
 -%}
 
 <section class="{{ jm_classes }}" id="reviews">
@@ -117,7 +120,8 @@
     { "type": "checkbox", "id": "hide_widget_title", "label": "Überschrift des Judge.me-Widgets ausblenden", "default": true, "info": "Empfohlen, solange oben eine eigene Headline steht — sonst stehen zwei Überschriften untereinander." },
     { "type": "checkbox", "id": "hide_review_date", "label": "Datum der Bewertungen ausblenden", "default": true },
     { "type": "checkbox", "id": "hide_review_count", "label": "Gesamtzahl der Bewertungen ausblenden", "default": true },
-    { "type": "checkbox", "id": "show_avg_stars", "label": "Sterne neben der Durchschnittsnote anzeigen", "default": true, "info": "Judge.me gibt dort nur die Zahl aus. Die Sterne zeichnet das Theme im Shop-Design dazu." }
+    { "type": "checkbox", "id": "show_avg_stars", "label": "Sterne neben der Durchschnittsnote anzeigen", "default": true, "info": "Judge.me gibt dort nur die Zahl aus. Die Sterne zeichnet das Theme im Shop-Design dazu." },
+    { "type": "checkbox", "id": "hide_media_gallery", "label": "Bilder-Galerie über der Liste ausblenden", "default": true, "info": "Judge.me zeigt dort alle Fotos noch einmal. Die Bilder in den einzelnen Bewertungen bleiben sichtbar." }
   ],
   "presets": [
     { "name": "Judge.me Bewertungen" }

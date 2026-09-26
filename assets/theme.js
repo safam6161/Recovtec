@@ -430,6 +430,38 @@
     }
   }
 
+  // Judge.me zeigt oberhalb der Liste eine Galerie mit allen Bewertungsbildern.
+  // Dasselbe Foto steht dadurch zweimal auf der Seite. Statt nach dem
+  // Klassennamen der Galerie zu raten, wird sie über die Struktur bestimmt:
+  // Bilder, die VOR der ersten Bewertung stehen, gehören zur Galerie.
+  // Achtung: nicht [class*="jm-review"] verwenden — das trifft auch den eigenen
+  // Wrapper .jm-reviews-widget, der das ganze Widget umschließt. Dann gilt jedes
+  // Bild als "innerhalb einer Bewertung" und die Galerie bleibt stehen.
+  const JM_REVIEW_SEL = '.jdgm-rev, [class*="review-item"], [class*="jm-review-item"]';
+
+  function hideMediaGallery(root) {
+    const firstReview = root.querySelector(JM_REVIEW_SEL);
+    if (!firstReview) return;                       // Struktur unklar -> nichts anfassen
+
+    root.querySelectorAll('img').forEach(img => {
+      if (firstReview.contains(img)) return;
+      if (img.closest(JM_REVIEW_SEL)) return;       // gehört zu einer Bewertung
+      const pos = firstReview.compareDocumentPosition(img);
+      if (!(pos & Node.DOCUMENT_POSITION_PRECEDING)) return;
+
+      // Nach oben bis zum äußersten Container, der ausser Medien keinen Text
+      // enthält — sonst bliebe eine leere Box stehen.
+      let node = img;
+      while (node.parentElement
+             && node.parentElement !== root
+             && !node.parentElement.classList.contains('jm-reviews-widget')
+             && (node.parentElement.textContent || '').trim() === '') {
+        node = node.parentElement;
+      }
+      node.setAttribute('data-jm-media-hidden', '');
+    });
+  }
+
   function initJudgemeWidget() {
     const root = document.querySelector('.jm-reviews');
     if (!root) return;
@@ -442,11 +474,13 @@
       rules.push({ re: JM_COUNT_RE, attr: 'data-jm-count-hidden' });
     }
     const showAvgStars = root.classList.contains('jm-reviews--avg-stars');
-    if (!rules.length && !showAvgStars) return;
+    const hideGallery = root.classList.contains('jm-reviews--no-media-gallery');
+    if (!rules.length && !showAvgStars && !hideGallery) return;
 
     const run = () => {
       if (rules.length) markByText(root, rules);
       if (showAvgStars) injectAverageStars(root);
+      if (hideGallery) hideMediaGallery(root);
     };
 
     run();
