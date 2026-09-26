@@ -353,6 +353,13 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 /* Eigene Headline steht schon in der Section-Hülle */
 .jm-reviews--no-widget-title .jdgm-rev-widg__title { display: none !important; }
 
+/* Datum der Bewertung ausblenden (Section-Einstellung).
+   Beide Judge.me-Generationen abgedeckt: .jdgm-* (klassisch) und .jm-* (revamp). */
+.jm-reviews--no-date .jdgm-rev__timestamp,
+.jm-reviews--no-date .jdgm-rev__timeago,
+.jm-reviews--no-date .jm-review-date,
+.jm-reviews--no-date .jm-review__date { display: none !important; }
+
 /* Ecken: das Theme ist durchgehend kantig */
 .jm-reviews .jdgm-widget *,
 .jm-reviews .jdgm-widget *::before,

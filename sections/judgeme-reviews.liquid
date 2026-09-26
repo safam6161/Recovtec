@@ -23,6 +23,9 @@
   if section.settings.hide_widget_title
     assign jm_classes = jm_classes | append: ' jm-reviews--no-widget-title'
   endif
+  if section.settings.hide_review_date
+    assign jm_classes = jm_classes | append: ' jm-reviews--no-date'
+  endif
 -%}
 
 <section class="{{ jm_classes }}" id="reviews">
@@ -105,7 +108,8 @@
         { "value": "paper", "label": "Standard" },
         { "value": "paper_2", "label": "Abgesetzt (grau)" }
       ], "default": "paper" },
-    { "type": "checkbox", "id": "hide_widget_title", "label": "Überschrift des Judge.me-Widgets ausblenden", "default": true, "info": "Empfohlen, solange oben eine eigene Headline steht — sonst stehen zwei Überschriften untereinander." }
+    { "type": "checkbox", "id": "hide_widget_title", "label": "Überschrift des Judge.me-Widgets ausblenden", "default": true, "info": "Empfohlen, solange oben eine eigene Headline steht — sonst stehen zwei Überschriften untereinander." },
+    { "type": "checkbox", "id": "hide_review_date", "label": "Datum der Bewertungen ausblenden", "default": true }
   ],
   "presets": [
     { "name": "Judge.me Bewertungen" }
