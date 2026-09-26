@@ -355,7 +355,7 @@
     });
   }
 
-  // ===== Judge.me: Datum in den Bewertungen ausblenden =====
+  // ===== Judge.me: Datum und Gesamtzahl der Bewertungen ausblenden =====
   // Die Regeln in theme.css decken die bekannten Judge.me-Klassen ab. Benennt
   // Judge.me sie in einer neuen Widget-Generation um, greift dieser Fallback:
   // Er sucht im Widget Elemente, deren gesamter Text nur aus einem Datum
@@ -374,27 +374,46 @@
     + '|(?:\\d+|an?)\\s+(?:' + JM_UNITS_EN + ')s?\\s+ago'                    // 2 days ago
     + ')$', 'i');
 
-  function markReviewDates(root) {
+  // Gesamtzahl der Bewertungen, z. B. "Basierend auf 47 Bewertungen", "47 reviews", "(47)"
+  const JM_COUNT_RE = new RegExp(
+    '^(?:'
+    + '(?:basierend\\s+auf\\s+)?\\d+\\s*(?:Bewertung|Bewertungen|Rezension|Rezensionen)'
+    + '|(?:based\\s+on\\s+)?\\d+\\s*(?:review|reviews|rating|ratings)'
+    + '|\\(\\s*\\d+\\s*\\)'
+    + ')$', 'i');
+
+  function markByText(root, rules) {
     root.querySelectorAll('*').forEach(el => {
       if (el.children.length) return;                    // nur Blattelemente
-      if (el.hasAttribute('data-jm-date-hidden')) return;
       const text = (el.textContent || '').trim();
-      if (!text || text.length > 32) return;             // Bewertungstext ausschließen
-      if (!JM_DATE_RE.test(text)) return;
-      el.setAttribute('data-jm-date-hidden', '');
+      if (!text || text.length > 40) return;             // Bewertungstext ausschließen
+      rules.forEach(rule => {
+        if (el.hasAttribute(rule.attr)) return;
+        if (rule.re.test(text)) el.setAttribute(rule.attr, '');
+      });
     });
   }
 
   function initHideReviewDates() {
-    const root = document.querySelector('.jm-reviews--no-date');
+    const root = document.querySelector('.jm-reviews');
     if (!root) return;
-    markReviewDates(root);
+
+    const rules = [];
+    if (root.classList.contains('jm-reviews--no-date')) {
+      rules.push({ re: JM_DATE_RE, attr: 'data-jm-date-hidden' });
+    }
+    if (root.classList.contains('jm-reviews--no-count')) {
+      rules.push({ re: JM_COUNT_RE, attr: 'data-jm-count-hidden' });
+    }
+    if (!rules.length) return;
+
+    markByText(root, rules);
     // Judge.me rendert asynchron und baut bei Seitenwechseln neu auf.
     let pending = false;
     const observer = new MutationObserver(() => {
       if (pending) return;
       pending = true;
-      requestAnimationFrame(() => { pending = false; markReviewDates(root); });
+      requestAnimationFrame(() => { pending = false; markByText(root, rules); });
     });
     observer.observe(root, { childList: true, subtree: true });
   }
