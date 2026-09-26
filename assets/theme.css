@@ -53,7 +53,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 /* ===== Layout ===== */
 .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--pad); }
 .section-pad { padding: var(--section-py) 0; }
-#problem, #solution, #howto, #compare, #social, #faq { scroll-margin-top: 76px; }
+#problem, #solution, #howto, #compare, #social, #reviews, #faq { scroll-margin-top: 76px; }
 
 /* ===== Buttons ===== */
 .btn {
@@ -334,6 +334,104 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .testimonial-soon .label { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute-2); }
 .testimonial-soon h3 { font-size: 15px; font-weight: 600; color: var(--ink); }
 .testimonial-soon p { font-size: 13px; color: var(--mute); line-height: 1.5; }
+
+/* ===== Judge.me Bewertungen =====
+   Angleichung des Judge.me-Widgets an die Theme-Tokens. Das Widget-Markup
+   kommt vom Judge.me-Skript und darf nicht angefasst werden, deshalb hier
+   ausschließlich Overrides. Alles ist auf .jm-reviews gescopt, damit das
+   Bewertungsformular unter /pages/bewertung unberührt bleibt.
+   Judge.me lädt sein eigenes Stylesheet nach, daher !important. */
+
+.jm-reviews { padding: var(--section-py) 0; background: var(--paper); }
+.jm-reviews--alt { background: var(--paper-2); }
+.jm-reviews-sub { max-width: 36ch; color: var(--mute); }
+
+/* Grundschrift: Judge.me setzt sonst seine eigene */
+.jm-reviews .jdgm-widget,
+.jm-reviews .jdgm-widget * { font-family: var(--f-ui) !important; }
+
+/* Eigene Headline steht schon in der Section-Hülle */
+.jm-reviews--no-widget-title .jdgm-rev-widg__title { display: none !important; }
+
+/* Ecken: das Theme ist durchgehend kantig */
+.jm-reviews .jdgm-widget *,
+.jm-reviews .jdgm-widget *::before,
+.jm-reviews .jdgm-widget *::after { border-radius: 0 !important; }
+
+/* Sterne in Textfarbe statt Judge.me-Gelb, wie in .stars */
+.jm-reviews .jdgm-star { color: var(--ink) !important; }
+.jm-reviews .jdgm-star.jdgm--off { color: var(--line-2) !important; }
+
+/* Kopfbereich mit Durchschnitt und Histogramm */
+.jm-reviews .jdgm-rev-widg__summary-text { font-size: 14px; color: var(--ink-3) !important; }
+.jm-reviews .jdgm-histogram__bar { background: var(--line) !important; }
+.jm-reviews .jdgm-histogram__bar-content { background: var(--ink) !important; }
+.jm-reviews .jdgm-histogram__row:hover { background: var(--paper-2) !important; }
+
+/* Einzelne Bewertung: Trennlinie statt Karte, wie im übrigen Theme */
+.jm-reviews .jdgm-rev {
+  border: 0 !important;
+  border-top: 1px solid var(--line) !important;
+  padding: 24px 0 !important;
+  background: transparent !important;
+}
+.jm-reviews .jdgm-rev__author { font-weight: 600 !important; color: var(--ink) !important; }
+.jm-reviews .jdgm-rev__title { font-weight: 600 !important; color: var(--ink) !important; }
+.jm-reviews .jdgm-rev__body { font-size: 14px !important; line-height: 1.6 !important; color: var(--ink-3) !important; }
+.jm-reviews .jdgm-rev__timestamp,
+.jm-reviews .jdgm-rev__location { font-size: 12px !important; color: var(--mute-2) !important; }
+
+/* Verifiziert-Badge im Stil der Eyebrow */
+.jm-reviews .jdgm-rev__buyer-badge {
+  font-family: var(--f-mono) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--green) !important;
+  background: transparent !important;
+}
+
+/* Buttons im Stil von .btn-primary */
+.jm-reviews .jdgm-write-rev-link,
+.jm-reviews .jdgm-btn,
+.jm-reviews .jdgm-paginate__page {
+  font-family: var(--f-ui) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: uppercase !important;
+  border-radius: 0 !important;
+}
+.jm-reviews .jdgm-write-rev-link,
+.jm-reviews .jdgm-btn {
+  background: var(--color-primary) !important;
+  color: var(--color-button-text) !important;
+  border: 1px solid var(--color-primary) !important;
+  padding: 14px 24px !important;
+}
+.jm-reviews .jdgm-write-rev-link:hover,
+.jm-reviews .jdgm-btn:hover { background: var(--color-primary-hover) !important; }
+
+/* Paginierung */
+.jm-reviews .jdgm-paginate__page {
+  color: var(--ink-3) !important;
+  background: transparent !important;
+  border: 1px solid var(--line) !important;
+}
+.jm-reviews .jdgm-paginate__page.jdgm-curt { background: var(--ink) !important; color: var(--paper) !important; }
+
+/* Sortier-Dropdown */
+.jm-reviews .jdgm-sort-dropdown,
+.jm-reviews .jdgm-sort-dropdown-arrow {
+  font-family: var(--f-ui) !important;
+  font-size: 13px !important;
+  color: var(--ink-3) !important;
+  border-color: var(--line) !important;
+}
+
+@media (max-width: 720px) {
+  .jm-reviews-sub { max-width: none; }
+}
 
 /* ===== FAQ / Accordion ===== */
 .faq { padding: var(--section-py) 0; background: var(--paper); }
@@ -846,7 +944,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 }
 body.lgl-noscroll { overflow: hidden; }
 
-/* Einrichtungs-Hinweis — erscheint ausschliesslich im Theme-Editor */
+/* Einrichtungs-Hinweis — erscheint ausschließlich im Theme-Editor */
 .lgl-setup {
   padding: 14px 16px; margin-top: 4px;
   background: #fff8e1; border: 1px dashed #d9a400;
