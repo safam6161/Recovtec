@@ -335,6 +335,21 @@
         "empty_text": "Wir freuen uns auf deine Bewertung — direkt nach den ersten 2 Wochen. Foto vom Setup gern dabei."
       }
     },
+    "judgeme_reviews": {
+      "type": "judgeme-reviews",
+      "settings": {
+        "product": "recovtec-pro-recovery-boots",
+        "eyebrow": "05 — Bewertungen",
+        "headline": "Was Kunden sagen.",
+        "subtext": "Alle Bewertungen stammen von verifizierten Käufern und werden ungefiltert angezeigt.",
+        "bg": "paper",
+        "hide_widget_title": true,
+        "hide_review_date": true,
+        "hide_review_count": true,
+        "show_avg_stars": true,
+        "hide_media_gallery": true
+      }
+    },
     "faq": {
       "type": "faq",
       "blocks": {
@@ -474,6 +489,7 @@
     "howto",
     "compare",
     "social",
+    "judgeme_reviews",
     "faq",
     "final_cta"
   ]

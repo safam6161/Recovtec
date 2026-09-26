@@ -463,9 +463,11 @@
   }
 
   function initJudgemeWidget() {
-    const root = document.querySelector('.jm-reviews');
-    if (!root) return;
+    // Die Section kann mehrfach vorkommen (Produktseite und Startseite).
+    document.querySelectorAll('.jm-reviews').forEach(setupJudgemeRoot);
+  }
 
+  function setupJudgemeRoot(root) {
     const rules = [];
     if (root.classList.contains('jm-reviews--no-date')) {
       rules.push({ re: JM_DATE_RE, attr: 'data-jm-date-hidden' });
