@@ -369,6 +369,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 /* Fallback per JS markiert, siehe initHideReviewDates() in theme.js */
 .jm-reviews--no-date [data-jm-date-hidden] { display: none !important; }
 
+/* Gesamtzahl der Bewertungen ausblenden (Section-Einstellung).
+   Die Durchschnittssterne oben bleiben stehen, nur die Anzahl verschwindet. */
+.jm-reviews--no-count .jdgm-rev-widg__summary-text,
+.jm-reviews--no-count [class*="summary-text"],
+.jm-reviews--no-count [class*="review-count"],
+.jm-reviews--no-count [class*="reviews-count"],
+.jm-reviews--no-count [data-jm-count-hidden] { display: none !important; }
+
 /* Ecken: das Theme ist durchgehend kantig */
 .jm-reviews .jdgm-widget *,
 .jm-reviews .jdgm-widget *::before,

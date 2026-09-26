@@ -263,7 +263,8 @@
         "subtext": "Alle Bewertungen stammen von verifizierten Käufern und werden ungefiltert angezeigt.",
         "bg": "paper",
         "hide_widget_title": true,
-        "hide_review_date": true
+        "hide_review_date": true,
+        "hide_review_count": true
       }
     },
     "faq": {
