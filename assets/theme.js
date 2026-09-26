@@ -394,7 +394,43 @@
     });
   }
 
-  function initHideReviewDates() {
+  // Durchschnittsbewertung: Judge.me gibt nur die Zahl aus ("5.0"). Die Sterne
+  // daneben zeichnet das Theme selbst — gleiches SVG wie in Social Proof, damit
+  // es zum Shop passt. Anteilige Füllung über eine geclippte Overlay-Reihe.
+  const JM_STAR_PATH = 'M8 1l2.1 4.6 5 .6-3.7 3.4 1 5-4.4-2.6L3.6 14.6l1-5L.9 6.2l5-.6L8 1z';
+  const JM_AVG_RE = /^([0-5][.,]\d)$/;   // Dezimalstelle verlangt, sonst kollidiert es
+                                         // mit den Zeilenlabels 5/4/3/2/1 im Histogramm
+
+  function buildStarRow(value) {
+    const svg = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="' + JM_STAR_PATH + '"/></svg>';
+    const row = document.createElement('span');
+    row.className = 'jm-avg-stars';
+    row.setAttribute('role', 'img');
+    row.setAttribute('aria-label', value.toString().replace('.', ',') + ' von 5 Sternen');
+    row.innerHTML =
+      '<span class="jm-avg-bg">' + svg.repeat(5) + '</span>' +
+      '<span class="jm-avg-fg" style="width:' + (value / 5 * 100) + '%">' + svg.repeat(5) + '</span>';
+    return row;
+  }
+
+  function injectAverageStars(root) {
+    if (root.querySelector('.jm-avg-stars')) return;      // nur einmal
+    const nodes = root.querySelectorAll('*');
+    for (const el of nodes) {
+      if (el.children.length) continue;
+      const match = (el.textContent || '').trim().match(JM_AVG_RE);
+      if (!match) continue;
+      // nicht innerhalb einer einzelnen Bewertung oder des Histogramms
+      if (el.closest('.jdgm-rev, [class*="review-item"], [class*="rev__body"], [class*="histogram"]')) continue;
+      const value = parseFloat(match[1].replace(',', '.'));
+      if (!(value >= 0 && value <= 5)) continue;
+      el.insertAdjacentElement('beforebegin', buildStarRow(value));
+      if (el.parentElement) el.parentElement.classList.add('jm-avg');
+      return;
+    }
+  }
+
+  function initJudgemeWidget() {
     const root = document.querySelector('.jm-reviews');
     if (!root) return;
 
@@ -405,15 +441,21 @@
     if (root.classList.contains('jm-reviews--no-count')) {
       rules.push({ re: JM_COUNT_RE, attr: 'data-jm-count-hidden' });
     }
-    if (!rules.length) return;
+    const showAvgStars = root.classList.contains('jm-reviews--avg-stars');
+    if (!rules.length && !showAvgStars) return;
 
-    markByText(root, rules);
+    const run = () => {
+      if (rules.length) markByText(root, rules);
+      if (showAvgStars) injectAverageStars(root);
+    };
+
+    run();
     // Judge.me rendert asynchron und baut bei Seitenwechseln neu auf.
     let pending = false;
     const observer = new MutationObserver(() => {
       if (pending) return;
       pending = true;
-      requestAnimationFrame(() => { pending = false; markByText(root, rules); });
+      requestAnimationFrame(() => { pending = false; run(); });
     });
     observer.observe(root, { childList: true, subtree: true });
   }
@@ -433,7 +475,7 @@
     });
 
     refreshDrawer();
-    initHideReviewDates();
+    initJudgemeWidget();
     initAnchorNav();
     initATCForm();
     initSizeSelector();
