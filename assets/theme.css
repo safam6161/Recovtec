@@ -371,7 +371,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .jm-reviews--no-date [class*="__date"],
 .jm-reviews--no-date [class*="-date"],
 .jm-reviews--no-date time,
-/* Fallback per JS markiert, siehe initHideReviewDates() in theme.js */
+/* Fallback per JS markiert, siehe initJudgemeWidget() in theme.js */
 .jm-reviews--no-date [data-jm-date-hidden] { display: none !important; }
 
 /* Gesamtzahl der Bewertungen ausblenden (Section-Einstellung).
@@ -406,6 +406,24 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 }
 .jm-reviews [class*="rev__rating"],
 .jm-reviews [class*="review-rating"] { font-size: 15px; line-height: 1; }
+
+/* Durchschnittsbewertung: Sterne zeichnet das Theme selbst (injectAverageStars()
+   in theme.js), weil Judge.me an dieser Stelle nur die Zahl ausgibt.
+   Graue Grundreihe, darüber eine anteilig beschnittene Reihe in Textfarbe. */
+.jm-reviews .jm-avg { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.jm-reviews .jm-avg-stars { position: relative; display: inline-flex; line-height: 0; flex: 0 0 auto; }
+.jm-reviews .jm-avg-bg,
+.jm-reviews .jm-avg-fg { display: inline-flex; gap: 3px; }
+.jm-reviews .jm-avg-bg { color: var(--line-2); }
+.jm-reviews .jm-avg-fg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--ink);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.jm-reviews .jm-avg-stars svg { width: 18px; height: 18px; flex: 0 0 auto; }
 
 /* Kopfbereich mit Durchschnitt und Histogramm */
 .jm-reviews .jdgm-rev-widg__summary-text { font-size: 14px; color: var(--ink-3) !important; }

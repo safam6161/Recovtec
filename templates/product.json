@@ -264,7 +264,8 @@
         "bg": "paper",
         "hide_widget_title": true,
         "hide_review_date": true,
-        "hide_review_count": true
+        "hide_review_count": true,
+        "show_avg_stars": true
       }
     },
     "faq": {
