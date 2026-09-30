@@ -17,41 +17,62 @@
 
       <!-- Gallery -->
       <div class="pdp-gallery">
+        {%- comment -%} product.media statt product.images, damit auch Videos (und 3D-Modelle) in der Galerie erscheinen {%- endcomment -%}
+        {%- assign title_compare = product.title | strip | downcase -%}
         <div class="gallery-main">
-          {%- if product.featured_image != blank -%}
-            {%- comment -%} Eindeutigen Alt-Text sicherstellen: leere oder generische (= Produkttitel) Alt-Texte durch eine eindeutige Ansicht-Nummer ersetzen; echte, individuell gepflegte Bild-Alt-Texte bleiben erhalten {%- endcomment -%}
-            {%- assign main_alt = product.featured_image.alt | strip -%}
-            {%- assign main_alt_compare = main_alt | downcase -%}
-            {%- assign title_compare = product.title | strip | downcase -%}
-            {%- if main_alt == blank or main_alt_compare == title_compare -%}
-              {%- assign main_alt = product.title | append: ' – Ansicht ' | append: product.featured_image.position -%}
-            {%- endif -%}
-            <img id="gallery-main-img"
-              src="{{ product.featured_image | image_url: width: 1200 }}"
-              width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}"
-              alt="{{ main_alt | escape }}"
-              loading="eager" fetchpriority="high">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media -%}
+              {%- comment -%} Eindeutigen Alt-Text sicherstellen: leere oder generische (= Produkttitel) Alt-Texte durch eine eindeutige Ansicht-Nummer ersetzen; echte, individuell gepflegte Alt-Texte bleiben erhalten {%- endcomment -%}
+              {%- assign media_alt = media.alt | strip -%}
+              {%- assign media_alt_compare = media_alt | downcase -%}
+              {%- if media_alt == blank or media_alt_compare == title_compare -%}
+                {%- assign media_alt = product.title | append: ' – Ansicht ' | append: forloop.index -%}
+              {%- endif -%}
+              <div class="gallery-slide{% if forloop.first %} active{% endif %}" data-media-id="{{ media.id }}"{% unless forloop.first %} hidden{% endunless %}>
+                {%- case media.media_type -%}
+                  {%- when 'image' -%}
+                    <img
+                      src="{{ media | image_url: width: 1200 }}"
+                      width="{{ media.width }}" height="{{ media.height }}"
+                      alt="{{ media_alt | escape }}"
+                      {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+                  {%- when 'video' -%}
+                    {{ media | video_tag: controls: true, playsinline: true, preload: 'metadata', image_size: '1200x' }}
+                  {%- when 'external_video' -%}
+                    {{ media | external_video_tag }}
+                  {%- when 'model' -%}
+                    {{ media | model_viewer_tag }}
+                {%- endcase -%}
+              </div>
+            {%- endfor -%}
           {%- else -%}
             <div class="placeholder" style="height:100%;min-height:500px">
               <div class="placeholder-label">{{ section.settings.img_placeholder | default: 'RECOVTEC PRO · Frontansicht · auf Modell' }}</div>
             </div>
           {%- endif -%}
         </div>
-        {%- if product.images.size > 1 -%}
+        {%- if product.media.size > 1 -%}
           <div class="gallery-thumbs">
-            {%- assign title_compare = product.title | strip | downcase -%}
-            {%- for img in product.images -%}
+            {%- for media in product.media -%}
               {%- comment -%} Gleiche Logik wie beim Hauptbild: doppelte oder leere Alt-Texte vermeiden {%- endcomment -%}
-              {%- assign thumb_alt = img.alt | strip -%}
+              {%- assign thumb_alt = media.alt | strip -%}
               {%- assign thumb_alt_compare = thumb_alt | downcase -%}
               {%- if thumb_alt == blank or thumb_alt_compare == title_compare -%}
                 {%- assign thumb_alt = product.title | append: ' – Ansicht ' | append: forloop.index -%}
               {%- endif -%}
-              <button class="gallery-thumb {% if forloop.first %}active{% endif %}"
-                data-src="{{ img | image_url: width: 1200 }}"
-                data-alt="{{ thumb_alt | escape }}"
-                aria-label="Bild {{ forloop.index }}">
-                {{ img | image_url: width: 192 | image_tag: loading: 'lazy', widths: '64, 128, 192', sizes: '64px', alt: thumb_alt }}
+              {%- assign is_video = false -%}
+              {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                {%- assign is_video = true -%}
+              {%- endif -%}
+              <button type="button" class="gallery-thumb {% if forloop.first %}active{% endif %}"
+                data-media-id="{{ media.id }}"
+                aria-label="{% if is_video %}Video{% else %}Bild{% endif %} {{ forloop.index }}">
+                {{ media.preview_image | image_url: width: 192 | image_tag: loading: 'lazy', widths: '64, 128, 192', sizes: '64px', alt: thumb_alt }}
+                {%- if is_video -%}
+                  <span class="gallery-thumb-play" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M3 1.5v9l7.5-4.5z"/></svg>
+                  </span>
+                {%- endif -%}
               </button>
             {%- endfor -%}
           </div>

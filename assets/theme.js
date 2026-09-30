@@ -165,15 +165,23 @@
   // ===== Gallery =====
   function initGallery() {
     const thumbs = document.querySelectorAll('.gallery-thumb');
-    const mainImg = document.getElementById('gallery-main-img');
-    if (!thumbs.length || !mainImg) return;
+    const slides = document.querySelectorAll('.gallery-slide');
+    if (!thumbs.length || !slides.length) return;
     thumbs.forEach(thumb => {
       thumb.addEventListener('click', () => {
         thumbs.forEach(t => t.classList.remove('active'));
         thumb.classList.add('active');
-        const src = thumb.dataset.src;
-        const alt = thumb.dataset.alt;
-        if (src) { mainImg.src = src; if (alt) mainImg.alt = alt; }
+        const id = thumb.dataset.mediaId;
+        slides.forEach(slide => {
+          const isActive = slide.dataset.mediaId === id;
+          slide.classList.toggle('active', isActive);
+          slide.hidden = !isActive;
+          // Videos auf ausgeblendeten Slides anhalten
+          if (!isActive) {
+            slide.querySelectorAll('video').forEach(v => v.pause());
+            slide.querySelectorAll('iframe').forEach(f => { const src = f.src; f.src = src; });
+          }
+        });
       });
     });
   }
