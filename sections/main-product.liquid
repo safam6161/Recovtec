@@ -18,25 +18,42 @@
       <!-- Gallery -->
       <div class="pdp-gallery">
         <div class="gallery-main">
-          {%- if product.featured_image != blank -%}
-            <img id="gallery-main-img"
-              src="{{ product.featured_image | image_url: width: 1200 }}"
-              alt="{{ product.featured_image.alt | escape }}"
-              loading="eager" fetchpriority="high">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media -%}
+              <div class="gallery-slide{% if forloop.first %} active{% endif %}" data-media-id="{{ media.id }}"{% unless forloop.first %} hidden{% endunless %}>
+                {%- case media.media_type -%}
+                  {%- when 'image' -%}
+                    <img
+                      src="{{ media | image_url: width: 1200 }}"
+                      alt="{{ media.alt | escape }}"
+                      {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+                  {%- when 'video' -%}
+                    {{ media | video_tag: controls: true, playsinline: true, preload: 'metadata', image_size: '1200x' }}
+                  {%- when 'external_video' -%}
+                    {{ media | external_video_tag }}
+                  {%- when 'model' -%}
+                    {{ media | model_viewer_tag }}
+                {%- endcase -%}
+              </div>
+            {%- endfor -%}
           {%- else -%}
             <div class="placeholder" style="height:100%;min-height:500px">
               <div class="placeholder-label">{{ section.settings.img_placeholder | default: 'RECOVTEC PRO · Frontansicht · auf Modell' }}</div>
             </div>
           {%- endif -%}
         </div>
-        {%- if product.images.size > 1 -%}
+        {%- if product.media.size > 1 -%}
           <div class="gallery-thumbs">
-            {%- for img in product.images -%}
-              <button class="gallery-thumb {% if forloop.first %}active{% endif %}"
-                data-src="{{ img | image_url: width: 1200 }}"
-                data-alt="{{ img.alt | escape }}"
-                aria-label="Bild {{ forloop.index }}">
-                <img src="{{ img | image_url: width: 160 }}" alt="{{ img.alt | escape }}" loading="lazy">
+            {%- for media in product.media -%}
+              <button type="button" class="gallery-thumb {% if forloop.first %}active{% endif %}"
+                data-media-id="{{ media.id }}"
+                aria-label="{% if media.media_type == 'video' or media.media_type == 'external_video' %}Video{% else %}Bild{% endif %} {{ forloop.index }}">
+                <img src="{{ media.preview_image | image_url: width: 160 }}" alt="{{ media.alt | escape }}" loading="lazy">
+                {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                  <span class="gallery-thumb-play" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M3 1.5v9l7.5-4.5z"/></svg>
+                  </span>
+                {%- endif -%}
               </button>
             {%- endfor -%}
           </div>

@@ -450,12 +450,20 @@ shopify-legal-warranty,
 .pdp-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px,4vw,64px); align-items: start; }
 .pdp-gallery { position: sticky; top: 80px; }
 .gallery-main { aspect-ratio: 4/5; overflow: hidden; background: var(--paper-3); margin-bottom: 8px; }
+.gallery-main { position: relative; }
+.gallery-slide { width: 100%; height: 100%; }
+.gallery-slide[hidden] { display: none; }
 .gallery-main img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+.gallery-main video,
+.gallery-main iframe,
+.gallery-main model-viewer { display: block; width: 100%; height: 100%; object-fit: cover; border: 0; background: #000; }
 .gallery-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 6px; }
 .gallery-thumb { aspect-ratio: 1; overflow: hidden; background: var(--paper-3); border: 1px solid transparent; transition: border-color 0.15s; cursor: pointer; padding: 0; }
 .gallery-thumb:hover { border-color: var(--line-2); }
 .gallery-thumb.active { outline: 1px solid var(--ink); outline-offset: 1px; }
+.gallery-thumb { position: relative; }
 .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-thumb-play { position: absolute; inset: 0; margin: auto; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; padding-left: 2px; }
 .pdp-info-inner { display: flex; flex-direction: column; gap: 20px; }
 .pdp-info-inner > .eyebrow { display: block; }
 .pdp-info-inner h1 { font-size: clamp(28px,3vw,42px); letter-spacing: -0.025em; margin-top: 4px; }
