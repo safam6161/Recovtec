@@ -71,11 +71,11 @@
             "image_label": "CONTROLLER DETAIL · LED-Farbdisplay",
             "image_right": true,
             "dark": false,
-            "eyebrow": "Bedienung · Controller",
-            "heading": "Ein Knopf. Volle Kontrolle.",
-            "lead": "Modus wählen, Druck einstellen, zurücklehnen. Alles direkt am LED-Display am Bein — keine App, kein Pairing, kein Konto.",
-            "bullets": "",
-            "stats": "bis 240::mmHg::Von sanft bis intensiv|5::Modi::Für jeden Tag das Passende|3::Std::Mehrere Sessions ohne Laden|<45::dB::Leise genug fürs Serien-Schauen|<1::Min::Aufgepumpt und startklar|Auto::Druck::Passt sich deiner Beinform an"
+            "eyebrow": "Einfach in der Anwendung",
+            "heading": "Kein Aufwand. Keine Ausreden.",
+            "lead": "Die beste Recovery ist die, die du wirklich machst. Deshalb steht bei Recovtec nichts zwischen dir und leichten Beinen.",
+            "bullets": "Keine App, kein Pairing::Ein Knopf am Bein: Modus wählen, Druck einstellen, zurücklehnen. In unter einer Minute startklar.|Leise genug für den Serienabend::Unter 45 dB. Läuft neben dir auf dem Sofa, ohne dass jemand den Fernseher lauter drehen muss.|Keine Steckdose nötig::3 Stunden Akku für mehrere Sessions. Auf dem Sofa, im Bett oder im Hotelzimmer.|Passt sich dir an::Der Druck stellt sich automatisch auf deine Beinform ein. Von sanft bis intensiv, ganz wie du es brauchst.",
+            "stats": ""
           }
         },
         "guarantee": {
