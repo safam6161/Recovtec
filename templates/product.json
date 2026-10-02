@@ -63,15 +63,6 @@
             "stats": ""
           }
         },
-        "guarantee": {
-          "type": "guarantee",
-          "settings": {
-            "days": "30",
-            "eyebrow": "Risikofrei testen",
-            "headline": "Tage Geld zurück.",
-            "text": "Probier die Boots in Ruhe zuhause. Wenn sie dich nicht überzeugen, schickst du sie zurück — ohne Diskussion, ohne Begründung."
-          }
-        },
         "story3": {
           "type": "story",
           "disabled": true,
@@ -118,7 +109,6 @@
       },
       "block_order": [
         "story1",
-        "guarantee",
         "story3",
         "modes",
         "story4"
@@ -674,10 +664,29 @@
         "label_pdp": "In den Warenkorb",
         "label_link": "Jetzt bestellen"
       }
+    },
+    "guarantee": {
+      "type": "product-story",
+      "blocks": {
+        "guarantee": {
+          "type": "guarantee",
+          "settings": {
+            "days": "30",
+            "eyebrow": "Risikofrei testen",
+            "headline": "Tage Geld zurück.",
+            "text": "Probier die Boots in Ruhe zuhause. Wenn sie dich nicht überzeugen, schickst du sie zurück — ohne Diskussion, ohne Begründung."
+          }
+        }
+      },
+      "block_order": [
+        "guarantee"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "main_product",
+    "guarantee",
     "benefits",
     "how_it_works",
     "value_calc",

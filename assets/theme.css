@@ -1502,3 +1502,13 @@ body.lgl-noscroll { overflow: hidden; }
   .size-guide-link { padding: 12px 0; margin: -12px 0; }
   .breadcrumb a { padding: 12px 0; }
 }
+
+/* Garantie-Banner mobil: „30“ direkt neben „Tage Geld zurück.“ statt darüber */
+@media (max-width: 600px) {
+  .guarantee-banner { padding: 40px 0; }
+  .guarantee-content { flex-direction: row; align-items: center; gap: 18px; }
+  .guarantee-num { font-size: 84px; }
+  .guarantee-text { gap: 8px; }
+  .guarantee-text h2 { font-size: 26px; line-height: 1.05; }
+  .guarantee-text p { font-size: 13.5px; line-height: 1.55; }
+}
