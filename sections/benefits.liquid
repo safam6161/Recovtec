@@ -1,0 +1,97 @@
+{%- comment -%}
+  Wirkung / Vorteile: Was die Boots für den Kunden bewirken (Ergebnis statt Technik).
+  Formulierungen bewusst als Empfinden/Unterstützung, nicht als Heilversprechen (HWG).
+{%- endcomment -%}
+<section class="benefits{% if section.settings.dark %} benefits--dark{% endif %}" id="wirkung">
+  <div class="container">
+    <div class="benefits-head">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="benefits-headline">
+          {%- assign lines = section.settings.headline | newline_to_br | split: '<br />' -%}
+          {%- for line in lines -%}<span style="display:block">{{ line }}</span>{%- endfor -%}
+        </h2>
+      </div>
+      {%- if section.settings.intro != blank -%}<p class="benefits-intro">{{ section.settings.intro }}</p>{%- endif -%}
+    </div>
+
+    <div class="benefits-grid">
+      {%- for block in section.blocks -%}
+        <article class="benefit" {{ block.shopify_attributes }}>
+          <div class="benefit-top">
+            <span class="benefit-ico">{% render 'benefit-icon', icon: block.settings.icon %}</span>
+            <span class="benefit-num">{{ forloop.index | prepend: '0' }}</span>
+          </div>
+          <div class="benefit-body">
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.cta_label != blank or section.settings.footnote != blank -%}
+      <div class="benefits-foot">
+        {%- if section.settings.footnote != blank -%}<p>{{ section.settings.footnote }}</p>{%- endif -%}
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_url | default: routes.all_products_collection_url }}" class="btn btn-primary btn-lg">
+            {{ section.settings.cta_label }}
+            <span class="btn-icon">{% render 'icon', icon: 'arrow-lg' %}</span>
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Wirkung / Vorteile",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "02 — Die Wirkung" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Nicht nur Technik.\nEin neues Beingefühl." },
+    { "type": "textarea", "id": "intro", "label": "Intro-Text" },
+    { "type": "checkbox", "id": "dark", "label": "Dunkler Hintergrund", "default": false },
+    { "type": "text", "id": "footnote", "label": "Fußnote", "default": "Empfinden und Wirkung sind individuell verschieden." },
+    { "type": "text", "id": "cta_label", "label": "Button Text" },
+    { "type": "url", "id": "cta_url", "label": "Button Link" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Vorteil",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "feather",
+          "options": [
+            { "value": "feather", "label": "Feder (leicht)" },
+            { "value": "muscle", "label": "Muskel" },
+            { "value": "bolt", "label": "Blitz (Energie)" },
+            { "value": "moon", "label": "Mond (Entspannung)" },
+            { "value": "flex", "label": "Bewegung" },
+            { "value": "plane", "label": "Flugzeug (Reisen)" },
+            { "value": "run", "label": "Laufen" },
+            { "value": "dumbbell", "label": "Hantel" },
+            { "value": "ball", "label": "Ball" },
+            { "value": "briefcase", "label": "Arbeit" },
+            { "value": "heart", "label": "Herz / Puls" },
+            { "value": "wave", "label": "Welle" },
+            { "value": "home", "label": "Zuhause" },
+            { "value": "check", "label": "Haken" }
+          ]
+        },
+        { "type": "text", "id": "title", "label": "Titel", "default": "Leichte Beine statt Beton" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Wirkung / Vorteile",
+    "blocks": [
+      { "type": "benefit", "settings": { "icon": "feather", "title": "Leichte Beine statt Beton" } },
+      { "type": "benefit", "settings": { "icon": "muscle", "title": "Weniger Muskelkater-Gefühl" } },
+      { "type": "benefit", "settings": { "icon": "bolt", "title": "Schneller wieder bereit" } }
+    ]
+  }]
+}
+{% endschema %}

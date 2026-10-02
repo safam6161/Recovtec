@@ -1,0 +1,148 @@
+{%- comment -%}
+  Kostenrechner: Recovtec (einmal kaufen) vs. Recovery-Studio (pro Session zahlen).
+  Werte werden serverseitig vorberechnet (funktioniert ohne JS) und per Slider live
+  aktualisiert (initValueCalc() in theme.js).
+  Preis: Produktpreis aus dem gewählten Produkt, optional per „Preis überschreiben"
+  (z. B. bei laufender Rabatt-Aktion, die erst im Checkout greift).
+{%- endcomment -%}
+{%- liquid
+  assign calc_product = section.settings.product | default: product
+  assign calc_price = 0
+  if section.settings.price_override != blank
+    assign calc_price = section.settings.price_override | replace: ',', '.' | times: 100 | round
+  elsif calc_product != blank
+    assign calc_price = calc_product.price
+  endif
+  assign studio_cents = section.settings.studio_price | times: 100
+  assign n = section.settings.sessions_default
+  assign sessions_year = n | times: 52
+  assign studio_year = studio_cents | times: sessions_year
+  assign break_even = 0
+  if studio_cents > 0
+    assign break_even = calc_price | times: 1.0 | divided_by: studio_cents | ceil
+  endif
+  assign weeks = break_even | times: 1.0 | divided_by: n | ceil
+  assign per_session = calc_price | divided_by: sessions_year
+  assign hours_saved = section.settings.travel_minutes | times: sessions_year | divided_by: 60
+  assign bar_ours = 100
+  if studio_year > 0
+    assign bar_ours = calc_price | times: 100.0 | divided_by: studio_year | at_most: 100 | round
+  endif
+  assign bar_studio = 100
+  if calc_price > studio_year
+    assign bar_studio = studio_year | times: 100.0 | divided_by: calc_price | round
+  endif
+-%}
+{%- if calc_price > 0 -%}
+<section class="calc" id="rechner"
+  data-calc
+  data-price="{{ calc_price }}"
+  data-studio="{{ studio_cents }}"
+  data-travel="{{ section.settings.travel_minutes }}">
+  <div class="container">
+    <div class="calc-grid">
+      <div class="calc-left">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="calc-headline">
+          {%- assign lines = section.settings.headline | newline_to_br | split: '<br />' -%}
+          {%- for line in lines -%}<span style="display:block">{{ line }}</span>{%- endfor -%}
+        </h2>
+        {%- if section.settings.subtext != blank -%}<p class="calc-sub">{{ section.settings.subtext }}</p>{%- endif -%}
+
+        <div class="calc-input">
+          <label for="calc-range-{{ section.id }}" class="calc-label">
+            {{ section.settings.slider_label }}
+            <output class="calc-n" data-calc-n for="calc-range-{{ section.id }}">{{ n }}×</output>
+          </label>
+          <input type="range" id="calc-range-{{ section.id }}" class="calc-range" data-calc-range
+                 min="1" max="7" step="1" value="{{ n }}" style="--p: {{ n | minus: 1 | times: 100 | divided_by: 6 }}%">
+          <div class="calc-scale" aria-hidden="true"><span>1×</span><span>7× / Woche</span></div>
+        </div>
+
+        <ul class="calc-perks">
+          <li>{% render 'icon', icon: 'check' %}<span>{{ section.settings.perk_1 }}</span></li>
+          <li>{% render 'icon', icon: 'check' %}<span>{{ section.settings.perk_2 }}</span></li>
+          <li>{% render 'icon', icon: 'check' %}<span>{{ section.settings.perk_3 }}</span></li>
+        </ul>
+      </div>
+
+      <div class="calc-card" aria-live="polite">
+        <div class="calc-hero">
+          <span class="calc-k">{{ section.settings.breakeven_label }}</span>
+          <div class="calc-big"><span data-calc-breakeven>{{ break_even }}</span><small>{{ section.settings.breakeven_unit }}</small></div>
+          <p class="calc-hero-sub">{{ section.settings.breakeven_text_before }} <strong><span data-calc-weeks>{{ weeks }}</span> {{ section.settings.weeks_word }}</strong> {{ section.settings.breakeven_text_after }}</p>
+        </div>
+
+        <div class="calc-bars">
+          <span class="calc-k">{{ section.settings.year_label }}</span>
+          <div class="calc-bar">
+            <div class="calc-bar-head"><span>{{ section.settings.studio_label }}</span><strong data-calc-studio-year>{{ studio_year | money_without_trailing_zeros }}</strong></div>
+            <div class="calc-track"><div class="calc-fill calc-fill--studio" data-calc-bar-studio style="width: {{ bar_studio }}%"></div></div>
+          </div>
+          <div class="calc-bar">
+            <div class="calc-bar-head"><span>{{ section.settings.ours_label }}</span><strong>{{ calc_price | money_without_trailing_zeros }}</strong></div>
+            <div class="calc-track"><div class="calc-fill calc-fill--ours" data-calc-bar-ours style="width: {{ bar_ours }}%"></div></div>
+          </div>
+        </div>
+
+        <div class="calc-stats">
+          <div>
+            <span class="calc-k">{{ section.settings.per_session_label }}</span>
+            <strong data-calc-per-session>{{ per_session | money }}</strong>
+          </div>
+          <div>
+            <span class="calc-k">{{ section.settings.time_label }}</span>
+            <strong><span data-calc-hours>{{ hours_saved }}</span> {{ section.settings.hours_word }}</strong>
+          </div>
+        </div>
+
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_url | default: calc_product.url | default: routes.all_products_collection_url }}" class="btn btn-primary btn-lg calc-btn">
+            {{ section.settings.cta_label }}
+            <span class="btn-icon">{% render 'icon', icon: 'arrow' %}</span>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.disclaimer != blank -%}<p class="calc-fine">{{ section.settings.disclaimer }}</p>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+{%- elsif request.design_mode -%}
+  <section class="calc"><div class="container"><p class="calc-sub">Kostenrechner: Bitte im Theme-Editor ein Produkt wählen oder einen Preis eintragen.</p></div></section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Kostenrechner",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Produkt", "info": "Auf der Produktseite automatisch das aktuelle Produkt." },
+    { "type": "text", "id": "price_override", "label": "Preis überschreiben (€, optional)", "info": "Nur nötig, wenn der Aktionspreis erst im Checkout greift, z. B. 399" },
+    { "type": "range", "id": "studio_price", "label": "Preis einer Studio-Session (€)", "min": 10, "max": 80, "step": 1, "unit": "€", "default": 30, "info": "Bitte mit aktuellen Preisen von Recovery-Studios in deiner Region abgleichen." },
+    { "type": "range", "id": "travel_minutes", "label": "Anfahrt hin & zurück (Min.)", "min": 0, "max": 120, "step": 5, "unit": "min", "default": 40 },
+    { "type": "range", "id": "sessions_default", "label": "Start-Wert Sessions pro Woche", "min": 1, "max": 7, "step": 1, "default": 3 },
+    { "type": "header", "content": "Texte" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Die Rechnung" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Recovery-Studio oder Recovtec?\nRechne selbst." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext" },
+    { "type": "text", "id": "slider_label", "label": "Slider-Beschriftung", "default": "Wie oft pro Woche möchtest du regenerieren?" },
+    { "type": "text", "id": "perk_1", "label": "Vorteil 1", "default": "Kein Termin, keine Anfahrt, kein Abo" },
+    { "type": "text", "id": "perk_2", "label": "Vorteil 2", "default": "Für die ganze Familie nutzbar" },
+    { "type": "text", "id": "perk_3", "label": "Vorteil 3", "default": "Jede weitere Session kostet dich nichts" },
+    { "type": "text", "id": "breakeven_label", "label": "Label Amortisation", "default": "Bezahlt gemacht nach" },
+    { "type": "text", "id": "breakeven_unit", "label": "Einheit Amortisation", "default": "Sessions" },
+    { "type": "text", "id": "breakeven_text_before", "label": "Text vor Wochen", "default": "Bei deinem Rhythmus sind das nur" },
+    { "type": "text", "id": "weeks_word", "label": "Wort für Wochen", "default": "Wochen" },
+    { "type": "text", "id": "breakeven_text_after", "label": "Text nach Wochen", "default": "— danach ist jede Session gratis." },
+    { "type": "text", "id": "year_label", "label": "Label Jahresvergleich", "default": "Kosten im ersten Jahr" },
+    { "type": "text", "id": "studio_label", "label": "Label Studio", "default": "Recovery-Studio" },
+    { "type": "text", "id": "ours_label", "label": "Label Recovtec", "default": "Recovtec Pro (einmalig)" },
+    { "type": "text", "id": "per_session_label", "label": "Label Kosten pro Session", "default": "Pro Session im 1. Jahr" },
+    { "type": "text", "id": "time_label", "label": "Label Zeitersparnis", "default": "Anfahrt gespart / Jahr" },
+    { "type": "text", "id": "hours_word", "label": "Wort für Stunden", "default": "Std." },
+    { "type": "text", "id": "cta_label", "label": "Button Text", "default": "Jetzt Recovtec sichern" },
+    { "type": "url", "id": "cta_url", "label": "Button Link" },
+    { "type": "textarea", "id": "disclaimer", "label": "Kleingedrucktes", "default": "Beispielrechnung. Studio-Preis: Durchschnittswert für eine 30-minütige Kompressions-Session, kann je nach Anbieter abweichen." }
+  ],
+  "presets": [{ "name": "Kostenrechner" }]
+}
+{% endschema %}

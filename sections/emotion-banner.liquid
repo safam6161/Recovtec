@@ -1,0 +1,74 @@
+{%- comment -%}
+  Emotions-Banner: großes Bild oder Video (randlos) mit einer starken Aussage.
+  Reihenfolge der Medien: Video > Bild > Fallback-Bild aus den Theme-Assets.
+{%- endcomment -%}
+{%- liquid
+  assign has_video = false
+  if section.settings.video != blank
+    assign has_video = true
+  endif
+  assign fallback_src = blank
+  if section.settings.fallback_asset != blank
+    assign fallback_src = section.settings.fallback_asset | asset_url
+  endif
+-%}
+<section class="emo emo--{{ section.settings.align }}" style="--emo-h: {{ section.settings.height }}vh">
+  <div class="emo-media">
+    {%- if has_video -%}
+      {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '1600x' }}
+    {%- elsif section.settings.image != blank -%}
+      <picture>
+        {%- if section.settings.image_mobile != blank -%}
+          <source media="(max-width: 749px)" srcset="{{ section.settings.image_mobile | image_url: width: 900 }} 900w, {{ section.settings.image_mobile | image_url: width: 1400 }} 1400w" sizes="100vw">
+        {%- endif -%}
+        {%- assign emo_alt = section.settings.image.alt | default: section.settings.headline | strip_newlines -%}
+        {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', alt: emo_alt }}
+      </picture>
+    {%- elsif fallback_src != blank -%}
+      <img src="{{ fallback_src }}" alt="{{ section.settings.headline | strip_newlines | escape }}" loading="lazy" width="1600" height="1200">
+    {%- else -%}
+      <div class="placeholder dark"><div class="placeholder-label">EMOTIONSBILD · Entspannt auf dem Sofa mit den Boots · Querformat</div></div>
+    {%- endif -%}
+  </div>
+  <div class="emo-overlay" style="--emo-shade: {{ section.settings.overlay | divided_by: 100.0 }}"></div>
+  <div class="container emo-content">
+    {%- if section.settings.eyebrow != blank -%}<span class="emo-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h2 class="emo-headline">
+      {%- assign lines = section.settings.headline | newline_to_br | split: '<br />' -%}
+      {%- for line in lines -%}<span style="display:block">{% if forloop.last and forloop.length > 1 %}<em>{{ line }}</em>{% else %}{{ line }}{% endif %}</span>{%- endfor -%}
+    </h2>
+    {%- if section.settings.text != blank -%}<p class="emo-text">{{ section.settings.text }}</p>{%- endif -%}
+    {%- if section.settings.cta_label != blank -%}
+      <a href="{{ section.settings.cta_url | default: routes.all_products_collection_url }}" class="btn btn-primary btn-lg emo-btn">
+        {{ section.settings.cta_label }}
+        <span class="btn-icon">{% render 'icon', icon: 'arrow' %}</span>
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Emotions-Banner",
+  "settings": [
+    { "type": "header", "content": "Medien" },
+    { "type": "video", "id": "video", "label": "Video (optional)", "info": "Läuft stumm in Schleife. Hat Vorrang vor dem Bild." },
+    { "type": "image_picker", "id": "image", "label": "Bild" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Bild (Mobil, optional)" },
+    { "type": "text", "id": "fallback_asset", "label": "Fallback-Bild aus Theme-Assets", "info": "Dateiname in /assets, wird genutzt solange kein Bild/Video gewählt ist.", "default": "recovtec-moment-entspannen.jpg" },
+    { "type": "range", "id": "overlay", "label": "Abdunklung", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 55 },
+    { "type": "range", "id": "height", "label": "Höhe", "min": 50, "max": 100, "step": 5, "unit": "vh", "default": 80 },
+    { "type": "select", "id": "align", "label": "Text-Position", "default": "bottom", "options": [
+      { "value": "bottom", "label": "Unten links" },
+      { "value": "center", "label": "Mitte" }
+    ] },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Der beste Teil vom Training?\nDas Gefühl danach." },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "cta_label", "label": "Button Text" },
+    { "type": "url", "id": "cta_url", "label": "Button Link" }
+  ],
+  "presets": [{ "name": "Emotions-Banner" }]
+}
+{% endschema %}

@@ -1,0 +1,132 @@
+{%- comment -%}
+  So wirkt's: animiertes Bein mit den 4 Luftkammern (Druckwelle Fuß → Oberschenkel),
+  daneben die Wirkkette in Schritten und darunter die Session-Timeline
+  („Was du spürst"). Die Animation ist reines CSS und respektiert prefers-reduced-motion.
+{%- endcomment -%}
+{%- liquid
+  assign steps = section.blocks | where: 'type', 'step'
+  assign moments = section.blocks | where: 'type', 'moment'
+-%}
+<section class="hiw" id="so-wirkts">
+  <div class="container">
+    <div class="hiw-grid">
+      <div class="hiw-visual">
+        <figure class="hiw-leg" role="img" aria-label="{{ section.settings.visual_alt | escape }}">
+          <svg viewBox="0 0 240 430" width="240" height="430" aria-hidden="true">
+            <defs>
+              <linearGradient id="hiw-flow-{{ section.id }}" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0" stop-color="currentColor" stop-opacity="0"/>
+                <stop offset="0.5" stop-color="currentColor" stop-opacity="0.9"/>
+                <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            {%- comment -%} Kammern: 4 = Oberschenkel (oben) … 1 = Fuß (unten) {%- endcomment -%}
+            <g class="hiw-chambers">
+              <path class="hiw-shell" d="M40 18 H150 L144 118 H46 Z"/>
+              <path class="hiw-shell" d="M46 124 H144 L138 210 H52 Z"/>
+              <path class="hiw-shell" d="M52 216 H138 L130 300 H60 Z"/>
+              <path class="hiw-shell" d="M60 306 H130 L128 352 Q128 374 150 378 H186 Q198 378 198 392 V404 H66 Q56 404 56 394 Z"/>
+
+              <path class="hiw-air hiw-air-4" d="M40 18 H150 L144 118 H46 Z"/>
+              <path class="hiw-air hiw-air-3" d="M46 124 H144 L138 210 H52 Z"/>
+              <path class="hiw-air hiw-air-2" d="M52 216 H138 L130 300 H60 Z"/>
+              <path class="hiw-air hiw-air-1" d="M60 306 H130 L128 352 Q128 374 150 378 H186 Q198 378 198 392 V404 H66 Q56 404 56 394 Z"/>
+            </g>
+            <g class="hiw-labels">
+              <text x="214" y="72">04</text>
+              <text x="214" y="170">03</text>
+              <text x="214" y="262">02</text>
+              <text x="214" y="350">01</text>
+            </g>
+            <line class="hiw-track" x1="17.5" y1="30" x2="17.5" y2="404"/>
+            <path class="hiw-arrow" d="M11 30 L17.5 18 L24 30"/>
+            <rect class="hiw-flow" x="16" y="284" width="3" height="120" fill="url(#hiw-flow-{{ section.id }})"/>
+          </svg>
+          <figcaption class="hiw-caption">
+            <span class="hiw-caption-dot" aria-hidden="true"></span>
+            {{ section.settings.visual_caption }}
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="hiw-text">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="hiw-headline">
+          {%- assign lines = section.settings.headline | newline_to_br | split: '<br />' -%}
+          {%- for line in lines -%}<span style="display:block">{{ line }}</span>{%- endfor -%}
+        </h2>
+        {%- if section.settings.intro != blank -%}<p class="hiw-intro">{{ section.settings.intro }}</p>{%- endif -%}
+
+        {%- if steps.size > 0 -%}
+          <ol class="hiw-steps">
+            {%- for block in steps -%}
+              <li {{ block.shopify_attributes }}>
+                <span class="hiw-step-num">{{ forloop.index | prepend: '0' }}</span>
+                <div>
+                  <h3>{{ block.settings.title }}</h3>
+                  <p>{{ block.settings.text }}</p>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ol>
+        {%- endif -%}
+
+        {%- if section.settings.note != blank -%}
+          <p class="hiw-note">{% render 'icon', icon: 'shield' %}<span>{{ section.settings.note }}</span></p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if moments.size > 0 -%}
+      <div class="hiw-timeline">
+        {%- if section.settings.timeline_title != blank -%}
+          <h3 class="hiw-timeline-title">{{ section.settings.timeline_title }}</h3>
+        {%- endif -%}
+        <ol class="hiw-moments">
+          {%- for block in moments -%}
+            <li class="hiw-moment" {{ block.shopify_attributes }}>
+              <span class="hiw-moment-time">{{ block.settings.time }}</span>
+              <h4>{{ block.settings.title }}</h4>
+              <p>{{ block.settings.text }}</p>
+            </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "So wirkt's",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "03 — So wirkt's" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Eine Druckwelle.\nVom Fuß bis zur Hüfte." },
+    { "type": "textarea", "id": "intro", "label": "Intro-Text" },
+    { "type": "text", "id": "visual_caption", "label": "Bildunterschrift Animation", "default": "4 Kammern · füllen sich nacheinander" },
+    { "type": "text", "id": "visual_alt", "label": "Beschreibung Animation (Screenreader)", "default": "Schematische Darstellung: Vier Luftkammern füllen sich nacheinander vom Fuß bis zum Oberschenkel." },
+    { "type": "textarea", "id": "note", "label": "Hinweis unter den Schritten" },
+    { "type": "text", "id": "timeline_title", "label": "Titel Timeline", "default": "Was du während einer Session spürst" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Wirk-Schritt",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titel" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    },
+    {
+      "type": "moment",
+      "name": "Timeline-Moment",
+      "settings": [
+        { "type": "text", "id": "time", "label": "Zeitpunkt", "default": "Minute 0" },
+        { "type": "text", "id": "title", "label": "Titel" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "So wirkt's" }]
+}
+{% endschema %}

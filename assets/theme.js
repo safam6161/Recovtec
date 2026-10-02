@@ -504,6 +504,88 @@
     observer.observe(root, { childList: true, subtree: true });
   }
 
+  // ===== Kostenrechner (sections/value-calculator.liquid) =====
+  function initValueCalc() {
+    const eur = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+    const eurCents = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    document.querySelectorAll('[data-calc]').forEach(root => {
+      const price = Number(root.dataset.price) / 100;
+      const studio = Number(root.dataset.studio) / 100;
+      const travel = Number(root.dataset.travel) || 0;
+      const range = root.querySelector('[data-calc-range]');
+      if (!range || !price || !studio) return;
+
+      const set = (sel, val) => root.querySelectorAll(sel).forEach(el => { el.textContent = val; });
+
+      function update() {
+        const n = Number(range.value) || 1;
+        const perYear = n * 52;
+        const studioYear = studio * perYear;
+        const breakEven = Math.ceil(price / studio);
+        const weeks = Math.ceil(breakEven / n);
+        const max = Math.max(studioYear, price);
+
+        range.style.setProperty('--p', ((n - 1) / 6 * 100) + '%');
+        set('[data-calc-n]', n + '×');
+        set('[data-calc-breakeven]', breakEven);
+        set('[data-calc-weeks]', weeks);
+        set('[data-calc-studio-year]', eur.format(studioYear));
+        set('[data-calc-per-session]', eurCents.format(price / perYear));
+        set('[data-calc-hours]', Math.floor(travel * perYear / 60));
+        const barStudio = root.querySelector('[data-calc-bar-studio]');
+        const barOurs = root.querySelector('[data-calc-bar-ours]');
+        if (barStudio) barStudio.style.width = (studioYear / max * 100) + '%';
+        if (barOurs) barOurs.style.width = (price / max * 100) + '%';
+      }
+
+      range.addEventListener('input', update);
+      update();
+    });
+  }
+
+  // ===== Sticky-Kaufleiste (sections/sticky-buy.liquid) =====
+  // Sichtbar, sobald der Haupt-Kaufbutton (PDP) bzw. der Hero (andere Seiten) oben
+  // aus dem Bild ist — aber nicht, solange Final-CTA oder Footer im Bild sind.
+  function initStickyBuy() {
+    const bar = document.querySelector('[data-sticky-buy]');
+    if (!bar || !('IntersectionObserver' in window)) return;
+
+    const isPdp = bar.dataset.mode === 'pdp';
+    const form = document.getElementById('pdp-atc-form');
+    const trigger = isPdp ? form : document.querySelector('.hero');
+    if (!trigger) return;
+
+    let pastTrigger = false;
+    const blockers = new Set();
+
+    function render() {
+      const show = pastTrigger && blockers.size === 0;
+      bar.classList.toggle('is-visible', show);
+      bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+      bar.querySelectorAll('a, button').forEach(el => { el.tabIndex = show ? 0 : -1; });
+    }
+
+    new IntersectionObserver(([entry]) => {
+      // Nur "vorbei", wenn das Element nach oben hinausgescrollt ist
+      pastTrigger = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+      render();
+    }).observe(trigger);
+
+    const blockObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => { e.isIntersecting ? blockers.add(e.target) : blockers.delete(e.target); });
+      render();
+    });
+    document.querySelectorAll('.final-cta, .footer').forEach(el => blockObserver.observe(el));
+
+    if (isPdp && form) {
+      bar.querySelector('[data-sticky-buy-submit]')?.addEventListener('click', () => {
+        if (typeof form.requestSubmit === 'function') form.requestSubmit();
+        else form.querySelector('[type="submit"]')?.click();
+      });
+    }
+  }
+
   // ===== Init =====
   document.addEventListener('DOMContentLoaded', () => {
     // Cart triggers
@@ -529,5 +611,7 @@
     initPaymentInfo();
     initNewsletter();
     initGuaranteeLabel();
+    initValueCalc();
+    initStickyBuy();
   });
 })();

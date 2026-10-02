@@ -1,0 +1,97 @@
+{%- comment -%}
+  Für wen: Einsatzbereiche/Zielgruppen als Karten. Jede Karte kann optional ein Bild haben
+  (Bild aus Shopify oder Dateiname in /assets), sonst wird das Icon gezeigt.
+{%- endcomment -%}
+<section class="uc" id="fuer-wen">
+  <div class="container">
+    <div class="section-head">
+      <div class="left">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="uc-headline">
+          {%- assign lines = section.settings.headline | newline_to_br | split: '<br />' -%}
+          {%- for line in lines -%}<span style="display:block">{{ line }}</span>{%- endfor -%}
+        </h2>
+      </div>
+      {%- if section.settings.subtext != blank -%}<p class="uc-sub">{{ section.settings.subtext }}</p>{%- endif -%}
+    </div>
+
+    <div class="uc-grid">
+      {%- for block in section.blocks -%}
+        <article class="uc-card{% if block.settings.image != blank or block.settings.image_asset != blank %} uc-card--img{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <div class="uc-img">
+              {%- assign uc_alt = block.settings.image.alt | default: block.settings.title -%}
+              {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 981px) 33vw, (min-width: 600px) 50vw, 100vw', alt: uc_alt }}
+            </div>
+          {%- elsif block.settings.image_asset != blank -%}
+            <div class="uc-img"><img src="{{ block.settings.image_asset | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="1200" height="1600"></div>
+          {%- endif -%}
+          <div class="uc-body">
+            <div class="uc-top">
+              <span class="uc-ico">{% render 'benefit-icon', icon: block.settings.icon %}</span>
+              {%- if block.settings.tag != blank -%}<span class="uc-tag">{{ block.settings.tag }}</span>{%- endif -%}
+            </div>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+            {%- if block.settings.tip != blank -%}
+              <p class="uc-tip"><span>{{ section.settings.tip_label }}</span>{{ block.settings.tip }}</p>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Für wen",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "05 — Für wen" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Für alle, die viel\nauf den Beinen sind." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext" },
+    { "type": "text", "id": "tip_label", "label": "Label für Tipp", "default": "Tipp" }
+  ],
+  "blocks": [
+    {
+      "type": "case",
+      "name": "Einsatzbereich",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "run",
+          "options": [
+            { "value": "run", "label": "Laufen" },
+            { "value": "dumbbell", "label": "Hantel" },
+            { "value": "ball", "label": "Ball" },
+            { "value": "briefcase", "label": "Arbeit" },
+            { "value": "plane", "label": "Flugzeug (Reisen)" },
+            { "value": "home", "label": "Zuhause" },
+            { "value": "heart", "label": "Herz / Puls" },
+            { "value": "moon", "label": "Mond (Entspannung)" },
+            { "value": "feather", "label": "Feder (leicht)" },
+            { "value": "bolt", "label": "Blitz (Energie)" },
+            { "value": "flex", "label": "Bewegung" },
+            { "value": "muscle", "label": "Muskel" },
+            { "value": "wave", "label": "Welle" },
+            { "value": "check", "label": "Haken" }
+          ]
+        },
+        { "type": "image_picker", "id": "image", "label": "Bild (optional)" },
+        { "type": "text", "id": "image_asset", "label": "ODER Bild aus Theme-Assets (Dateiname)" },
+        { "type": "text", "id": "tag", "label": "Tag (klein)", "default": "Sport" },
+        { "type": "text", "id": "title", "label": "Titel", "default": "Laufen & Ausdauer" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "text", "id": "tip", "label": "Anwendungs-Tipp (optional)" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Für wen",
+    "blocks": [
+      { "type": "case", "settings": { "icon": "run", "title": "Laufen & Ausdauer" } },
+      { "type": "case", "settings": { "icon": "dumbbell", "title": "Kraft & CrossFit" } },
+      { "type": "case", "settings": { "icon": "briefcase", "title": "Lange Arbeitstage" } }
+    ]
+  }]
+}
+{% endschema %}

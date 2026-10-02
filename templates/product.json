@@ -13,7 +13,8 @@
       "type": "main-product",
       "settings": {
         "eyebrow": "Recovtec — Recovery",
-        "lede": "Frische Beine in 15–45 Minuten. Pneumatische Recovery Boots mit 5 Modi und 7 Druckstufen bis 240 mmHg. Kabellos, leise, ohne App.",
+        "lede": "Leichte, lockere Beine in 30 Minuten — ohne Studio, ohne Termin. Recovery Boots mit 5 Modi und 7 Druckstufen bis 240 mmHg. Kabellos, leise, ohne App.",
+        "benefits": "Spürbar leichtere Beine nach jeder Session\nSchneller erholt — bereit fürs nächste Training\nTiefenentspannung auf dem Sofa statt Termin im Studio\n30 Tage risikofrei zuhause testen",
         "price_note": "Inkl. MwSt.",
         "atc_label": "In den Warenkorb",
         "in_stock_text": "Auf Lager · in 1–3 Werktagen bei dir.",
@@ -355,12 +356,20 @@
             "question": "Wie reinige und pflege ich die Boots?",
             "answer": "Wisch die Innenseite nach der Nutzung einfach mit einem leicht feuchten Tuch und etwas mildem Reiniger ab — nicht in die Waschmaschine. Kurz trocknen lassen, bevor du sie verstaust. Prüf ab und zu Schlauch und Anschlüsse. So bleiben sie lange hygienisch und einsatzbereit."
           }
+        },
+        "faq_first": {
+          "type": "item",
+          "settings": {
+            "question": "Spüre ich schon nach der ersten Anwendung einen Unterschied?",
+            "answer": "Viele merken schon direkt nach der ersten Session, dass sich die Beine leichter und lockerer anfühlen. Wie stark, ist individuell. Am meisten holst du heraus, wenn die Boots zur Routine werden — zum Beispiel nach jedem Training oder abends auf dem Sofa."
+          }
         }
       },
       "block_order": [
         "faq_how",
         "faq_forwho",
         "faq_when",
+        "faq_first",
         "faq5",
         "faq_contra",
         "faq3",
@@ -381,8 +390,8 @@
     "final_cta": {
       "type": "final-cta",
       "settings": {
-        "headline": "Eine Entscheidung.\nBessere Beine.",
-        "subtext": "Ein Produkt. Alles dabei. Wenn's nicht passt, schickst du es zurück — kostenlos, ohne Diskussion.",
+        "headline": "Deine Beine\nwerden es dir danken.",
+        "subtext": "Ein Produkt. Alles dabei. 30 Tage zuhause testen — und wenn es dich nicht überzeugt, schickst du es zurück. Kostenlos, ohne Diskussion.",
         "cta_label": "Jetzt bestellen",
         "cta_url": "shopify://products/recovtec-pro-recovery-boots",
         "trust_1": "Kostenloser Versand",
@@ -402,17 +411,241 @@
     "177981239699d97d24": {
       "type": "apps",
       "settings": {}
+    },
+    "benefits": {
+      "type": "benefits",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "feather",
+            "title": "Leichte Beine statt Beton",
+            "text": "Die wellenförmige Kompression regt die Durchblutung an und unterstützt den Rückfluss aus den Beinen. Das Schweregefühl lässt nach — viele spüren es schon nach der ersten Session."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "wave",
+            "title": "Weniger Muskelkater-Gefühl",
+            "text": "Nach harten Einheiten fühlen sich die Muskeln lockerer an. Statt zwei Tage die Treppe zu verfluchen, bist du schneller wieder in Bewegung."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "bolt",
+            "title": "Schneller wieder bereit",
+            "text": "Bessere Erholung zwischen den Einheiten heißt mehr Qualität im nächsten Workout. Du trainierst, wann du willst — nicht, wann deine Beine es erlauben."
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "moon",
+            "title": "Abschalten & entspannen",
+            "text": "Hinlegen, Augen zu, rhythmischer Druck. Viele machen die Boots zu ihrem Abendritual — 30 Minuten, in denen der Kopf genauso runterfährt wie die Beine."
+          }
+        },
+        "b5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "flex",
+            "title": "Lockerer & beweglicher",
+            "text": "Feste Waden und harte Oberschenkel fühlen sich spürbar weicher an. Ideal vor dem Training zum Aktivieren oder an Ruhetagen zum Lockern."
+          }
+        },
+        "b6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "briefcase",
+            "title": "Auch für lange Tage",
+            "text": "Viel Stehen, langes Sitzen, Flug oder Autofahrt: Wenn die Beine abends schwer und müde sind, tut eine Session einfach gut — ganz ohne Training."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ],
+      "settings": {
+        "eyebrow": "Die Wirkung",
+        "headline": "Was 30 Minuten\nmit deinen Beinen machen.",
+        "intro": "Recovery Boots sind kein Technik-Spielzeug. Sie sind der Moment am Ende eines langen Tages, in dem du dich hinlegst, durchatmest — und spürst, wie die Schwere aus deinen Beinen weicht.",
+        "dark": false,
+        "footnote": "Wirkung und Empfinden sind individuell verschieden. Bei gesundheitlichen Beschwerden die Anwendung bitte vorher ärztlich abklären."
+      }
+    },
+    "how_it_works": {
+      "type": "how-it-works",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Die Kammern füllen sich nacheinander",
+            "text": "Vier Luftkammern bauen vom Fuß aufwärts Druck auf — wie zwei Hände, die dein Bein von unten nach oben ausstreichen."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Die Durchblutung kommt in Schwung",
+            "text": "Der wandernde Druck unterstützt den natürlichen Rückfluss von Blut und Lymphe Richtung Herz. Frisches, sauerstoffreiches Blut kann nachströmen."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Die Beine werden leicht",
+            "text": "Das Gewebe wird entlastet, die Muskulatur lockert sich. Das Ergebnis spürst du direkt nach der Session: leichte, entspannte Beine."
+          }
+        },
+        "m1": {
+          "type": "moment",
+          "settings": {
+            "time": "Minute 0",
+            "title": "Hinlegen. Start drücken.",
+            "text": "Der erste Druck baut sich sanft am Fuß auf. Du entscheidest, wie intensiv es wird."
+          }
+        },
+        "m2": {
+          "type": "moment",
+          "settings": {
+            "time": "Minute 5",
+            "title": "Die Welle findet ihren Rhythmus.",
+            "text": "Ein angenehmes Kneten wandert durchs Bein. Die Schultern sinken, der Kopf wird ruhig."
+          }
+        },
+        "m3": {
+          "type": "moment",
+          "settings": {
+            "time": "Minute 20",
+            "title": "Tiefe Entspannung.",
+            "text": "Jetzt merkst du, wie fest deine Beine eigentlich waren — und wie sie langsam loslassen."
+          }
+        },
+        "m4": {
+          "type": "moment",
+          "settings": {
+            "time": "Am nächsten Morgen",
+            "title": "Aufstehen mit leichten Beinen.",
+            "text": "Treppe statt Aufzug, nächstes Training statt Pause. Genau dafür hast du trainiert."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ],
+      "settings": {
+        "eyebrow": "So wirkt's",
+        "headline": "Eine Druckwelle.\nVom Fuß bis zur Hüfte.",
+        "intro": "Das Prinzip kommt aus der Physiotherapie und ist heute aus dem Profisport nicht mehr wegzudenken: pneumatische Kompression. Recovtec bringt es zu dir nach Hause.",
+        "visual_caption": "4 Kammern · füllen sich nacheinander",
+        "visual_alt": "Schematische Darstellung: Vier Luftkammern füllen sich nacheinander vom Fuß bis zum Oberschenkel.",
+        "note": "Pneumatische Kompression wird seit Jahrzehnten in der Physiotherapie eingesetzt und gehört heute in vielen Profi-Teams fest zur Regeneration.",
+        "timeline_title": "Was du während einer Session spürst"
+      }
+    },
+    "moments": {
+      "type": "moments-gallery",
+      "blocks": {
+        "g1": {
+          "type": "media",
+          "settings": {
+            "image_asset": "recovtec-moment-entspannen.jpg",
+            "caption": "Nach dem Training"
+          }
+        },
+        "g2": {
+          "type": "media",
+          "settings": {
+            "image_asset": "recovtec-moment-controller.jpg",
+            "caption": "240 mmHg · Modus 3"
+          }
+        },
+        "g3": {
+          "type": "media",
+          "settings": {
+            "image_asset": "recovtec-moment-boots.jpg",
+            "caption": "Auspacken & loslegen"
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3"
+      ],
+      "settings": {
+        "eyebrow": "Echte Momente",
+        "headline": "Kein Studio. Kein Termin.\nNur du und deine Recovery.",
+        "subtext": "Echte Fotos, keine Renderings: So sieht Recovery mit Recovtec im Alltag aus — auf dem Bett, auf dem Sofa, nach dem Training.",
+        "cta_label": "Jetzt in den Warenkorb",
+        "cta_url": "#pdp-main"
+      }
+    },
+    "value_calc": {
+      "type": "value-calculator",
+      "settings": {
+        "studio_price": 25,
+        "travel_minutes": 40,
+        "sessions_default": 3,
+        "eyebrow": "Die Rechnung",
+        "headline": "Recovery-Studio oder Recovtec?\nRechne selbst.",
+        "subtext": "Eine Kompressions-Session im Recovery-Studio kostet schnell 25 € — plus Anfahrt und Termin. Mit Recovtec zahlst du einmal und regenerierst, so oft du willst.",
+        "slider_label": "Wie oft pro Woche möchtest du regenerieren?",
+        "perk_1": "Kein Termin, keine Anfahrt, kein Abo",
+        "perk_2": "Für die ganze Familie nutzbar",
+        "perk_3": "Jede weitere Session kostet dich nichts",
+        "cta_label": "Jetzt in den Warenkorb",
+        "cta_url": "#pdp-main",
+        "breakeven_label": "Bezahlt gemacht nach",
+        "breakeven_unit": "Sessions",
+        "breakeven_text_before": "Bei deinem Rhythmus sind das nur",
+        "weeks_word": "Wochen",
+        "breakeven_text_after": "— danach ist jede Session gratis.",
+        "year_label": "Kosten im ersten Jahr",
+        "studio_label": "Recovery-Studio",
+        "ours_label": "Recovtec Pro (einmalig)",
+        "per_session_label": "Pro Session im 1. Jahr",
+        "time_label": "Anfahrt gespart / Jahr",
+        "hours_word": "Std.",
+        "disclaimer": "Beispielrechnung. Studio-Preis: Durchschnittswert für eine 30-minütige Kompressions-Session, kann je nach Anbieter abweichen."
+      }
+    },
+    "sticky_buy": {
+      "type": "sticky-buy",
+      "settings": {
+        "note": "Kostenloser Versand",
+        "label_pdp": "In den Warenkorb",
+        "label_link": "Jetzt bestellen"
+      }
     }
   },
   "order": [
     "main_product",
+    "benefits",
+    "how_it_works",
     "story",
+    "moments",
+    "value_calc",
     "compare",
     "17798124291570cc56",
     "judgeme_reviews",
     "faq",
     "final_cta",
     "1779812357c32a4326",
-    "177981239699d97d24"
+    "177981239699d97d24",
+    "sticky_buy"
   ]
 }

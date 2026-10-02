@@ -1,0 +1,57 @@
+{%- comment -%}
+  Sticky-Kaufleiste: erscheint unten, sobald der Haupt-Kaufbutton (Produktseite) bzw.
+  der Hero (Startseite) aus dem Bild gescrollt ist, und verschwindet wieder über
+  dem Final-CTA und dem Footer. Logik: initStickyBuy() in theme.js.
+  Auf der Produktseite löst der Button das echte Warenkorb-Formular aus (gewählte
+  Größe bleibt erhalten); auf anderen Seiten verlinkt er zum Produkt.
+{%- endcomment -%}
+{%- assign sb_product = product | default: section.settings.product -%}
+{%- if sb_product != blank -%}
+  {%- liquid
+    assign sb_on_pdp = false
+    if template.name == 'product'
+      assign sb_on_pdp = true
+    endif
+    assign sb_variant = sb_product.selected_or_first_available_variant
+  -%}
+  <div class="sticky-buy" data-sticky-buy data-mode="{% if sb_on_pdp %}pdp{% else %}link{% endif %}" aria-hidden="true">
+    <div class="container sticky-buy-inner">
+      <div class="sticky-buy-info">
+        {%- if sb_product.featured_image != blank -%}
+          <div class="sticky-buy-img">{{ sb_product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '44px', alt: '' }}</div>
+        {%- endif -%}
+        <div class="sticky-buy-txt">
+          <span class="sticky-buy-title">{{ sb_product.title }}</span>
+          <span class="sticky-buy-meta">
+            <strong>{{ sb_variant.price | money_without_trailing_zeros }}</strong>
+            {%- if section.settings.note != blank -%}<span class="sticky-buy-note">· {{ section.settings.note }}</span>{%- endif -%}
+          </span>
+        </div>
+      </div>
+      {%- if sb_on_pdp -%}
+        <button type="button" class="btn btn-primary sticky-buy-btn" data-sticky-buy-submit tabindex="-1"{% unless sb_variant.available %} disabled{% endunless %}>
+          {{ section.settings.label_pdp }}
+          <span class="btn-icon">{% render 'icon', icon: 'arrow' %}</span>
+        </button>
+      {%- else -%}
+        <a href="{{ sb_product.url }}" class="btn btn-primary sticky-buy-btn" tabindex="-1">
+          {{ section.settings.label_link }}
+          <span class="btn-icon">{% render 'icon', icon: 'arrow' %}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Sticky-Kaufleiste",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Produkt (für Seiten ohne Produkt, z. B. Startseite)" },
+    { "type": "text", "id": "note", "label": "Hinweis neben dem Preis", "default": "Kostenloser Versand" },
+    { "type": "text", "id": "label_pdp", "label": "Button Text (Produktseite)", "default": "In den Warenkorb" },
+    { "type": "text", "id": "label_link", "label": "Button Text (andere Seiten)", "default": "Jetzt bestellen" }
+  ],
+  "presets": [{ "name": "Sticky-Kaufleiste" }]
+}
+{% endschema %}

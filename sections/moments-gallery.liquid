@@ -1,0 +1,87 @@
+{%- comment -%}
+  Echte Momente: Galerie aus echten Fotos/Videos (Kunden, Team, Alltag).
+  Pro Block: Video (Shopify) > Bild (Shopify) > Dateiname aus /assets.
+  Das erste Element wird groß dargestellt.
+{%- endcomment -%}
+<section class="moments" id="momente">
+  <div class="container">
+    <div class="section-head">
+      <div class="left">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="moments-headline">
+          {%- assign lines = section.settings.headline | newline_to_br | split: '<br />' -%}
+          {%- for line in lines -%}<span style="display:block">{{ line }}</span>{%- endfor -%}
+        </h2>
+      </div>
+      {%- if section.settings.subtext != blank -%}<p class="moments-sub">{{ section.settings.subtext }}</p>{%- endif -%}
+    </div>
+
+    <div class="moments-grid moments-grid--{{ section.blocks.size | at_most: 5 }}">
+      {%- for block in section.blocks -%}
+        {%- assign m_alt = block.settings.caption | default: section.settings.headline | strip_newlines -%}
+        <figure class="moment{% if forloop.first %} moment--lead{% endif %}" {{ block.shopify_attributes }}>
+          <div class="moment-media">
+            {%- if block.settings.video != blank -%}
+              {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '900x' }}
+            {%- elsif block.settings.image != blank -%}
+              {%- assign m_alt = block.settings.image.alt | default: m_alt -%}
+              {{ block.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '400, 700, 1000, 1400', sizes: '(min-width: 981px) 50vw, 100vw', alt: m_alt }}
+            {%- elsif block.settings.image_asset != blank -%}
+              <img src="{{ block.settings.image_asset | asset_url }}" alt="{{ m_alt | escape }}" loading="lazy" width="1200" height="1600">
+            {%- else -%}
+              <div class="placeholder"><div class="placeholder-label">Foto oder Video hinzufügen</div></div>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.caption != blank -%}
+            <figcaption class="moment-cap">{{ block.settings.caption }}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+      <div class="moments-foot">
+        {%- if section.settings.footnote != blank -%}<p>{{ section.settings.footnote }}</p>{%- endif -%}
+        <a href="{{ section.settings.cta_url | default: routes.all_products_collection_url }}" class="btn btn-primary btn-lg">
+          {{ section.settings.cta_label }}
+          <span class="btn-icon">{% render 'icon', icon: 'arrow-lg' %}</span>
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Echte Momente",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Echte Momente" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Kein Studio. Kein Termin.\nNur du und deine Recovery." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext" },
+    { "type": "text", "id": "footnote", "label": "Text neben dem Button" },
+    { "type": "text", "id": "cta_label", "label": "Button Text" },
+    { "type": "url", "id": "cta_url", "label": "Button Link" }
+  ],
+  "blocks": [
+    {
+      "type": "media",
+      "name": "Foto / Video",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video (optional)", "info": "Läuft stumm in Schleife. Hat Vorrang vor dem Bild." },
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "text", "id": "image_asset", "label": "ODER Bild aus Theme-Assets (Dateiname)" },
+        { "type": "text", "id": "caption", "label": "Bildunterschrift" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Echte Momente",
+    "blocks": [
+      { "type": "media", "settings": { "image_asset": "recovtec-moment-entspannen.jpg" } },
+      { "type": "media", "settings": { "image_asset": "recovtec-moment-controller.jpg" } },
+      { "type": "media", "settings": { "image_asset": "recovtec-moment-boots.jpg" } }
+    ]
+  }]
+}
+{% endschema %}
