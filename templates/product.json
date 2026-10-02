@@ -593,11 +593,11 @@
         "sessions_default": 3,
         "eyebrow": "Die Rechnung",
         "headline": "Beinmassage im Studio oder Recovtec?\nRechne selbst.",
-        "subtext": "Eine Beinmassage im Studio kostet im Schnitt 50 €. Recovtec zahlst du einmal.",
+        "subtext": "Eine Beinmassage im Studio kostet im Schnitt 50 € — plus Anfahrt und Termin. Mit Recovtec zahlst du einmal und gönnst deinen Beinen die Massage, so oft du willst.",
         "slider_label": "Wie oft pro Woche möchtest du regenerieren?",
-        "perk_1": "Kein Abo, keine Folgekosten",
+        "perk_1": "Kein Termin, keine Anfahrt, kein Abo",
         "perk_2": "Für die ganze Familie nutzbar",
-        "perk_3": "",
+        "perk_3": "Jede weitere Session kostet dich nichts",
         "cta_label": "Jetzt in den Warenkorb",
         "cta_url": "#pdp-main",
         "breakeven_label": "Bezahlt gemacht nach",
@@ -611,7 +611,7 @@
         "per_session_label": "Pro Session im 1. Jahr",
         "time_label": "Anfahrt gespart / Jahr",
         "hours_word": "Std.",
-        "disclaimer": "Beispielrechnung. Studiopreise können abweichen."
+        "disclaimer": "Beispielrechnung. Studio-Preis: Durchschnittswert für eine Beinmassage im Studio, kann je nach Anbieter abweichen."
       }
     },
     "sticky_buy": {
