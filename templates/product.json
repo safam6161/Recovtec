@@ -14,7 +14,7 @@
       "settings": {
         "eyebrow": "Recovtec — Recovery",
         "lede": "Leichte, lockere Beine in 30 Minuten — ohne Studio, ohne Termin. Recovery Boots mit 5 Modi und 7 Druckstufen bis 240 mmHg. Kabellos, leise, ohne App.",
-        "benefits": "Spürbar leichtere Beine nach jeder Session\nSchneller erholt — bereit fürs nächste Training\nTiefenentspannung auf dem Sofa statt Termin im Studio\n30 Tage risikofrei zuhause testen",
+        "benefits": "Flüsterleise unter 45 dB — läuft neben dir beim Serienabend\nSpürbar leichtere Beine nach jeder Session\nEinschalten & sofort starten — ohne App, ohne Pairing\nKabellos mit 3 Std. Akku — für Sofa, Bett oder Hotel\n30 Tage risikofrei zuhause testen",
         "price_note": "Inkl. MwSt.",
         "atc_label": "In den Warenkorb",
         "in_stock_text": "Auf Lager · in 1–3 Werktagen bei dir.",
@@ -65,6 +65,7 @@
         },
         "story2": {
           "type": "story",
+          "disabled": true,
           "settings": {
             "id": "story-controller",
             "image": "shopify://shop_images/Bedieneinheit_angepasst.png",
