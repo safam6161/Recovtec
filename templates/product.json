@@ -420,7 +420,7 @@
           "settings": {
             "icon": "moon",
             "title": "Abschalten & entspannen",
-            "text": "Hinlegen, Augen zu, rhythmischer Druck. Viele machen die Boots zu ihrem Abendritual — 30 Minuten, in denen der Kopf genauso runterfährt wie die Beine."
+            "text": "Hinlegen, Augen zu, rhythmischer Druck — und dabei flüsterleise unter 45 dB. Viele machen die Boots zu ihrem Abendritual: 30 Minuten, in denen der Kopf genauso runterfährt wie die Beine."
           }
         },
         "b5": {
@@ -453,7 +453,6 @@
         "headline": "Was 30 Minuten\nmit deinen Beinen machen.",
         "intro": "Recovery Boots sind kein Technik-Spielzeug. Sie sind der Moment am Ende eines langen Tages, in dem du dich hinlegst, durchatmest — und spürst, wie die Schwere aus deinen Beinen weicht.",
         "dark": false,
-        "facts": "<45::dB::Flüsterleise — perfekt für den Serienabend|1::Knopf::Einschalten & sofort starten, ohne App|3::Std::Akku — kabellos auf Sofa, Bett oder im Hotel|240::mmHg::Druck von sanft bis intensiv",
         "footnote": "Wirkung und Empfinden sind individuell verschieden. Bei gesundheitlichen Beschwerden die Anwendung bitte vorher ärztlich abklären."
       }
     },
