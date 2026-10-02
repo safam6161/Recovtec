@@ -13,7 +13,7 @@
       "type": "main-product",
       "settings": {
         "eyebrow": "Recovtec — Recovery",
-        "lede": "Leichte Beine in 30 Minuten — ohne Studio, ohne Termin.",
+        "lede": "Leichte, lockere Beine in 30 Minuten — ohne Studio, ohne Termin. Recovery Boots mit 5 Modi und 7 Druckstufen bis 240 mmHg. Kabellos, leise, ohne App.",
         "benefits": "Flüsterleise unter 45 dB\nSpürbar leichtere Beine nach jeder Session\nSofort startklar — ohne App\nKomplett kabellos mit 3 Std. Akku",
         "price_note": "Inkl. MwSt.",
         "atc_label": "In den Warenkorb",
@@ -102,7 +102,7 @@
             "eyebrow": "Im Paket enthalten",
             "heading": "Alles dabei. Ohne Aufpreis.",
             "lead": "Andere verkaufen das einzeln — bei uns ist alles im Karton.",
-            "bullets": "Recovtec Pro Boots::Mit LED-Controller.|Transport-Rucksack::Mit Ladeanschluss — laden ohne Auspacken.|Erweiterungslaschen::+10 cm Spielraum am ganzen Bein.",
+            "bullets": "Recovtec Pro Boots::Doppellagiges Rautengewebe, LED-Controller.|Transport-Rucksack::Mit Ladeanschluss — laden ohne Auspacken.|Erweiterungslaschen::+10 cm Spielraum — passt auch bei kräftigeren Beinen.",
             "stats": ""
           }
         }
@@ -249,77 +249,117 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "faq_when": {
+        "faq1": {
           "type": "item",
           "settings": {
-            "question": "Vor oder nach dem Training?",
-            "answer": "Beides: vorher 10–15 Minuten zum Aufwärmen, danach 15–45 Minuten zur Erholung. Auch an Ruhetagen."
+            "question": "Wie schnell wird geliefert?",
+            "answer": "Versand innerhalb Deutschlands in 1–3 Werktagen, komplett kostenlos. Bestellst du vor 14 Uhr, geht das Paket noch am gleichen Tag raus."
           }
         },
-        "faq5": {
+        "faq2": {
           "type": "item",
           "settings": {
-            "question": "Wie oft darf ich sie nutzen?",
-            "answer": "Gern täglich — 15–45 Minuten pro Session."
+            "question": "Kann ich die Boots zurücksenden, wenn sie mir nicht gefallen?",
+            "answer": "Ja. Du hast 30 Tage Zeit, die Boots zuhause zu testen. Gefallen sie dir nicht, schickst du sie zurück und bekommst dein Geld zurück — ohne Diskussion."
           }
         },
         "faq3": {
           "type": "item",
           "settings": {
             "question": "Welche Größe passt mir?",
-            "answer": "M bis 1,80 m, L ab 1,80 m. Die Erweiterungslaschen geben +10 cm Spielraum. Im Zweifel die größere Größe."
+            "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die Erweiterungslaschen sind dabei und bieten +10 cm Spielraum am ganzen Bein — bei Zweifeln nimm die größere Variante."
           }
         },
-        "faq1": {
+        "faq4": {
           "type": "item",
           "settings": {
-            "question": "Wie schnell wird geliefert?",
-            "answer": "In 1–3 Werktagen, kostenlos. Bestellung bis 14 Uhr geht am selben Tag raus."
+            "question": "Brauche ich eine App oder WLAN?",
+            "answer": "Nein. Anschalten, Modus und Druckstufe direkt am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto."
           }
         },
-        "faq2": {
+        "faq5": {
           "type": "item",
           "settings": {
-            "question": "Kann ich sie zurückschicken?",
-            "answer": "Ja, 30 Tage lang. Du bekommst dein Geld zurück — ohne Diskussion."
+            "question": "Wie oft sollte ich sie nutzen?",
+            "answer": "Eine Session dauert 15–45 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel."
+          }
+        },
+        "faq7": {
+          "type": "item",
+          "settings": {
+            "question": "Wie lange hält der Akku?",
+            "answer": "Bis zu 3 Stunden im Betrieb. Reicht für mehrere Sessions ohne Aufladen — auch unterwegs oder im Trainingslager."
           }
         },
         "faq8": {
           "type": "item",
           "settings": {
-            "question": "Gibt es Garantie?",
-            "answer": "1 Jahr auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir kostenlos."
+            "question": "Was ist mit Garantie?",
+            "answer": "1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei."
           }
         },
-        "faq_clean": {
+        "faq_how": {
           "type": "item",
           "settings": {
-            "question": "Wie reinige ich die Boots?",
-            "answer": "Innenseite mit einem feuchten Tuch abwischen, trocknen lassen. Nicht in die Waschmaschine."
+            "question": "Wie funktionieren die Recovery Boots und was bringen sie?",
+            "answer": "Die Boots umschließen das ganze Bein und füllen sich in vier Kammern nacheinander mit Luft — vom Fuß aufwärts Richtung Oberschenkel. Dieser wandernde Druck unterstützt den Rücktransport von Blut und Lymphe und fördert die Durchblutung. Das spürst du als leichtere Beine, weniger Muskelkater und schnellere Erholung nach dem Training."
+          }
+        },
+        "faq_forwho": {
+          "type": "item",
+          "settings": {
+            "question": "Für wen sind die Recovery Boots geeignet?",
+            "answer": "Für alle, die ihre Beine regelmäßig belasten — Läufer, Kraft- und Mannschaftssportler, Triathleten, CrossFitter. Aber genauso für lange Bürotage, viel Stehen oder Reisen, wenn sich die Beine schwer anfühlen. Du musst kein Profi sein, um davon zu profitieren."
+          }
+        },
+        "faq_when": {
+          "type": "item",
+          "settings": {
+            "question": "Vor oder nach dem Training — wann nutze ich sie am besten?",
+            "answer": "Beides funktioniert. Vor dem Training (kurz, ca. 10–15 Min.) regst du die Durchblutung an und wärmst die Muskeln auf. Nach dem Training (15–45 Min.) lockern sie die Beine und beschleunigen die Erholung. Auch an Ruhetagen oder nach langem Stehen tun sie gut."
           }
         },
         "faq_contra": {
           "type": "item",
           "settings": {
-            "question": "Wer sollte die Boots nicht nutzen?",
-            "answer": "Bei akuter Thrombose, schweren Herz- oder Lungenerkrankungen, offenen Wunden, Hautinfektionen, arteriellen Durchblutungsstörungen oder in der Schwangerschaft bitte vorher ärztlich abklären."
+            "question": "Wer sollte die Boots nicht verwenden?",
+            "answer": "Bitte kläre die Nutzung vorher mit deinem Arzt ab, wenn du eine akute Thrombose (Blutgerinnsel), eine schwere Herz- oder Lungenerkrankung, offene Wunden, Hautinfektionen oder eine fortgeschrittene arterielle Durchblutungsstörung hast. Auch in der Schwangerschaft solltest du vorher ärztlichen Rat einholen. Im Zweifel gilt: erst fragen, dann nutzen."
+          }
+        },
+        "faq_clean": {
+          "type": "item",
+          "settings": {
+            "question": "Wie reinige und pflege ich die Boots?",
+            "answer": "Wisch die Innenseite nach der Nutzung einfach mit einem leicht feuchten Tuch und etwas mildem Reiniger ab — nicht in die Waschmaschine. Kurz trocknen lassen, bevor du sie verstaust. Prüf ab und zu Schlauch und Anschlüsse. So bleiben sie lange hygienisch und einsatzbereit."
+          }
+        },
+        "faq_first": {
+          "type": "item",
+          "settings": {
+            "question": "Spüre ich schon nach der ersten Anwendung einen Unterschied?",
+            "answer": "Viele merken schon direkt nach der ersten Session, dass sich die Beine leichter und lockerer anfühlen. Wie stark, ist individuell. Am meisten holst du heraus, wenn die Boots zur Routine werden — zum Beispiel nach jedem Training oder abends auf dem Sofa."
           }
         }
       },
       "block_order": [
+        "faq_how",
+        "faq_forwho",
         "faq_when",
+        "faq_first",
         "faq5",
+        "faq_contra",
         "faq3",
+        "faq4",
+        "faq7",
+        "faq_clean",
         "faq1",
         "faq2",
-        "faq8",
-        "faq_clean",
-        "faq_contra"
+        "faq8"
       ],
       "settings": {
         "eyebrow": "FAQ",
         "headline": "Noch Fragen?\nWir antworten.",
-        "subtext": "Andere Frage? Schreib uns — wir antworten meist innerhalb eines Werktages.",
+        "subtext": "Du hast eine andere Frage? Schreib uns direkt — meistens antworten wir innerhalb eines Werktages.",
         "email": "support@recovtec.de"
       }
     },
@@ -327,7 +367,7 @@
       "type": "final-cta",
       "settings": {
         "headline": "Deine Beine\nwerden es dir danken.",
-        "subtext": "Ein Paket, alles dabei. 30 Tage risikofrei testen.",
+        "subtext": "Ein Paket, alles dabei. 30 Tage risikofrei testen — Rücksendung kostenlos, ohne Diskussion.",
         "cta_label": "Jetzt bestellen",
         "cta_url": "shopify://products/recovtec-pro-recovery-boots",
         "trust_1": "Kostenloser Versand",
@@ -356,7 +396,7 @@
           "settings": {
             "icon": "feather",
             "title": "Leichte Beine statt Beton",
-            "text": "Die Druckwelle regt die Durchblutung an. Die Schwere verschwindet."
+            "text": "Die Druckwelle regt die Durchblutung an — das Schweregefühl lässt nach, oft schon nach der ersten Session."
           }
         },
         "b2": {
@@ -364,7 +404,7 @@
           "settings": {
             "icon": "wave",
             "title": "Weniger Muskelkater",
-            "text": "Schneller wieder fit fürs nächste Training."
+            "text": "Muskeln fühlen sich nach harten Einheiten lockerer an. Du bist schneller wieder fit fürs nächste Training."
           }
         },
         "b4": {
@@ -380,7 +420,7 @@
           "settings": {
             "icon": "briefcase",
             "title": "Auch ohne Training",
-            "text": "Nach langem Stehen, Sitzen oder Reisen tut eine Session einfach gut."
+            "text": "Viel Stehen, langes Sitzen, Flug oder Autofahrt: Auch dann tut eine Session einfach gut."
           }
         }
       },
@@ -456,7 +496,7 @@
           "settings": {
             "time": "Minute 0",
             "title": "Hinlegen. Start drücken.",
-            "text": "Der Druck beginnt sanft am Fuß."
+            "text": "Der erste Druck baut sich sanft am Fuß auf. Du entscheidest, wie intensiv es wird."
           }
         },
         "m2": {
@@ -464,7 +504,7 @@
           "settings": {
             "time": "Minute 5",
             "title": "Die Welle findet ihren Rhythmus.",
-            "text": "Der Kopf wird ruhig."
+            "text": "Ein angenehmes Kneten wandert durchs Bein. Die Schultern sinken, der Kopf wird ruhig."
           }
         },
         "m3": {
@@ -472,7 +512,7 @@
           "settings": {
             "time": "Minute 20",
             "title": "Tiefe Entspannung.",
-            "text": "Die Beine lassen spürbar los."
+            "text": "Jetzt merkst du, wie fest deine Beine eigentlich waren — und wie sie langsam loslassen."
           }
         },
         "m4": {
@@ -480,7 +520,7 @@
           "settings": {
             "time": "Am nächsten Morgen",
             "title": "Aufstehen mit leichten Beinen.",
-            "text": "Genau dafür hast du trainiert."
+            "text": "Treppe statt Aufzug, nächstes Training statt Pause. Genau dafür hast du trainiert."
           }
         }
       },
@@ -501,7 +541,7 @@
         "intro": "Die Druckwelle unterstützt den Rückfluss von Blut und Lymphe — deine Beine werden leicht. Wähle einen Modus:",
         "visual_caption": "4 Kammern · füllen sich nacheinander",
         "visual_alt": "Schematische Darstellung der vier Luftkammern vom Fuß bis zum Oberschenkel und ihres Druckmusters im gewählten Modus.",
-        "note": "",
+        "note": "Pneumatische Kompression wird seit Jahrzehnten in der Physiotherapie eingesetzt und gehört heute in vielen Profi-Teams fest zur Regeneration.",
         "timeline_title": "Was du während einer Session spürst",
         "modes_label": "Wähle deinen Modus"
       }
