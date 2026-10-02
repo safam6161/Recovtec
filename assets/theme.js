@@ -603,6 +603,64 @@
     set(reviewChild, 'margin-top', '12px');
   }
 
+  // Letzte Absicherung (mobil): Abstand zwischen der Zeile „Bewertung schreiben“
+  // und dem ersten sichtbaren Inhalt darunter (Sterne/Text der ersten Bewertung)
+  // tatsächlich messen. Ist er größer als 24 px, wird der Block darunter per
+  // negativem Margin hochgezogen — unabhängig davon, woher die Lücke kommt.
+  // Öffnet sich dort etwas Sichtbares (z. B. Filter-Menü), ist die Lücke klein und
+  // es wird nichts verschoben.
+  const JM_TARGET_GAP = 16;
+  function pullUpReviews(root) {
+    const widget = root.querySelector('.jm-reviews-widget');
+    if (!widget) return;
+    const prev = widget.querySelector('[data-jm-pull]');
+    if (prev) { prev.style.removeProperty('margin-top'); prev.removeAttribute('data-jm-pull'); }
+    if (!JM_MOBILE.matches) return;
+
+    const isShown = el => {
+      const r = el.getBoundingClientRect();
+      if (r.width <= 2 || r.height <= 2) return false;
+      const cs = getComputedStyle(el);
+      return cs.visibility !== 'hidden' && cs.opacity !== '0';
+    };
+    const writeBtn = Array.from(widget.querySelectorAll('button, a, [role="button"]'))
+      .find(el => /bewertung schreiben|write a review/i.test(el.textContent || '') && isShown(el));
+    if (!writeBtn) return;
+    const row = writeBtn.parentElement;
+
+    let target = null;
+    for (const el of widget.querySelectorAll('*')) {
+      if (row.contains(el) || !(row.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING)) continue;
+      if (el.closest('[data-jm-empty], [data-jm-media-hidden]')) continue;
+      const isMedia = el.matches('img, svg, video, picture, canvas');
+      const ownText = Array.from(el.childNodes).some(n => n.nodeType === 3 && n.nodeValue.trim());
+      if (!isMedia && !ownText) continue;
+      if (!isShown(el)) continue;
+      target = el;
+      break;
+    }
+    if (!target) return;
+
+    let block = target;
+    while (block.parentElement && !block.parentElement.contains(row)) block = block.parentElement;
+    const rowBottom = row.getBoundingClientRect().bottom;
+    const gap = target.getBoundingClientRect().top - rowBottom;
+    if (gap <= 24) return;
+    let shift = gap - JM_TARGET_GAP;
+    // Trennlinien (border-top) auf dem Weg dürfen nicht über die Button-Zeile rutschen
+    for (let a = target.parentElement; a; a = a.parentElement) {
+      const cs = getComputedStyle(a);
+      if (parseFloat(cs.borderTopWidth) > 0 && cs.borderTopStyle !== 'none') {
+        shift = Math.min(shift, a.getBoundingClientRect().top - rowBottom - 8);
+      }
+      if (a === block) break;
+    }
+    if (shift <= 8) return;
+    const mt = parseFloat(getComputedStyle(block).marginTop) || 0;
+    block.style.setProperty('margin-top', (mt - shift) + 'px', 'important');
+    block.setAttribute('data-jm-pull', '');
+  }
+
   function initJudgemeWidget() {
     // Die Section kann mehrfach vorkommen (Produktseite und Startseite).
     document.querySelectorAll('.jm-reviews').forEach(setupJudgemeRoot);
@@ -630,11 +688,15 @@
       collapseEmptyBlocks(root);
       compactJudgeme(root);
       tightenFirstReviewGap(root);
+      pullUpReviews(root);
     };
 
     run();
     // Judge.me setzt Layout-Klassen teils erst später → zur Sicherheit nachziehen
     [800, 2500, 5000].forEach(ms => setTimeout(run, ms));
+    // Nach Klicks (Filter/Sortierung öffnen sich) und Drehen des Handys neu messen
+    root.addEventListener('click', () => setTimeout(run, 350));
+    window.addEventListener('resize', () => requestAnimationFrame(run));
     // Judge.me rendert asynchron und baut bei Seitenwechseln neu auf.
     let pending = false;
     const observer = new MutationObserver(() => {
