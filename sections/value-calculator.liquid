@@ -60,9 +60,9 @@
         </div>
 
         <ul class="calc-perks">
-          <li>{% render 'icon', icon: 'check' %}<span>{{ section.settings.perk_1 }}</span></li>
-          <li>{% render 'icon', icon: 'check' %}<span>{{ section.settings.perk_2 }}</span></li>
-          <li>{% render 'icon', icon: 'check' %}<span>{{ section.settings.perk_3 }}</span></li>
+          {%- if section.settings.perk_1 != blank -%}<li>{% render 'icon', icon: 'check' %}<span>{{ section.settings.perk_1 }}</span></li>{%- endif -%}
+          {%- if section.settings.perk_2 != blank -%}<li>{% render 'icon', icon: 'check' %}<span>{{ section.settings.perk_2 }}</span></li>{%- endif -%}
+          {%- if section.settings.perk_3 != blank -%}<li>{% render 'icon', icon: 'check' %}<span>{{ section.settings.perk_3 }}</span></li>{%- endif -%}
         </ul>
       </div>
 

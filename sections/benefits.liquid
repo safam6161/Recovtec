@@ -15,7 +15,7 @@
       {%- if section.settings.intro != blank -%}<p class="benefits-intro">{{ section.settings.intro }}</p>{%- endif -%}
     </div>
 
-    <div class="benefits-grid">
+    <div class="benefits-grid benefits-grid--{{ section.blocks.size }}">
       {%- for block in section.blocks -%}
         <article class="benefit" {{ block.shopify_attributes }}>
           <div class="benefit-top">
