@@ -490,6 +490,27 @@
     });
   }
 
+  // Mobil: Judge.me bringt eigene, sehr großzügige Abstände mit (Margins, Paddings,
+  // Gaps, Mindesthöhen) — je nach Widget-Version mit anderen Klassen. Statt Klassen
+  // zu raten, werden alle vertikalen Abstände im Widget auf ein Maximum gedeckelt.
+  const JM_MAX_SPACE = 12;
+  const JM_MOBILE = window.matchMedia('(max-width: 600px)');
+  function compactJudgeme(root) {
+    if (!JM_MOBILE.matches) return;
+    root.querySelectorAll('.jm-reviews-widget *').forEach(el => {
+      if (!(el instanceof HTMLElement) || el.closest('svg') || el.hasAttribute('data-jm-compact')) return;
+      el.setAttribute('data-jm-compact', '');
+      const cs = getComputedStyle(el);
+      ['margin-top', 'margin-bottom', 'padding-top', 'padding-bottom', 'row-gap'].forEach(prop => {
+        const v = parseFloat(cs.getPropertyValue(prop));
+        if (v > JM_MAX_SPACE) el.style.setProperty(prop, JM_MAX_SPACE + 'px', 'important');
+      });
+      if (!el.matches('img, video, iframe, picture') && parseFloat(cs.minHeight) > 48) {
+        el.style.setProperty('min-height', '0', 'important');
+      }
+    });
+  }
+
   function initJudgemeWidget() {
     // Die Section kann mehrfach vorkommen (Produktseite und Startseite).
     document.querySelectorAll('.jm-reviews').forEach(setupJudgemeRoot);
@@ -515,6 +536,7 @@
       if (showAvgStars) injectAverageStars(root);
       if (hideGallery) hideMediaGallery(root);
       collapseEmptyBlocks(root);
+      compactJudgeme(root);
     };
 
     run();
