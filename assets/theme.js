@@ -517,6 +517,9 @@
       if (!range || !price || !studio) return;
 
       const set = (sel, val) => root.querySelectorAll(sel).forEach(el => { el.textContent = val; });
+      // Ganze Beträge ohne, krumme mit Cent — alle Beträge im selben Format
+      const money = v => (Math.round(v * 100) % 100 === 0 ? eur : eurCents).format(v);
+      set('[data-calc-price]', money(price));
 
       function update() {
         const n = Number(range.value) || 1;
@@ -530,7 +533,7 @@
         set('[data-calc-n]', n + '×');
         set('[data-calc-breakeven]', breakEven);
         set('[data-calc-weeks]', weeks);
-        set('[data-calc-studio-year]', eur.format(studioYear));
+        set('[data-calc-studio-year]', money(studioYear));
         set('[data-calc-per-session]', eurCents.format(price / perYear));
         set('[data-calc-hours]', Math.floor(travel * perYear / 60));
         const barStudio = root.querySelector('[data-calc-bar-studio]');

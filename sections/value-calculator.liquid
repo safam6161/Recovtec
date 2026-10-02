@@ -80,7 +80,7 @@
             <div class="calc-track"><div class="calc-fill calc-fill--studio" data-calc-bar-studio style="width: {{ bar_studio }}%"></div></div>
           </div>
           <div class="calc-bar">
-            <div class="calc-bar-head"><span>{{ section.settings.ours_label }}</span><strong>{{ calc_price | money_without_trailing_zeros }}</strong></div>
+            <div class="calc-bar-head"><span>{{ section.settings.ours_label }}</span><strong data-calc-price>{{ calc_price | money_without_trailing_zeros }}</strong></div>
             <div class="calc-track"><div class="calc-fill calc-fill--ours" data-calc-bar-ours style="width: {{ bar_ours }}%"></div></div>
           </div>
         </div>
