@@ -474,16 +474,46 @@
   // Filterleisten) vor der ersten Bewertung einklappen — sie kosten mobil viel Höhe.
   // Nur Blöcke ohne Text und ohne sichtbare Medien/Bedienelemente werden markiert.
   const JM_KEEP_SEL = 'img, svg, video, iframe, canvas, input, button, select, textarea, a, [class*="star"], [class*="icon"]';
+  // Text eines Elements ohne die Beschriftung von Buttons (z. B. Karussell-Pfeile „›“)
+  function contentText(el) {
+    let text = '';
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (node.parentElement && node.parentElement.closest('button, [role="button"]')) continue;
+      text += node.nodeValue;
+    }
+    return text.trim();
+  }
   function collapseEmptyBlocks(root) {
     const firstReview = root.querySelector(JM_REVIEW_SEL);
     if (!firstReview) return;
     const visible = el => el.getClientRects().length > 0 && !el.closest('[data-jm-media-hidden]');
+    // Karussell-Pfeile der ausgeblendeten Galerie, falls sie außerhalb ihres Containers sitzen
+    if (root.querySelector('[data-jm-media-hidden]')) {
+      root.querySelectorAll('.jm-reviews-widget button, .jm-reviews-widget [role="button"]').forEach(btn => {
+        if (!(firstReview.compareDocumentPosition(btn) & Node.DOCUMENT_POSITION_PRECEDING)) return;
+        const label = ((btn.getAttribute('aria-label') || '') + ' ' + (btn.className || '')).toLowerCase();
+        const text = (btn.textContent || '').trim();
+        if (/^[›‹<>❯❮→←]?$/.test(text) && /(next|prev|arrow|scroll|carousel|weiter|zurück|nächst|vorig)/.test(label)) {
+          btn.setAttribute('data-jm-empty', '');
+        } else if (/^[›‹❯❮→←]$/.test(text)) {
+          btn.setAttribute('data-jm-empty', '');
+        }
+      });
+    }
     root.querySelectorAll('.jm-reviews-widget *').forEach(el => {
       if (!(el instanceof HTMLElement) || el.closest('svg')) return;   // SVG-Teile (Sterne) nie anfassen
       if (el.hasAttribute('data-jm-empty') || el.contains(firstReview)) return;
       if (!(firstReview.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_PRECEDING)) return;
+      if (contentText(el) !== '') return;
+      // Rest der ausgeblendeten Bild-Galerie: Container ohne Text, der ausgeblendete
+      // Bilder enthält — übrig bleiben dort nur die Pfeil-Buttons des Karussells.
+      if (el.querySelector('[data-jm-media-hidden]') && !el.closest('[data-jm-empty]')) {
+        el.setAttribute('data-jm-empty', '');
+        return;
+      }
       if (el.offsetHeight < 32) return;
-      if ((el.textContent || '').trim() !== '') return;
       if (el.matches(JM_KEEP_SEL)) return;
       if (Array.from(el.querySelectorAll(JM_KEEP_SEL)).some(visible)) return;
       el.setAttribute('data-jm-empty', '');
