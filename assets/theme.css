@@ -1561,3 +1561,11 @@ body.lgl-noscroll { overflow: hidden; }
   .benefits-head,
   .section-head { margin-bottom: 22px; }
 }
+
+/* Produktseite mobil: Bilder bei „360° Kompression“ und „Alles dabei“ flacher (4:3 statt 4:5) */
+@media (max-width: 600px) {
+  .story-img { aspect-ratio: 4 / 3; }
+  .story-img .placeholder { min-height: 0; }
+  #story-360 .story-img img { object-fit: contain; }
+  .story-grid { gap: 24px; }
+}
