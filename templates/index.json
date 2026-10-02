@@ -117,8 +117,8 @@
           "settings": {
             "big_num": "3",
             "big_unit": "Std. Akku",
-            "title": "Komplett kabellos",
-            "text": "Kein Kabel am Bein, keine App.",
+            "title": "Läuft mit Akku",
+            "text": "Keine Steckdose nötig, keine App.",
             "cta_label": "",
             "cta_url": ""
           }
@@ -705,7 +705,7 @@
             "icon": "plane",
             "tag": "Unterwegs",
             "title": "Reisen & Pendeln",
-            "text": "Nach Flug oder langer Autofahrt bringen die Boots die Beine wieder in Schwung. Kabellos und im Rucksack verstaut — perfekt fürs Hotelzimmer.",
+            "text": "Nach Flug oder langer Autofahrt bringen die Boots die Beine wieder in Schwung. Mit Akku und im Rucksack verstaut — perfekt für unterwegs.",
             "tip": "Nach der Ankunft 20 Min. sanft starten."
           }
         }
