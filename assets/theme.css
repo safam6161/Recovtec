@@ -1539,3 +1539,11 @@ body.lgl-noscroll { overflow: hidden; }
   .gallery-main { margin-bottom: 4px; }
   .gallery-thumbs { gap: 4px; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); }
 }
+
+/* Produktseite mobil: Preiszeile kompakter (weniger Luft zu den Linien), Kaufbox insgesamt dichter */
+@media (max-width: 980px) {
+  .pdp-info-inner { gap: 12px; }
+  .pdp-price-row { padding: 8px 0; }
+  .size-block { gap: 8px; }
+  .pdp-trust-pills { padding-top: 12px; }
+}
