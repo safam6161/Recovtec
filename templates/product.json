@@ -484,18 +484,68 @@
     "how_it_works": {
       "type": "how-it-works",
       "blocks": {
+        "mode1": {
+          "type": "mode",
+          "settings": {
+            "number": "1",
+            "title": "Entspannen",
+            "name": "Wave Massage",
+            "text": "Eine sanfte Druckwelle rollt durchs ganze Bein. Ideal für die tägliche Massage und zum Abschalten am Abend.",
+            "pattern": "wave"
+          }
+        },
+        "mode2": {
+          "type": "mode",
+          "settings": {
+            "number": "2",
+            "title": "Rundum",
+            "name": "Sequential + Double Wave",
+            "text": "Aufsteigender Druckaufbau, kombiniert mit einer Doppelwelle — das umfassendste Programm, wenn du alles willst.",
+            "pattern": "combo"
+          }
+        },
+        "mode3": {
+          "type": "mode",
+          "settings": {
+            "number": "3",
+            "title": "Aufwärmen",
+            "name": "Double Wave",
+            "text": "Zwei überlagerte Druckwellen bringen die Durchblutung in Schwung — perfekt vor dem Workout und zum Lockern.",
+            "pattern": "double"
+          }
+        },
+        "mode4": {
+          "type": "mode",
+          "settings": {
+            "number": "4",
+            "title": "Tief erholen",
+            "name": "All Squeezing",
+            "text": "Alle Kammern drücken gleichzeitig. Intensive Vollkompression für tiefe Regeneration nach harten Einheiten.",
+            "pattern": "all"
+          }
+        },
+        "mode5": {
+          "type": "mode",
+          "settings": {
+            "number": "5",
+            "title": "Klassisch",
+            "name": "Sequential Squeezing",
+            "text": "Der Druck baut sich vom Fuß nach oben auf und hält — der bewährte Recovery-Standard aus dem Profisport.",
+            "pattern": "sequential"
+          }
+        },
         "s1": {
           "type": "step",
           "settings": {
-            "title": "Die Kammern füllen sich nacheinander",
-            "text": "Vier Luftkammern bauen vom Fuß aufwärts Druck auf — wie zwei Hände, die dein Bein von unten nach oben ausstreichen."
+            "title": "Vier Kammern umschließen dein Bein",
+            "text": "Vom Fuß bis zum Oberschenkel. Je nach Modus füllen sie sich als Welle, in Doppelwellen oder alle gleichzeitig — wie Hände, die dein Bein ausstreichen und kneten."
           }
         },
         "s2": {
           "type": "step",
           "settings": {
             "title": "Die Durchblutung kommt in Schwung",
-            "text": "Der wandernde Druck unterstützt den natürlichen Rückfluss von Blut und Lymphe Richtung Herz. Frisches, sauerstoffreiches Blut kann nachströmen."
+            "text": "Der Druck unterstützt den natürlichen Rückfluss von Blut und Lymphe Richtung Herz. Frisches, sauerstoffreiches Blut kann nachströmen."
           }
         },
         "s3": {
@@ -539,6 +589,11 @@
         }
       },
       "block_order": [
+        "mode1",
+        "mode2",
+        "mode3",
+        "mode4",
+        "mode5",
         "s1",
         "s2",
         "s3",
@@ -549,12 +604,13 @@
       ],
       "settings": {
         "eyebrow": "So wirkt's",
-        "headline": "Eine Druckwelle.\nVom Fuß bis zur Hüfte.",
-        "intro": "Das Prinzip kommt aus der Physiotherapie und ist heute aus dem Profisport nicht mehr wegzudenken: pneumatische Kompression. Recovtec bringt es zu dir nach Hause.",
+        "headline": "Vier Kammern. Fünf Programme.\nEin Ziel: leichte Beine.",
+        "intro": "Das Prinzip kommt aus der Physiotherapie und ist heute aus dem Profisport nicht mehr wegzudenken: pneumatische Kompression. Wähle einen Modus und sieh, wie die Boots arbeiten.",
         "visual_caption": "4 Kammern · füllen sich nacheinander",
-        "visual_alt": "Schematische Darstellung: Vier Luftkammern füllen sich nacheinander vom Fuß bis zum Oberschenkel.",
+        "visual_alt": "Schematische Darstellung der vier Luftkammern vom Fuß bis zum Oberschenkel und ihres Druckmusters im gewählten Modus.",
         "note": "Pneumatische Kompression wird seit Jahrzehnten in der Physiotherapie eingesetzt und gehört heute in vielen Profi-Teams fest zur Regeneration.",
-        "timeline_title": "Was du während einer Session spürst"
+        "timeline_title": "Was du während einer Session spürst",
+        "modes_label": "Wähle deinen Modus"
       }
     },
     "moments": {

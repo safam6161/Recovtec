@@ -586,6 +586,85 @@
     }
   }
 
+  // ===== Modus-Vorschau (sections/how-it-works.liquid) =====
+  // Spielt pro Modus ein eigenes Druckmuster auf den 4 Kammern ab. Ein Frame = Zustand
+  // der Kammern [Fuß, Wade, Knie, Oberschenkel]. Wechselt automatisch weiter, bis jemand
+  // selbst einen Modus wählt; läuft nur, solange die Grafik im Bild ist.
+  function initModeDemo() {
+    const P = {
+      wave:       [[1,0,0,0],[1,1,0,0],[0,1,1,0],[0,0,1,1],[0,0,0,1],[0,0,0,0]],
+      double:     [[1,0,0,0],[0,1,0,0],[1,0,1,0],[0,1,0,1],[0,0,1,0],[0,0,0,1],[0,0,0,0]],
+      sequential: [[1,0,0,0],[1,1,0,0],[1,1,1,0],[1,1,1,1],[1,1,1,1],[0,0,0,0]],
+      all:        [[1,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,0,0],[0,0,0,0]],
+    };
+    P.combo = P.sequential.concat(P.double);
+    const STEP = 650;
+    const CYCLES_PER_MODE = 2;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.querySelectorAll('[data-mode-demo]').forEach(fig => {
+      const tabs = Array.from(fig.querySelectorAll('[data-mode-tab]'));
+      const air = [1, 2, 3, 4].map(i => fig.querySelector('.hiw-air-' + i));
+      if (!tabs.length || air.some(a => !a)) return;
+
+      const panel = fig.querySelector('.hiw-mode-panel');
+      const titleEl = fig.querySelector('[data-mode-title]');
+      const nameEl = fig.querySelector('[data-mode-name]');
+      const textEl = fig.querySelector('[data-mode-text]');
+      let current = 0, frame = 0, cycles = 0, auto = true, visible = false, timer = null;
+
+      fig.classList.add('is-scripted');
+      panel?.setAttribute('aria-live', 'off');
+
+      const pattern = () => P[fig.dataset.pattern] || P.wave;
+      const paint = levels => air.forEach((el, i) => el.classList.toggle('is-on', !!levels[i]));
+
+      function select(i, byUser) {
+        current = i; frame = 0; cycles = 0;
+        const t = tabs[i];
+        tabs.forEach((b, j) => {
+          b.classList.toggle('is-active', j === i);
+          b.setAttribute('aria-pressed', j === i ? 'true' : 'false');
+        });
+        fig.dataset.pattern = t.dataset.pattern;
+        if (titleEl) titleEl.textContent = t.dataset.title || '';
+        if (nameEl) nameEl.textContent = t.dataset.name || '';
+        if (textEl) textEl.textContent = t.dataset.text || '';
+        if (byUser) { auto = false; panel?.setAttribute('aria-live', 'polite'); }
+        if (reduce) {
+          // Ohne Bewegung: den „vollsten" Frame des Musters zeigen
+          paint(pattern().reduce((a, b) => (b.reduce((x, y) => x + y) > a.reduce((x, y) => x + y) ? b : a)));
+        }
+      }
+
+      function tick() {
+        const pat = pattern();
+        paint(pat[frame]);
+        frame += 1;
+        if (frame >= pat.length) {
+          frame = 0; cycles += 1;
+          if (auto && cycles >= CYCLES_PER_MODE) select((current + 1) % tabs.length, false);
+        }
+      }
+      function start() { if (!timer && !reduce) timer = setInterval(tick, STEP); }
+      function stop() { clearInterval(timer); timer = null; }
+
+      tabs.forEach((b, i) => b.addEventListener('click', () => {
+        select(i, true);
+        stop();
+        if (!reduce) tick();
+        if (visible) start();
+      }));
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? start() : stop(); }).observe(fig);
+      } else {
+        visible = true; start();
+      }
+      select(0, false);
+    });
+  }
+
   // ===== Init =====
   document.addEventListener('DOMContentLoaded', () => {
     // Cart triggers
@@ -613,5 +692,6 @@
     initGuaranteeLabel();
     initValueCalc();
     initStickyBuy();
+    initModeDemo();
   });
 })();

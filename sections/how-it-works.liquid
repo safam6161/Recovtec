@@ -1,18 +1,23 @@
 {%- comment -%}
-  So wirkt's: animiertes Bein mit den 4 Luftkammern (Druckwelle Fuß → Oberschenkel),
-  daneben die Wirkkette in Schritten und darunter die Session-Timeline
-  („Was du spürst"). Die Animation ist reines CSS und respektiert prefers-reduced-motion.
+  So wirkt's: animiertes Bein mit den 4 Luftkammern, daneben die Wirkkette in Schritten
+  und darunter die Session-Timeline („Was du spürst").
+  Mit Blöcken vom Typ „Modus" wird unter dem Bein eine Modus-Auswahl gezeigt: Die
+  Animation spielt dann das Druckmuster des gewählten Modus ab (initModeDemo() in
+  theme.js) und wechselt automatisch weiter, bis jemand selbst einen Modus wählt.
+  Ohne JS bzw. bei prefers-reduced-motion läuft die einfache CSS-Welle bzw. nichts.
 {%- endcomment -%}
 {%- liquid
   assign steps = section.blocks | where: 'type', 'step'
   assign moments = section.blocks | where: 'type', 'moment'
+  assign modes = section.blocks | where: 'type', 'mode'
 -%}
 <section class="hiw" id="so-wirkts">
   <div class="container">
     <div class="hiw-grid">
       <div class="hiw-visual">
-        <figure class="hiw-leg" role="img" aria-label="{{ section.settings.visual_alt | escape }}">
-          <svg viewBox="0 0 240 430" width="240" height="430" aria-hidden="true">
+        {%- assign first_mode = modes | first -%}
+        <figure class="hiw-leg"{% if modes.size > 0 %} data-mode-demo data-pattern="{{ first_mode.settings.pattern }}"{% endif %}>
+          <svg viewBox="0 0 240 430" width="240" height="430" role="img" aria-label="{{ section.settings.visual_alt | escape }}">
             <defs>
               <linearGradient id="hiw-flow-{{ section.id }}" x1="0" y1="1" x2="0" y2="0">
                 <stop offset="0" stop-color="currentColor" stop-opacity="0"/>
@@ -42,10 +47,37 @@
             <path class="hiw-arrow" d="M11 30 L17.5 18 L24 30"/>
             <rect class="hiw-flow" x="16" y="284" width="3" height="120" fill="url(#hiw-flow-{{ section.id }})"/>
           </svg>
-          <figcaption class="hiw-caption">
-            <span class="hiw-caption-dot" aria-hidden="true"></span>
-            {{ section.settings.visual_caption }}
-          </figcaption>
+          {%- if modes.size > 0 -%}
+            <figcaption class="hiw-modes">
+              <span class="hiw-modes-label">{{ section.settings.modes_label }}</span>
+              <div class="hiw-mode-tabs" role="group" aria-label="{{ section.settings.modes_label | escape }}">
+                {%- for block in modes -%}
+                  <button type="button" class="hiw-mode-tab{% if forloop.first %} is-active{% endif %}"
+                    aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+                    data-mode-tab data-pattern="{{ block.settings.pattern }}"
+                    data-title="{{ block.settings.title | escape }}"
+                    data-name="{{ block.settings.name | escape }}"
+                    data-text="{{ block.settings.text | escape }}"
+                    {{ block.shopify_attributes }}>
+                    <span class="hiw-mode-num">{{ block.settings.number }}</span>
+                    <span class="hiw-mode-short">{{ block.settings.title }}</span>
+                  </button>
+                {%- endfor -%}
+              </div>
+              <div class="hiw-mode-panel" aria-live="polite">
+                <div class="hiw-mode-head">
+                  <strong data-mode-title>{{ first_mode.settings.title }}</strong>
+                  <span class="hiw-mode-name" data-mode-name>{{ first_mode.settings.name }}</span>
+                </div>
+                <p data-mode-text>{{ first_mode.settings.text }}</p>
+              </div>
+            </figcaption>
+          {%- else -%}
+            <figcaption class="hiw-caption">
+              <span class="hiw-caption-dot" aria-hidden="true"></span>
+              {{ section.settings.visual_caption }}
+            </figcaption>
+          {%- endif -%}
         </figure>
       </div>
 
@@ -106,9 +138,30 @@
     { "type": "text", "id": "visual_caption", "label": "Bildunterschrift Animation", "default": "4 Kammern · füllen sich nacheinander" },
     { "type": "text", "id": "visual_alt", "label": "Beschreibung Animation (Screenreader)", "default": "Schematische Darstellung: Vier Luftkammern füllen sich nacheinander vom Fuß bis zum Oberschenkel." },
     { "type": "textarea", "id": "note", "label": "Hinweis unter den Schritten" },
-    { "type": "text", "id": "timeline_title", "label": "Titel Timeline", "default": "Was du während einer Session spürst" }
+    { "type": "text", "id": "timeline_title", "label": "Titel Timeline", "default": "Was du während einer Session spürst" },
+    { "type": "text", "id": "modes_label", "label": "Label Modus-Auswahl", "default": "Wähle deinen Modus" }
   ],
   "blocks": [
+    {
+      "type": "mode",
+      "name": "Modus",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Nummer", "default": "1" },
+        { "type": "text", "id": "title", "label": "Nutzen (kurz)", "default": "Entspannen" },
+        { "type": "text", "id": "name", "label": "Programm-Name", "default": "Wave Massage" },
+        { "type": "textarea", "id": "text", "label": "Beschreibung" },
+        {
+          "type": "select", "id": "pattern", "label": "Druckmuster der Animation", "default": "wave",
+          "options": [
+            { "value": "wave", "label": "Welle (eine Kammer nach der anderen)" },
+            { "value": "double", "label": "Doppelwelle" },
+            { "value": "sequential", "label": "Sequenziell aufbauen & halten" },
+            { "value": "all", "label": "Alle Kammern gleichzeitig" },
+            { "value": "combo", "label": "Sequenziell + Doppelwelle" }
+          ]
+        }
+      ]
+    },
     {
       "type": "step",
       "name": "Wirk-Schritt",

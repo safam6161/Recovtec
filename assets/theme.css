@@ -1153,6 +1153,32 @@ body.lgl-noscroll { overflow: hidden; }
 .hiw-moment-time { font-family: var(--f-display); font-size: clamp(22px,2.4vw,32px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; color: var(--paper); }
 .hiw-moment h4 { font-size: 15px; font-weight: 600; line-height: 1.3; color: var(--paper); }
 .hiw-moment p { font-size: 13px; line-height: 1.55; color: rgba(250,250,250,0.55); }
+/* Modus-Vorschau: JS steuert die Kammern (is-on), CSS-Welle ist dann aus */
+.hiw-leg.is-scripted .hiw-air { animation: none; transition: opacity 0.45s ease, transform 0.45s ease; }
+.hiw-leg.is-scripted .hiw-air.is-on { opacity: 0.88; transform: scale(1.035); }
+.hiw-leg[data-pattern="all"] .hiw-flow { animation: none; opacity: 0; }
+.hiw-modes { width: 100%; display: flex; flex-direction: column; gap: 14px; }
+.hiw-modes-label { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-align: center; }
+.hiw-mode-tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.hiw-mode-tab {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 10px 4px; min-height: 44px;
+  border: 1px solid rgba(255,255,255,0.16); color: rgba(255,255,255,0.75);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.hiw-mode-tab:hover { border-color: rgba(255,255,255,0.5); color: var(--paper); }
+.hiw-mode-tab.is-active { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+.hiw-mode-tab:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
+.hiw-mode-num { font-family: var(--f-display); font-size: 20px; font-weight: 700; line-height: 1; }
+.hiw-mode-short { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.2; text-align: center; }
+.hiw-mode-panel { min-height: 104px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08); }
+.hiw-mode-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-bottom: 6px; }
+.hiw-mode-head strong { font-size: 16px; font-weight: 600; color: var(--paper); }
+.hiw-mode-name { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.hiw-mode-panel p { font-size: 13px; line-height: 1.55; color: rgba(250,250,250,0.6); }
+@media (max-width: 600px) {
+  .hiw-mode-short { display: none; }
+}
 @media (prefers-reduced-motion: reduce) {
   .hiw-air { animation: none; opacity: 0.45; }
   .hiw-flow { animation: none; opacity: 0; }
