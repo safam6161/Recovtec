@@ -1524,3 +1524,9 @@ body.lgl-noscroll { overflow: hidden; }
 /* Nutzen-Checkliste: Kernaussage fett, Begründung leiser */
 .pdp-benefits li strong { font-weight: 600; color: var(--ink); }
 .pdp-benefits li { font-size: 14.5px; }
+
+/* Produktseite mobil: Breadcrumb ausblenden (Startseite über das Logo), Produktbild rückt nach oben */
+@media (max-width: 980px) {
+  .breadcrumb { display: none; }
+  .pdp { padding-top: 16px; }
+}
