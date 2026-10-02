@@ -1520,3 +1520,7 @@ body.lgl-noscroll { overflow: hidden; }
 .benefits-grid--4 { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 980px) { .benefits-grid--4 { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .benefits-grid--4 { grid-template-columns: 1fr; } }
+
+/* Nutzen-Checkliste: Kernaussage fett, Begründung leiser */
+.pdp-benefits li strong { font-weight: 600; color: var(--ink); }
+.pdp-benefits li { font-size: 14.5px; }

@@ -93,7 +93,9 @@
               {%- for item in pdp_benefits -%}
                 {%- assign item_text = item | strip -%}
                 {%- if item_text != blank -%}
-                  <li>{% render 'icon', icon: 'check' %}<span>{{ item_text }}</span></li>
+                  {%- comment -%} Teil vor „ — “ wird fett (Kernaussage), der Rest ist die Begründung {%- endcomment -%}
+                  {%- assign item_parts = item_text | split: ' — ' -%}
+                  <li>{% render 'icon', icon: 'check' %}<span>{% if item_parts.size > 1 %}<strong>{{ item_parts[0] }}</strong> — {{ item_text | remove_first: item_parts[0] | remove_first: ' — ' }}{% else %}{{ item_text }}{% endif %}</span></li>
                 {%- endif -%}
               {%- endfor -%}
             </ul>
