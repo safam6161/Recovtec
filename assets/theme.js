@@ -528,8 +528,7 @@
   function compactJudgeme(root) {
     if (!JM_MOBILE.matches) return;
     root.querySelectorAll('.jm-reviews-widget *').forEach(el => {
-      if (!(el instanceof HTMLElement) || el.closest('svg') || el.hasAttribute('data-jm-compact')) return;
-      el.setAttribute('data-jm-compact', '');
+      if (!(el instanceof HTMLElement) || el.closest('svg')) return;
       const cs = getComputedStyle(el);
       ['margin-top', 'margin-bottom', 'padding-top', 'padding-bottom', 'row-gap'].forEach(prop => {
         const v = parseFloat(cs.getPropertyValue(prop));
@@ -539,6 +538,69 @@
         el.style.setProperty('min-height', '0', 'important');
       }
     });
+  }
+
+  // Sichtbarer Text eines Elements — ohne Button-Beschriftungen und ohne
+  // Screenreader-Texte (1-px-Elemente, unsichtbare Elemente).
+  function visibleText(el) {
+    let text = '';
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      const parent = node.parentElement;
+      if (!parent || !node.nodeValue.trim()) continue;
+      if (parent.closest('button, [role="button"], [data-jm-empty], [data-jm-media-hidden]')) continue;
+      const r = parent.getBoundingClientRect();
+      if (r.width <= 2 || r.height <= 2) continue;
+      const cs = getComputedStyle(parent);
+      if (cs.visibility === 'hidden' || cs.opacity === '0') continue;
+      text += node.nodeValue;
+    }
+    return text.trim();
+  }
+  const JM_FORM_SEL = 'input, select, textarea, label, [role="radio"], [role="checkbox"], [role="listbox"], [role="option"]';
+
+  // Mobil: Zwischen der Zeile „Bewertung schreiben“ und der ersten Bewertung steht
+  // bei Judge.me viel Leerraum — verschachtelte Abstände und unsichtbare Reste der
+  // Bild-Galerie. Hier wird der Weg zwischen beiden Elementen gezielt geleert.
+  function tightenFirstReviewGap(root) {
+    if (!JM_MOBILE.matches) return;
+    const firstReview = root.querySelector(JM_REVIEW_SEL);
+    if (!firstReview) return;
+    const precedes = el => firstReview.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_PRECEDING;
+    const controls = Array.from(root.querySelectorAll('.jm-reviews-widget button, .jm-reviews-widget a, .jm-reviews-widget [role="button"]'))
+      .filter(el => precedes(el) && !el.closest('[data-jm-empty], [data-jm-media-hidden]') && el.getClientRects().length);
+    const writeBtn = controls.find(el => /bewertung schreiben|write a review/i.test(el.textContent || '')) || controls[controls.length - 1];
+    if (!writeBtn) return;
+    let common = writeBtn.parentElement;
+    while (common && !common.contains(firstReview)) common = common.parentElement;
+    if (!common) return;
+    const set = (el, prop, val) => el.style.setProperty(prop, val, 'important');
+
+    // Weg von der Bewertung nach oben: Abstände oben weg, leere Geschwister davor ausblenden
+    for (let node = firstReview; node && node !== common; node = node.parentElement) {
+      if (node !== firstReview) { set(node, 'margin-top', '0px'); set(node, 'padding-top', '0px'); }
+      else set(node, 'margin-top', '0px');
+      for (let sib = node.previousElementSibling; sib; sib = sib.previousElementSibling) {
+        if (sib.contains(writeBtn) || !sib.getClientRects().length) continue;
+        if (sib.querySelector(JM_FORM_SEL) || sib.matches(JM_FORM_SEL)) continue;
+        if (visibleText(sib) === '') sib.setAttribute('data-jm-empty', '');
+      }
+    }
+    // Weg vom Button nach oben: Abstände unten weg
+    for (let node = writeBtn.parentElement; node && node !== common; node = node.parentElement) {
+      set(node, 'margin-bottom', '0px'); set(node, 'padding-bottom', '0px');
+    }
+    // Zwischen Button-Zeile und Bewertung liegende Geschwister im gemeinsamen Container
+    let rowChild = writeBtn; while (rowChild.parentElement !== common) rowChild = rowChild.parentElement;
+    let reviewChild = firstReview; while (reviewChild.parentElement !== common) reviewChild = reviewChild.parentElement;
+    for (let sib = rowChild.nextElementSibling; sib && sib !== reviewChild; sib = sib.nextElementSibling) {
+      if (!sib.getClientRects().length) continue;
+      if (sib.querySelector(JM_FORM_SEL) || sib.matches(JM_FORM_SEL)) continue;
+      if (visibleText(sib) === '') sib.setAttribute('data-jm-empty', '');
+    }
+    set(common, 'row-gap', '12px');
+    set(reviewChild, 'margin-top', '12px');
   }
 
   function initJudgemeWidget() {
@@ -567,9 +629,12 @@
       if (hideGallery) hideMediaGallery(root);
       collapseEmptyBlocks(root);
       compactJudgeme(root);
+      tightenFirstReviewGap(root);
     };
 
     run();
+    // Judge.me setzt Layout-Klassen teils erst später → zur Sicherheit nachziehen
+    [800, 2500, 5000].forEach(ms => setTimeout(run, ms));
     // Judge.me rendert asynchron und baut bei Seitenwechseln neu auf.
     let pending = false;
     const observer = new MutationObserver(() => {
