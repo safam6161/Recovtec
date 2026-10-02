@@ -1,5 +1,5 @@
 {%- comment -%}
-  Kostenrechner: Recovtec (einmal kaufen) vs. Recovery-Studio (pro Session zahlen).
+  Kostenrechner: Recovtec (einmal kaufen) vs. Beinmassage im Studio (pro Termin zahlen).
   Werte werden serverseitig vorberechnet (funktioniert ohne JS) und per Slider live
   aktualisiert (initValueCalc() in theme.js).
   Preis: Produktpreis aus dem gewählten Produkt, optional per „Preis überschreiben"
@@ -117,12 +117,12 @@
   "settings": [
     { "type": "product", "id": "product", "label": "Produkt", "info": "Auf der Produktseite automatisch das aktuelle Produkt." },
     { "type": "text", "id": "price_override", "label": "Preis überschreiben (€, optional)", "info": "Nur nötig, wenn der Aktionspreis erst im Checkout greift, z. B. 399" },
-    { "type": "range", "id": "studio_price", "label": "Preis einer Studio-Session (€)", "min": 10, "max": 80, "step": 1, "unit": "€", "default": 30, "info": "Bitte mit aktuellen Preisen von Recovery-Studios in deiner Region abgleichen." },
+    { "type": "range", "id": "studio_price", "label": "Preis einer Beinmassage im Studio (€)", "min": 10, "max": 120, "step": 1, "unit": "€", "default": 50, "info": "Durchschnittspreis einer Beinmassage im Studio." },
     { "type": "range", "id": "travel_minutes", "label": "Anfahrt hin & zurück (Min.)", "min": 0, "max": 120, "step": 5, "unit": "min", "default": 40 },
     { "type": "range", "id": "sessions_default", "label": "Start-Wert Sessions pro Woche", "min": 1, "max": 7, "step": 1, "default": 3 },
     { "type": "header", "content": "Texte" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Die Rechnung" },
-    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Recovery-Studio oder Recovtec?\nRechne selbst." },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Beinmassage im Studio oder Recovtec?\nRechne selbst." },
     { "type": "textarea", "id": "subtext", "label": "Subtext" },
     { "type": "text", "id": "slider_label", "label": "Slider-Beschriftung", "default": "Wie oft pro Woche möchtest du regenerieren?" },
     { "type": "text", "id": "perk_1", "label": "Vorteil 1", "default": "Kein Termin, keine Anfahrt, kein Abo" },
@@ -134,14 +134,14 @@
     { "type": "text", "id": "weeks_word", "label": "Wort für Wochen", "default": "Wochen" },
     { "type": "text", "id": "breakeven_text_after", "label": "Text nach Wochen", "default": "— danach ist jede Session gratis." },
     { "type": "text", "id": "year_label", "label": "Label Jahresvergleich", "default": "Kosten im ersten Jahr" },
-    { "type": "text", "id": "studio_label", "label": "Label Studio", "default": "Recovery-Studio" },
+    { "type": "text", "id": "studio_label", "label": "Label Studio", "default": "Beinmassage im Studio" },
     { "type": "text", "id": "ours_label", "label": "Label Recovtec", "default": "Recovtec Pro (einmalig)" },
     { "type": "text", "id": "per_session_label", "label": "Label Kosten pro Session", "default": "Pro Session im 1. Jahr" },
     { "type": "text", "id": "time_label", "label": "Label Zeitersparnis", "default": "Anfahrt gespart / Jahr" },
     { "type": "text", "id": "hours_word", "label": "Wort für Stunden", "default": "Std." },
     { "type": "text", "id": "cta_label", "label": "Button Text", "default": "Jetzt Recovtec sichern" },
     { "type": "url", "id": "cta_url", "label": "Button Link" },
-    { "type": "textarea", "id": "disclaimer", "label": "Kleingedrucktes", "default": "Beispielrechnung. Studio-Preis: Durchschnittswert für eine 30-minütige Kompressions-Session, kann je nach Anbieter abweichen." }
+    { "type": "textarea", "id": "disclaimer", "label": "Kleingedrucktes", "default": "Beispielrechnung. Studio-Preis: Durchschnittswert für eine Beinmassage im Studio, kann je nach Anbieter abweichen." }
   ],
   "presets": [{ "name": "Kostenrechner" }]
 }

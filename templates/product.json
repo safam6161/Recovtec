@@ -597,12 +597,12 @@
     "value_calc": {
       "type": "value-calculator",
       "settings": {
-        "studio_price": 25,
+        "studio_price": 50,
         "travel_minutes": 40,
         "sessions_default": 3,
         "eyebrow": "Die Rechnung",
-        "headline": "Recovery-Studio oder Recovtec?\nRechne selbst.",
-        "subtext": "Eine Kompressions-Session im Recovery-Studio kostet schnell 25 € — plus Anfahrt und Termin. Mit Recovtec zahlst du einmal und regenerierst, so oft du willst.",
+        "headline": "Beinmassage im Studio oder Recovtec?\nRechne selbst.",
+        "subtext": "Eine Beinmassage im Studio kostet im Schnitt 50 € — plus Anfahrt und Termin. Mit Recovtec zahlst du einmal und gönnst deinen Beinen die Massage, so oft du willst.",
         "slider_label": "Wie oft pro Woche möchtest du regenerieren?",
         "perk_1": "Kein Termin, keine Anfahrt, kein Abo",
         "perk_2": "Für die ganze Familie nutzbar",
@@ -615,12 +615,12 @@
         "weeks_word": "Wochen",
         "breakeven_text_after": "— danach ist jede Session gratis.",
         "year_label": "Kosten im ersten Jahr",
-        "studio_label": "Recovery-Studio",
+        "studio_label": "Beinmassage im Studio",
         "ours_label": "Recovtec Pro (einmalig)",
         "per_session_label": "Pro Session im 1. Jahr",
         "time_label": "Anfahrt gespart / Jahr",
         "hours_word": "Std.",
-        "disclaimer": "Beispielrechnung. Studio-Preis: Durchschnittswert für eine 30-minütige Kompressions-Session, kann je nach Anbieter abweichen."
+        "disclaimer": "Beispielrechnung. Studio-Preis: Durchschnittswert für eine Beinmassage im Studio, kann je nach Anbieter abweichen."
       }
     },
     "sticky_buy": {
