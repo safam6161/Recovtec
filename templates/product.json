@@ -63,22 +63,6 @@
             "stats": ""
           }
         },
-        "story2": {
-          "type": "story",
-          "disabled": true,
-          "settings": {
-            "id": "story-controller",
-            "image": "shopify://shop_images/Bedieneinheit_angepasst.png",
-            "image_label": "CONTROLLER DETAIL · LED-Farbdisplay",
-            "image_right": true,
-            "dark": false,
-            "eyebrow": "Einfach in der Anwendung",
-            "heading": "Kein Aufwand. Keine Ausreden.",
-            "lead": "Die beste Recovery ist die, die du wirklich machst. Deshalb steht bei Recovtec nichts zwischen dir und leichten Beinen.",
-            "bullets": "Keine App, kein Pairing::Ein Knopf am Bein: einschalten und die Massage startet sofort. Modus wählen, Druck einstellen, zurücklehnen.|Leise genug für den Serienabend::Unter 45 dB. Läuft neben dir auf dem Sofa, ohne dass jemand den Fernseher lauter drehen muss.|Keine Steckdose nötig::3 Stunden Akku für mehrere Sessions. Auf dem Sofa, im Bett oder im Hotelzimmer.|Passt sich dir an::Der Druck stellt sich automatisch auf deine Beinform ein. Von sanft bis intensiv, ganz wie du es brauchst.",
-            "stats": ""
-          }
-        },
         "guarantee": {
           "type": "guarantee",
           "settings": {
@@ -134,7 +118,6 @@
       },
       "block_order": [
         "story1",
-        "story2",
         "guarantee",
         "story3",
         "modes",
@@ -480,6 +463,7 @@
         "headline": "Was 30 Minuten\nmit deinen Beinen machen.",
         "intro": "Recovery Boots sind kein Technik-Spielzeug. Sie sind der Moment am Ende eines langen Tages, in dem du dich hinlegst, durchatmest — und spürst, wie die Schwere aus deinen Beinen weicht.",
         "dark": false,
+        "facts": "<45::dB::Flüsterleise — perfekt für den Serienabend|1::Knopf::Einschalten & sofort starten, ohne App|3::Std::Akku — kabellos auf Sofa, Bett oder im Hotel|240::mmHg::Druck von sanft bis intensiv",
         "footnote": "Wirkung und Empfinden sind individuell verschieden. Bei gesundheitlichen Beschwerden die Anwendung bitte vorher ärztlich abklären."
       }
     },

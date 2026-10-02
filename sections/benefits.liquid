@@ -30,6 +30,20 @@
       {%- endfor -%}
     </div>
 
+    {%- if section.settings.facts != blank -%}
+      {%- comment -%} Kernfakten als Leiste unter den Karten. Format: Wert::Einheit::Text | … — der erste Fakt wird hervorgehoben {%- endcomment -%}
+      {%- assign fact_items = section.settings.facts | split: '|' -%}
+      <ul class="benefits-facts">
+        {%- for fact in fact_items -%}
+          {%- assign parts = fact | split: '::' -%}
+          <li class="benefits-fact{% if forloop.first %} is-key{% endif %}">
+            <span class="benefits-fact-num">{{ parts[0] | strip }}<small>{{ parts[1] | strip }}</small></span>
+            <span class="benefits-fact-label">{{ parts[2] | strip }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
     {%- if section.settings.cta_label != blank or section.settings.footnote != blank -%}
       <div class="benefits-foot">
         {%- if section.settings.footnote != blank -%}<p>{{ section.settings.footnote }}</p>{%- endif -%}
@@ -52,6 +66,7 @@
     { "type": "textarea", "id": "headline", "label": "Headline", "default": "Nicht nur Technik.\nEin neues Beingefühl." },
     { "type": "textarea", "id": "intro", "label": "Intro-Text" },
     { "type": "checkbox", "id": "dark", "label": "Dunkler Hintergrund", "default": false },
+    { "type": "textarea", "id": "facts", "label": "Kernfakten (Wert::Einheit::Text | getrennt)", "info": "Optional. Der erste Fakt wird hervorgehoben. Beispiel: <45::dB::Flüsterleise|3::Std::Akku" },
     { "type": "text", "id": "footnote", "label": "Fußnote", "default": "Empfinden und Wirkung sind individuell verschieden." },
     { "type": "text", "id": "cta_label", "label": "Button Text" },
     { "type": "url", "id": "cta_url", "label": "Button Link" }

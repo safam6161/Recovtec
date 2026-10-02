@@ -1087,6 +1087,24 @@ body.lgl-noscroll { overflow: hidden; }
 .benefits--dark .benefit:hover { background: var(--ink-2); }
 .benefits--dark .benefit-ico { background: var(--paper); color: var(--ink); }
 
+.benefits-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 16px; background: var(--line); border: 1px solid var(--line); }
+.benefits-fact { background: var(--paper-2); padding: clamp(18px,2vw,28px); display: flex; flex-direction: column; gap: 6px; }
+.benefits-fact.is-key { background: var(--ink); }
+.benefits-fact-num { font-family: var(--f-display); font-size: clamp(30px,3vw,44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: var(--ink); }
+.benefits-fact-num small { font-size: 0.45em; font-weight: 500; letter-spacing: 0; margin-left: 3px; color: var(--mute); }
+.benefits-fact-label { font-size: 13px; line-height: 1.4; color: var(--ink-3); }
+.benefits-fact.is-key .benefits-fact-num { color: var(--paper); }
+.benefits-fact.is-key .benefits-fact-num small { color: rgba(250,250,250,0.6); }
+.benefits-fact.is-key .benefits-fact-label { color: rgba(250,250,250,0.8); }
+@media (max-width: 880px) {
+  .benefits-facts { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .benefits-fact { padding: 16px 14px; }
+  .benefits-fact-num { font-size: 30px; }
+  .benefits-fact-label { font-size: 12.5px; }
+}
+
 /* ===== So wirkt's ===== */
 .hiw { padding: var(--section-py) 0; background: #000; color: var(--paper); overflow: hidden; }
 .hiw-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(40px,6vw,96px); align-items: center; }
