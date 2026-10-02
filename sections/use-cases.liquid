@@ -15,7 +15,7 @@
       {%- if section.settings.subtext != blank -%}<p class="uc-sub">{{ section.settings.subtext }}</p>{%- endif -%}
     </div>
 
-    <div class="uc-grid">
+    <div class="uc-grid" data-swipe>
       {%- for block in section.blocks -%}
         <article class="uc-card{% if block.settings.image != blank or block.settings.image_asset != blank %} uc-card--img{% endif %}" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}

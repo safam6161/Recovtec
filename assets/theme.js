@@ -668,6 +668,36 @@
     });
   }
 
+  // ===== Wisch-Karussells (mobil): Punkte-Indikator unter [data-swipe] =====
+  function initSwipe() {
+    document.querySelectorAll('[data-swipe]').forEach(track => {
+      const items = Array.from(track.children);
+      if (items.length < 2) return;
+      const dots = document.createElement('div');
+      dots.className = 'swipe-dots';
+      dots.setAttribute('aria-hidden', 'true');
+      items.forEach(() => dots.appendChild(document.createElement('span')));
+      track.after(dots);
+      const marks = Array.from(dots.children);
+      let raf = 0;
+      function update() {
+        raf = 0;
+        const left = track.getBoundingClientRect().left;
+        let best = 0, bestDist = Infinity;
+        items.forEach((el, i) => {
+          const d = Math.abs(el.getBoundingClientRect().left - left - parseFloat(getComputedStyle(track).paddingLeft || 0));
+          if (d < bestDist) { bestDist = d; best = i; }
+        });
+        // Am rechten Ende ist die letzte Karte aktiv, auch wenn sie nicht ganz links steht
+        if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 4) best = items.length - 1;
+        marks.forEach((m, i) => m.classList.toggle('is-active', i === best));
+      }
+      track.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    });
+  }
+
   // ===== Init =====
   document.addEventListener('DOMContentLoaded', () => {
     // Cart triggers
@@ -696,5 +726,6 @@
     initValueCalc();
     initStickyBuy();
     initModeDemo();
+    initSwipe();
   });
 })();

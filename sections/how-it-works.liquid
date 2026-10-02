@@ -114,7 +114,7 @@
         {%- if section.settings.timeline_title != blank -%}
           <h3 class="hiw-timeline-title">{{ section.settings.timeline_title }}</h3>
         {%- endif -%}
-        <ol class="hiw-moments">
+        <ol class="hiw-moments" data-swipe>
           {%- for block in moments -%}
             <li class="hiw-moment" {{ block.shopify_attributes }}>
               <span class="hiw-moment-time">{{ block.settings.time }}</span>
