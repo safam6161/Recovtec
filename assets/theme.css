@@ -1547,3 +1547,17 @@ body.lgl-noscroll { overflow: hidden; }
   .size-block { gap: 8px; }
   .pdp-trust-pills { padding-top: 12px; }
 }
+
+/* Mobil: weniger Luft zwischen den Abschnitten → weniger Scrollen.
+   html:root, weil --section-py im <head> (layout/theme.liquid) nach diesem CSS gesetzt wird. */
+@media (max-width: 600px) {
+  html:root { --section-py: 44px; }
+  .benefits,
+  .hiw,
+  .uc,
+  .calc { padding: 44px 0; }
+  .pdp { padding-bottom: 8px; }
+  .pdp-trust-pills { padding-bottom: 0; }
+  .benefits-head,
+  .section-head { margin-bottom: 22px; }
+}
