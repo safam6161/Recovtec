@@ -470,6 +470,26 @@
     });
   }
 
+  // Leere Flächen im Judge.me-Widget (z. B. Reste von ausgeblendeter Galerie oder
+  // Filterleisten) vor der ersten Bewertung einklappen — sie kosten mobil viel Höhe.
+  // Nur Blöcke ohne Text und ohne sichtbare Medien/Bedienelemente werden markiert.
+  const JM_KEEP_SEL = 'img, svg, video, iframe, canvas, input, button, select, textarea, a, [class*="star"], [class*="icon"]';
+  function collapseEmptyBlocks(root) {
+    const firstReview = root.querySelector(JM_REVIEW_SEL);
+    if (!firstReview) return;
+    const visible = el => el.getClientRects().length > 0 && !el.closest('[data-jm-media-hidden]');
+    root.querySelectorAll('.jm-reviews-widget *').forEach(el => {
+      if (!(el instanceof HTMLElement) || el.closest('svg')) return;   // SVG-Teile (Sterne) nie anfassen
+      if (el.hasAttribute('data-jm-empty') || el.contains(firstReview)) return;
+      if (!(firstReview.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_PRECEDING)) return;
+      if (el.offsetHeight < 32) return;
+      if ((el.textContent || '').trim() !== '') return;
+      if (el.matches(JM_KEEP_SEL)) return;
+      if (Array.from(el.querySelectorAll(JM_KEEP_SEL)).some(visible)) return;
+      el.setAttribute('data-jm-empty', '');
+    });
+  }
+
   function initJudgemeWidget() {
     // Die Section kann mehrfach vorkommen (Produktseite und Startseite).
     document.querySelectorAll('.jm-reviews').forEach(setupJudgemeRoot);
@@ -483,14 +503,18 @@
     if (root.classList.contains('jm-reviews--no-count')) {
       rules.push({ re: JM_COUNT_RE, attr: 'data-jm-count-hidden' });
     }
+    if (root.classList.contains('jm-reviews--no-widget-title')) {
+      // Neuere Judge.me-Widgets haben eine eigene Überschrift ohne feste Klasse
+      rules.push({ re: /^(kundenbewertungen|customer reviews|bewertungen)$/i, attr: 'data-jm-title-hidden' });
+    }
     const showAvgStars = root.classList.contains('jm-reviews--avg-stars');
     const hideGallery = root.classList.contains('jm-reviews--no-media-gallery');
-    if (!rules.length && !showAvgStars && !hideGallery) return;
 
     const run = () => {
       if (rules.length) markByText(root, rules);
       if (showAvgStars) injectAverageStars(root);
       if (hideGallery) hideMediaGallery(root);
+      collapseEmptyBlocks(root);
     };
 
     run();

@@ -1575,3 +1575,16 @@ body.lgl-noscroll { overflow: hidden; }
   #story-paket .story-img { aspect-ratio: auto; }
   #story-paket .story-img img { height: auto; }
 }
+
+/* Judge.me: Abstände straffen (Widget-Überschrift, leere Flächen, Außenabstände) */
+.jm-reviews--no-widget-title [data-jm-title-hidden],
+.jm-reviews [data-jm-empty] { display: none !important; }
+.jm-reviews .jdgm-widget,
+.jm-reviews .jdgm-rev-widg { margin-top: 0 !important; padding-top: 0 !important; }
+@media (max-width: 600px) {
+  .jm-reviews .section-head { margin-bottom: 16px; }
+  .jm-reviews .jdgm-rev-widg__header { margin-bottom: 12px !important; }
+  .jm-reviews .jdgm-rev-widg__body,
+  .jm-reviews .jdgm-rev-widg__reviews { margin-top: 0 !important; padding-top: 0 !important; }
+  .jm-reviews .jdgm-rev { padding: 16px 0 !important; }
+}
