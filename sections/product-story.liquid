@@ -60,7 +60,7 @@
       </div>
     </section>
   {%- elsif block.type == 'guarantee' -%}
-    <section class="guarantee-banner" {{ block.shopify_attributes }}>
+    <section class="guarantee-banner{% if block.settings.pure_black %} guarantee-banner--black{% endif %}" {{ block.shopify_attributes }}>
       <div class="container guarantee-content">
         <div class="guarantee-num">{{ block.settings.days }}</div>
         <div class="guarantee-text">
@@ -151,7 +151,8 @@
         { "type": "text", "id": "days", "label": "Tage", "default": "30" },
         { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Risikofrei testen" },
         { "type": "text", "id": "headline", "label": "Headline", "default": "Tage Geld zurück." },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "Probier die Boots in Ruhe zuhause. Wenn sie dich nicht überzeugen, schickst du sie kostenfrei zurück — ohne Diskussion, ohne Begründung." }
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Probier die Boots in Ruhe zuhause. Wenn sie dich nicht überzeugen, schickst du sie kostenfrei zurück — ohne Diskussion, ohne Begründung." },
+        { "type": "checkbox", "id": "pure_black", "label": "Tiefschwarz mit Trennlinie", "default": false, "info": "Aktivieren, wenn direkt danach ein tiefschwarzer Bereich folgt (z. B. „So wirkt's“), damit beide denselben Schwarzton haben." }
       ]
     },
     {

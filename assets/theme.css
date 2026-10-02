@@ -1512,3 +1512,6 @@ body.lgl-noscroll { overflow: hidden; }
   .guarantee-text h2 { font-size: 26px; line-height: 1.05; }
   .guarantee-text p { font-size: 13.5px; line-height: 1.55; }
 }
+
+/* Garantie-Banner vor tiefschwarzen Bereichen (So wirkt's): gleicher Schwarzton + Trennlinie */
+.guarantee-banner--black { background: #000; border-bottom: 1px solid rgba(255,255,255,0.1); }

@@ -674,7 +674,8 @@
             "days": "30",
             "eyebrow": "Risikofrei testen",
             "headline": "Tage Geld zurück.",
-            "text": "Probier die Boots in Ruhe zuhause. Wenn sie dich nicht überzeugen, schickst du sie zurück — ohne Diskussion, ohne Begründung."
+            "text": "Probier die Boots in Ruhe zuhause. Wenn sie dich nicht überzeugen, schickst du sie zurück — ohne Diskussion, ohne Begründung.",
+            "pure_black": true
           }
         }
       },
@@ -686,8 +687,8 @@
   },
   "order": [
     "main_product",
-    "guarantee",
     "benefits",
+    "guarantee",
     "how_it_works",
     "value_calc",
     "story",
