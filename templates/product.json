@@ -89,6 +89,7 @@
         },
         "story3": {
           "type": "story",
+          "disabled": true,
           "settings": {
             "id": "story-modi",
             "image": "shopify://shop_images/hf_20260603_200725_f8da45fa-9d61-4717-9f01-edfc702faf4b.png",
