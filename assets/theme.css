@@ -1569,3 +1569,9 @@ body.lgl-noscroll { overflow: hidden; }
   #story-360 .story-img img { object-fit: contain; }
   .story-grid { gap: 24px; }
 }
+
+/* Lieferumfang-Bild mobil: nicht beschneiden — in seinem eigenen Seitenverhältnis zeigen */
+@media (max-width: 600px) {
+  #story-paket .story-img { aspect-ratio: auto; }
+  #story-paket .story-img img { height: auto; }
+}
