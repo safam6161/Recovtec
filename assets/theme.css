@@ -1530,3 +1530,12 @@ body.lgl-noscroll { overflow: hidden; }
   .breadcrumb { display: none; }
   .pdp { padding-top: 16px; }
 }
+
+/* Produktseite mobil: kleine Überschrift „Recovtec — Recovery“ weg, Abstände enger */
+@media (max-width: 980px) {
+  .pdp-info-inner > .eyebrow { display: none; }
+  .pdp-grid { gap: 20px; }
+  .pdp-info-inner { gap: 14px; }
+  .gallery-main { margin-bottom: 4px; }
+  .gallery-thumbs { gap: 4px; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); }
+}
