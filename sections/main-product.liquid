@@ -271,7 +271,10 @@
                     cents = parseInt(cents, 10);
                     if (!(cents > 0)) return;
                     current = cents;
-                    var was = money(cents), now = money(Math.round(cents * (100 - pct) / 100));
+                    // Wie Shopify im Warenkorb/Checkout: Rabattbetrag auf den Cent ABgerundet
+                    // (20 % von 499,99 € = 99,998 € → 99,99 € Rabatt → 400 €)
+                    var off = Math.floor(cents * pct / 100 + 1e-6);
+                    var was = money(cents), now = money(cents - off);
                     compareVal.textContent = was;
                     priceEl.textContent = now;
                     if (sticky) { sticky.was.textContent = was; sticky.now.textContent = now; }
