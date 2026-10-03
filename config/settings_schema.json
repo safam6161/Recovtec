@@ -330,5 +330,52 @@
         "default": "Haltbarkeitsgarantie ansehen"
       }
     ]
+  },
+  {
+    "name": "Rabattcodes",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Kommt ein Kunde über einen Rabatt-Link (z. B. recovtec.com/discount/LEFLO20), speichert Shopify den Code im Browser. Die Produktseite zeigt dann den reduzierten Preis und einen Hinweis über dem Kaufbutton. Abgezogen wird der Rabatt weiterhin von Shopify im Checkout – diese Einstellungen steuern nur die Anzeige."
+      },
+      {
+        "type": "checkbox",
+        "id": "discount_preview_enabled",
+        "label": "Aktiven Rabattcode auf der Produktseite anzeigen",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "discount_default_percent",
+        "min": 1,
+        "max": 90,
+        "step": 1,
+        "unit": "%",
+        "label": "Standard-Rabatt",
+        "default": 20,
+        "info": "Gilt für jeden Code, der unten nicht extra aufgeführt ist."
+      },
+      {
+        "type": "textarea",
+        "id": "discount_code_percents",
+        "label": "Abweichende Codes",
+        "placeholder": "LEFLO20: 20\nSOMMER15: 15\nVERSANDFREI: 0",
+        "info": "Ein Code pro Zeile im Format CODE: Prozent. Groß-/Kleinschreibung egal. 0 = für diesen Code keinen Rabatt anzeigen (z. B. Gratis-Versand-Codes)."
+      },
+      {
+        "type": "checkbox",
+        "id": "discount_only_listed",
+        "label": "Nur Codes aus der Liste anzeigen",
+        "default": false,
+        "info": "Aktiv = unbekannte Codes werden ignoriert, statt mit dem Standard-Rabatt angezeigt zu werden."
+      },
+      {
+        "type": "text",
+        "id": "discount_notice_text",
+        "label": "Hinweistext",
+        "default": "Dein Code [code] ist aktiv – [prozent] % werden automatisch abgezogen.",
+        "info": "[code] und [prozent] werden automatisch ersetzt."
+      }
+    ]
   }
 ]
