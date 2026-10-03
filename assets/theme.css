@@ -1402,7 +1402,7 @@ body.lgl-noscroll { overflow: hidden; }
   .calc-grid,
   .hiw-grid { grid-template-columns: minmax(0, 1fr); }
   .compare-table.two-col { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr); }
-  .compare-cell { overflow-wrap: anywhere; }
+  .compare-cell { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 
   /* So wirkt's: erst Überschrift, dann Animation, dann Erklärung */
   .hiw-grid { row-gap: 0; }

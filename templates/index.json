@@ -64,6 +64,7 @@
     },
     "problem": {
       "type": "problem",
+      "disabled": true,
       "blocks": {
         "p1": {
           "type": "item",
@@ -100,6 +101,7 @@
     },
     "solution": {
       "type": "solution",
+      "disabled": true,
       "blocks": {
         "s1": {
           "type": "usp",
@@ -227,17 +229,17 @@
         "r3": {
           "type": "row",
           "settings": {
-            "feature": "Kabel am Bein",
-            "our_value": "Kurzer Schlauch",
-            "competitor_value": "Lange Schläuche & Kabel"
+            "feature": "Lautstärke",
+            "our_value": "< 45 dB",
+            "competitor_value": "> 60 dB"
           }
         },
         "r4": {
           "type": "row",
           "settings": {
-            "feature": "Lautstärke",
-            "our_value": "< 45 dB",
-            "competitor_value": "> 60 dB"
+            "feature": "Kabel am Bein",
+            "our_value": "Kurzer Schlauch",
+            "competitor_value": "Lange Schläuche & Kabel"
           }
         },
         "r5": {
@@ -346,6 +348,55 @@
     "faq": {
       "type": "faq",
       "blocks": {
+        "faq1": {
+          "type": "item",
+          "settings": {
+            "question": "Wie schnell wird geliefert?",
+            "answer": "Versand innerhalb Deutschlands in 1–3 Werktagen, komplett kostenlos. Bestellst du vor 14 Uhr, geht das Paket noch am gleichen Tag raus."
+          }
+        },
+        "faq2": {
+          "type": "item",
+          "settings": {
+            "question": "Kann ich die Boots zurücksenden, wenn sie mir nicht gefallen?",
+            "answer": "Ja. Du hast 30 Tage Zeit, die Boots zuhause zu testen. Gefallen sie dir nicht, schickst du sie zurück und bekommst dein Geld zurück — ohne Diskussion."
+          }
+        },
+        "faq3": {
+          "type": "item",
+          "settings": {
+            "question": "Welche Größe passt mir?",
+            "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die Erweiterungslaschen sind dabei und bieten +10 cm Spielraum am ganzen Bein — bei Zweifeln nimm die größere Variante."
+          }
+        },
+        "faq4": {
+          "type": "item",
+          "settings": {
+            "question": "Brauche ich eine App oder WLAN?",
+            "answer": "Nein. Anschalten, Modus und Druckstufe direkt am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto."
+          }
+        },
+        "faq5": {
+          "type": "item",
+          "settings": {
+            "question": "Wie oft sollte ich sie nutzen?",
+            "answer": "Eine Session dauert 15–45 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel."
+          }
+        },
+        "faq7": {
+          "type": "item",
+          "settings": {
+            "question": "Wie lange hält der Akku?",
+            "answer": "Bis zu 3 Stunden im Betrieb. Reicht für mehrere Sessions ohne Aufladen — auch unterwegs oder im Trainingslager."
+          }
+        },
+        "faq8": {
+          "type": "item",
+          "settings": {
+            "question": "Was ist mit Garantie?",
+            "answer": "1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei."
+          }
+        },
         "faq_how": {
           "type": "item",
           "settings": {
@@ -367,13 +418,6 @@
             "answer": "Beides funktioniert. Vor dem Training (kurz, ca. 10–15 Min.) regst du die Durchblutung an und wärmst die Muskeln auf. Nach dem Training (15–45 Min.) lockern sie die Beine und beschleunigen die Erholung. Auch an Ruhetagen oder nach langem Stehen tun sie gut."
           }
         },
-        "faq5": {
-          "type": "item",
-          "settings": {
-            "question": "Wie oft sollte ich sie nutzen?",
-            "answer": "Eine Session dauert 15–45 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel."
-          }
-        },
         "faq_contra": {
           "type": "item",
           "settings": {
@@ -381,53 +425,11 @@
             "answer": "Bitte kläre die Nutzung vorher mit deinem Arzt ab, wenn du eine akute Thrombose (Blutgerinnsel), eine schwere Herz- oder Lungenerkrankung, offene Wunden, Hautinfektionen oder eine fortgeschrittene arterielle Durchblutungsstörung hast. Auch in der Schwangerschaft solltest du vorher ärztlichen Rat einholen. Im Zweifel gilt: erst fragen, dann nutzen."
           }
         },
-        "faq3": {
-          "type": "item",
-          "settings": {
-            "question": "Welche Größe passt mir?",
-            "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die Erweiterungslaschen sind dabei und bieten +10 cm Spielraum am ganzen Bein — bei Zweifeln nimm die größere Variante."
-          }
-        },
-        "faq4": {
-          "type": "item",
-          "settings": {
-            "question": "Brauche ich eine App oder WLAN?",
-            "answer": "Nein. Anschalten, Modus und Druckstufe direkt am LED-Controller wählen, fertig. Keine App, kein Bluetooth, kein Konto."
-          }
-        },
-        "faq7": {
-          "type": "item",
-          "settings": {
-            "question": "Wie lange hält der Akku?",
-            "answer": "Bis zu 3 Stunden im Betrieb. Reicht für mehrere Sessions ohne Aufladen — auch unterwegs oder im Trainingslager."
-          }
-        },
         "faq_clean": {
           "type": "item",
           "settings": {
             "question": "Wie reinige und pflege ich die Boots?",
             "answer": "Wisch die Innenseite nach der Nutzung einfach mit einem leicht feuchten Tuch und etwas mildem Reiniger ab — nicht in die Waschmaschine. Kurz trocknen lassen, bevor du sie verstaust. Prüf ab und zu Schlauch und Anschlüsse. So bleiben sie lange hygienisch und einsatzbereit."
-          }
-        },
-        "faq1": {
-          "type": "item",
-          "settings": {
-            "question": "Wie schnell wird geliefert?",
-            "answer": "Versand innerhalb Deutschlands in 1–3 Werktagen, komplett kostenlos. Bestellst du vor 14 Uhr, geht das Paket noch am gleichen Tag raus."
-          }
-        },
-        "faq2": {
-          "type": "item",
-          "settings": {
-            "question": "Kann ich die Boots zurücksenden, wenn sie mir nicht gefallen?",
-            "answer": "Ja. Du hast 30 Tage Zeit, die Boots zuhause zu testen. Gefallen sie dir nicht, schickst du sie zurück und bekommst dein Geld zurück — ohne Diskussion."
-          }
-        },
-        "faq8": {
-          "type": "item",
-          "settings": {
-            "question": "Was ist mit Garantie?",
-            "answer": "1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei."
           }
         },
         "faq_first": {
@@ -455,7 +457,7 @@
       ],
       "settings": {
         "eyebrow": "08 — FAQ",
-        "headline": "Häufige Fragen.\nKlare Antworten.",
+        "headline": "Noch Fragen?\nWir antworten.",
         "subtext": "Du hast eine andere Frage? Schreib uns direkt — meistens antworten wir innerhalb eines Werktages.",
         "email": "support@recovtec.de",
         "contact_button_label": "Zum Kontaktformular",
@@ -643,6 +645,7 @@
     },
     "emotion": {
       "type": "emotion-banner",
+      "disabled": true,
       "settings": {
         "fallback_asset": "recovtec-moment-entspannen.jpg",
         "overlay": 55,
@@ -764,7 +767,6 @@
     "value_calc": {
       "type": "value-calculator",
       "settings": {
-        "product": "recovtec-pro-recovery-boots",
         "studio_price": 50,
         "travel_minutes": 40,
         "sessions_default": 3,
@@ -788,7 +790,8 @@
         "per_session_label": "Pro Session im 1. Jahr",
         "time_label": "Anfahrt gespart / Jahr",
         "hours_word": "Std.",
-        "disclaimer": "Beispielrechnung. Studio-Preis: Durchschnittswert für eine Beinmassage im Studio, kann je nach Anbieter abweichen."
+        "disclaimer": "Beispielrechnung. Studio-Preis: Durchschnittswert für eine Beinmassage im Studio, kann je nach Anbieter abweichen.",
+        "product": "recovtec-pro-recovery-boots"
       }
     },
     "sticky_buy": {
@@ -799,25 +802,86 @@
         "label_pdp": "In den Warenkorb",
         "label_link": "Jetzt bestellen"
       }
+    },
+    "guarantee": {
+      "type": "product-story",
+      "blocks": {
+        "guarantee": {
+          "type": "guarantee",
+          "settings": {
+            "days": "30",
+            "eyebrow": "Risikofrei testen",
+            "headline": "Tage Geld zurück.",
+            "text": "Gefällt es dir nicht, schickst du die Boots zurück. Ohne Diskussion.",
+            "pure_black": true
+          }
+        }
+      },
+      "block_order": [
+        "guarantee"
+      ],
+      "settings": {}
+    },
+    "story": {
+      "type": "product-story",
+      "blocks": {
+        "story1": {
+          "type": "story",
+          "settings": {
+            "id": "story-360",
+            "image": "shopify://shop_images/hf_20260601_200247_61c6e104-d208-4a2a-821f-36d18ed0ec46.png",
+            "image_label": "360° KOMPRESSION · 4 ZONEN",
+            "image_right": false,
+            "dark": true,
+            "eyebrow": "360° Kompression · 4 Zonen",
+            "heading": "360° Kompression. Volle Beinabdeckung.",
+            "lead": "Vom Fuß über die Wade bis hoch zum Oberschenkel — die Boots umschließen das ganze Bein. Vier Kammern sorgen für gleichmäßigen Druck auf jeder Höhe, ohne Lücken oder Druckstellen.",
+            "bullets": "",
+            "stats": ""
+          }
+        },
+        "story4": {
+          "type": "story",
+          "settings": {
+            "id": "story-paket",
+            "image": "shopify://shop_images/hf_20260601_185648_b8ec2646-1669-45ca-b1a1-cf01ffa8348b.png",
+            "image_label": "FLATLAY · Boots + Rucksack + Erweiterungslaschen",
+            "image_right": true,
+            "dark": false,
+            "eyebrow": "Im Paket enthalten",
+            "heading": "Alles dabei. Ohne Aufpreis.",
+            "lead": "Andere verkaufen das einzeln — bei uns ist alles im Karton.",
+            "bullets": "Recovtec Pro Boots::Doppellagiges Rautengewebe, LED-Controller.|Transport-Rucksack::Mit Ladeanschluss — laden ohne Auspacken.|Erweiterungslaschen::+10 cm Spielraum — passt auch bei kräftigeren Beinen.",
+            "stats": ""
+          }
+        }
+      },
+      "block_order": [
+        "story1",
+        "story4"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "hero",
     "trust",
-    "problem",
     "benefits",
+    "guarantee",
     "how_it_works",
+    "value_calc",
+    "story",
+    "compare",
+    "judgeme_reviews",
+    "faq",
+    "final_cta",
+    "problem",
     "emotion",
     "solution",
     "use_cases",
     "moments",
-    "value_calc",
     "howto",
-    "compare",
     "social",
-    "judgeme_reviews",
-    "faq",
-    "final_cta",
     "sticky_buy"
   ]
 }
