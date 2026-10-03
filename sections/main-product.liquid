@@ -159,7 +159,6 @@
                     <button type="button"
                       class="size-opt {% if option.selected_value == value %}selected{% endif %}"
                       data-variant-id="{{ variant_for_value.id }}"
-                      data-price="{{ variant_for_value.price }}"
                       data-option="{{ option.position }}"
                       data-value="{{ value }}">
                       {{ option.name }} {{ value }}
@@ -311,11 +310,6 @@
                   // Die Leiste ist beim Laden ausgeblendet – Aktualisierung nach dem Parsen springt nicht
                   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initSticky);
                   else initSticky();
-
-                  // Größenwechsel: Preise der gewählten Variante neu berechnen
-                  document.querySelectorAll('#pdp-main .size-opt[data-price]').forEach(function (btn) {
-                    btn.addEventListener('click', function () { render(btn.getAttribute('data-price')); });
-                  });
                 } catch (e) {}
               })();
             </script>
