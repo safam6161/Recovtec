@@ -307,14 +307,45 @@
   }
 
   // ===== Anchor Nav =====
+  // Menü-Links auf Abschnitte, die es nicht mehr gibt (ausgeblendet/umbenannt),
+  // landen beim inhaltlich passenden Abschnitt statt ins Leere zu laufen.
+  const ANCHOR_ALIASES = {
+    '#howto': ['#so-wirkts'],
+    '#solution': ['#story-paket', '#so-wirkts'],
+    '#problem': ['#wirkung'],
+    '#fuer-wen': ['#wirkung'],
+    '#social': ['#reviews'],
+    '#momente': ['#reviews'],
+  };
+  function findAnchorTarget(hash) {
+    if (!hash || hash === '#') return null;
+    let target = null;
+    try { target = document.querySelector(hash); } catch (e) { return null; }
+    if (target) return target;
+    for (const alt of ANCHOR_ALIASES[hash] || []) {
+      target = document.querySelector(alt);
+      if (target) return target;
+    }
+    return null;
+  }
+
   function initAnchorNav() {
     const NAV_HEIGHT = 72;
+    // Seite mit Anker geöffnet (z. B. /#howto vom Menü einer anderen Seite)
+    if (location.hash) {
+      let direct = null;
+      try { direct = document.querySelector(location.hash); } catch (e) { /* ungültiger Anker */ }
+      const t = direct ? null : findAnchorTarget(location.hash);
+      if (t) window.addEventListener('load', () => {
+        window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT });
+      });
+    }
     document.querySelectorAll('a[href]').forEach(link => {
       const href = link.getAttribute('href') || '';
       const hash = href.includes('#') ? '#' + href.split('#')[1] : null;
       if (!hash) return;
       link.addEventListener('click', e => {
-        const target = document.querySelector(hash);
+        const target = findAnchorTarget(hash);
         if (!target) return;
         e.preventDefault();
         const top = target.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT;

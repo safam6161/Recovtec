@@ -29,7 +29,7 @@
           "type": "item",
           "settings": {
             "icon": "truck",
-            "label": "1–3 Tage Lieferung"
+            "label": "Lieferung in 1–3 Werktagen"
           }
         },
         "t2": {
@@ -280,7 +280,7 @@
         "eyebrow": "06 — Vergleich",
         "headline": "Recovtec Pro\nvs. andere Marken.",
         "col1_label": "Recovtec Pro",
-        "col2_label": "Andere Brands"
+        "col2_label": "Andere Marken"
       }
     },
     "social": {
@@ -366,7 +366,7 @@
           "type": "item",
           "settings": {
             "question": "Welche Größe passt mir?",
-            "answer": "Größe M passt bis 1,80 m Körpergröße, Größe L ab 1,80 m. Die Erweiterungslaschen sind dabei und bieten +10 cm Spielraum am ganzen Bein — bei Zweifeln nimm die größere Variante."
+            "answer": "Größe M passt bis 1,79 m Körpergröße, Größe L ab 1,80 m. Die Erweiterungslaschen sind dabei und bieten +10 cm Spielraum am ganzen Bein — bei Zweifeln nimm die größere Variante."
           }
         },
         "faq4": {
@@ -380,7 +380,7 @@
           "type": "item",
           "settings": {
             "question": "Wie oft sollte ich sie nutzen?",
-            "answer": "Eine Session dauert 15–45 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen. Es gibt kein Zuviel."
+            "answer": "Eine Session dauert 15–45 Minuten. Du kannst sie täglich nutzen — typisch nach dem Training oder an Ruhetagen."
           }
         },
         "faq7": {
@@ -393,8 +393,8 @@
         "faq8": {
           "type": "item",
           "settings": {
-            "question": "Was ist mit Garantie?",
-            "answer": "1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei."
+            "question": "Gibt es eine Garantie?",
+            "answer": "Ja, 1 Jahr Garantie auf Material und Funktion. Im Garantiefall reparieren oder ersetzen wir die Boots kostenfrei. Deine gesetzlichen Gewährleistungsrechte (2 Jahre) bleiben davon unberührt."
           }
         },
         "faq_how": {
@@ -473,7 +473,7 @@
         "cta_url": "shopify://products/recovtec-pro-recovery-boots",
         "trust_1": "Kostenloser Versand",
         "trust_2": "30 Tage Geld-zurück-Garantie",
-        "trust_3": "1–3 Tage Lieferung",
+        "trust_3": "Lieferung in 1–3 Werktagen",
         "trust_4": "1 Jahr Garantie",
         "show_newsletter": true,
         "nl_label": "Newsletter — Updates & frühe Drops",

@@ -8,9 +8,9 @@
   </form>
   {%- if search.performed -%}
     {%- if search.results_count == 0 -%}
-      <p style="color:var(--mute)">Keine Ergebnisse für „{{ search.terms }}".</p>
+      <p style="color:var(--mute)">Keine Ergebnisse für „{{ search.terms | escape }}".</p>
     {%- else -%}
-      <p style="color:var(--mute);margin-bottom:24px">{{ search.results_count }} Ergebnis{{ search.results_count | plural: '', 'se' }} für „{{ search.terms }}"</p>
+      <p style="color:var(--mute);margin-bottom:24px">{{ search.results_count }} {{ search.results_count | pluralize: 'Ergebnis', 'Ergebnisse' }} für „{{ search.terms | escape }}"</p>
       <div style="display:grid;gap:16px">
         {%- for item in search.results -%}
           <a href="{{ item.url }}" style="display:flex;gap:16px;text-decoration:none;color:inherit;padding:16px;border:1px solid var(--paper-2)">
