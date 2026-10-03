@@ -1,0 +1,105 @@
+{%- comment -%}
+  Rabatt-Vorschau (global, im <head> eingebunden)
+  Kommt ein Kunde über /discount/CODE, legt Shopify den Cookie „discount_code" an.
+  Dieses Skript liest ihn und stellt window.RecovtecDiscount bereit – oder nichts,
+  wenn kein (gültiger) Code aktiv ist. Ohne Cookie bleibt der Shop unverändert.
+
+  Preise im Theme werden so markiert:
+    data-discount-price="<Cent>"       Grundpreis; Textinhalt wird durch den Rabattpreis ersetzt
+    data-discount-div="<n>"            optional: Rabattpreis / n, aufgerundet (Raten)
+    data-discount-format="money"       optional: immer mit Cent (wie | money), sonst ohne ,00
+    data-discount-strike               optional: Originalpreis durchgestrichen davor setzen
+  RecovtecDiscount.paint(root) aktualisiert alles in root. Läuft automatisch beim
+  DOMContentLoaded; Bereiche oberhalb des Falzes rufen es direkt inline auf (kein Springen).
+
+  Abgezogen wird der Rabatt weiterhin von Shopify im Warenkorb/Checkout – hier geht es
+  nur um die Anzeige. Einstellungen: Theme-Einstellungen → Rabattcodes.
+{%- endcomment -%}
+{%- if settings.discount_preview_enabled -%}
+<script>
+  (function () {
+    try {
+      var cfg = {
+        def: {{ settings.discount_default_percent | default: 20 | json }},
+        list: {{ settings.discount_code_percents | default: '' | json }},
+        onlyListed: {{ settings.discount_only_listed | json }},
+        moneyFormat: {{ shop.money_format | json }}
+      };
+
+      var m = document.cookie.match(/(?:^|;\s*)discount_code=([^;]+)/);
+      if (!m) return;
+      var code = m[1];
+      try { code = decodeURIComponent(code.replace(/\+/g, ' ')); } catch (e) {}
+      code = code.trim();
+      // Nur typische Code-Zeichen zulassen – manipulierte Links zeigen nichts an
+      if (!/^[A-Za-z0-9ÄÖÜäöüß_.\-]{1,40}$/.test(code)) return;
+
+      // Prozent ermitteln: eigener Eintrag in der Liste, sonst Standard
+      var pct = null;
+      String(cfg.list || '').split(/\r?\n/).forEach(function (line) {
+        var p = line.match(/^\s*(.+?)\s*[:=]\s*(\d+(?:[.,]\d+)?)\s*%?\s*$/);
+        if (p && p[1].toUpperCase() === code.toUpperCase()) pct = parseFloat(p[2].replace(',', '.'));
+      });
+      if (pct === null) {
+        if (cfg.onlyListed) return;
+        pct = Number(cfg.def);
+      }
+      if (!(pct > 0 && pct < 100)) return;
+
+      // Shop-Währungsformat wie Shopifys | money bzw. | money_without_trailing_zeros
+      var decoder = document.createElement('textarea');
+      decoder.innerHTML = cfg.moneyFormat || '';
+      var fmt = decoder.value;
+      function money(cents, keepZeros) {
+        var tag = /\{\{\s*(\w+)\s*\}\}/.exec(fmt);
+        var key = tag ? tag[1] : 'amount_with_comma_separator';
+        var th = ',', dec = '.';
+        if (/comma/.test(key)) { th = '.'; dec = ','; }
+        else if (/space/.test(key)) { th = ' '; dec = ','; }
+        else if (/apostrophe/.test(key)) { th = "'"; dec = '.'; }
+        var parts = (cents / 100).toFixed(2).split('.');
+        var int = parts[0], frac = parts[1];
+        if (/no_decimals/.test(key)) { int = String(Math.round(cents / 100)); frac = '00'; }
+        int = int.replace(/\B(?=(\d{3})+(?!\d))/g, th);
+        var amount = (frac === '00' && (!keepZeros || /no_decimals/.test(key))) ? int : int + dec + frac;
+        return tag ? fmt.replace(tag[0], amount) : amount + ' €';
+      }
+
+      // Wie Shopify im Warenkorb/Checkout: Rabattbetrag auf den Cent ABgerundet
+      // (20 % von 499,99 € = 99,998 € → 99,99 € Rabatt → 400 €)
+      function apply(cents) {
+        cents = parseInt(cents, 10) || 0;
+        return cents - Math.floor(cents * pct / 100 + 1e-6);
+      }
+
+      function paint(root) {
+        (root || document).querySelectorAll('[data-discount-price]:not([data-discount-done])').forEach(function (el) {
+          var base = parseInt(el.getAttribute('data-discount-price'), 10);
+          if (!(base > 0)) return;
+          var keep = el.getAttribute('data-discount-format') === 'money';
+          var div = parseInt(el.getAttribute('data-discount-div'), 10);
+          var value = apply(base);
+          if (div > 0) value = Math.ceil(value / div - 1e-9);
+          if (el.hasAttribute('data-discount-strike')) {
+            var was = document.createElement('s');
+            was.className = 'discount-was';
+            var sr = document.createElement('span');
+            sr.className = 'discount-sr';
+            sr.textContent = 'Ursprünglicher Preis: ';
+            was.appendChild(sr);
+            was.appendChild(document.createTextNode(money(div > 0 ? Math.ceil(base / div - 1e-9) : base, keep)));
+            el.parentNode.insertBefore(was, el);
+            el.parentNode.insertBefore(document.createTextNode(' '), el);
+          }
+          el.textContent = money(value, keep);
+          el.setAttribute('data-discount-done', '');
+        });
+      }
+
+      window.RecovtecDiscount = { code: code, pct: pct, apply: apply, money: money, paint: paint };
+      document.documentElement.classList.add('has-discount');
+      document.addEventListener('DOMContentLoaded', function () { paint(document); });
+    } catch (e) {}
+  })();
+</script>
+{%- endif -%}

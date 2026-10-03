@@ -9,7 +9,7 @@
           {%- endif -%}
         </div>
         <p style="font-weight:600;margin-bottom:4px">{{ product.title }}</p>
-        <p style="color:var(--mute)">{{ product.price | money }}</p>
+        <p style="color:var(--mute)"><span data-discount-price="{{ product.price }}" data-discount-format="money" data-discount-strike>{{ product.price | money }}</span></p>
       </a>
     {%- endfor -%}
   </div>

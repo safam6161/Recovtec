@@ -73,6 +73,9 @@
     }
   </style>
 
+  {%- comment -%} Rabatt-Vorschau: aktiver Rabattcode (Cookie „discount_code") für alle Preisanzeigen {%- endcomment -%}
+  {% render 'discount-preview' %}
+
   {%- comment -%} Strukturierte Daten (JSON-LD): Organization & WebSite – global {%- endcomment -%}
   {% render 'schema-organization' %}
   {% render 'schema-website' %}

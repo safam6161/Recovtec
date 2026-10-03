@@ -336,12 +336,12 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Kommt ein Kunde über einen Rabatt-Link (z. B. recovtec.com/discount/LEFLO20), speichert Shopify den Code im Browser. Die Produktseite zeigt dann den reduzierten Preis und einen Hinweis über dem Kaufbutton. Abgezogen wird der Rabatt weiterhin von Shopify im Checkout – diese Einstellungen steuern nur die Anzeige."
+        "content": "Kommt ein Kunde über einen Rabatt-Link (z. B. recovtec.com/discount/LEFLO20), speichert Shopify den Code im Browser. Der Shop zeigt dann überall den reduzierten Preis: Produktseite (mit Hinweis über dem Kaufbutton), PayPal-Raten, Sticky-Kaufleiste, Kostenrechner, Kollektion und Suche. Abgezogen wird der Rabatt weiterhin von Shopify im Warenkorb/Checkout – diese Einstellungen steuern nur die Anzeige."
       },
       {
         "type": "checkbox",
         "id": "discount_preview_enabled",
-        "label": "Aktiven Rabattcode auf der Produktseite anzeigen",
+        "label": "Aktiven Rabattcode im Shop anzeigen",
         "default": true
       },
       {

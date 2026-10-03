@@ -744,7 +744,11 @@
     const eurCents = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     document.querySelectorAll('[data-calc]').forEach(root => {
-      const price = Number(root.dataset.price) / 100;
+      // Aktiver Rabattcode (snippets/discount-preview.liquid): mit dem reduzierten Preis rechnen
+      const D = window.RecovtecDiscount;
+      const basePrice = Number(root.dataset.price);
+      const discounted = D && root.hasAttribute('data-discountable');
+      const price = (discounted ? D.apply(basePrice) : basePrice) / 100;
       const studio = Number(root.dataset.studio) / 100;
       const travel = Number(root.dataset.travel) || 0;
       const range = root.querySelector('[data-calc-range]');
@@ -754,6 +758,11 @@
       // Ganze Beträge ohne, krumme mit Cent — alle Beträge im selben Format
       const money = v => (Math.round(v * 100) % 100 === 0 ? eur : eurCents).format(v);
       set('[data-calc-price]', money(price));
+      const was = root.querySelector('[data-calc-was]');
+      if (discounted && was) {
+        was.textContent = money(basePrice / 100);
+        was.hidden = false;
+      }
 
       function update() {
         const n = Number(range.value) || 1;

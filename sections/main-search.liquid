@@ -19,7 +19,7 @@
             {%- endif -%}
             <div>
               <p style="font-weight:600">{{ item.title }}</p>
-              {%- if item.price -%}<p style="color:var(--mute)">{{ item.price | money }}</p>{%- endif -%}
+              {%- if item.price -%}<p style="color:var(--mute)"><span data-discount-price="{{ item.price }}" data-discount-format="money" data-discount-strike>{{ item.price | money }}</span></p>{%- endif -%}
             </div>
           </a>
         {%- endfor -%}

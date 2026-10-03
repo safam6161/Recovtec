@@ -102,8 +102,7 @@
           {%- endif -%}
 
           <div class="pdp-price-row">
-            <s class="pdp-price-compare" hidden><span class="pdp-sr">Ursprünglicher Preis: </span><span class="pdp-price-compare-val"></span></s>
-            <div class="pdp-price" data-price="{{ product.selected_or_first_available_variant.price }}">{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</div>
+            <div class="pdp-price" data-discount-price="{{ product.selected_or_first_available_variant.price }}" data-discount-strike>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</div>
             <div class="pdp-price-meta">{{ section.settings.price_note | default: 'Inkl. MwSt.' }}</div>
           </div>
 
@@ -130,7 +129,7 @@
                 {%- if section.settings.inst_show_rates and inst_price > 0 and inst_max_term > 0 -%}
                   <p class="pay-inst-rate">
                     <strong>{{ section.settings.inst_zero_label | default: '0 % Zinsen' }}</strong>
-                    <span>{{ section.settings.inst_from_label | default: 'schon ab' }} {{ inst_min_rate | money }} {{ section.settings.inst_permonth_label | default: 'pro Monat' }}</span>
+                    <span>{{ section.settings.inst_from_label | default: 'schon ab' }} <span data-discount-price="{{ inst_price }}" data-discount-div="{{ inst_max_term }}" data-discount-format="money">{{ inst_min_rate | money }}</span> {{ section.settings.inst_permonth_label | default: 'pro Monat' }}</span>
                   </p>
                 {%- else -%}
                   <p class="pay-inst-rate">
@@ -201,115 +200,31 @@
 
           {%- if settings.discount_preview_enabled -%}
             {%- comment -%}
-              Rabatt-Vorschau: Shopify legt beim Aufruf von /discount/CODE den Cookie
-              „discount_code" an. Das Skript läuft synchron direkt nach Preis und Hinweis,
-              also vor dem ersten Rendern – dadurch kein Layout-Sprung. Ohne Cookie
-              passiert nichts. Abgezogen wird der Rabatt weiterhin von Shopify im Checkout.
+              Rabatt-Vorschau (Logik: snippets/discount-preview.liquid). Läuft synchron direkt
+              nach Preis, Raten und Hinweis – also vor dem ersten Rendern, kein Layout-Sprung.
             {%- endcomment -%}
             <script>
               (function () {
+                var D = window.RecovtecDiscount;
+                var note = document.getElementById('pdp-discount-note');
+                if (!D || !note) return;
                 try {
-                  var cfg = {
-                    def: {{ settings.discount_default_percent | default: 20 | json }},
-                    list: {{ settings.discount_code_percents | default: '' | json }},
-                    onlyListed: {{ settings.discount_only_listed | json }},
-                    text: {{ settings.discount_notice_text | default: 'Dein Code [code] ist aktiv – [prozent] % werden automatisch abgezogen.' | json }},
-                    moneyFormat: {{ shop.money_format | json }}
-                  };
-
-                  var m = document.cookie.match(/(?:^|;\s*)discount_code=([^;]+)/);
-                  if (!m) return;
-                  var code = m[1];
-                  try { code = decodeURIComponent(code.replace(/\+/g, ' ')); } catch (e) {}
-                  code = code.trim();
-                  // Nur typische Code-Zeichen zulassen – manipulierte Links zeigen nichts an
-                  if (!/^[A-Za-z0-9ÄÖÜäöüß_.\-]{1,40}$/.test(code)) return;
-
-                  // Prozent ermitteln: eigener Eintrag in der Liste, sonst Standard
-                  var pct = null;
-                  cfg.list.split(/\r?\n/).forEach(function (line) {
-                    var p = line.match(/^\s*(.+?)\s*[:=]\s*(\d+(?:[.,]\d+)?)\s*%?\s*$/);
-                    if (p && p[1].toUpperCase() === code.toUpperCase()) pct = parseFloat(p[2].replace(',', '.'));
-                  });
-                  if (pct === null) {
-                    if (cfg.onlyListed) return;
-                    pct = Number(cfg.def);
-                  }
-                  if (!(pct > 0 && pct < 100)) return;
-
-                  var row = document.querySelector('#pdp-main .pdp-price-row');
-                  var priceEl = row && row.querySelector('.pdp-price');
-                  var compareEl = row && row.querySelector('.pdp-price-compare');
-                  var compareVal = compareEl && compareEl.querySelector('.pdp-price-compare-val');
-                  var note = document.getElementById('pdp-discount-note');
-                  if (!priceEl || !compareEl || !compareVal || !note) return;
-
-                  // Shop-Währungsformat wie „money_without_trailing_zeros“
-                  var decoder = document.createElement('textarea');
-                  decoder.innerHTML = cfg.moneyFormat || '';
-                  var fmt = decoder.value;
-                  function money(cents) {
-                    var tag = /\{\{\s*(\w+)\s*\}\}/.exec(fmt);
-                    var key = tag ? tag[1] : 'amount_with_comma_separator';
-                    var th = ',', dec = '.';
-                    if (/comma/.test(key)) { th = '.'; dec = ','; }
-                    else if (/space/.test(key)) { th = ' '; dec = ','; }
-                    else if (/apostrophe/.test(key)) { th = "'"; dec = '.'; }
-                    var parts = (cents / 100).toFixed(2).split('.');
-                    var int = parts[0], frac = parts[1];
-                    if (/no_decimals/.test(key)) { int = String(Math.round(cents / 100)); frac = '00'; }
-                    int = int.replace(/\B(?=(\d{3})+(?!\d))/g, th);
-                    var amount = frac === '00' ? int : int + dec + frac;
-                    return tag ? fmt.replace(tag[0], amount) : amount + ' €';
-                  }
-
-                  var pctLabel = String(pct).replace('.', ',');
-                  var sticky = null; // Sticky-Kaufleiste (sections/sticky-buy.liquid), steht weiter unten im DOM
-                  var current = priceEl.getAttribute('data-price');
-                  function render(cents) {
-                    cents = parseInt(cents, 10);
-                    if (!(cents > 0)) return;
-                    current = cents;
-                    // Wie Shopify im Warenkorb/Checkout: Rabattbetrag auf den Cent ABgerundet
-                    // (20 % von 499,99 € = 99,998 € → 99,99 € Rabatt → 400 €)
-                    var off = Math.floor(cents * pct / 100 + 1e-6);
-                    var was = money(cents), now = money(cents - off);
-                    compareVal.textContent = was;
-                    priceEl.textContent = now;
-                    if (sticky) { sticky.was.textContent = was; sticky.now.textContent = now; }
-                  }
-                  function initSticky() {
-                    var now = document.querySelector('[data-sticky-buy][data-mode="pdp"] .sticky-buy-meta strong');
-                    if (!now || sticky) return;
-                    var was = document.createElement('s');
-                    was.className = 'sticky-buy-was';
-                    now.parentNode.insertBefore(was, now);
-                    sticky = { was: was, now: now };
-                    render(current);
-                  }
-
-                  render(current);
-                  compareEl.hidden = false;
-                  row.classList.add('has-discount');
-
-                  // Hinweistext: [code] / [prozent] ersetzen, Code immer als Text (kein HTML)
+                  D.paint(document.getElementById('pdp-main'));
+                  var text = {{ settings.discount_notice_text | default: 'Dein Code [code] ist aktiv – [prozent] % werden automatisch abgezogen.' | json }};
                   var textEl = note.querySelector('.pdp-discount-text');
-                  cfg.text.split(/(\[code\]|\[prozent\])/i).forEach(function (chunk) {
+                  // [code] / [prozent] ersetzen, Code immer als Text (kein HTML)
+                  text.split(/(\[code\]|\[prozent\])/i).forEach(function (chunk) {
                     if (/^\[code\]$/i.test(chunk)) {
                       var strong = document.createElement('strong');
-                      strong.textContent = code;
+                      strong.textContent = D.code;
                       textEl.appendChild(strong);
                     } else if (/^\[prozent\]$/i.test(chunk)) {
-                      textEl.appendChild(document.createTextNode(pctLabel));
+                      textEl.appendChild(document.createTextNode(String(D.pct).replace('.', ',')));
                     } else if (chunk) {
                       textEl.appendChild(document.createTextNode(chunk));
                     }
                   });
                   note.hidden = false;
-
-                  // Die Leiste ist beim Laden ausgeblendet – Aktualisierung nach dem Parsen springt nicht
-                  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initSticky);
-                  else initSticky();
                 } catch (e) {}
               })();
             </script>
@@ -411,7 +326,7 @@
             {%- assign term_rate = inst_price | times: 1.0 | divided_by: term_num | ceil -%}
             <div class="pay-rate">
               <span class="pay-rate-term">{{ term_num }} {{ section.settings.inst_months_label | default: 'Monate' }}</span>
-              <span class="pay-rate-amount">{{ term_rate | money }} <small>{{ section.settings.inst_permonth_label | default: 'pro Monat' }}</small></span>
+              <span class="pay-rate-amount"><span data-discount-price="{{ inst_price }}" data-discount-div="{{ term_num }}" data-discount-format="money">{{ term_rate | money }}</span> <small>{{ section.settings.inst_permonth_label | default: 'pro Monat' }}</small></span>
             </div>
           {%- endif -%}
         {%- endfor -%}
@@ -458,7 +373,7 @@
     { "type": "header", "content": "Ratenzahlung (PayPal)" },
     { "type": "checkbox", "id": "inst_show", "label": "Ratenzahlungs-Hinweis anzeigen", "default": true },
     { "type": "text", "id": "inst_terms", "label": "Laufzeiten in Monaten (mit Komma trennen)", "default": "3, 6, 12, 24" },
-    { "type": "checkbox", "id": "inst_show_rates", "label": "Konkrete Monatsraten anzeigen", "default": false, "info": "Aus lassen, solange Rabatt-Aktionen laufen: die Raten werden aus dem ungerabatteten Produktpreis berechnet und wären dann zu hoch." },
+    { "type": "checkbox", "id": "inst_show_rates", "label": "Konkrete Monatsraten anzeigen", "default": false, "info": "Bei Rabatt-Links (/discount/CODE) werden die Raten automatisch auf den reduzierten Preis umgerechnet. Bei anderen Aktionen (z. B. automatischen Rabatten) aus lassen – dann wären die Raten zu hoch." },
     { "type": "text", "id": "inst_norate_label", "label": "Hinweis ohne Betrag", "default": "0 % Finanzierung mit PayPal", "info": "Wird gezeigt, wenn keine konkreten Monatsraten angezeigt werden." },
     { "type": "text", "id": "inst_zero_label", "label": "Zins-Hinweis (fett)", "default": "0 % Zinsen" },
     { "type": "text", "id": "inst_from_label", "label": "Text vor der Rate", "default": "schon ab" },

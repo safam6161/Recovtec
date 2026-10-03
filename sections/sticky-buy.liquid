@@ -23,7 +23,7 @@
         <div class="sticky-buy-txt">
           <span class="sticky-buy-title">{{ sb_product.title }}</span>
           <span class="sticky-buy-meta">
-            <strong>{{ sb_variant.price | money_without_trailing_zeros }}</strong>
+            <strong data-discount-price="{{ sb_variant.price }}" data-discount-strike>{{ sb_variant.price | money_without_trailing_zeros }}</strong>
             {%- if section.settings.note != blank -%}<span class="sticky-buy-note">· {{ section.settings.note }}</span>{%- endif -%}
           </span>
         </div>
