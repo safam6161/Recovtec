@@ -101,11 +101,6 @@
             </ul>
           {%- endif -%}
 
-          <div class="pdp-price-row">
-            <div class="pdp-price" data-discount-price="{{ product.selected_or_first_available_variant.price }}" data-discount-strike>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</div>
-            <div class="pdp-price-meta">{{ section.settings.price_note | default: 'Inkl. MwSt.' }}</div>
-          </div>
-
           {%- if section.settings.inst_show -%}
             {%- liquid
               assign inst_price = product.selected_or_first_available_variant.price
@@ -186,6 +181,11 @@
               </div>
             {%- endfor -%}
           {%- endunless -%}
+
+          <div class="pdp-price-row">
+            <div class="pdp-price" data-discount-price="{{ product.selected_or_first_available_variant.price }}" data-discount-strike>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</div>
+            <div class="pdp-price-meta">{{ section.settings.price_note | default: 'Inkl. MwSt.' }}</div>
+          </div>
 
           <div class="stock-status">
             {%- if product.selected_or_first_available_variant.available -%}

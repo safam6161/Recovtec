@@ -1451,13 +1451,12 @@ body.lgl-noscroll { overflow: hidden; }
   .hiw-steps { order: 5; }
   .hiw-note { order: 6; }
 
-  /* Produktseite: Titel → Nutzen → Preis → Größe → Kaufen (wie Desktop: erst die
-     Kaufgründe, dann der Preis). Lede fällt mobil weg, die Checkliste sagt es kürzer. */
+  /* Produktseite: Titel → Nutzen → Zahlungsarten → Größe → Preis → Kaufen (wie Desktop).
+     Lede fällt mobil weg, die Checkliste sagt es kürzer. */
   .pdp-info-inner > * { order: 10; }
   .pdp-info-inner > .eyebrow { order: 1; }
   .pdp-info-inner > h1 { order: 2; }
   .pdp-info-inner > .pdp-benefits { order: 3; }
-  .pdp-info-inner > .pdp-price-row { order: 4; }
   .pdp-info-inner > .pay-inst { order: 5; }
   .pdp-info-inner > .lede { display: none; }
 }
