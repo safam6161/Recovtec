@@ -185,7 +185,7 @@
           {%- endif -%}
 
           <div class="add-row">
-            <form id="pdp-atc-form">
+            <form id="pdp-atc-form" action="{{ routes.cart_add_url }}" method="post">
               <input type="hidden" name="id" id="pdp-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
               <button type="submit" class="btn btn-primary btn-lg btn-add"
                 {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>

@@ -14,7 +14,10 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, quantity: qty })
       });
-      return r.json();
+      const data = await r.json().catch(() => ({}));
+      // Shopify antwortet bei Ablehnung (z. B. ausverkauft) mit 4xx + description
+      if (!r.ok) throw new Error(data.description || data.message || 'Artikel konnte nicht hinzugefügt werden.');
+      return data;
     },
     async change(line, qty) {
       const r = await fetch('/cart/change.js', {
@@ -123,25 +126,41 @@
 
   // ===== Add to Cart =====
   async function addToCart(variantId, qty) {
-    if (!variantId) return;
+    if (!variantId) {
+      showToast('Bitte wähle zuerst eine Größe.');
+      return false;
+    }
     try {
       await Cart.add(variantId, qty || 1);
-      await refreshDrawer();
-      showToast('Zum Warenkorb hinzugefügt');
-      setTimeout(openDrawer, 400);
     } catch (e) {
       console.error('Add to cart failed', e);
+      showToast(e.message);
+      return false;
     }
+    showToast('Zum Warenkorb hinzugefügt');
+    // Drawer-Aktualisierung darf einen erfolgreichen Kauf nicht als Fehler melden
+    refreshDrawer().catch(e => console.error('Cart refresh failed', e)).finally(() => setTimeout(openDrawer, 400));
+    return true;
   }
 
   // ===== ATC Form (PDP) =====
+  // Das Formular postet ohne JS nativ an /cart/add (Fallback). Mit JS: AJAX + Drawer.
   function initATCForm() {
     const form = document.getElementById('pdp-atc-form');
     if (!form) return;
+    const button = form.querySelector('[type="submit"]');
+    let busy = false;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const id = form.querySelector('[name="id"]')?.value;
-      await addToCart(id, 1);
+      if (busy) return;
+      busy = true;
+      button?.setAttribute('aria-busy', 'true');
+      try {
+        await addToCart(form.querySelector('[name="id"]')?.value, 1);
+      } finally {
+        busy = false;
+        button?.removeAttribute('aria-busy');
+      }
     });
   }
 
@@ -955,20 +974,16 @@
       window.location.href = '/checkout';
     });
 
-    refreshDrawer();
-    initJudgemeWidget();
-    initAnchorNav();
-    initATCForm();
-    initSizeSelector();
-    initGallery();
-    initAccordion();
-    initSizeGuide();
-    initPaymentInfo();
-    initNewsletter();
-    initGuaranteeLabel();
-    initValueCalc();
-    initStickyBuy();
-    initModeDemo();
-    initSwipe();
+    refreshDrawer().catch(e => console.error('Cart refresh failed', e));
+    // Kauf-Funktionen zuerst; jede Init einzeln abgesichert, damit ein Fehler
+    // (z. B. im Judge.me-Widget) nicht den Warenkorb-Button lahmlegt.
+    [
+      initATCForm, initSizeSelector, initStickyBuy,
+      initJudgemeWidget, initAnchorNav, initGallery, initAccordion, initSizeGuide,
+      initPaymentInfo, initNewsletter, initGuaranteeLabel, initValueCalc,
+      initModeDemo, initSwipe
+    ].forEach(fn => {
+      try { fn(); } catch (e) { console.error(fn.name + ' failed', e); }
+    });
   });
 })();
