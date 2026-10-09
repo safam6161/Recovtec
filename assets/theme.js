@@ -271,6 +271,10 @@
     initSideModal('payment-info-modal', 'pay-overlay', '.pay-info-trigger');
   }
 
+  function initKlarnaInfo() {
+    initSideModal('klarna-info-modal', 'klarna-overlay', '.klarna-info-trigger');
+  }
+
   // ===== Newsletter =====
   function initNewsletter() {
     document.querySelectorAll('.final-nl-form').forEach(form => {
@@ -998,7 +1002,7 @@
     [
       initATCForm, initSizeSelector, initStickyBuy,
       initJudgemeWidget, initAnchorNav, initGallery, initAccordion, initSizeGuide,
-      initPaymentInfo, initNewsletter, initGuaranteeLabel, initValueCalc,
+      initPaymentInfo, initKlarnaInfo, initNewsletter, initGuaranteeLabel, initValueCalc,
       initModeDemo, initSwipe
     ].forEach(fn => {
       try { fn(); } catch (e) { console.error(fn.name + ' failed', e); }

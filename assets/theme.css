@@ -670,6 +670,12 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 .pay-step-text h3 { font-family: var(--f-ui); font-size: 15px; font-weight: 600; line-height: 1.3; color: var(--paper); margin-bottom: 6px; }
 .pay-step-text p { font-size: 14px; line-height: 1.55; color: rgba(250,250,250,0.6); }
 .pay-note { font-size: 12px; line-height: 1.55; color: rgba(250,250,250,0.4); padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+.pay-inst + .pay-inst { margin-top: -10px; }            /* PayPal + Klarna als zusammengehörige Gruppe */
+.pay-logo { display: block; height: 24px; width: auto; flex-shrink: 0; }
+.pay-section { display: flex; flex-direction: column; gap: 20px; }
+.pay-section + .pay-section { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); }
+.pay-section-label { font-family: var(--f-mono); font-size: 11px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,250,250,0.45); }
+.pay-step-text h3:only-child { margin: 0; padding-top: 7px; }   /* Schritt ohne Zusatztext: mittig zur Nummer */
 /* Rabatt-Vorschau (aktiver Rabattcode, snippets/discount-preview.liquid) */
 .discount-was { color: var(--mute); text-decoration: line-through; text-decoration-thickness: 1.5px; }
 .discount-was[hidden] { display: none; }
@@ -1566,6 +1572,7 @@ body.lgl-noscroll { overflow: hidden; }
 @media (max-width: 980px) {
   .pdp-info-inner { gap: 12px; }
   .pdp-price-row { padding: 8px 0; }
+  .pay-inst + .pay-inst { margin-top: -4px; }   /* 8 px zwischen PayPal und Klarna */
   .size-block { gap: 8px; }
   .pdp-trust-pills { padding-top: 12px; }
 }

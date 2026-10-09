@@ -133,12 +133,31 @@
                   </p>
                 {%- else -%}
                   <p class="pay-inst-rate">
-                    <strong>{{ section.settings.inst_norate_label | default: '0 % Finanzierung mit PayPal' }}</strong>
+                    <strong>{{ section.settings.inst_norate_label | default: '0 % Finanzierung oder in 30 Tagen bezahlen' }}</strong>
                   </p>
                 {%- endif -%}
-                <p class="pay-inst-text">{{ section.settings.inst_text | default: 'Mit PayPal in 3, 6, 12 oder 24 Raten zahlen.' }}</p>
+                <p class="pay-inst-text">{{ section.settings.inst_text | default: 'Mit PayPal in 3, 6, 12 oder 24 Raten zu 0 % – oder erst 30 Tage nach der Bestellung bezahlen.' }}</p>
               </div>
-              <button type="button" class="pay-info-btn pay-info-trigger" aria-label="{{ section.settings.inst_info_aria | default: 'Weitere Informationen zur Ratenzahlung' | escape }}">
+              <button type="button" class="pay-info-btn pay-info-trigger" aria-label="{{ section.settings.inst_info_aria | default: 'Weitere Informationen zu Ratenzahlung und Bezahlung nach 30 Tagen' | escape }}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5"/><path d="M12 7.4v.2"/></svg>
+                <span>{{ section.settings.inst_info_label | default: 'Weitere Informationen' }}</span>
+              </button>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.klarna_show -%}
+            {%- comment -%} Klarna: nur „In 30 Tagen bezahlen“ bewerben (keine Raten, keine Zinsangaben) {%- endcomment -%}
+            <div class="pay-inst pay-inst--klarna">
+              <div class="pay-inst-main">
+                <div class="pay-inst-brands">
+                  {{ 'klarna' | payment_type_svg_tag: class: 'pay-logo pay-logo-klarna' }}
+                </div>
+                <p class="pay-inst-rate">
+                  <strong>{{ section.settings.klarna_label | default: 'Kauf auf Rechnung mit Klarna' }}</strong>
+                </p>
+                <p class="pay-inst-text">{{ section.settings.klarna_text | default: 'Erst bestellen, testen – und in 30 Tagen bezahlen.' }}</p>
+              </div>
+              <button type="button" class="pay-info-btn klarna-info-trigger" aria-label="{{ section.settings.klarna_info_aria | default: 'Weitere Informationen zur Zahlung mit Klarna' | escape }}">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5"/><path d="M12 7.4v.2"/></svg>
                 <span>{{ section.settings.inst_info_label | default: 'Weitere Informationen' }}</span>
               </button>
@@ -298,59 +317,123 @@
 </aside>
 
 {%- if section.settings.inst_show -%}
-<!-- Ratenzahlung Info Modal -->
+<!-- Später bezahlen mit PayPal: Info Modal -->
 <div class="sg-overlay" id="pay-overlay"></div>
-<aside class="sg-modal pay-modal" id="payment-info-modal" role="dialog" aria-label="{{ section.settings.inst_modal_title | default: 'Ratenzahlung' | escape }}">
+<aside class="sg-modal pay-modal" id="payment-info-modal" role="dialog" aria-label="{{ section.settings.inst_modal_title | default: 'Später bezahlen mit PayPal' | escape }}">
   <header class="sg-head">
-    <span class="sg-eyebrow">{{ section.settings.inst_modal_title | default: 'Ratenzahlung' }}</span>
+    <span class="sg-eyebrow">{{ section.settings.inst_modal_title | default: 'Später bezahlen mit PayPal' }}</span>
     <button class="sg-close" aria-label="Schließen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
   </header>
   <div class="sg-body">
     <div class="sg-brand">{{ section.settings.logo_text | default: 'RECOVTEC' }}</div>
-    <p class="sg-intro">{{ section.settings.inst_modal_intro }}</p>
 
     <div class="pay-modal-brands">
       <span class="pay-chip pay-chip-paypal"><span>Pay</span>Pal</span>
     </div>
 
-    {%- liquid
-      assign inst_price = product.selected_or_first_available_variant.price
-      assign inst_terms = section.settings.inst_terms | default: '3, 6, 12, 24' | split: ','
-    -%}
-    {%- if section.settings.inst_show_rates and inst_price > 0 and inst_terms.size > 0 -%}
-      <h2 class="sg-title">{{ section.settings.inst_table_heading | default: 'Deine Raten mit PayPal' }}</h2>
-      <div class="pay-rates">
-        {%- for term in inst_terms -%}
-          {%- assign term_num = term | strip | times: 1 -%}
-          {%- if term_num > 0 -%}
-            {%- assign term_rate = inst_price | times: 1.0 | divided_by: term_num | ceil -%}
-            <div class="pay-rate">
-              <span class="pay-rate-term">{{ term_num }} {{ section.settings.inst_months_label | default: 'Monate' }}</span>
-              <span class="pay-rate-amount"><span data-discount-price="{{ inst_price }}" data-discount-div="{{ term_num }}" data-discount-format="money">{{ term_rate | money }}</span> <small>{{ section.settings.inst_permonth_label | default: 'pro Monat' }}</small></span>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-      {%- if section.settings.inst_table_note != blank -%}
-        <p class="pay-rates-note">{{ section.settings.inst_table_note }}</p>
-      {%- endif -%}
-    {%- endif -%}
+    {%- comment -%} Abschnitt 1: Ratenzahlung zu 0 % {%- endcomment -%}
+    <section class="pay-section">
+      <h2 class="sg-title">{{ section.settings.inst_section_heading | default: 'Ratenzahlung zu 0 %' }}</h2>
+      <p class="sg-intro">{{ section.settings.inst_modal_intro }}</p>
 
-    <h2 class="sg-title">{{ section.settings.inst_modal_heading | default: 'So funktioniert’s' }}</h2>
-    <ol class="pay-steps">
-      {%- if section.settings.inst_step1 != blank -%}
-        <li class="pay-step"><span class="pay-step-num">1</span><div class="pay-step-text"><h3>{{ section.settings.inst_step1 }}</h3><p>{{ section.settings.inst_step1_text }}</p></div></li>
+      {%- liquid
+        assign inst_price = product.selected_or_first_available_variant.price
+        assign inst_terms = section.settings.inst_terms | default: '3, 6, 12, 24' | split: ','
+      -%}
+      {%- if section.settings.inst_show_rates and inst_price > 0 and inst_terms.size > 0 -%}
+        <h3 class="pay-section-label">{{ section.settings.inst_table_heading | default: 'Deine Raten mit PayPal' }}</h3>
+        <div class="pay-rates">
+          {%- for term in inst_terms -%}
+            {%- assign term_num = term | strip | times: 1 -%}
+            {%- if term_num > 0 -%}
+              {%- assign term_rate = inst_price | times: 1.0 | divided_by: term_num | ceil -%}
+              <div class="pay-rate">
+                <span class="pay-rate-term">{{ term_num }} {{ section.settings.inst_months_label | default: 'Monate' }}</span>
+                <span class="pay-rate-amount"><span data-discount-price="{{ inst_price }}" data-discount-div="{{ term_num }}" data-discount-format="money">{{ term_rate | money }}</span> <small>{{ section.settings.inst_permonth_label | default: 'pro Monat' }}</small></span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.inst_table_note != blank -%}
+          <p class="pay-rates-note">{{ section.settings.inst_table_note }}</p>
+        {%- endif -%}
       {%- endif -%}
-      {%- if section.settings.inst_step2 != blank -%}
-        <li class="pay-step"><span class="pay-step-num">2</span><div class="pay-step-text"><h3>{{ section.settings.inst_step2 }}</h3><p>{{ section.settings.inst_step2_text }}</p></div></li>
-      {%- endif -%}
-      {%- if section.settings.inst_step3 != blank -%}
-        <li class="pay-step"><span class="pay-step-num">3</span><div class="pay-step-text"><h3>{{ section.settings.inst_step3 }}</h3><p>{{ section.settings.inst_step3_text }}</p></div></li>
-      {%- endif -%}
-    </ol>
+
+      <h3 class="pay-section-label">{{ section.settings.inst_modal_heading | default: 'So funktioniert’s' }}</h3>
+      <ol class="pay-steps">
+        {%- if section.settings.inst_step1 != blank -%}
+          <li class="pay-step"><span class="pay-step-num">1</span><div class="pay-step-text"><h3>{{ section.settings.inst_step1 }}</h3><p>{{ section.settings.inst_step1_text }}</p></div></li>
+        {%- endif -%}
+        {%- if section.settings.inst_step2 != blank -%}
+          <li class="pay-step"><span class="pay-step-num">2</span><div class="pay-step-text"><h3>{{ section.settings.inst_step2 }}</h3><p>{{ section.settings.inst_step2_text }}</p></div></li>
+        {%- endif -%}
+        {%- if section.settings.inst_step3 != blank -%}
+          <li class="pay-step"><span class="pay-step-num">3</span><div class="pay-step-text"><h3>{{ section.settings.inst_step3 }}</h3><p>{{ section.settings.inst_step3_text }}</p></div></li>
+        {%- endif -%}
+      </ol>
+    </section>
+
+    {%- comment -%} Abschnitt 2: Bezahlung nach 30 Tagen {%- endcomment -%}
+    {%- if section.settings.inst_later_show -%}
+      <section class="pay-section">
+        <h2 class="sg-title">{{ section.settings.inst_later_heading | default: 'Bezahlung nach 30 Tagen' }}</h2>
+        <p class="sg-intro">{{ section.settings.inst_later_text }}</p>
+        <h3 class="pay-section-label">{{ section.settings.inst_modal_heading | default: 'So funktioniert’s' }}</h3>
+        <ol class="pay-steps">
+          {%- if section.settings.inst_later_step1 != blank -%}
+            <li class="pay-step"><span class="pay-step-num">1</span><div class="pay-step-text"><h3>{{ section.settings.inst_later_step1 }}</h3></div></li>
+          {%- endif -%}
+          {%- if section.settings.inst_later_step2 != blank -%}
+            <li class="pay-step"><span class="pay-step-num">2</span><div class="pay-step-text"><h3>{{ section.settings.inst_later_step2 }}</h3></div></li>
+          {%- endif -%}
+          {%- if section.settings.inst_later_step3 != blank -%}
+            <li class="pay-step"><span class="pay-step-num">3</span><div class="pay-step-text"><h3>{{ section.settings.inst_later_step3 }}</h3></div></li>
+          {%- endif -%}
+        </ol>
+      </section>
+    {%- endif -%}
 
     {%- if section.settings.inst_modal_note != blank -%}
       <p class="pay-note">{{ section.settings.inst_modal_note }}</p>
+    {%- endif -%}
+  </div>
+</aside>
+{%- endif -%}
+
+{%- if section.settings.klarna_show -%}
+<!-- Später bezahlen mit Klarna: Info Modal -->
+<div class="sg-overlay" id="klarna-overlay"></div>
+<aside class="sg-modal pay-modal" id="klarna-info-modal" role="dialog" aria-label="{{ section.settings.klarna_modal_title | default: 'Später bezahlen mit Klarna' | escape }}">
+  <header class="sg-head">
+    <span class="sg-eyebrow">{{ section.settings.klarna_modal_title | default: 'Später bezahlen mit Klarna' }}</span>
+    <button class="sg-close" aria-label="Schließen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  </header>
+  <div class="sg-body">
+    <div class="sg-brand">{{ section.settings.logo_text | default: 'RECOVTEC' }}</div>
+
+    <div class="pay-modal-brands">
+      {{ 'klarna' | payment_type_svg_tag: class: 'pay-logo pay-logo-klarna' }}
+    </div>
+
+    <section class="pay-section">
+      <h2 class="sg-title">{{ section.settings.klarna_modal_heading | default: 'In 30 Tagen bezahlen' }}</h2>
+      <p class="sg-intro">{{ section.settings.klarna_modal_text }}</p>
+      <h3 class="pay-section-label">{{ section.settings.inst_modal_heading | default: 'So funktioniert’s' }}</h3>
+      <ol class="pay-steps">
+        {%- if section.settings.klarna_step1 != blank -%}
+          <li class="pay-step"><span class="pay-step-num">1</span><div class="pay-step-text"><h3>{{ section.settings.klarna_step1 }}</h3></div></li>
+        {%- endif -%}
+        {%- if section.settings.klarna_step2 != blank -%}
+          <li class="pay-step"><span class="pay-step-num">2</span><div class="pay-step-text"><h3>{{ section.settings.klarna_step2 }}</h3></div></li>
+        {%- endif -%}
+        {%- if section.settings.klarna_step3 != blank -%}
+          <li class="pay-step"><span class="pay-step-num">3</span><div class="pay-step-text"><h3>{{ section.settings.klarna_step3 }}</h3></div></li>
+        {%- endif -%}
+      </ol>
+    </section>
+
+    {%- if section.settings.klarna_modal_note != blank -%}
+      <p class="pay-note">{{ section.settings.klarna_modal_note }}</p>
     {%- endif -%}
   </div>
 </aside>
@@ -374,15 +457,16 @@
     { "type": "checkbox", "id": "inst_show", "label": "Ratenzahlungs-Hinweis anzeigen", "default": true },
     { "type": "text", "id": "inst_terms", "label": "Laufzeiten in Monaten (mit Komma trennen)", "default": "3, 6, 12, 24" },
     { "type": "checkbox", "id": "inst_show_rates", "label": "Konkrete Monatsraten anzeigen", "default": false, "info": "Bei Rabatt-Links (/discount/CODE) werden die Raten automatisch auf den reduzierten Preis umgerechnet. Bei anderen Aktionen (z. B. automatischen Rabatten) aus lassen – dann wären die Raten zu hoch." },
-    { "type": "text", "id": "inst_norate_label", "label": "Hinweis ohne Betrag", "default": "0 % Finanzierung mit PayPal", "info": "Wird gezeigt, wenn keine konkreten Monatsraten angezeigt werden." },
+    { "type": "text", "id": "inst_norate_label", "label": "Hinweis ohne Betrag", "default": "0 % Finanzierung oder in 30 Tagen bezahlen", "info": "Wird gezeigt, wenn keine konkreten Monatsraten angezeigt werden." },
     { "type": "text", "id": "inst_zero_label", "label": "Zins-Hinweis (fett)", "default": "0 % Zinsen" },
     { "type": "text", "id": "inst_from_label", "label": "Text vor der Rate", "default": "schon ab" },
     { "type": "text", "id": "inst_permonth_label", "label": "Text nach der Rate", "default": "pro Monat" },
     { "type": "text", "id": "inst_months_label", "label": "Wort für „Monate“", "default": "Monate" },
-    { "type": "text", "id": "inst_text", "label": "Hinweis-Text", "default": "Mit PayPal in 3, 6, 12 oder 24 Raten zahlen." },
+    { "type": "text", "id": "inst_text", "label": "Hinweis-Text", "default": "Mit PayPal in 3, 6, 12 oder 24 Raten zu 0 % – oder erst 30 Tage nach der Bestellung bezahlen." },
     { "type": "text", "id": "inst_info_label", "label": "Info-Button Text", "default": "Weitere Informationen" },
-    { "type": "text", "id": "inst_info_aria", "label": "Info-Button Beschriftung (Screenreader)", "default": "Weitere Informationen zur Ratenzahlung" },
-    { "type": "text", "id": "inst_modal_title", "label": "Modal Titel", "default": "Ratenzahlung" },
+    { "type": "text", "id": "inst_info_aria", "label": "Info-Button Beschriftung (Screenreader)", "default": "Weitere Informationen zu Ratenzahlung und Bezahlung nach 30 Tagen" },
+    { "type": "text", "id": "inst_modal_title", "label": "Modal Titel", "default": "Später bezahlen mit PayPal" },
+    { "type": "text", "id": "inst_section_heading", "label": "Abschnitt Ratenzahlung: Überschrift", "default": "Ratenzahlung zu 0 %" },
     { "type": "textarea", "id": "inst_modal_intro", "label": "Modal Einleitung", "default": "Du möchtest deine Recovery Boots lieber in Raten zahlen? Mit der PayPal Ratenzahlung geht das in 3, 6, 12 oder 24 Monatsraten zu 0 % Zinsen." },
     { "type": "text", "id": "inst_table_heading", "label": "Raten-Tabelle Überschrift", "default": "Deine Raten mit PayPal" },
     { "type": "textarea", "id": "inst_table_note", "label": "Raten-Tabelle Hinweis", "default": "Beispielrechnung zu 0 % effektivem Jahreszins (0 % Sollzins p. a., gebunden) auf Basis des aktuellen Produktpreises. Die letzte Rate kann rundungsbedingt abweichen." },
@@ -393,7 +477,27 @@
     { "type": "textarea", "id": "inst_step2_text", "label": "Schritt 2 Text", "default": "Wähle im Checkout PayPal als Zahlungsart aus." },
     { "type": "text", "id": "inst_step3", "label": "Schritt 3 Titel", "default": "Raten nach dem Checkout auswählen" },
     { "type": "textarea", "id": "inst_step3_text", "label": "Schritt 3 Text", "default": "Nach dem Checkout wirst du zu PayPal weitergeleitet. Dort wählst du die Laufzeit aus, die zu dir passt — 3, 6, 12 oder 24 Monate." },
-    { "type": "textarea", "id": "inst_modal_note", "label": "Hinweis (klein)", "default": "Die Ratenzahlung wird von PayPal angeboten und setzt deren positive Prüfung voraus. Die Laufzeit wählst du direkt bei PayPal im Anschluss an den Checkout." },
+    { "type": "header", "content": "PayPal: Bezahlung nach 30 Tagen (im Modal)" },
+    { "type": "checkbox", "id": "inst_later_show", "label": "Abschnitt „Bezahlung nach 30 Tagen“ anzeigen", "default": true },
+    { "type": "text", "id": "inst_later_heading", "label": "Überschrift", "default": "Bezahlung nach 30 Tagen" },
+    { "type": "textarea", "id": "inst_later_text", "label": "Text", "default": "Du bestellst jetzt und bezahlst erst 30 Tage später – der Betrag wird dann automatisch von deinem Konto abgebucht." },
+    { "type": "text", "id": "inst_later_step1", "label": "Schritt 1", "default": "Größe wählen und zur Kasse gehen." },
+    { "type": "text", "id": "inst_later_step2", "label": "Schritt 2", "default": "PayPal als Zahlungsart wählen." },
+    { "type": "text", "id": "inst_later_step3", "label": "Schritt 3", "default": "Bei PayPal „Bezahlung nach 30 Tagen“ auswählen." },
+    { "type": "textarea", "id": "inst_modal_note", "label": "Hinweis (klein)", "default": "Ratenzahlung und Bezahlung nach 30 Tagen werden von PayPal angeboten und setzen deren positive Prüfung voraus." },
+    { "type": "header", "content": "Klarna: In 30 Tagen bezahlen" },
+    { "type": "paragraph", "content": "Bewirbt nur „In 30 Tagen bezahlen“ – keine Klarna-Raten, keine Zinsangaben." },
+    { "type": "checkbox", "id": "klarna_show", "label": "Klarna-Hinweis anzeigen", "default": true },
+    { "type": "text", "id": "klarna_label", "label": "Hinweis (fett)", "default": "Kauf auf Rechnung mit Klarna" },
+    { "type": "text", "id": "klarna_text", "label": "Hinweis-Text", "default": "Erst bestellen, testen – und in 30 Tagen bezahlen." },
+    { "type": "text", "id": "klarna_info_aria", "label": "Info-Button Beschriftung (Screenreader)", "default": "Weitere Informationen zur Zahlung mit Klarna" },
+    { "type": "text", "id": "klarna_modal_title", "label": "Modal Titel", "default": "Später bezahlen mit Klarna" },
+    { "type": "text", "id": "klarna_modal_heading", "label": "Modal Überschrift", "default": "In 30 Tagen bezahlen" },
+    { "type": "textarea", "id": "klarna_modal_text", "label": "Modal Text", "default": "Mit Klarna bezahlst du deine Recovery Boots erst 30 Tage nach der Bestellung – bequem per Rechnung." },
+    { "type": "text", "id": "klarna_step1", "label": "Schritt 1", "default": "Größe wählen und zur Kasse gehen." },
+    { "type": "text", "id": "klarna_step2", "label": "Schritt 2", "default": "Im Checkout Klarna als Zahlungsart wählen." },
+    { "type": "text", "id": "klarna_step3", "label": "Schritt 3", "default": "„Rechnung / In 30 Tagen bezahlen“ auswählen." },
+    { "type": "textarea", "id": "klarna_modal_note", "label": "Hinweis (klein)", "default": "Die Zahlung nach 30 Tagen wird von Klarna angeboten und setzt deren positive Prüfung voraus." },
     { "type": "header", "content": "Lager-Status" },
     { "type": "text", "id": "in_stock_text", "label": "Auf Lager Text", "default": "Auf Lager · in 1–3 Werktagen bei dir." },
     { "type": "text", "id": "out_of_stock_text", "label": "Ausverkauft Text", "default": "Derzeit nicht verfügbar" },
