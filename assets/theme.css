@@ -893,8 +893,17 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--f-display); font-weight: 700; line-h
 @media (max-width:600px) {
   .howto-steps { grid-template-columns: 1fr; }
   .pdp-trust-pills { grid-template-columns: 1fr; }
-  .pay-inst { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .pay-info-btn { width: 100%; justify-content: center; }
+  /* Zahlungs-Hinweise mobil kompakt: Logo + Überschrift in einer Zeile,
+     „Weitere Informationen“ als kleiner Link statt Kasten-Button */
+  .pay-inst { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 12px; }
+  .pay-inst-main { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 10px; row-gap: 3px; }
+  .pay-inst-brands { grid-row: 1; }
+  .pay-inst-rate { grid-row: 1; font-size: 13px; line-height: 1.3; }
+  .pay-inst-text { grid-column: 1 / -1; font-size: 12px; line-height: 1.4; }
+  .pay-inst .pay-chip { font-size: 10px; padding: 4px 6px; }
+  .pay-inst .pay-logo { height: 20px; }
+  .pay-inst .pay-info-btn { height: auto; padding: 2px 0; border: 0; background: none; font-size: 10px; gap: 5px; text-decoration: underline; text-underline-offset: 3px; }
+  .pay-inst .pay-info-btn svg { width: 12px; height: 12px; }
   .final-cta-guarantees { grid-template-columns: 1fr; }
   .nav-links { display: none; }
   .story-stats { grid-template-columns: 1fr 1fr; }
