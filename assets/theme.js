@@ -9,20 +9,15 @@
       return r.json();
     },
     async add(id, qty) {
-      // Hängt die Anfrage (z. B. durch ein App-Skript), nach 8 s abbrechen
-      const ctrl = 'AbortController' in window ? new AbortController() : null;
-      const timer = ctrl && setTimeout(() => ctrl.abort(), 8000);
-      let r;
-      try {
-        r = await fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ id, quantity: qty }),
-          signal: ctrl?.signal
-        });
-      } finally {
-        clearTimeout(timer);
-      }
+      // Apps (Tracking o. Ä.) ersetzen teils window.fetch; hängt die Anfrage,
+      // bricht das Zeitlimit sie unabhängig davon ab.
+      const request = fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ id, quantity: qty })
+      });
+      const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('Zeitüberschreitung')), 5000));
+      const r = await Promise.race([request, timeout]);
       const data = await r.json().catch(() => ({}));
       // Shopify antwortet bei Ablehnung (z. B. ausverkauft) mit 4xx + description
       if (!r.ok) {
@@ -169,7 +164,7 @@
     if (!form) return;
     const button = form.querySelector('[type="submit"]');
     let busy = false;
-    form.addEventListener('submit', async (e) => {
+    async function handle(e) {
       e.preventDefault();
       if (busy) return;
       busy = true;
@@ -180,7 +175,11 @@
         busy = false;
         button?.removeAttribute('aria-busy');
       }
-    });
+    }
+    // Direkt am Button: Apps, die das submit-Ereignis abfangen, können den Kauf
+    // so nicht blockieren. submit bleibt für Enter-Taste u. Ä.
+    button?.addEventListener('click', handle);
+    form.addEventListener('submit', handle);
   }
 
   // ===== Size Selector =====
@@ -864,8 +863,7 @@
 
     if (isPdp && form) {
       bar.querySelector('[data-sticky-buy-submit]')?.addEventListener('click', () => {
-        if (typeof form.requestSubmit === 'function') form.requestSubmit();
-        else form.querySelector('[type="submit"]')?.click();
+        form.querySelector('[type="submit"]')?.click();
       });
     }
   }
