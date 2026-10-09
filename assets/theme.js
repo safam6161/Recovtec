@@ -9,14 +9,27 @@
       return r.json();
     },
     async add(id, qty) {
-      const r = await fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, quantity: qty })
-      });
+      // Hängt die Anfrage (z. B. durch ein App-Skript), nach 8 s abbrechen
+      const ctrl = 'AbortController' in window ? new AbortController() : null;
+      const timer = ctrl && setTimeout(() => ctrl.abort(), 8000);
+      let r;
+      try {
+        r = await fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ id, quantity: qty }),
+          signal: ctrl?.signal
+        });
+      } finally {
+        clearTimeout(timer);
+      }
       const data = await r.json().catch(() => ({}));
       // Shopify antwortet bei Ablehnung (z. B. ausverkauft) mit 4xx + description
-      if (!r.ok) throw new Error(data.description || data.message || 'Artikel konnte nicht hinzugefügt werden.');
+      if (!r.ok) {
+        const err = new Error(data.description || data.message || 'Artikel konnte nicht hinzugefügt werden.');
+        err.status = r.status;
+        throw err;
+      }
       return data;
     },
     async change(line, qty) {
@@ -125,7 +138,9 @@
   }
 
   // ===== Add to Cart =====
-  async function addToCart(variantId, qty) {
+  // fallbackForm: bei technischem Fehler (kein Shopify-Nein) das Formular klassisch
+  // an /cart/add senden — dann landet der Artikel trotzdem im Warenkorb.
+  async function addToCart(variantId, qty, fallbackForm) {
     if (!variantId) {
       showToast('Bitte wähle zuerst eine Größe.');
       return false;
@@ -134,6 +149,10 @@
       await Cart.add(variantId, qty || 1);
     } catch (e) {
       console.error('Add to cart failed', e);
+      if (!e.status && fallbackForm) {
+        HTMLFormElement.prototype.submit.call(fallbackForm);
+        return false;
+      }
       showToast(e.message);
       return false;
     }
@@ -156,7 +175,7 @@
       busy = true;
       button?.setAttribute('aria-busy', 'true');
       try {
-        await addToCart(form.querySelector('[name="id"]')?.value, 1);
+        await addToCart(form.querySelector('[name="id"]')?.value, 1, form);
       } finally {
         busy = false;
         button?.removeAttribute('aria-busy');
