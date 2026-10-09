@@ -1,0 +1,116 @@
+{%- comment -%}
+  Diagnose-Anzeige für den Warenkorb-Button. Nur aktiv mit ?debug=1 in der URL,
+  für Kunden unsichtbar. Läuft vor content_for_header, damit Fehler und Klicks
+  auch dann erfasst werden, wenn App-Skripte sie abfangen.
+{%- endcomment -%}
+<script>
+  (function () {
+    if (!/[?&]debug=1\b/.test(location.search)) return;
+    var log = [], clicks = 0;
+    function add(msg) { log.push(new Date().toTimeString().slice(0, 8) + ' ' + msg); render(); }
+    function desc(el) {
+      if (!el || !el.tagName) return String(el);
+      var s = el.tagName.toLowerCase();
+      if (el.id) s += '#' + el.id;
+      if (typeof el.className === 'string' && el.className.trim()) s += '.' + el.className.trim().split(/\s+/).slice(0, 3).join('.');
+      return s;
+    }
+    window.addEventListener('error', function (e) {
+      if (!e.message) return;   // Ladefehler von Bildern o. Ä. ignorieren
+      add('FEHLER: ' + e.message + ' @ ' + String(e.filename || '').split('?')[0].split('/').slice(-2).join('/') + ':' + e.lineno);
+    }, true);
+
+    // Welches Skript stoppt/verhindert Ereignisse am Kauf-Button? (Datei aus dem Stack)
+    function caller() {
+      var st = String(new Error().stack || '').split('\n').slice(2);
+      for (var i = 0; i < st.length; i++) {
+        var m = st[i].match(/(https?:\/\/[^\s)]+?):\d+:\d+/);
+        if (m) return m[1].split('?')[0].replace(location.origin, '').split('/').slice(-3).join('/');
+      }
+      return '(unbekannt / inline)';
+    }
+    function onBuy(e) {
+      var t = e && e.target;
+      return t && t.closest && t.closest('#pdp-atc-form, [data-sticky-buy]');
+    }
+    ['preventDefault', 'stopPropagation', 'stopImmediatePropagation'].forEach(function (fn) {
+      var orig = Event.prototype[fn];
+      Event.prototype[fn] = function () {
+        if (/^(click|submit|pointerdown|pointerup|touchend|mousedown|mouseup)$/.test(this.type) && onBuy(this)) {
+          add(this.type + ': ' + fn + '() durch ' + caller());
+        }
+        return orig.apply(this, arguments);
+      };
+    });
+    window.addEventListener('unhandledrejection', function (e) { add('FEHLER (async): ' + (e.reason && e.reason.message || e.reason)); });
+
+    // Klicks: was wird getroffen, und hat jemand den Klick abgefangen?
+    ['pointerdown', 'click'].forEach(function (type) {
+      window.addEventListener(type, function (e) {
+        var t = e.target;
+        var btn = document.querySelector('#pdp-atc-form [type="submit"]');
+        var onBtn = btn && (btn === t || btn.contains(t));
+        // Liegt der Zeiger über der Button-Fläche, auch wenn etwas anderes getroffen wurde?
+        var r = btn && btn.getBoundingClientRect();
+        var inArea = r && e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+        if (!onBtn && !inArea && !onBuy(e)) { if (type === 'click') clicks++; return; }
+        add(type + ' auf ' + desc(t) + (onBtn ? ' (= Kauf-Button)' : inArea ? ' (LIEGT ÜBER DEM BUTTON!)' : ''));
+        if (type === 'pointerdown') {
+          var clicksBefore = clicks;
+          setTimeout(function () {
+            if (clicks === clicksBefore) add('!! Klick kam NIE beim Button an (von einem Skript gestoppt)');
+          }, 800);
+        }
+        if (type === 'click') clicks++;
+      }, true);
+    });
+    window.addEventListener('submit', function (e) { add('submit-Ereignis: ' + desc(e.target)); }, true);
+    window.addEventListener('beforeunload', function () { add('Seite wird verlassen'); });
+
+    // Warenkorb-Anfragen protokollieren
+    var of = window.fetch;
+    if (of) window.fetch = function (u, o) {
+      var url = String(u && u.url || u);
+      var cart = /\/cart\//.test(url);
+      if (cart) add('Anfrage ' + url.replace(location.origin, ''));
+      var p = of.apply(this, arguments);
+      if (cart) p.then(function (r) { add('  -> Antwort ' + r.status + ' ' + url.replace(location.origin, '')); },
+                       function (err) { add('  -> Netzwerkfehler ' + err); });
+      return p;
+    };
+
+    var box;
+    function render() {
+      if (!box) return;
+      box.querySelector('pre').textContent = log.slice(-25).join('\n');
+    }
+    function info() {
+      var form = document.getElementById('pdp-atc-form');
+      var btn = form && form.querySelector('[type="submit"]');
+      var lines = [
+        'Theme-Version: ' + (window.RECOVTEC_THEME_VERSION || 'ALT / theme.js nicht geladen'),
+        'Formular: ' + (form ? 'ja, action=' + form.getAttribute('action') : 'NICHT GEFUNDEN'),
+        'Button: ' + (btn ? (btn.disabled ? 'DEAKTIVIERT' : 'aktiv') : 'NICHT GEFUNDEN')
+      ];
+      if (btn) {
+        var r = btn.getBoundingClientRect();
+        if (r.width && r.bottom > 0 && r.top < innerHeight) {
+          var hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+          lines.push('Über dem Button liegt: ' + desc(hit) + (btn === hit || btn.contains(hit) ? ' (OK, der Button selbst)' : ' (BLOCKIERT!)'));
+        } else {
+          lines.push('Über dem Button liegt: (Button nicht im Bild – hinscrollen)');
+        }
+      }
+      box.querySelector('b').textContent = lines.join('\n');
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      box = document.createElement('div');
+      box.setAttribute('style', 'position:fixed;left:8px;right:8px;bottom:8px;max-height:45vh;overflow:auto;z-index:2147483647;' +
+        'background:#fff;color:#000;border:3px solid #d00;padding:8px;font:12px/1.35 monospace;white-space:pre-wrap;pointer-events:none');
+      box.innerHTML = '<div style="font-weight:700;color:#d00">DIAGNOSE – Screenshot an Claude schicken</div><b style="display:block;margin:4px 0"></b><pre style="margin:0;white-space:pre-wrap"></pre>';
+      document.body.appendChild(box);
+      info(); render();
+      setInterval(info, 1000);
+    });
+  })();
+</script>

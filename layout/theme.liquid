@@ -39,6 +39,8 @@
     {%- assign mono_family = 'ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace' -%}
   {%- endif -%}
 
+  {%- comment -%} Diagnose nur mit ?debug=1 – muss vor content_for_header stehen {%- endcomment -%}
+  {% render 'debug-panel' %}
   {{ content_for_header }}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 

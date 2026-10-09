@@ -1,6 +1,7 @@
 /* RECOVTEC Theme JS */
 (function () {
   'use strict';
+  window.RECOVTEC_THEME_VERSION = '2026-10-09 Warenkorb-Fix 3';
 
   // ===== Cart (Shopify AJAX API) =====
   const Cart = {
