@@ -23,7 +23,12 @@
         <div class="sticky-buy-txt">
           <span class="sticky-buy-title">{{ sb_product.title }}</span>
           <span class="sticky-buy-meta">
-            <strong data-discount-price="{{ sb_variant.price }}" data-discount-strike>{{ sb_variant.price | money_without_trailing_zeros }}</strong>
+            {%- if sb_variant.compare_at_price > sb_variant.price -%}
+              <s class="discount-was"><span class="discount-sr">Ursprünglicher Preis: </span>{{ sb_variant.compare_at_price | money_without_trailing_zeros }}</s>
+              <strong data-discount-price="{{ sb_variant.price }}">{{ sb_variant.price | money_without_trailing_zeros }}</strong>
+            {%- else -%}
+              <strong data-discount-price="{{ sb_variant.price }}" data-discount-strike>{{ sb_variant.price | money_without_trailing_zeros }}</strong>
+            {%- endif -%}
             {%- if section.settings.note != blank -%}<span class="sticky-buy-note">· {{ section.settings.note }}</span>{%- endif -%}
           </span>
         </div>

@@ -183,7 +183,13 @@
           {%- endunless -%}
 
           <div class="pdp-price-row">
-            <div class="pdp-price" data-discount-price="{{ product.selected_or_first_available_variant.price }}" data-discount-strike>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</div>
+            {%- assign pdp_variant = product.selected_or_first_available_variant -%}
+            {%- if pdp_variant.compare_at_price > pdp_variant.price -%}
+              {%- comment -%} Streichpreis aus dem Shopify-Feld „Vergleichspreis“ {%- endcomment -%}
+              <div class="pdp-price"><s class="discount-was"><span class="discount-sr">Ursprünglicher Preis: </span>{{ pdp_variant.compare_at_price | money_without_trailing_zeros }}</s> <span data-discount-price="{{ pdp_variant.price }}">{{ pdp_variant.price | money_without_trailing_zeros }}</span></div>
+            {%- else -%}
+              <div class="pdp-price" data-discount-price="{{ pdp_variant.price }}" data-discount-strike>{{ pdp_variant.price | money_without_trailing_zeros }}</div>
+            {%- endif -%}
             <div class="pdp-price-meta">{{ section.settings.price_note | default: 'Inkl. MwSt.' }}</div>
           </div>
 
