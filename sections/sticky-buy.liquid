@@ -26,6 +26,8 @@
             {%- if sb_variant.compare_at_price > sb_variant.price -%}
               <s class="discount-was"><span class="discount-sr">Ursprünglicher Preis: </span>{{ sb_variant.compare_at_price | money_without_trailing_zeros }}</s>
               <strong data-discount-price="{{ sb_variant.price }}">{{ sb_variant.price | money_without_trailing_zeros }}</strong>
+              {%- assign sb_save = sb_variant.compare_at_price | minus: sb_variant.price | times: 100.0 | divided_by: sb_variant.compare_at_price | round -%}
+              <span class="sticky-save" data-save-compare="{{ sb_variant.compare_at_price }}" data-save-price="{{ sb_variant.price }}">&minus;{{ sb_save }} %</span>
             {%- else -%}
               <strong data-discount-price="{{ sb_variant.price }}" data-discount-strike>{{ sb_variant.price | money_without_trailing_zeros }}</strong>
             {%- endif -%}

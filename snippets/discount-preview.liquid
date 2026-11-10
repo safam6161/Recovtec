@@ -94,6 +94,15 @@
           el.textContent = money(value, keep);
           el.setAttribute('data-discount-done', '');
         });
+        // Ersparnis-Badge: Gesamtersparnis ggü. Streichpreis inkl. Code (gerundet)
+        (root || document).querySelectorAll('[data-save-compare]:not([data-save-done])').forEach(function (el) {
+          var cmp = parseInt(el.getAttribute('data-save-compare'), 10);
+          var base = parseInt(el.getAttribute('data-save-price'), 10);
+          if (!(cmp > 0 && base > 0)) return;
+          var save = Math.round((cmp - apply(base)) / cmp * 100);
+          if (save > 0) el.textContent = '\u2212' + save + ' %';
+          el.setAttribute('data-save-done', '');
+        });
       }
 
       window.RecovtecDiscount = { code: code, pct: pct, apply: apply, money: money, paint: paint };

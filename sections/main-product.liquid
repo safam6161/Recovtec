@@ -187,6 +187,8 @@
             {%- if pdp_variant.compare_at_price > pdp_variant.price -%}
               {%- comment -%} Streichpreis aus dem Shopify-Feld „Vergleichspreis“ {%- endcomment -%}
               <div class="pdp-price"><s class="discount-was"><span class="discount-sr">Ursprünglicher Preis: </span>{{ pdp_variant.compare_at_price | money_without_trailing_zeros }}</s> <span data-discount-price="{{ pdp_variant.price }}">{{ pdp_variant.price | money_without_trailing_zeros }}</span></div>
+              {%- assign pdp_save = pdp_variant.compare_at_price | minus: pdp_variant.price | times: 100.0 | divided_by: pdp_variant.compare_at_price | round -%}
+              <span class="pdp-save" data-save-compare="{{ pdp_variant.compare_at_price }}" data-save-price="{{ pdp_variant.price }}">&minus;{{ pdp_save }} %</span>
             {%- else -%}
               <div class="pdp-price" data-discount-price="{{ pdp_variant.price }}" data-discount-strike>{{ pdp_variant.price | money_without_trailing_zeros }}</div>
             {%- endif -%}
