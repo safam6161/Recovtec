@@ -94,7 +94,7 @@
           el.textContent = money(value, keep);
           el.setAttribute('data-discount-done', '');
         });
-        // Ersparnis-Badge: Preisreduzierung + Code-Rabatt, z. B. „−10 % + 20 % Code“
+        // Ersparnis-Badge: Preisreduzierung + Code-Rabatt, z. B. „−10 % + 20 % Code“ (statt Gesamtprozent)
         (root || document).querySelectorAll('[data-save-compare]:not([data-save-done])').forEach(function (el) {
           var cmp = parseInt(el.getAttribute('data-save-compare'), 10);
           var base = parseInt(el.getAttribute('data-save-price'), 10);
