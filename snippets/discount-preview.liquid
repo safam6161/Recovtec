@@ -94,13 +94,13 @@
           el.textContent = money(value, keep);
           el.setAttribute('data-discount-done', '');
         });
-        // Ersparnis-Badge: Gesamtersparnis ggü. Streichpreis inkl. Code (gerundet)
+        // Ersparnis-Badge: Preisreduzierung + Code-Rabatt, z. B. „−10 % + 20 % Code“
         (root || document).querySelectorAll('[data-save-compare]:not([data-save-done])').forEach(function (el) {
           var cmp = parseInt(el.getAttribute('data-save-compare'), 10);
           var base = parseInt(el.getAttribute('data-save-price'), 10);
           if (!(cmp > 0 && base > 0)) return;
-          var save = Math.round((cmp - apply(base)) / cmp * 100);
-          if (save > 0) el.textContent = '\u2212' + save + ' %';
+          var reduced = Math.round((cmp - base) / cmp * 100);
+          if (reduced > 0) el.textContent = '\u2212' + reduced + ' % + ' + String(pct).replace('.', ',') + ' % Code';
           el.setAttribute('data-save-done', '');
         });
       }
